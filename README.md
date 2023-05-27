@@ -3,7 +3,7 @@
 <img src="https://i.ibb.co/0qfcPnY/tolby.png" width="150" height="150">
 <br/>
 <div style='text-align:right'>
-    <h1><b>TOLBY TECHNOLOGY</b></h1>
+    <h1><b>TOLBY TECHNOLOGIES</b></h1>
     <p style='padding-left:2rem'> UNDER DEVELOPMENT</p>
 </div>
 </div>
