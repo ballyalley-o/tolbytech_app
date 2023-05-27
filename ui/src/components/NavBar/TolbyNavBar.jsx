@@ -4,7 +4,6 @@ import Header from '../Header.jsx'
 import MenuIcon from '@mui/icons-material/Menu'
 import {
   AppBar,
-  Box,
   Typography,
   IconButton,
   Toolbar,
@@ -86,31 +85,29 @@ const AppBarBase = styled(AppBar)(({ theme }) => ({
 
 const TolbyNavBar = () => {
   return (
-    <Box sx={{ width: 'auto' }}>
-      <AppBarBase position='sticky'>
-        <Toolbar>
-          <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ mr: 2 }}
-          >
-            <Header />
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder='Search…'
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-        </Toolbar>
-      </AppBarBase>
-    </Box>
+    <AppBarBase position='sticky'>
+      <Toolbar>
+        <IconButton
+          size='large'
+          edge='start'
+          color='inherit'
+          aria-label='menu'
+          sx={{ mr: 2 }}
+        >
+          <Header />
+          {/* <MenuIcon /> */}
+        </IconButton>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder='Search…'
+            inputProps={{ 'aria-label': 'search' }}
+          />
+        </Search>
+      </Toolbar>
+    </AppBarBase>
   )
 }
 

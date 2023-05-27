@@ -1,7 +1,8 @@
 // /* eslint-disable no-unused-vars */
 import * as React from 'react'
 import { styled } from '@mui/material/styles'
-import { Box, IconButton, Badge } from '@mui/material'
+import Box from '@mui/material/Box'
+import { IconButton, Badge } from '@mui/material'
 import {
   MailIcon,
   NotificationsIcon,
