@@ -12,11 +12,11 @@ const HomeScreen = () => {
           Latest Products
         </Typography>
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={12} xl={3}>
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
         <Grid container lg={12} xl={12} spacing={2}>
           {products.map((product) => {
             return (
-              <Grid item key={product._id} xs={12} md={2} lg={3} xl={3}>
+              <Grid item key={product._id} xs={12} md={4} lg={3} xl={3}>
                 <Product product={product} />
                 {/* <Typography variant='h5'>{product.name}</Typography> */}
               </Grid>
