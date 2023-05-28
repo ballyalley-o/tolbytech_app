@@ -85,7 +85,7 @@ button:focus-visible {}
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: inherit;
+  background-color: #FBFAF8;
   padding: 10px;
   text-align: center;
 }

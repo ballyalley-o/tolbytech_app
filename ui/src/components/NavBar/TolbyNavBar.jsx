@@ -207,9 +207,15 @@ const TolbyNavBar = () => {
           </Box>
           <IconButton size='small' aria-label='show cart' color='inherit'>
             <Tooltip title='Your Cart'>
-              <ShoppingBagIcon sx={{ marginRight: '2rem' }} />
+              <ShoppingBagIcon />
             </Tooltip>
           </IconButton>
+          <Typography
+            variant='overline'
+            sx={{ marginRight: '1rem', marginLeft: '.5rem' }}
+          >
+            &nbsp;
+          </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
