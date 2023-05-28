@@ -7,7 +7,6 @@ import { styled } from '@mui/material/styles'
 const Footer = () => {
   const FooterBase = styled('footer')(({ theme }) => ({
     position: 'relative',
-    color: '#',
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -22,7 +21,7 @@ const Footer = () => {
         <Container maxWidth='lg'>
           <FooterBase>
             <Typography variant='body1' align='center'>
-              &copy; 2023 Tolby Technologies
+              <footer className='footer'>&copy; 2023 Tolby Technologies</footer>
             </Typography>
           </FooterBase>
         </Container>

@@ -1,14 +1,22 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
 import Header from '../Header.jsx'
-import MenuIcon from '@mui/icons-material/Menu'
 import {
   AppBar,
   Typography,
   IconButton,
   Toolbar,
   InputBase,
+  Menu,
+  MenuItem,
+  Container,
+  Box,
+  Tooltip,
+  Avatar,
+  Button,
 } from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
 import { alpha, styled } from '@mui/material/styles'
 import SearchIcon from '@mui/icons-material/Search'
 
@@ -59,7 +67,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const AppBarBase = styled(AppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
   backgroundColor: '#C0C0C0',
-  color: '#ffffff',
+  color: '#000',
   '& .MuiSvgIcon-root': {
     fill: '#9a886b',
   },
@@ -83,30 +91,164 @@ const AppBarBase = styled(AppBar)(({ theme }) => ({
   },
 }))
 
+const pages = [
+  {
+    label: 'Home',
+    link: '/',
+  },
+  {
+    label: 'Gadgets',
+    link: '/gadgets',
+  },
+  {
+    label: 'Blog',
+    link: '/blog',
+  },
+]
+const settings = ['Profile', 'Account', 'Dashboard', 'Sign In']
+
 const TolbyNavBar = () => {
+  const [anchorElNav, setAnchorElNav] = React.useState(null)
+  const [anchorElUser, setAnchorElUser] = React.useState(null)
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget)
+  }
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget)
+  }
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null)
+  }
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
+  }
+
   return (
     <AppBarBase position='sticky'>
-      <Toolbar>
-        <IconButton
-          size='large'
-          edge='start'
-          color='inherit'
-          aria-label='menu'
-          sx={{ mr: 2 }}
-        >
-          <Header />
-          {/* <MenuIcon /> */}
-        </IconButton>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder='Search…'
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </Search>
-      </Toolbar>
+      <Container maxWidth='lg'>
+        <Toolbar disableGutters>
+          <Box>
+            <IconButton
+              size='large'
+              edge='start'
+              color='inherit'
+              aria-label='menu'
+              onClick={handleOpenNavMenu}
+            >
+              <Header />
+            </IconButton>
+            <Menu
+              id='menu-appbar'
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none', lg: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem
+                  key={page.label}
+                  onClick={handleCloseNavMenu}
+                  component={Button}
+                  to={page.link}
+                >
+                  <Typography textAlign='center' variant='h6'>
+                    {page.label}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <Box sx={{ paddingRight: '1rem' }}>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder='Search…'
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+          </Box>
+          <IconButton
+            size='large'
+            edge='start'
+            color='inherit'
+            aria-label='menu'
+            onClick={handleOpenNavMenu}
+            sx={{ display: { xs: 'block', md: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page.label}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+                to={page.link}
+              >
+                {page.label}
+              </Button>
+            ))}
+          </Box>
+
+          <IconButton
+            size='small'
+            aria-label='show cart'
+            color='inherit'
+            sx={{ paddingRight: '2rem' }}
+          >
+            <Tooltip title='Your Cart'>
+              <ShoppingBagIcon />
+            </Tooltip>
+          </IconButton>
+
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title='Settings'>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt='Your Profile' src='' />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id='menu-appbar'
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign='center'>{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
     </AppBarBase>
   )
 }

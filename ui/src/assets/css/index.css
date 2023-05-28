@@ -79,3 +79,13 @@ button:focus-visible {}
 .MuiAppBar-root {
   background-color: #242424;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: inherit;
+  padding: 10px;
+  text-align: center;
+}
