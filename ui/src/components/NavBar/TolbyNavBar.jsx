@@ -67,6 +67,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const AppBarBase = styled(AppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
   backgroundColor: '#C0C0C0',
+  justifyContent: 'center',
   color: '#000',
   '& .MuiSvgIcon-root': {
     fill: '#9a886b',
@@ -165,9 +166,7 @@ const TolbyNavBar = () => {
                   component={Button}
                   to={page.link}
                 >
-                  <Typography textAlign='center' variant='h6'>
-                    {page.label}
-                  </Typography>
+                  <Typography variant='h6'>{page.label}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -206,18 +205,11 @@ const TolbyNavBar = () => {
               </Button>
             ))}
           </Box>
-
-          <IconButton
-            size='small'
-            aria-label='show cart'
-            color='inherit'
-            sx={{ paddingRight: '2rem' }}
-          >
+          <IconButton size='small' aria-label='show cart' color='inherit'>
             <Tooltip title='Your Cart'>
-              <ShoppingBagIcon />
+              <ShoppingBagIcon sx={{ marginRight: '2rem' }} />
             </Tooltip>
           </IconButton>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
