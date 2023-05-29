@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../Header.jsx'
 import {
   AppBar,
@@ -106,7 +107,24 @@ const pages = [
     link: '/blog',
   },
 ]
-const settings = ['Profile', 'Account', 'Dashboard', 'Sign In']
+const settings = [
+  {
+    label: 'Profile',
+    link: '/profile',
+  },
+  {
+    label: 'Account',
+    link: '/account',
+  },
+  {
+    label: 'Dashboard',
+    link: '/dashboard',
+  },
+  {
+    label: 'Sign Up',
+    link: '/signup',
+  },
+]
 
 const TolbyNavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
@@ -132,15 +150,17 @@ const TolbyNavBar = () => {
       <Container maxWidth='lg'>
         <Toolbar disableGutters>
           <Box>
-            <IconButton
-              size='large'
-              edge='start'
-              color='inherit'
-              aria-label='menu'
-              onClick={handleOpenNavMenu}
-            >
-              <Header />
-            </IconButton>
+            <Link to='/'>
+              <IconButton
+                size='large'
+                edge='start'
+                color='inherit'
+                aria-label='menu'
+                onClick={handleOpenNavMenu}
+              >
+                <Header />
+              </IconButton>
+            </Link>
             <Menu
               id='menu-appbar'
               anchorEl={anchorElNav}
@@ -164,9 +184,10 @@ const TolbyNavBar = () => {
                   key={page.label}
                   onClick={handleCloseNavMenu}
                   component={Button}
-                  to={page.link}
                 >
-                  <Typography variant='h6'>{page.label}</Typography>
+                  <Link to={page.link}>
+                    <Typography variant='h6'>{page.label}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -195,14 +216,15 @@ const TolbyNavBar = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page.label}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-                to={page.link}
-              >
-                {page.label}
-              </Button>
+              <Link key={page.label} to={page.link}>
+                <Button
+                  key={page.label}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page.label}
+                </Button>
+              </Link>
             ))}
           </Box>
           <IconButton size='small' aria-label='show cart' color='inherit'>
@@ -240,7 +262,9 @@ const TolbyNavBar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign='center'>{setting}</Typography>
+                  <Link to={setting.link}>
+                    <Typography textAlign='center'>{setting.label}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>

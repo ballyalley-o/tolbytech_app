@@ -1,8 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Grid, Typography, Card, CardMedia, CardContent } from '@mui/material'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import {
+  Grid,
+  Typography,
+  Card,
+  CardMedia,
+  CardContent,
+  Box,
+} from '@mui/material'
 import { styled } from '@mui/material/styles'
-import Link from '@mui/material/Link'
+
 import Rating from './Rating'
 
 const Product = ({ product }) => {
@@ -21,7 +30,7 @@ const Product = ({ product }) => {
   return (
     <Grid container>
       <Grid item>
-        <Link href={`/product/${product._id}`} variant='body1' underline='none'>
+        <Link to={`/product/${product._id}`} variant='body1' underline='none'>
           <CardBase>
             <CardMedia
               component='img'
@@ -38,13 +47,19 @@ const Product = ({ product }) => {
               <Typography gutterBottom component='div' variant='h5'>
                 {product.name}
               </Typography>
-              <Typography variant='overline' color='text.secondary'>
-                <Rating
-                  value={product.rating}
-                  text={`${product.numReviews} reviews`}
-                />
+              <Typography
+                gutterBottom
+                variant='overline'
+                color='text.secondary'
+              >
+                <Box sx={{ pb: 1 }}>
+                  <Rating
+                    value={product.rating}
+                    text={`${product.numReviews} reviews`}
+                  />
+                </Box>
               </Typography>
-              <Typography variant='h4' color='text.secondary'>
+              <Typography variant='h4' color='text.secondary' fontWeight='bold'>
                 ${product.price}
               </Typography>
             </CardContent>
@@ -53,6 +68,10 @@ const Product = ({ product }) => {
       </Grid>
     </Grid>
   )
+}
+
+Product.propTypes = {
+  product: PropTypes.object,
 }
 
 export default Product
