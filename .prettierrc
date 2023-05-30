@@ -1,11 +1,14 @@
 {
     "trailingComma": "es5",
     "tabWidth": 2,
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "overrides": [
         {
-            "files": "*.md",
+            "files": [
+                "server/data/products.js",
+                "*.md"
+            ],
             "options": {
                 "parser": "none"
             }

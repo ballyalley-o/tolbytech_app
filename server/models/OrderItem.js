@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const OrderItemSchema = new mongoose.Schema(
+export const OrderItemSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -28,6 +28,4 @@ const OrderItemSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-const OrderItem = mongoose.model('OrderItem', OrderItemSchema)
-
-export default OrderItem
+export const OrderItem = mongoose.model('OrderItem', OrderItemSchema)

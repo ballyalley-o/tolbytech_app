@@ -34,7 +34,13 @@
 
 <hr>
 
-## Todos
+## Phase 1
+
+<sub>
+v0.0.1
+</sub>
+
+<br/>
 
 client
 - [x] **responsive**
@@ -50,7 +56,7 @@ client
 
 server
 - [ ] **admin**
-- [ ] **product**
+- [x] **product**
 - [ ] **user**
 - [ ] **order**
 - [ ] **payment**
