@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import OrderItem from './OrderItem'
+import { OrderItemSchema } from './OrderItem.js'
 
 const OrderSchema = new mongoose.Schema(
   {
@@ -7,7 +7,7 @@ const OrderSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
-    orderItems: [OrderItem],
+    orderItems: [OrderItemSchema],
     shippingAddress: {
       address: {
         type: String,

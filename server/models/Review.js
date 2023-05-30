@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 
-const ReviewSchema = new mongoose.Schema(
+export const ReviewSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: User,
+      ref: 'User',
     },
     name: {
       type: String,
@@ -25,6 +25,4 @@ const ReviewSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-const Review = mongoose.model('Review', ReviewSchema)
-
-export default Review
+export const Review = mongoose.model('Review', ReviewSchema)
