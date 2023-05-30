@@ -1,0 +1,11 @@
+PORT=
+NODE_ENV=
+
+SERVER_URL=http://localhost:{PORT}
+
+# Database
+MONGODB_URI=
+MONGODB_DB=
+MONGODB_USER=
+MONGODB_PASS=
+

@@ -19,32 +19,43 @@ const Product = ({ product }) => {
     color: theme.palette.text.primary,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
-    height: '400px',
-    width: 'auto',
+    height: '300px',
+    width: '200px',
     borderRadius: '1em',
     padding: '1rem',
-    mt: '1rem',
+    m: '1rem',
+    boxShadow: '0 0 10px 0 rgba(0,0,0,0.2)',
+    transition: '0.3s',
+    '&:hover': {
+      boxShadow: '0 0 20px 0 rgba(0,0,0,0.2)',
+    },
   }))
+
+  const CardMediaBase = styled(CardMedia)(({ theme }) => ({
+    display: 'block',
+    objectFit: 'cover',
+    height: '200px',
+  }))
+
+  const CardContentBase = styled(CardContent)(({ theme }) => ({
+    display: 'block',
+    width: '95%',
+    height: '50px',
+  }))
+
   return (
     <Grid container>
       <Grid item>
-        <Link to={`/product/${product._id}`} variant='body1' underline='none'>
+        <Link to={`/products/${product._id}`} variant='body1' underline='none'>
           <CardBase>
-            <CardMedia
+            <CardMediaBase
               component='img'
               image={product.image}
-              sx={{
-                height: '250px',
-                objectFit: 'cover',
-                width: '100%',
-                my: '1rem',
-              }}
               alt={product.name}
             />
-            <CardContent>
-              <Typography gutterBottom component='div' variant='h5'>
+            <CardContentBase>
+              <Typography gutterBottom component='div' variant='body1'>
                 {product.name}
               </Typography>
               <Typography
@@ -52,17 +63,26 @@ const Product = ({ product }) => {
                 variant='overline'
                 color='text.secondary'
               >
-                <Box sx={{ pb: 1 }}>
+                <Box>
                   <Rating
                     value={product.rating}
-                    text={`${product.numReviews} reviews`}
+                    rating={`${product.numReviews} reviews`}
                   />
                 </Box>
               </Typography>
-              <Typography variant='h4' color='text.secondary' fontWeight='bold'>
-                ${product.price}
-              </Typography>
-            </CardContent>
+            </CardContentBase>
+            <CardContentBase>
+              <Box justifyContent='flex-end'>
+                <Typography
+                  variant='h5'
+                  color='text.secondary'
+                  fontWeight='bold'
+                  py={2}
+                >
+                  ${product.price}
+                </Typography>
+              </Box>
+            </CardContentBase>
           </CardBase>
         </Link>
       </Grid>

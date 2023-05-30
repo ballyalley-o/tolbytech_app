@@ -23,7 +23,7 @@ import SearchIcon from '@mui/icons-material/Search'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
-  color: '#1c252c',
+  color: '#1C252C',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
@@ -43,7 +43,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   position: 'absolute',
   pointerEvents: 'none',
   display: 'flex',
-  color: '#1c252c',
+  color: '#1C252C',
   alignItems: 'center',
   justifyContent: 'center',
 }))
@@ -100,11 +100,15 @@ const pages = [
   },
   {
     label: 'Gadgets',
-    link: '/gadgets',
+    link: '/gadget',
   },
   {
     label: 'Blog',
     link: '/blog',
+  },
+  {
+    label: 'Kicks',
+    link: '/kicks',
   },
 ]
 const settings = [
