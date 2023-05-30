@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { alpha, styled } from '@mui/material/styles'
 import {
@@ -16,12 +17,23 @@ import {
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import Rating from '../components/Rating'
-import products from '../assets/data/products'
 import Product from '../components/Product'
+import axios from 'axios'
+import { CONFIG } from '../config-global'
 
 const ProductDetailScreen = () => {
+  const [product, setProduct] = useState({})
   const { id: productId } = useParams()
-  const product = products.find((p) => p._id === productId)
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(
+        `${CONFIG.SERVER_URL}/api/products/${productId}`
+      )
+      setProduct(data)
+    }
+    fetchProduct()
+  }, [productId])
 
   const CardMediaBase = styled(CardMedia)(({ theme }) => ({
     display: 'block',
@@ -171,3 +183,5 @@ ProductDetailScreen.propTypes = {
 }
 
 export default ProductDetailScreen
+
+// give a description on this application Tolby technologies

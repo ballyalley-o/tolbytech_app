@@ -47,7 +47,7 @@ const Product = ({ product }) => {
   return (
     <Grid container>
       <Grid item>
-        <Link to={`/product/${product._id}`} variant='body1' underline='none'>
+        <Link to={`/products/${product._id}`} variant='body1' underline='none'>
           <CardBase>
             <CardMediaBase
               component='img'

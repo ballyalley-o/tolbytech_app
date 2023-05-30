@@ -1,10 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { useEffect, useState } from 'react'
 import { Grid, Typography } from '@mui/material'
 import Product from '../components/Product'
-import products from '../assets/data/products'
+import axios from 'axios'
+import { CONFIG } from '../config-global'
 
 const HomeScreen = () => {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get(`${CONFIG.SERVER_URL}/api/products`)
+      setProducts(data)
+    }
+    fetchProducts()
+  }, [])
+
   return (
     <Grid container xs={12} lg={12} spacing={2}>
       <Grid item lg={12}>
