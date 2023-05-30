@@ -5,12 +5,14 @@ dotenv.config({
 })
 import products from './data/products.js'
 import tolby from './helpers/response.js'
+import connectDB from './config/db.js'
 import cors from 'cors'
-import colors from 'colors'
+import 'colors'
+
+connectDB()
 
 const PORT = process.env.PORT || 8003
 const ENV = process.env.NODE_ENV
-const SERVER = process.env.SERVER_URL
 const app = express()
 
 app.use(cors())
