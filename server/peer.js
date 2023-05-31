@@ -24,7 +24,7 @@ const peerData = async () => {
       return { ...product, user: adminUser }
     })
     await Product.insertMany(sampleProducts)
-    console.log('Data PEERED'.bgGreen)
+    console.log('DATA PEERED'.bgGreen)
     process.exit()
   } catch (err) {
     const error = new Error(err)
@@ -39,7 +39,7 @@ const destroyData = async () => {
     await User.deleteMany()
     await Order.deleteMany()
 
-    console.log('Data DESTROYED'.bgRed)
+    console.log('DATA DESTROYED'.bgRed)
     process.exit(1)
   } catch (err) {}
   const error = new Error(err)

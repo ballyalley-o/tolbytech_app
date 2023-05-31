@@ -3,9 +3,11 @@ import dotenv from 'dotenv'
 dotenv.config({
   path: './server/config/config.env',
 })
-import products from './data/products.js'
+import { notFound, errorHandler } from './middleware/error-handler.js'
+
 import tolby from './helpers/response.js'
 import connectDB from './config/db.js'
+import productsRouteer from './routes/products.js'
 import cors from 'cors'
 import 'colors'
 
@@ -21,14 +23,10 @@ app.get('/', (req, res) => {
   res.send(tolby)
 })
 
-app.get('/api/products', (req, res) => {
-  res.json(products)
-})
+app.use('/api/products', productsRouteer)
 
-app.get('/api/products/:id', (req, res) => {
-  const product = products.find((p) => p._id === req.params.id)
-  res.json(product)
-})
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(PORT, () => {
   console.log(`SERVER STATUS: Running on PORT: ${PORT}`.bgYellow.black)
