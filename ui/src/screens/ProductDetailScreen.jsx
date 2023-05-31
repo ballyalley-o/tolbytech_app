@@ -113,7 +113,7 @@ const ProductDetailScreen = () => {
   }))
   return (
     <>
-      <Link to='/'>
+      <Link to="/">
         <Button>
           <KeyboardDoubleArrowLeftIcon />
           <Typography>Go Back</Typography>
@@ -121,33 +121,33 @@ const ProductDetailScreen = () => {
       </Link>
       <Grid container lg={12}>
         <Grid item lg={7}>
-          <CardMediaBase component='img' image={product.image}></CardMediaBase>
+          <CardMediaBase component="img" image={product.image}></CardMediaBase>
         </Grid>
         <Grid item lg={5}>
           <Grid container lg={12}>
             <CardContentBase>
               <BoxBase>
                 {product.model >= '2020' ? (
-                  <Typography variant='body1'>New</Typography>
+                  <Typography variant="body1">New</Typography>
                 ) : (
-                  <Typography variant='body1'>{product.model}</Typography>
+                  <Typography variant="body1">{product.model}</Typography>
                 )}
-                <Typography variant='h3'>{product.name}</Typography>
+                <Typography variant="h3">{product.name}</Typography>
                 <Rating
                   value={product.rating}
                   rating={product.numReviews}
-                  color='#F8E825'
+                  color="#F8E825"
                 />
               </BoxBase>
               <BoxBase>
-                <Typography variant='body1'>NZ${product.price}</Typography>
+                <Typography variant="body1">NZ${product.price}</Typography>
               </BoxBase>
             </CardContentBase>
             <CardContentBase>
               <BoxBase>
-                <Typography variant='body1'>{product.description}</Typography>
+                <Typography variant="body1">{product.description}</Typography>
               </BoxBase>
-              <Typography variant='body2'>
+              <Typography variant="body2">
                 Category: {product.category}
               </Typography>
             </CardContentBase>
@@ -155,7 +155,7 @@ const ProductDetailScreen = () => {
               <BoxBase fontSize={1}>
                 <ChipBase
                   label={product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
-                  variant='outlined'
+                  variant="outlined"
                 />
               </BoxBase>
             </CardContentBase>
@@ -163,7 +163,7 @@ const ProductDetailScreen = () => {
               <BoxBase>
                 <CartButton disabled={product.countInStock === 0}>
                   {product.countInStock === 0 ? '' : <AddShoppingCartIcon />}
-                  <CartTypography variant='caption'>
+                  <CartTypography variant="caption">
                     {product.countInStock === 0
                       ? 'Stocks are on its way'
                       : 'Add to Cart'}

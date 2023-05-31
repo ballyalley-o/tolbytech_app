@@ -23,7 +23,7 @@ const Product = ({ product }) => {
     height: '300px',
     width: '200px',
     borderRadius: '1em',
-    padding: '1rem',
+    padding: '.5rem',
     m: '1rem',
     boxShadow: '0 0 10px 0 rgba(0,0,0,0.2)',
     transition: '0.3s',
@@ -34,8 +34,12 @@ const Product = ({ product }) => {
 
   const CardMediaBase = styled(CardMedia)(({ theme }) => ({
     display: 'block',
+    height: '150px',
     objectFit: 'cover',
-    height: '200px',
+
+    // normalize all images to the same height
+    // height: '100%',
+    borderRadius: '.5em',
   }))
 
   const CardContentBase = styled(CardContent)(({ theme }) => ({
@@ -47,21 +51,21 @@ const Product = ({ product }) => {
   return (
     <Grid container>
       <Grid item>
-        <Link to={`/products/${product._id}`} variant='body1' underline='none'>
+        <Link to={`/products/${product._id}`} variant="body1" underline="none">
           <CardBase>
             <CardMediaBase
-              component='img'
+              component="img"
               image={product.image}
               alt={product.name}
             />
             <CardContentBase>
-              <Typography gutterBottom component='div' variant='body1'>
+              <Typography gutterBottom component="div" variant="body1">
                 {product.name}
               </Typography>
               <Typography
                 gutterBottom
-                variant='overline'
-                color='text.secondary'
+                variant="overline"
+                color="text.secondary"
               >
                 <Box>
                   <Rating
@@ -72,11 +76,11 @@ const Product = ({ product }) => {
               </Typography>
             </CardContentBase>
             <CardContentBase>
-              <Box justifyContent='flex-end'>
+              <Box justifyContent="flex-end">
                 <Typography
-                  variant='h5'
-                  color='text.secondary'
-                  fontWeight='bold'
+                  variant="h5"
+                  color="text.secondary"
+                  fontWeight="bold"
                   py={2}
                 >
                   ${product.price}

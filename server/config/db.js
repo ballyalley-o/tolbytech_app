@@ -1,7 +1,9 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
-dotenv.config()
+dotenv.config({
+  path: './server/config/config.env',
+})
 
 const USERNAME = process.env.MONGODB_USER
 const PASSWORD = process.env.MONGODB_PASS
@@ -13,7 +15,7 @@ const DBURI =
 const connectDB = async () => {
   try {
     const DBURL = `mongodb+srv://${USERNAME}:${PASSWORD}@${HOST}/${DBNAME}?retryWrites=true&w=majority`
-    const conDB = await mongoose.connect(DBURI)
+    const conDB = await mongoose.connect(DBURL)
     console.log(`MONGODB_HOST: ${HOST}`.green.bold)
     console.log(`MONGODB_DBNAME: ${DBNAME}`.green.bold)
     console.log(`MONGODB_STATUS: CONNECTED`.green.bold)

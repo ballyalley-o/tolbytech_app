@@ -19,9 +19,9 @@ const Footer = () => {
   return (
     <>
       <Box sx={{ flexGrow: 1, minHeight: '80vh' }}>
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
           <FooterBase>
-            <footer className='footer'>&copy; 2023 Tolby Technologies</footer>
+            <footer className="footer">&copy; 2023 Tolby Technologies</footer>
           </FooterBase>
         </Container>
       </Box>
