@@ -8,7 +8,7 @@ import {
 import { useMemo } from 'react'
 
 ThemeProvider.PropTypes = {
-  children: PropTypes.node,
+  children: PropTypes.any,
 }
 
 export const ThemeProvider = ({ children }) => {
