@@ -78,8 +78,8 @@ Rating.defaultProps = {
 }
 
 Rating.propTypes = {
-  value: PropTypes.number.isRequired,
-  rating: PropTypes.string.isRequired,
+  value: PropTypes.any,
+  rating: PropTypes.string,
   color: PropTypes.string,
 }
 

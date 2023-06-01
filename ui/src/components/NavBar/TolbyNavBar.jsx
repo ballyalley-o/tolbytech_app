@@ -95,36 +95,44 @@ const AppBarBase = styled(AppBar)(({ theme }) => ({
 
 const pages = [
   {
+    id: 1,
     label: 'Home',
     link: '/',
   },
   {
+    id: 2,
     label: 'Gadgets',
     link: '/gadget',
   },
   {
+    id: 3,
     label: 'Blog',
     link: '/blog',
   },
   {
+    id: 4,
     label: 'Kicks',
     link: '/kicks',
   },
 ]
 const settings = [
   {
+    id: 1,
     label: 'Profile',
     link: '/profile',
   },
   {
+    id: 2,
     label: 'Account',
     link: '/account',
   },
   {
+    id: 3,
     label: 'Dashboard',
     link: '/dashboard',
   },
   {
+    id: 4,
     label: 'Sign Up',
     link: '/signup',
   },
@@ -150,23 +158,23 @@ const TolbyNavBar = () => {
   }
 
   return (
-    <AppBarBase position='sticky'>
-      <Container maxWidth='lg'>
+    <AppBarBase position="sticky">
+      <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Box>
-            <Link to='/'>
+            <Link to="/">
               <IconButton
-                size='large'
-                edge='start'
-                color='inherit'
-                aria-label='menu'
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
                 onClick={handleOpenNavMenu}
               >
                 <Header />
               </IconButton>
             </Link>
             <Menu
-              id='menu-appbar'
+              id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -185,12 +193,12 @@ const TolbyNavBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem
-                  key={page.label}
+                  key={page.id}
                   onClick={handleCloseNavMenu}
                   component={Button}
                 >
                   <Link to={page.link}>
-                    <Typography variant='h6'>{page.label}</Typography>
+                    <Typography variant="h6">{page.label}</Typography>
                   </Link>
                 </MenuItem>
               ))}
@@ -202,16 +210,16 @@ const TolbyNavBar = () => {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder='Search…'
+                placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
               />
             </Search>
           </Box>
           <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
             onClick={handleOpenNavMenu}
             sx={{ display: { xs: 'block', md: 'none' } }}
           >
@@ -220,9 +228,8 @@ const TolbyNavBar = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link key={page.label} to={page.link}>
+              <Link key={page.id} to={page.link}>
                 <Button
-                  key={page.label}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
@@ -231,26 +238,26 @@ const TolbyNavBar = () => {
               </Link>
             ))}
           </Box>
-          <IconButton size='small' aria-label='show cart' color='inherit'>
-            <Tooltip title='Your Cart'>
+          <IconButton size="small" aria-label="show cart" color="inherit">
+            <Tooltip title="Your Cart">
               <ShoppingBagIcon />
             </Tooltip>
           </IconButton>
           <Typography
-            variant='overline'
+            variant="overline"
             sx={{ marginRight: '1rem', marginLeft: '.5rem' }}
           >
             &nbsp;
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title='Settings'>
+            <Tooltip title="Settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt='Your Profile' src='' />
+                <Avatar alt="Your Profile" src="" />
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
-              id='menu-appbar'
+              id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -265,9 +272,9 @@ const TolbyNavBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
                   <Link to={setting.link}>
-                    <Typography textAlign='center'>{setting.label}</Typography>
+                    <Typography textAlign="center">{setting.label}</Typography>
                   </Link>
                 </MenuItem>
               ))}
