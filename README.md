@@ -2,11 +2,26 @@
 
 <img src="https://i.ibb.co/0qfcPnY/tolby.png" width="150" height="150">
 <br/>
+
+[![git](https://img.shields.io/badge/--F05032?logo=git&logoColor=ffffff)](http://git-scm.com/)
+
+<br/>
+
 <div style='text-align:right'>
     <h1><b>TOLBY TECHNOLOGIES</b></h1>
-    <p style='padding-left:2rem'> UNDER DEVELOPMENT</p>
+
+[![ForTheBadge powered-by-electricity](http://ForTheBadge.com/images/badges/powered-by-electricity.svg)](http://ForTheBadge.com)
+
+<br/>
+
+<p style='padding-left:2rem'> UNDER DEVELOPMENT</p>
 </div>
 </div>
+
+
+<br/>
+
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/issues/)
 
 <br/>
 <hr>
