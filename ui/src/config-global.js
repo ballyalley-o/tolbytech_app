@@ -4,6 +4,7 @@ export const CONFIG = {
   DEV_TOOLS: import.meta.env.VITE_DEV_TOOLS,
   CLIENT_URL_DEV: import.meta.env.VITE_CLIENT_URL_DEV,
   PRODUCTS_URL: import.meta.env.VITE_PRODUCTS_URL,
+  PRODUCT_DETAILS_URL: import.meta.env.VITE_PRODUCT_DETAILS_URL,
   USERS_URL: import.meta.env.VITE_USERS_URL,
   ORDERS_URL: import.meta.env.VITE_ORDERS_URL,
   BLOG_URL: import.meta.env.VITE_BLOG_URL,

@@ -1,12 +1,13 @@
 import { CONFIG } from './config-global'
 
 export const BASE_URL =
-  CONFIG.NODE_ENV === 'development' ? CONFIG.CLIENT_URL_DEV : ''
+  CONFIG.NODE_ENV === 'development' ? CONFIG.SERVER_URL : ''
 
 export const DEV_TOOLS =
   CONFIG.NODE_ENV === 'development' ? CONFIG.DEV_TOOLS : false
 
 export const PRODUCTS_URL = CONFIG.PRODUCTS_URL
+export const PRODUCT_DETAILS_URL = CONFIG.PRODUCT_DETAILS_URL
 export const USERS_URL = CONFIG.USERS_URL
 export const ORDERS_URL = CONFIG.ORDERS_URL
 export const GADGETS_URL = CONFIG.GADGETS_URL

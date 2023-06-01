@@ -18,7 +18,7 @@ const connectDB = async () => {
     const conDB = await mongoose.connect(DBURL)
     console.log(`MONGODB_HOST: ${HOST}`.green.bold)
     console.log(`MONGODB_DBNAME: ${DBNAME}`.green.bold)
-    console.log(`MONGODB_STATUS: CONNECTED`.green.bold)
+    console.log(`MONGODB_STATUS: ...`.green.bold)
   } catch (err) {
     const error = new Error(err)
     error.statusCode = 401

@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { alpha, styled } from '@mui/material/styles'
 import {
@@ -18,22 +17,18 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import Rating from '../components/Rating'
 import Product from '../components/Product'
-import axios from 'axios'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 import { CONFIG } from '../config-global'
+import { useGetProductDetailsQuery } from '../slices/products-slice'
 
 const ProductDetailScreen = () => {
-  const [product, setProduct] = useState({})
   const { id: productId } = useParams()
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(
-        `${CONFIG.SERVER_URL}/api/v1/products/${productId}`
-      )
-      setProduct(data)
-    }
-    fetchProduct()
-  }, [productId])
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useGetProductDetailsQuery(productId)
 
   const CardMediaBase = styled(CardMedia)(({ theme }) => ({
     display: 'block',
@@ -119,61 +114,83 @@ const ProductDetailScreen = () => {
           <Typography>Go Back</Typography>
         </Button>
       </Link>
-      <Grid container lg={12}>
-        <Grid item lg={7}>
-          <CardMediaBase component="img" image={product.image}></CardMediaBase>
-        </Grid>
-        <Grid item lg={5}>
+
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
+        <Message severity="error" color="error">
+          {error?.data?.message || error.error}
+        </Message>
+      ) : (
+        <>
           <Grid container lg={12}>
-            <CardContentBase>
-              <BoxBase>
-                {product.model >= '2020' ? (
-                  <Typography variant="body1">New</Typography>
-                ) : (
-                  <Typography variant="body1">{product.model}</Typography>
-                )}
-                <Typography variant="h3">{product.name}</Typography>
-                <Rating
-                  value={product.rating}
-                  rating={product.numReviews}
-                  color="#F8E825"
-                />
-              </BoxBase>
-              <BoxBase>
-                <Typography variant="body1">NZ${product.price}</Typography>
-              </BoxBase>
-            </CardContentBase>
-            <CardContentBase>
-              <BoxBase>
-                <Typography variant="body1">{product.description}</Typography>
-              </BoxBase>
-              <Typography variant="body2">
-                Category: {product.category}
-              </Typography>
-            </CardContentBase>
-            <CardContentBase>
-              <BoxBase fontSize={1}>
-                <ChipBase
-                  label={product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
-                  variant="outlined"
-                />
-              </BoxBase>
-            </CardContentBase>
-            <CardContentBase>
-              <BoxBase>
-                <CartButton disabled={product.countInStock === 0}>
-                  {product.countInStock === 0 ? '' : <AddShoppingCartIcon />}
-                  <CartTypography variant="caption">
-                    {product.countInStock === 0
-                      ? 'Stocks are on its way'
-                      : 'Add to Cart'}
-                  </CartTypography>
-                </CartButton>
-              </BoxBase>
-            </CardContentBase>
+            <Grid item lg={7}>
+              <CardMediaBase
+                component="img"
+                image={product.image}
+              ></CardMediaBase>
+            </Grid>
+            <Grid item lg={5}>
+              <Grid container lg={12}>
+                <CardContentBase>
+                  <BoxBase>
+                    {product.model >= '2020' ? (
+                      <Typography variant="body1">New</Typography>
+                    ) : (
+                      <Typography variant="body1">{product.model}</Typography>
+                    )}
+                    <Typography variant="h3">{product.name}</Typography>
+                    <Rating
+                      value={product.rating}
+                      rating={product.numReviews}
+                      color="#F8E825"
+                    />
+                  </BoxBase>
+                  <BoxBase>
+                    <Typography variant="body1">NZ${product.price}</Typography>
+                  </BoxBase>
+                </CardContentBase>
+                <CardContentBase>
+                  <BoxBase>
+                    <Typography variant="body1">
+                      {product.description}
+                    </Typography>
+                  </BoxBase>
+                  <Typography variant="body2">
+                    Category: {product.category}
+                  </Typography>
+                </CardContentBase>
+                <CardContentBase>
+                  <BoxBase fontSize={1}>
+                    <ChipBase
+                      label={
+                        product.countInStock > 0 ? 'In Stock' : 'Out of Stock'
+                      }
+                      variant="outlined"
+                    />
+                  </BoxBase>
+                </CardContentBase>
+                <CardContentBase>
+                  <BoxBase>
+                    <CartButton disabled={product.countInStock === 0}>
+                      {product.countInStock === 0 ? (
+                        ''
+                      ) : (
+                        <AddShoppingCartIcon />
+                      )}
+                      <CartTypography variant="caption">
+                        {product.countInStock === 0
+                          ? 'Stocks are on its way'
+                          : 'Add to Cart'}
+                      </CartTypography>
+                    </CartButton>
+                  </BoxBase>
+                </CardContentBase>
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-      </Grid>
+        </>
+      )}
     </>
   )
 }

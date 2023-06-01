@@ -14,4 +14,10 @@ const tolby = {
   environment: ENV,
 }
 
-export default tolby
+const TolbyTechResponse = {
+  response: (req, res) => {
+    res.send(tolby)
+  },
+}
+
+export { TolbyTechResponse }
