@@ -17,6 +17,8 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import Rating from '../components/Rating'
 import Product from '../components/Product'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 import { CONFIG } from '../config-global'
 import { useGetProductDetailsQuery } from '../slices/products-slice'
 
@@ -112,10 +114,13 @@ const ProductDetailScreen = () => {
           <Typography>Go Back</Typography>
         </Button>
       </Link>
+
       {isLoading ? (
-        <h1>Loading...</h1>
+        <Loader />
       ) : error ? (
-        <div>{error?.data?.message || error.error}</div>
+        <Message severity="error" color="error">
+          {error?.data?.message || error.error}
+        </Message>
       ) : (
         <>
           <Grid container lg={12}>

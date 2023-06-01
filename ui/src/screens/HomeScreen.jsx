@@ -5,6 +5,8 @@ import { Grid, Typography } from '@mui/material'
 import Product from '../components/Product'
 import { CONFIG } from '../config-global'
 import { useGetProductsQuery } from '../slices/products-slice'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 
 const HomeScreen = () => {
   const { data: products, isLoading, error } = useGetProductsQuery()
@@ -12,9 +14,11 @@ const HomeScreen = () => {
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <Loader />
       ) : error ? (
-        <div>{error?.data?.message || error.error}</div>
+        <Message severity="error" color="error">
+          {error?.data?.message || error.error}
+        </Message>
       ) : (
         <>
           <Grid container spacing={2}>
