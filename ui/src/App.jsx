@@ -26,7 +26,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <TolbyNavBar />
         <Container>
-          <Typography variant='h1'>&nbsp;</Typography>
+          <Typography variant="h1">&nbsp;</Typography>
           <Outlet />
         </Container>
         <Footer />
