@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { alpha, styled } from '@mui/material/styles'
 import {
   Grid,
@@ -12,6 +12,10 @@ import {
   Accordion,
   Chip,
   Box,
+  FormControl,
+  Select,
+  InputLabel,
+  MenuItem,
 } from '@mui/material'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
@@ -20,21 +24,33 @@ import Product from '../components/Product'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { CONFIG } from '../config-global'
+import { CART_URL } from '../constants'
+import { useDispatch } from 'react-redux'
 import { useGetProductDetailsQuery } from '../slices/products-slice'
+import { addToCart } from '../slices/cart-slice'
 
 const ProductDetailScreen = () => {
   const { id: productId } = useParams()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [qty, setQty] = useState(1)
   const {
     data: product,
     isLoading,
     error,
   } = useGetProductDetailsQuery(productId)
 
+  const handleAddToCart = () => {
+    dispatch(addToCart({ ...product, qty }))
+    navigate(CART_URL)
+  }
+
   const CardMediaBase = styled(CardMedia)(({ theme }) => ({
     display: 'block',
+    border: '1px solid #C0C0C0',
     objectFit: 'contain',
-    paddingRight: '2rem',
-    paddingTop: '2rem',
+    marginRight: '3rem',
+    marginTop: '2rem',
   }))
 
   const CardContentBase = styled(CardContent)(({ theme }) => ({
@@ -143,7 +159,6 @@ const ProductDetailScreen = () => {
                     <Rating
                       value={product.rating}
                       rating={product.numReviews}
-                      color="#F8E825"
                     />
                   </BoxBase>
                   <BoxBase>
@@ -170,9 +185,36 @@ const ProductDetailScreen = () => {
                     />
                   </BoxBase>
                 </CardContentBase>
+
+                {product.countInStock > 0 && (
+                  <CardContentBase>
+                    <BoxBase>
+                      <FormControl size="medium">
+                        <InputLabel id="qty">Qty</InputLabel>
+                        <Select
+                          labelId="qty"
+                          id="qty-select"
+                          value={qty}
+                          label="Qty"
+                          onChange={(e) => setQty(Number(e.target.value))}
+                        >
+                          {[...Array(product.countInStock).keys()].map((x) => (
+                            <MenuItem key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </BoxBase>
+                  </CardContentBase>
+                )}
+
                 <CardContentBase>
                   <BoxBase>
-                    <CartButton disabled={product.countInStock === 0}>
+                    <CartButton
+                      onClick={handleAddToCart}
+                      disabled={product.countInStock === 0}
+                    >
                       {product.countInStock === 0 ? (
                         ''
                       ) : (

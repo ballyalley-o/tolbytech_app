@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
-import ReactDOM from 'react-dom/client'
 import { Outlet } from 'react-router-dom'
 
 import { alpha, styled, createTheme, ThemeProvider } from '@mui/material/styles'
@@ -21,6 +20,7 @@ const App = () => {
     },
     minHeight: '80vh',
   })
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -29,7 +29,6 @@ const App = () => {
           <Typography variant="h1">&nbsp;</Typography>
           <Outlet />
         </Container>
-        <Footer />
       </ThemeProvider>
     </>
   )

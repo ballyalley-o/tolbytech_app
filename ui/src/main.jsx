@@ -9,19 +9,21 @@ import {
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store.js'
-import HomeScreen from './Screens/HomeScreen'
-import GadgetsScreen from './Screens/GadgetsScreen'
+import HomeScreen from './Screens/HomeScreen.jsx'
+import TechScreen from './screens/TechScreen.jsx'
 import BlogScreen from './Screens/BlogScreen'
 import ProductDetailScreen from './screens/ProductDetailScreen'
+import NotFound from './screens/defaults/NotFound.jsx'
 import './assets/css/index.css'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
-      <Route path="/gadget" element={<GadgetsScreen />} />
+      <Route path="/tech" element={<TechScreen />} />
       <Route path="/products/:id" element={<ProductDetailScreen />} />
       <Route path="/blog" element={<BlogScreen />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 )
