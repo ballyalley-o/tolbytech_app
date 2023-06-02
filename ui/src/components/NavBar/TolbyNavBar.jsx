@@ -51,6 +51,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     // transition: theme.transitions.create('width'),
     width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
     paddingTop: '0px',
     [theme.breakpoints.up('sm')]: {
       width: '20ch',
@@ -222,6 +225,7 @@ const TolbyNavBar = () => {
                 display: { xs: 'flex', md: 'none', lg: 'none' },
               }}
             >
+              {/* Mobile nav */}
               {pages.map((page) => (
                 <MenuItem
                   key={page.id}
@@ -236,17 +240,7 @@ const TolbyNavBar = () => {
             </Menu>
           </Box>
 
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={handleOpenNavMenu}
-            sx={{ display: { xs: 'block', md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-
+          {/* Large/reg screens */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Link key={page.id} to={page.link}>
@@ -259,95 +253,150 @@ const TolbyNavBar = () => {
               </Link>
             ))}
           </Box>
-          <Box sx={{ marginRight: '3rem' }}>
-            <Search sx={{ backgroundColor: 'transparent' }}>
-              <SearchIconWrapper onClick={handleExpandClick}>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <Collapse
-                in={expanded}
-                timeout="auto"
-                unmountOnExit
+          <Search
+            sx={{
+              backgroundColor: 'transparent',
+              marginTop: '0px',
+              paddingTop: '0px',
+            }}
+          >
+            <SearchIconWrapper
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={handleExpandClick}
+            >
+              <SearchIcon />
+            </SearchIconWrapper>
+            <Collapse
+              in={expanded}
+              timeout="auto"
+              unmountOnExit
+              sx={{
+                display: 'flex',
+
+                '& .MuiCollapse-wrapperInner': {
+                  marginTop: '0px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 0,
+                },
+              }}
+            >
+              <StyledInputBase
+                placeholder="Search Tolby.co.nz"
+                inputProps={{ 'aria-label': 'search' }}
                 sx={{
-                  '& .MuiCollapse-wrapperInner': {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 0,
+                  transition: 'width 300ms',
+                  height: '0px',
+                  '&:focus': {
+                    height: '30px',
+                    width: '20ch',
                   },
                 }}
-              >
-                <StyledInputBase
-                  placeholder="Search Tolby.co.nz"
-                  inputProps={{ 'aria-label': 'search' }}
-                  sx={{
-                    height: 0,
-                    transition: 'width 300ms',
-                  }}
-                />
-              </Collapse>
-            </Search>
-          </Box>
-          <IconButton
-            size="small"
-            aria-label="show cart"
-            color="inherit"
-            sx={{}}
-          >
-            <Tooltip title="Your Cart">
-              <Badge
-                badgeContent="9"
-                color="primary"
-                size="small"
-                max="9"
-                invisible={cartItems.length === 0}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                sx={{}}
-              >
-                <ShoppingBagOutlinedIcon />
-              </Badge>
+              />
+            </Collapse>
+          </Search>
 
-              {/* {
-                cartItems.length > 0 && (<></>)
-              } */}
-            </Tooltip>
-          </IconButton>
           <Typography
             variant="overline"
             sx={{ marginRight: '1rem', marginLeft: '.5rem' }}
           >
             &nbsp;
           </Typography>
-          <AvatarWrapper>
-            <Tooltip title="Settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Your Profile" src="" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+
+          <Box
+            sx={{
+              display: { xs: 'block', md: 'flex' },
+              marginRight: { xs: '2rem', md: '0px' },
+              marginLeft: 'auto',
+            }}
+          >
+            <IconButton
+              size="small"
+              aria-label="show cart"
+              color="inherit"
+              sx={{}}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
-                  <Link to={setting.link}>
-                    <Typography textAlign="center">{setting.label}</Typography>
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          </AvatarWrapper>
+              <Tooltip title="Your Cart">
+                <Badge
+                  badgeContent="9"
+                  color="primary"
+                  size="small"
+                  max="9"
+                  invisible={cartItems.length === 0}
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                >
+                  <ShoppingBagOutlinedIcon />
+                </Badge>
+
+                {/* {
+                cartItems.length > 0 && (<></>)
+              } */}
+              </Tooltip>
+            </IconButton>
+          </Box>
+          <Box
+            sx={{
+              display: { xs: 'flex', md: 'none' },
+
+              justifyContent: 'flex-end',
+            }}
+          >
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={handleOpenNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+                padding: '0px',
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
+          <Box
+            sx={{
+              display: { xs: 'none', md: 'block' },
+              paddingLeft: '1rem',
+            }}
+          >
+            <AvatarWrapper>
+              <Tooltip title="Settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Your Profile" src="" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '5px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
+                    <Link to={setting.link}>
+                      <Typography textAlign="center">
+                        {setting.label}
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </AvatarWrapper>
+          </Box>
         </Toolbar>
       </Container>
     </AppBarBase>
