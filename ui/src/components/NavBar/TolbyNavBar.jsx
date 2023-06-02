@@ -177,6 +177,7 @@ const TolbyNavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null)
   const [expanded, setExpanded] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const isDrawerOpen = Boolean(anchorElNav)
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen)
@@ -342,20 +343,21 @@ const TolbyNavBar = () => {
               sx={{}}
             >
               <Tooltip title="Your Cart">
-                <Badge
-                  badgeContent="9"
-                  color="primary"
-                  size="small"
-                  max="9"
-                  invisible={cartItems.length === 0}
-                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                >
-                  <ShoppingBagOutlinedIcon />
-                </Badge>
-
-                {/* {
-                cartItems.length > 0 && (<></>)
-              } */}
+                {cartItems.length > 0 && (
+                  <Badge
+                    badgeContent={cartItems.reduce(
+                      (acc, item) => acc + item.qty,
+                      0
+                    )}
+                    color="primary"
+                    size="small"
+                    max="9"
+                    invisible={cartItems.length === 0}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                  >
+                    <ShoppingBagOutlinedIcon />
+                  </Badge>
+                )}
               </Tooltip>
             </IconButton>
           </Box>
