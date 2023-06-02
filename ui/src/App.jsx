@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import TolbyNavBar from './components/NavBar/TolbyNavBar'
 
 const App = () => {
+  const isDrawerOpen = false
   const theme = createTheme({
     palette: {
       primary: {

@@ -18,6 +18,11 @@ import {
   Button,
   Badge,
   Collapse,
+  Drawer,
+  Grid,
+  TextField,
+  FormControl,
+  InputLabel,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
@@ -171,6 +176,11 @@ const TolbyNavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
   const [expanded, setExpanded] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleDrawer = () => {
+    setIsOpen(!isOpen)
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -253,6 +263,7 @@ const TolbyNavBar = () => {
               </Link>
             ))}
           </Box>
+
           <Search
             sx={{
               backgroundColor: 'transparent',
@@ -264,38 +275,50 @@ const TolbyNavBar = () => {
               edge="start"
               color="inherit"
               aria-label="menu"
-              onClick={handleExpandClick}
+              onClick={toggleDrawer}
             >
               <SearchIcon />
             </SearchIconWrapper>
-            <Collapse
-              in={expanded}
-              timeout="auto"
-              unmountOnExit
-              sx={{
-                display: 'flex',
+            <Drawer anchor="top" open={isOpen} onClose={toggleDrawer}>
+              <Grid container lg={12}>
+                {/* create a list */}
+                <Container
+                  maxWidth="md"
+                  sx={{
+                    marginTop: '1rem',
+                    padding: '5rem',
+                  }}
+                >
+                  <Grid
+                    item
+                    lg={4}
+                    sx={{
+                      display: 'flex-end',
+                    }}
+                  >
+                    <FormControl>
+                      {/* label for search */}
+                      <Box sx={{ display: 'inline-flex' }}>
+                        <Box sx={{ height: '3rem' }}>
+                          <SearchIcon />
+                        </Box>
+                        {/* input text field */}
 
-                '& .MuiCollapse-wrapperInner': {
-                  marginTop: '0px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: 0,
-                },
-              }}
-            >
-              <StyledInputBase
-                placeholder="Search Tolby.co.nz"
-                inputProps={{ 'aria-label': 'search' }}
-                sx={{
-                  transition: 'width 300ms',
-                  height: '0px',
-                  '&:focus': {
-                    height: '30px',
-                    width: '20ch',
-                  },
-                }}
-              />
-            </Collapse>
+                        <InputBase
+                          placeholder="Search Tolby.co.nz"
+                          sx={{
+                            fontSize: '2rem',
+                            height: '3rem',
+                            width: '100%',
+                            paddingLeft: '1rem',
+                          }}
+                        />
+                      </Box>
+                    </FormControl>
+                  </Grid>
+                </Container>
+              </Grid>
+            </Drawer>
           </Search>
 
           <Typography

@@ -90,3 +90,8 @@ button:focus-visible {}
   padding: 10px;
   text-align: left;
 }
+
+.blurred-background {
+  filter: blur(5px);
+  pointer-events: none;
+}
