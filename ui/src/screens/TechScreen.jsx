@@ -24,9 +24,26 @@ const TechScreen = () => {
         <>
           <Grid container spacing={2}>
             <Grid item lg={12}>
-              <Typography variant="h3" pr={3} py={3}>
-                Latest Products
-              </Typography>
+              <Grid item lg={8}>
+                <Typography variant="h3" pr={3} py={3} fontWeight="bold">
+                  Shop.
+                  <Typography
+                    variant="h3"
+                    fontWeight="bold"
+                    sx={{ color: 'gray', display: 'inline-flex' }}
+                  >
+                    The best tech products in{' '}
+                    <Typography
+                      variant="h2"
+                      color="pink.main"
+                      fontWeight="bold"
+                    >
+                      one
+                    </Typography>
+                    place
+                  </Typography>
+                </Typography>
+              </Grid>
             </Grid>
             <Grid item lg={12}>
               <Grid container justifyContent="space-evenly">

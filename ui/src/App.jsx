@@ -17,6 +17,9 @@ const App = () => {
       secondary: {
         main: '#1c252c',
       },
+      pink: {
+        main: '#FF1288',
+      },
     },
     minHeight: '80vh',
   })
