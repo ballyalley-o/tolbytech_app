@@ -32,7 +32,7 @@
 
 "Unlock the future with cutting-edge
     technology at our premier tech emporium. Immerse yourself in a world of
-    innovation as you explore our vast selection of state-of-the-art gadgets,
+    innovation as you explore our vast selection of state-of-the-art Technologies,
     top-of-the-line electronics, and revolutionary smart devices. From the
     latest smartphones to immersive virtual reality experiences, we have
     everything you need to stay ahead in the digital age. Browse now and embrace
@@ -42,8 +42,8 @@
 
 ## Pages
 
-- [x] **Home Page**
-- [ ] **Gadgets Page**
+- [ ] **Home Page**
+- [x] **Tech Page**
 - [ ] **Blog Page**
 - [ ] **Login/Signup Page**
 - [ ] **Product Details Page**

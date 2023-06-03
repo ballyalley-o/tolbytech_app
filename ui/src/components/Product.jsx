@@ -18,14 +18,16 @@ const Product = ({ product }) => {
   const CardBase = styled(Card)(({ theme }) => ({
     color: theme.palette.text.primary,
     display: 'flex',
+    backgroundColor: 'transparent',
     flexDirection: 'column',
+    border: '1px solid #C0C0C0',
     alignItems: 'center',
     height: '300px',
     width: '200px',
     borderRadius: '1em',
     padding: '.5rem',
     m: '1rem',
-    boxShadow: '0 0 10px 0 rgba(0,0,0,0.2)',
+    boxShadow: 'none',
     transition: '0.3s',
     '&:hover': {
       boxShadow: '0 0 20px 0 rgba(0,0,0,0.2)',

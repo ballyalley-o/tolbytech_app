@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
-import ReactDOM from 'react-dom/client'
 import { Outlet } from 'react-router-dom'
 
 import { alpha, styled, createTheme, ThemeProvider } from '@mui/material/styles'
@@ -10,6 +9,7 @@ import Footer from './components/Footer'
 import TolbyNavBar from './components/NavBar/TolbyNavBar'
 
 const App = () => {
+  const isDrawerOpen = false
   const theme = createTheme({
     palette: {
       primary: {
@@ -18,9 +18,13 @@ const App = () => {
       secondary: {
         main: '#1c252c',
       },
+      pink: {
+        main: '#FF1288',
+      },
     },
     minHeight: '80vh',
   })
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -29,7 +33,6 @@ const App = () => {
           <Typography variant="h1">&nbsp;</Typography>
           <Outlet />
         </Container>
-        <Footer />
       </ThemeProvider>
     </>
   )

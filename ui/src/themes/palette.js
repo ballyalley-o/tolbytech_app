@@ -9,7 +9,7 @@ import {
 import { useMemo } from 'react'
 
 ThemeProvider.PropTypes = {
-  children: PropTypes.any,
+  children: PropTypes.node,
 }
 
 export const ThemeProvider = ({ children }) => {
@@ -19,7 +19,7 @@ export const ThemeProvider = ({ children }) => {
         main: '#1c252c',
       },
       secondary: {
-        main: '#1c252c',
+        main: '#12ekl1',
       },
       info: {
         main: '#1c252c',
@@ -29,7 +29,7 @@ export const ThemeProvider = ({ children }) => {
 
   return (
     <>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <TolbyThemeProvider theme={theme}>{children}</TolbyThemeProvider>
     </>
   )
 }
