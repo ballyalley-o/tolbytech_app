@@ -437,30 +437,28 @@ const TolbyNavBar = () => {
             }}
           >
             <Link to="/cart">
-              <IconButton size="small" aria-label="show cart" color="inherit">
-                <Tooltip title="Your Cart">
-                  {cartItems.length > 0 && (
-                    <Badge
-                      badgeContent={cartItems.reduce(
-                        (acc, item) => acc + item.qty,
-                        0
-                      )}
-                      color="primary"
-                      size="small"
-                      max={9}
-                      invisible={cartItems.length === 0}
-                      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                      sx={{
-                        '& .MuiBadge-badge': {
-                          fontSize: cartItems.length > 8 ? '7px' : '8px',
-                        },
-                      }}
-                    >
-                      <ShoppingBagOutlinedIcon />
-                    </Badge>
-                  )}
-                </Tooltip>
-              </IconButton>
+              <Tooltip title="Your Cart">
+                <IconButton size="small" aria-label="show cart" color="inherit">
+                  <Badge
+                    badgeContent={cartItems.reduce(
+                      (acc, item) => acc + item.qty,
+                      0
+                    )}
+                    color="primary"
+                    size="small"
+                    max={9}
+                    invisible={cartItems.length === 0}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    sx={{
+                      '& .MuiBadge-badge': {
+                        fontSize: cartItems.length > 8 ? '7px' : '8px',
+                      },
+                    }}
+                  >
+                    <ShoppingBagOutlinedIcon />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
             </Link>
           </Box>
           <Box

@@ -34,16 +34,17 @@ const ProductDetailScreen = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [qty, setQty] = useState(1)
-  const {
-    data: product,
-    isLoading,
-    error,
-  } = useGetProductDetailsQuery(productId)
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, qty }))
     navigate(CART_URL)
   }
+
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useGetProductDetailsQuery(productId)
 
   const CardMediaBase = styled(CardMedia)(({ theme }) => ({
     display: 'block',
@@ -65,21 +66,6 @@ const ProductDetailScreen = () => {
     display: 'block',
     width: '100%',
     paddingBottom: '1rem',
-  }))
-
-  const AccordionBase = styled(Accordion)(({ theme }) => ({
-    width: '100%',
-    shadow: 'none',
-    backgroundColor: alpha('#fff', 0.1),
-    '& .MuiAccordionSummary-root': {
-      backgroundColor: alpha('#fff', 1),
-      shadow: 'none',
-      boxShadow: 'none',
-      shadowColor: 'none',
-    },
-    '& .MuiAccordionDetails-root': {
-      backgroundColor: alpha('#1c252c', 0.1),
-    },
   }))
 
   const ChipBase = styled(Chip)(({ theme }) => ({
@@ -122,6 +108,7 @@ const ProductDetailScreen = () => {
       transitionDelay: '0.2s',
     },
   }))
+
   return (
     <>
       <Link to="/">
@@ -237,10 +224,4 @@ const ProductDetailScreen = () => {
   )
 }
 
-ProductDetailScreen.propTypes = {
-  match: PropTypes.object,
-}
-
 export default ProductDetailScreen
-
-// give a description on this application Tolby technologies
