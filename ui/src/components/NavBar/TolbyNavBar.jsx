@@ -286,6 +286,10 @@ const TolbyNavBar = () => {
                 vertical: 'bottom',
                 horizontal: 'left',
               }}
+              popperProps={{
+                disablePortal: true,
+              }}
+              onPointerEnter={handleOpenNavMenu}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
@@ -446,6 +450,11 @@ const TolbyNavBar = () => {
                       max={9}
                       invisible={cartItems.length === 0}
                       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                      sx={{
+                        '& .MuiBadge-badge': {
+                          fontSize: cartItems.length > 8 ? '7px' : '8px',
+                        },
+                      }}
                     >
                       <ShoppingBagOutlinedIcon />
                     </Badge>
@@ -457,7 +466,6 @@ const TolbyNavBar = () => {
           <Box
             sx={{
               display: { xs: 'flex', md: 'none' },
-
               justifyContent: 'flex-end',
             }}
           >
