@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Header from '../Header.jsx'
@@ -17,17 +17,16 @@ import {
   Avatar,
   Button,
   Badge,
-  Collapse,
   Drawer,
   Grid,
-  TextField,
   FormControl,
-  InputLabel,
+  InputAdornment,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
+import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined'
 import { alpha, styled } from '@mui/material/styles'
-import SearchIcon from '@mui/icons-material/Search'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,11 +51,15 @@ const SearchIconWrapper = styled(IconButton)(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   height: '0px',
+  width: '100px',
   '& .MuiInputBase-input': {
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    // transition: theme.transitions.create('width'),
+    transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+    // auto focus
+    '&:focus': {
       width: '20ch',
     },
     paddingTop: '0px',
@@ -69,6 +72,43 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }))
 
+const DrawerBase = styled(Drawer)(({ theme }) => ({
+  '& .MuiDrawer-paperAnchorTop': {
+    top: '0px',
+    height: '30vh',
+    width: '100%',
+    boxShadow: 'none',
+  },
+  drawerBackground: {
+    backgroundColor: '#FFF',
+    backdropFilter: 'blur(10px)',
+  },
+  '& .MuiDrawer-paper': {
+    backgroundColor: '#FFF',
+    backdropFilter: 'blur(10px)',
+  },
+  '& .MuiDrawer-paperAnchorDockedTop': {
+    marginTop: '0px',
+    backgroundColor: '#FFF',
+  },
+  WebkitBackdropFilter: 'blur(10px)',
+  backdropFilter: 'blur(10px)',
+  backgroundColor: 'rgba(255, 255, 255, 0.5)',
+  boxShadow: '0 8px 32px 0 rgba(255, 255, 255, 0.97)',
+  scrollBehavior: 'smooth',
+  animation: 'fadeInUp .5s ease-in-out',
+  transition: 'all .5s ease-in-out',
+  '@keyframes fadeInUp': {
+    '0%': {
+      opacity: 0,
+      transform: 'translateY(20px)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translateY(0)',
+    },
+  },
+}))
 const AvatarWrapper = styled(Box)(({ theme }) => ({
   flexGrow: 0,
   flexShrink: 2,
@@ -80,11 +120,6 @@ const AvatarWrapper = styled(Box)(({ theme }) => ({
     width: '2rem',
     height: '2rem',
   },
-}))
-
-const NavLabelsWrapper = styled(Box)(({ theme }) => ({
-  flexGrow: 1,
-  display: { xs: 'none', md: 'flex' },
 }))
 
 const AppBarBase = styled(AppBar)(({ theme }) => ({
@@ -107,6 +142,9 @@ const AppBarBase = styled(AppBar)(({ theme }) => ({
   '& .MuiInputBase-root': {
     color: '#000',
     marginTop: '0px',
+    '&:focus': {
+      color: '#1c252c',
+    },
   },
   '& .MuiBadge-badge': {
     fontSize: '8px',
@@ -118,7 +156,6 @@ const AppBarBase = styled(AppBar)(({ theme }) => ({
   '& .MuiInputBase-input:focus': {
     color: '#1c252c',
   },
-  // svg component inside the IconButton
   '& .MuiIconButton-root': {
     height: '30px',
     width: '30px',
@@ -177,10 +214,14 @@ const TolbyNavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null)
   const [expanded, setExpanded] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const isDrawerOpen = Boolean(anchorElNav)
+  const [searchValue, setSearchValue] = useState('')
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen)
+  }
+
+  const closeDrawer = () => {
+    setIsOpen(false)
   }
 
   const handleOpenNavMenu = (event) => {
@@ -201,6 +242,26 @@ const TolbyNavBar = () => {
   const handleExpandClick = () => {
     setExpanded(!expanded)
   }
+
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value)
+  }
+
+  const handleClearSearch = () => {
+    setSearchValue('')
+  }
+
+  useEffect(() => {
+    if (isOpen) {
+      //  other events
+      document.addEventListener('mousedown', closeDrawer)
+    } else {
+      document.removeEventListener('mousedown', closeDrawer)
+    }
+    return () => {
+      document.removeEventListener('mousedown', closeDrawer)
+    }
+  }, [isOpen])
 
   return (
     <AppBarBase position="sticky">
@@ -270,6 +331,7 @@ const TolbyNavBar = () => {
               backgroundColor: 'transparent',
               marginTop: '0px',
               paddingTop: '0px',
+              marginLeft: { xs: '2rem', md: '0rem' },
             }}
           >
             <SearchIconWrapper
@@ -277,11 +339,27 @@ const TolbyNavBar = () => {
               color="inherit"
               aria-label="menu"
               onClick={toggleDrawer}
+              sx={{ display: isOpen ? 'none' : 'block', padding: '0px' }}
             >
-              <SearchIcon />
+              <SearchOutlinedIcon />
             </SearchIconWrapper>
-            <Drawer anchor="top" open={isOpen} onClose={toggleDrawer}>
-              <Grid container lg={12}>
+            <DrawerBase
+              anchor="top"
+              open={isOpen}
+              onClose={closeDrawer || toggleDrawer}
+              ModalProps={{
+                disableEnforceFocus: true,
+                disableRestoreFocus: true,
+                disableAutoFocus: true,
+                disablePortal: false,
+                BackdropProps: {
+                  sx: {
+                    backgroundColor: 'transparent',
+                  },
+                },
+              }}
+            >
+              <Grid container>
                 {/* create a list */}
                 <Container
                   maxWidth="md"
@@ -292,34 +370,52 @@ const TolbyNavBar = () => {
                 >
                   <Grid
                     item
-                    lg={4}
+                    lg={12}
                     sx={{
                       display: 'flex-end',
                     }}
                   >
                     <FormControl>
-                      {/* label for search */}
                       <Box sx={{ display: 'inline-flex' }}>
                         <Box sx={{ height: '3rem' }}>
-                          <SearchIcon />
+                          <SearchOutlinedIcon />
                         </Box>
-                        {/* input text field */}
-
-                        <InputBase
-                          placeholder="Search Tolby.co.nz"
-                          sx={{
-                            fontSize: '2rem',
-                            height: '3rem',
-                            width: '100%',
-                            paddingLeft: '1rem',
-                          }}
-                        />
+                        <Box>
+                          <StyledInputBase
+                            placeholder="Search Tolby.co.nz"
+                            autoFocus={true}
+                            showSearch={true}
+                            allowClear={true}
+                            allowCancel={true}
+                            autoCorrect={true}
+                            onChange={handleInputChange}
+                            endAdornment={
+                              searchValue && (
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    edge="end"
+                                    onClick={handleClearSearch}
+                                  >
+                                    <BackspaceOutlinedIcon size="sm" />
+                                  </IconButton>
+                                </InputAdornment>
+                              )
+                            }
+                            // onChange={handleSearchChange}
+                            sx={{
+                              fontSize: '2rem',
+                              height: '3rem',
+                              width: '100%',
+                              paddingLeft: '1rem',
+                            }}
+                          />
+                        </Box>
                       </Box>
                     </FormControl>
                   </Grid>
                 </Container>
               </Grid>
-            </Drawer>
+            </DrawerBase>
           </Search>
 
           <Typography
@@ -336,30 +432,27 @@ const TolbyNavBar = () => {
               marginLeft: 'auto',
             }}
           >
-            <IconButton
-              size="small"
-              aria-label="show cart"
-              color="inherit"
-              sx={{}}
-            >
-              <Tooltip title="Your Cart">
-                {cartItems.length > 0 && (
-                  <Badge
-                    badgeContent={cartItems.reduce(
-                      (acc, item) => acc + item.qty,
-                      0
-                    )}
-                    color="primary"
-                    size="small"
-                    max="9"
-                    invisible={cartItems.length === 0}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                  >
-                    <ShoppingBagOutlinedIcon />
-                  </Badge>
-                )}
-              </Tooltip>
-            </IconButton>
+            <Link to="/cart">
+              <IconButton size="small" aria-label="show cart" color="inherit">
+                <Tooltip title="Your Cart">
+                  {cartItems.length > 0 && (
+                    <Badge
+                      badgeContent={cartItems.reduce(
+                        (acc, item) => acc + item.qty,
+                        0
+                      )}
+                      color="primary"
+                      size="small"
+                      max={9}
+                      invisible={cartItems.length === 0}
+                      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    >
+                      <ShoppingBagOutlinedIcon />
+                    </Badge>
+                  )}
+                </Tooltip>
+              </IconButton>
+            </Link>
           </Box>
           <Box
             sx={{

@@ -139,7 +139,7 @@ const ProductDetailScreen = () => {
         </Message>
       ) : (
         <>
-          <Grid container lg={12}>
+          <Grid container>
             <Grid item lg={7}>
               <CardMediaBase
                 component="img"
@@ -147,7 +147,7 @@ const ProductDetailScreen = () => {
               ></CardMediaBase>
             </Grid>
             <Grid item lg={5}>
-              <Grid container lg={12}>
+              <Grid container>
                 <CardContentBase>
                   <BoxBase>
                     {product.model >= '2020' ? (

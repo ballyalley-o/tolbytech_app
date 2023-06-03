@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
-import { Typography, Box, Container, Badge, CardMedia } from '@mui/material'
+import { Typography, Box, Container, CardMedia } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 const AbstractBg = () => {
@@ -17,6 +18,7 @@ const AbstractBg = () => {
     height: '100%',
     zIndex: '-1',
   }))
+
   return (
     // create a component for the abstract background using mui
     <Box>

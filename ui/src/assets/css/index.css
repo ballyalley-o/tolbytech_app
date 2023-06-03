@@ -15,6 +15,9 @@
   -moz-osx-font-smoothing: grayscale;
   min-height: 80vh;
   scroll-snap-align: start;
+  transition: background-color 0.25s;
+  animation: cubic-bezier(1, 0, 0, 1) 0.25s;
+  animation-name: fadeIn;
 }
 
 main {

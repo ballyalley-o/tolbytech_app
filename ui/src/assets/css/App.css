@@ -42,8 +42,3 @@
 .read-the-docs {
   color: #888;
 }
-
-.blurred-background {
-  filter: blur(5px);
-  pointer-events: none;
-}

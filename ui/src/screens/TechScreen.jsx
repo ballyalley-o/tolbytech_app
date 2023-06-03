@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { useEffect } from 'react'
 import { Grid, Typography } from '@mui/material'
 import Product from '../components/Product'
 import { CONFIG } from '../config-global'

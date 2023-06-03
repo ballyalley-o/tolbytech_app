@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import tolby from '../../assets/icons/tolby.svg'
 import { Link } from 'react-router-dom'
 import { Container } from '@mui/material'
