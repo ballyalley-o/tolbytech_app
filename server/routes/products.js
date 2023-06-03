@@ -9,4 +9,5 @@ router.get('/:id', productsController.getProduct)
 // router.put('/:id', productsController.updateProduct)
 // router.get('/:id', productsController.deleteProduct)
 
-export default router
+const productRouter = router
+export default productRouter

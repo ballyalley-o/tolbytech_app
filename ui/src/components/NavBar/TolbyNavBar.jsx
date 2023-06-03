@@ -253,7 +253,6 @@ const TolbyNavBar = () => {
 
   useEffect(() => {
     if (isOpen) {
-      //  other events
       document.addEventListener('mousedown', closeDrawer)
     } else {
       document.removeEventListener('mousedown', closeDrawer)

@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
-import { linkProductsRoutes } from '../routes/index.js'
+import { linkRoutes } from '../routes/index.js'
 import connectDB from './db.js'
 import { notFound, errorHandler } from '../middleware/error-handler.js'
 import { TolbyTechResponse } from '../helpers/response.js'
@@ -41,7 +41,7 @@ export class App {
   }
 
   registerRoutes() {
-    linkProductsRoutes(this.app, API_ROOT)
+    linkRoutes(this.app, API_ROOT)
   }
 
   start() {

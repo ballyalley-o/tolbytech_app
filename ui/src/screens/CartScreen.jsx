@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart } from '../slices/cart-slice'
+import { addToCart, removeFromCart } from '../slices/cart-slice'
 import {
   Container,
   Typography,
@@ -28,6 +28,14 @@ const CartScreen = () => {
 
   const handleAddToCart = async (product, qty) => {
     dispatch(addToCart({ ...product, qty }))
+  }
+
+  const handleRemoveFromCart = async (id) => {
+    dispatch(removeFromCart(id))
+  }
+
+  const handleCheckout = () => {
+    navigate('/login?redirect=/shipping')
   }
 
   return (
@@ -106,7 +114,9 @@ const CartScreen = () => {
                         <Button
                           variant="outlined"
                           color="secondary"
-                          onClick={(e) => {}}
+                          onClick={() => {
+                            handleRemoveFromCart(item._id)
+                          }}
                         >
                           <DeleteIcon />
                         </Button>
@@ -135,7 +145,10 @@ const CartScreen = () => {
                             size="large"
                           />
                           &nbsp; &nbsp;
-                          {cartItems.length > 1 ? ' items' : ' item'}
+                          {cartItems.reduce((acc, item) => acc + item.qty, 0) >
+                          1
+                            ? ' items'
+                            : ' item'}
                         </Typography>
                       </Grid>
                       <Grid item lg={12}>
@@ -171,6 +184,9 @@ const CartScreen = () => {
                   variant="contained"
                   disabled={cartItems.length === 0}
                   sx={{ borderRadius: '5px', margin: '1rem 0' }}
+                  onClick={() => {
+                    handleCheckout()
+                  }}
                 >
                   checkout
                 </Button>

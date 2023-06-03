@@ -10,5 +10,6 @@ export const CONFIG = {
   ORDERS_URL: import.meta.env.VITE_ORDERS_URL,
   BLOG_URL: import.meta.env.VITE_BLOG_URL,
   TECH_URL: import.meta.env.VITE_TECH_URL,
+  CHECKOUT_AUTH_CHECK: import.meta.env.VITE_CHECKOUT_AUTH_CHECK,
   PAYPAL_URL: import.meta.env.VITE_PAYPAL_URL,
 }
