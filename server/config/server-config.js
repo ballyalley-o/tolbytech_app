@@ -19,6 +19,7 @@ export class App {
   constructor() {
     this.app = express()
     this.app.use(express.json())
+    this.app.use(express.urlencoded({ extended: true }))
     this.app.get('/', TolbyTechResponse.response)
     this.app.use(setHeaders)
     this.registerRoutes()

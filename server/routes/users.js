@@ -4,10 +4,9 @@ import usersController from '../controllers/users.js'
 const router = express.Router()
 
 router
-  .route('/:id')
-  .get(usersController.getUser)
-  .put(usersController.updateUser)
-  .delete(usersController.deleteUser)
+  .route('/account')
+  .get(usersController.getUserAccount)
+  .put(usersController.updateUserAccount)
 
 router
   .route('/')
@@ -15,9 +14,10 @@ router
   .get(usersController.getUsers)
 
 router
-  .route('/account')
-  .get(usersController.getUserAccount)
-  .put(usersController.updateUserAccount)
+  .route('/:id')
+  .get(usersController.getUser)
+  .put(usersController.updateUser)
+  .delete(usersController.deleteUser)
 
 router.post('/logout', usersController.logoutUser)
 router.post('/auth', usersController.authUser)
