@@ -13,8 +13,6 @@ const VARS = {
   ENV: process.env.NODE_ENV,
   // API_ROOT
   API_ROOT: process.env.API_ROOT,
-  // DB
-  DB_URI: process.env.DB_URI,
   // MONGO DB
   USERNAME: process.env.MONGODB_USER,
   PASSWORD: process.env.MONGODB_PASS,
