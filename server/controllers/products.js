@@ -2,7 +2,7 @@ import express from 'express'
 import asyncHandler from '../middleware/async-handler.js'
 import Product from '../models/Product.js'
 
-// @desc    fetch all product
+// @desc    fetch all products
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res, next) => {

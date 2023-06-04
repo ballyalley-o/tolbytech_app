@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { addToCart, removeFromCart } from '../slices/cart-slice'
 import {
   Container,
   Typography,
@@ -24,6 +25,18 @@ const CartScreen = () => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
+
+  const handleAddToCart = async (product, qty) => {
+    dispatch(addToCart({ ...product, qty }))
+  }
+
+  const handleRemoveFromCart = async (id) => {
+    dispatch(removeFromCart(id))
+  }
+
+  const handleCheckout = () => {
+    navigate('/login?redirect=/shipping')
+  }
 
   return (
     <>
@@ -83,9 +96,11 @@ const CartScreen = () => {
                           <Select
                             labelId="qty"
                             id="qty-select"
-                            value={item.qty}
+                            value={Number(item.qty)}
                             label="Qty"
-                            onChange={(e) => {}}
+                            onChange={(e) => {
+                              handleAddToCart(item, Number(e.target.value))
+                            }}
                           >
                             {[...Array(item.countInStock).keys()].map((x) => (
                               <MenuItem key={x + 1} value={x + 1}>
@@ -100,7 +115,7 @@ const CartScreen = () => {
                           variant="outlined"
                           color="secondary"
                           onClick={() => {
-                            dispatch(removeFromCart(item._id))
+                            handleRemoveFromCart(item._id)
                           }}
                         >
                           <DeleteIcon />
@@ -112,62 +127,72 @@ const CartScreen = () => {
               </>
             )}
           </Grid>
-          <Grid item lg={4}>
-            <List dense disablePadding>
-              <Grid item>
-                <ListItem>
-                  <Grid container spacing={2} gap={2}>
-                    <Grid item lg={12}>
-                      <Typography variant="body1" fontWeight="bold">
-                        Subtotal: &nbsp; &nbsp;
-                        <Badge
-                          badgeContent={cartItems.reduce(
-                            (acc, item) => acc + item.qty,
-                            0
-                          )}
-                          color="info"
-                          size="large"
-                        />
-                        &nbsp; &nbsp;
-                        {cartItems.length > 1 ? ' items' : ' item'}
-                      </Typography>
+          {cartItems.length !== 0 && (
+            <Grid item lg={4}>
+              <List dense disablePadding>
+                <Grid item>
+                  <ListItem>
+                    <Grid container spacing={2} gap={2}>
+                      <Grid item lg={12}>
+                        <Typography variant="body1" fontWeight="bold">
+                          Subtotal: &nbsp; &nbsp;
+                          <Badge
+                            badgeContent={cartItems.reduce(
+                              (acc, item) => acc + item.qty,
+                              0
+                            )}
+                            color="info"
+                            size="large"
+                          />
+                          &nbsp; &nbsp;
+                          {cartItems.reduce((acc, item) => acc + item.qty, 0) >
+                          1
+                            ? ' items'
+                            : ' item'}
+                        </Typography>
+                      </Grid>
+                      <Grid item lg={12}>
+                        <Typography variant="body1">
+                          NZ$
+                          {cartItems
+                            .reduce(
+                              (acc, item) => acc + item.qty * item.price,
+                              0
+                            )
+                            .toFixed(2)}
+                        </Typography>
+                      </Grid>
                     </Grid>
-                    <Grid item lg={12}>
-                      <Typography variant="body1">
-                        NZ$
-                        {cartItems
-                          .reduce((acc, item) => acc + item.qty * item.price, 0)
-                          .toFixed(2)}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </ListItem>
-              </Grid>
-            </List>
-            <Grid
-              item
-              lg={12}
-              sx={{
-                display: 'block',
-                margin: '1rem 0',
-              }}
-            >
-              <hr />
-            </Grid>
-
-            <Grid item lg={12}>
-              <Button
-                type="button"
-                fullWidth
-                color="info"
-                variant="contained"
-                disabled={cartItems.length === 0}
-                sx={{ borderRadius: '5px', margin: '1rem 0' }}
+                  </ListItem>
+                </Grid>
+              </List>
+              <Grid
+                item
+                lg={12}
+                sx={{
+                  display: 'block',
+                  margin: '1rem 0',
+                }}
               >
-                checkout
-              </Button>
+                <hr />
+              </Grid>
+              <Grid item lg={12}>
+                <Button
+                  type="button"
+                  fullWidth
+                  color="info"
+                  variant="contained"
+                  disabled={cartItems.length === 0}
+                  sx={{ borderRadius: '5px', margin: '1rem 0' }}
+                  onClick={() => {
+                    handleCheckout()
+                  }}
+                >
+                  checkout
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
+          )}
         </Grid>
       </Container>
     </>

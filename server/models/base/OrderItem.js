@@ -7,7 +7,7 @@ export const OrderItemSchema = new mongoose.Schema(
       required: true,
     },
     qty: {
-      type: String,
+      type: Number,
       required: true,
       default: 1,
     },

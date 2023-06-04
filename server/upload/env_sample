@@ -9,3 +9,5 @@ MONGODB_DB=
 MONGODB_USER=
 MONGODB_PASS=
 
+// path
+'/config'
