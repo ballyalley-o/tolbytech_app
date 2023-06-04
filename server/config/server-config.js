@@ -2,19 +2,16 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-import { linkRoutes } from '../routes/index.js'
+import setHeaders from '../helpers/set-headers.js'
 import connectDB from './db.js'
+import { linkRoutes } from '../routes/index.js'
 import { notFound, errorHandler } from '../middleware/error-handler.js'
 import { TolbyTechResponse } from '../helpers/response.js'
 import MessageLOG from '../helpers/message-logger.js'
-import setHeaders from '../helpers/set-headers.js'
+import VARS from '../helpers/vars/vars.js'
 dotenv.config({
   path: './server/config/config.env',
 })
-
-const API_ROOT = process.env.API_ROOT
-const PORT = process.env.PORT || 8003
-const ENV = process.env.NODE_ENV
 
 export class App {
   constructor() {
@@ -27,31 +24,27 @@ export class App {
     this.registerRoutes()
     this.app.use(notFound)
     this.app.use(errorHandler)
-    this.app.use(
-      cors({
-        origin: '*',
-      })
-    )
+    this.app.use(cors({ origin: '*' }))
   }
-
   async connectDB() {
     try {
       await connectDB()
       MessageLOG.custom('.. CONNECTED', 'green')
     } catch (err) {
+      MessageLOG.error('FAILED TO CONNECT')
       MessageLOG.error(err)
     }
   }
 
   registerRoutes() {
-    linkRoutes(this.app, API_ROOT)
+    linkRoutes(this.app, VARS.API_ROOT)
   }
 
   start() {
     try {
-      this.app.listen(PORT, () => {
-        MessageLOG.port_response(PORT)
-        MessageLOG.custom(`ENVIRONMENT: ${ENV}`, 'bgBlue')
+      this.app.listen(VARS.PORT, () => {
+        MessageLOG.port_response(VARS.PORT)
+        MessageLOG.env(VARS.ENV)
       })
     } catch (err) {
       MessageLOG.error(err)
