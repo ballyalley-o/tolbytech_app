@@ -1,9 +1,3 @@
-import dotenv from 'dotenv'
-dotenv.config({
-  path: './server/config/config.env',
-})
-
-const API_ROOT = process.env.API_ROOT
 import productRouter from './products.js'
 import userRouter from './users.js'
 
