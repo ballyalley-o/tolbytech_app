@@ -25,8 +25,18 @@ const MessageLOG = {
     console.log(message[color])
   },
 
+  env: function (env) {
+    console.log(`ENVIRONMENT: ${env}`.bgBlue)
+  },
+
   port_response: function (port) {
     console.log(`SERVER STATUS: Running on PORT: ${port}`.bgYellow.black)
+  },
+
+  db: function (host, db) {
+    console.log(`MONGODB_HOST: ${host}`.green.bold)
+    console.log(`MONGODB_DBNAME: ${db}`.green.bold)
+    console.log(`MONGODB_STATUS: ...`.green.bold)
   },
 }
 

@@ -15,6 +15,12 @@ const VARS = {
   API_ROOT: process.env.API_ROOT,
   // DB
   DB_URI: process.env.DB_URI,
+  // MONGO DB
+  USERNAME: process.env.MONGODB_USER,
+  PASSWORD: process.env.MONGODB_PASS,
+  HOST: process.env.MONGODB_HOST,
+  DBNAME: process.env.MONGODB_DB,
+  DB_URI: process.env.MONGODB_URI,
 }
 
 export default VARS
