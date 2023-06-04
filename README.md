@@ -42,11 +42,11 @@
 
 ## Pages
 
-- [ ] **Home Page**
+- [x] **Home Page**
 - [x] **Tech Page**
 - [ ] **Blog Page**
 - [ ] **Login/Signup Page**
-- [ ] **Product Details Page**
+- [x] **Product Details Page**
 
 <hr>
 
@@ -60,8 +60,8 @@ v0.0.1
 
 client
 - [x] **responsive**
-- [ ] **search bar**
-- [ ] **cart**
+- [x] **search bar**
+- [x] **cart**
 - [ ] **wishlist**
 - [ ] **checkout page**
 - [ ] **payment gateway**
@@ -74,18 +74,18 @@ client
 - [x] **redux-boilerplate**
 - [x] **redux-slices**
 - [x] **redux-toolkit**
-- [ ] **redux-actions**
+- [x] **redux-actions**
 - [ ] **redux-thunk**
 
 server
-- [ ] **admin**
+- [x] **admin**
 - [x] **product**
 - [ ] **user**
 - [ ] **order**
 - [ ] **payment**
 - [ ] **blog**
 - [ ] **contact**
-- [ ] **seeder**
+- [x] **peerdata**
 - [ ] **wishlist**
 
 <hr>
