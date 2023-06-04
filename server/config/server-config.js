@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { linkRoutes } from '../routes/index.js'
 import connectDB from './db.js'
@@ -20,6 +21,7 @@ export class App {
     this.app = express()
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+    this.app.use(cookieParser())
     this.app.get('/', TolbyTechResponse.response)
     this.app.use(setHeaders)
     this.registerRoutes()
