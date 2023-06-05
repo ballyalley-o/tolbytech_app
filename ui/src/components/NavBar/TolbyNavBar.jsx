@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Form, Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useLogoutMutation } from '../../slices/user-slice.js'
+import { logout } from '../../slices/auth-slice.js'
+import SnackAlert from '../SnackAlert.jsx'
 import Header from '../Header.jsx'
 import {
   AppBar,
@@ -14,19 +17,22 @@ import {
   Container,
   Box,
   Tooltip,
-  Avatar,
+  Divider,
   Button,
   Badge,
   Drawer,
   Grid,
   FormControl,
   InputAdornment,
+  FormControlLabel,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined'
+import CustomAvatar from '../CustomAvatar.jsx'
 import { alpha, styled } from '@mui/material/styles'
+import { toast } from 'react-toastify'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -200,21 +206,25 @@ const settings = [
     label: 'Orders History',
     link: '/history',
   },
-
-  {
-    id: 4,
-    label: 'Sign Up',
-    link: '/signup',
-  },
 ]
 
 const TolbyNavBar = () => {
   const { cartItems } = useSelector((state) => state.cart)
+  const { userInfo } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [logoutCall] = useLogoutMutation()
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
   const [expanded, setExpanded] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [snackOpen, setSnackOpen] = useState(false)
   const [searchValue, setSearchValue] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+  const [searchLoading, setSearchLoading] = useState(false)
+  const [searchError, setSearchError] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [isSignedIn, setIsSignedIn] = useState(false)
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen)
@@ -251,8 +261,33 @@ const TolbyNavBar = () => {
     setSearchValue('')
   }
 
+  const handleLogout = async () => {
+    try {
+      await logoutCall().unwrap()
+      dispatch(logout())
+      navigate('/auth')
+      // toast.success('Logout successful')
+      setSnackOpen('Logout successful')
+      handleHideDuration(2000)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleHideDuration = (duration) => {
+    setTimeout(() => {
+      setSnackOpen(null)
+    }, duration)
+  }
+
   useEffect(() => {
-    if (isOpen) {
+    if (searchValue.length > 0) {
+      document.addEventListener('mousedown', handleClearSearch)
+    } else {
+      document.removeEventListener('mousedown', handleClearSearch)
+    }
+
+    if (isOpen && searchValue.length === 0) {
       document.addEventListener('mousedown', closeDrawer)
     } else {
       document.removeEventListener('mousedown', closeDrawer)
@@ -260,11 +295,24 @@ const TolbyNavBar = () => {
     return () => {
       document.removeEventListener('mousedown', closeDrawer)
     }
-  }, [isOpen])
+  }, [isOpen, searchValue.length])
 
   return (
     <AppBarBase position="sticky">
       <Container maxWidth="md">
+        {snackOpen && (
+          <SnackAlert
+            open={snackOpen}
+            onClose={() => setSnackOpen(null)}
+            message={snackOpen}
+            transition="left"
+            vertical="top"
+            duration={2000}
+            horizontal="right"
+          >
+            {snackOpen}
+          </SnackAlert>
+        )}
         <Toolbar disableGutters>
           <Box>
             <Link to="/">
@@ -285,7 +333,7 @@ const TolbyNavBar = () => {
                 vertical: 'bottom',
                 horizontal: 'left',
               }}
-              popperProps={{
+              popperprops={{
                 disablePortal: true,
               }}
               onPointerEnter={handleOpenNavMenu}
@@ -329,6 +377,7 @@ const TolbyNavBar = () => {
             ))}
           </Box>
 
+          {/* search bar */}
           <Search
             sx={{
               backgroundColor: 'transparent',
@@ -363,7 +412,6 @@ const TolbyNavBar = () => {
               }}
             >
               <Grid container>
-                {/* create a list */}
                 <Container
                   maxWidth="md"
                   sx={{
@@ -379,6 +427,14 @@ const TolbyNavBar = () => {
                     }}
                   >
                     <FormControl>
+                      {searchValue && (
+                        <Box sx={{ marginLeft: '3rem' }}>
+                          <Typography variant="body2">
+                            Search Tolby.co.nz
+                          </Typography>
+                        </Box>
+                      )}
+
                       <Box sx={{ display: 'inline-flex' }}>
                         <Box sx={{ height: '3rem' }}>
                           <SearchOutlinedIcon />
@@ -390,7 +446,7 @@ const TolbyNavBar = () => {
                             showSearch={true}
                             allowClear={true}
                             allowCancel={true}
-                            autoCorrect={true}
+                            value={searchValue}
                             onChange={handleInputChange}
                             endAdornment={
                               searchValue && (
@@ -428,6 +484,7 @@ const TolbyNavBar = () => {
             &nbsp;
           </Typography>
 
+          {/* bag  */}
           <Box
             sx={{
               display: { xs: 'block', md: 'flex' },
@@ -436,7 +493,7 @@ const TolbyNavBar = () => {
             }}
           >
             <Link to="/cart">
-              <Tooltip title="Your Cart">
+              <Tooltip title="Your Bag">
                 <IconButton size="small" aria-label="show cart" color="inherit">
                   <Badge
                     badgeContent={cartItems.reduce(
@@ -480,46 +537,73 @@ const TolbyNavBar = () => {
               <MenuIcon />
             </IconButton>
           </Box>
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'block' },
-              paddingLeft: '1rem',
-            }}
-          >
-            <AvatarWrapper>
-              <Tooltip title="Settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Your Profile" src="" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '5px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
-                    <Link to={setting.link}>
-                      <Typography textAlign="center">
-                        {setting.label}
-                      </Typography>
+          {userInfo ? (
+            <Box
+              sx={{
+                display: { xs: 'none', md: 'block' },
+                paddingLeft: '1rem',
+              }}
+            >
+              <AvatarWrapper>
+                <Tooltip title="Account & Settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <CustomAvatar name={userInfo.response.name} />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '5px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem title={userInfo.response.name} id="username">
+                    <Typography textAlign="center">
+                      Hi &nbsp;{userInfo.response.name},
+                    </Typography>
+                  </MenuItem>
+                  <Divider />
+                  {settings.map((setting) => (
+                    <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
+                      <Link to={setting.link}>
+                        <Typography textAlign="center">
+                          {setting.label}
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                  ))}
+                  <MenuItem onClick={handleLogout}>
+                    <Link to="/logout">
+                      <Typography textAlign="center">Logout</Typography>
                     </Link>
                   </MenuItem>
-                ))}
-              </Menu>
-            </AvatarWrapper>
-          </Box>
+                </Menu>
+              </AvatarWrapper>
+            </Box>
+          ) : (
+            <Box>
+              <Link to="/auth" onClick={handleCloseNavMenu}>
+                <Button
+                  sx={{
+                    my: 2,
+                    color: 'black',
+                    display: { xs: 'none', md: 'block' },
+                  }}
+                >
+                  Sign In
+                </Button>
+              </Link>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBarBase>

@@ -18,9 +18,9 @@ const Product = ({ product }) => {
   const CardBase = styled(Card)(({ theme }) => ({
     color: theme.palette.text.primary,
     display: 'flex',
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
     flexDirection: 'column',
-    border: '1px solid #C0C0C0',
+    border: '0px solid #C0C0C0',
     alignItems: 'center',
     height: '300px',
     width: '200px',
@@ -30,7 +30,7 @@ const Product = ({ product }) => {
     boxShadow: 'none',
     transition: '0.3s',
     '&:hover': {
-      boxShadow: '0 0 20px 0 rgba(0,0,0,0.2)',
+      boxShadow: '0 0 20px 0 rgba(234,43,233,0.2)',
     },
   }))
 

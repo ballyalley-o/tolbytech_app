@@ -14,6 +14,9 @@ import TechScreen from './screens/TechScreen.jsx'
 import BlogScreen from './screens/BlogScreen'
 import ProductDetailScreen from './screens/ProductDetailScreen'
 import CartScreen from './screens/CartScreen'
+import LoginScreen from './screens/LoginScreen.jsx'
+import RegisterScreen from './screens/RegisterScreen.jsx'
+import ShippingScreen from './screens/ShippingScreen.jsx'
 import NotFound from './screens/defaults/NotFound.jsx'
 import './assets/css/index.css'
 
@@ -25,6 +28,9 @@ const router = createBrowserRouter(
       <Route path="/products/:id" element={<ProductDetailScreen />} />
       <Route path="/blog" element={<BlogScreen />} />
       <Route path="/cart" element={<CartScreen />} />
+      <Route path="/auth" element={<LoginScreen />} />
+      <Route path="/register" element={<RegisterScreen />} />
+      <Route path="/shipping" element={<ShippingScreen />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   )

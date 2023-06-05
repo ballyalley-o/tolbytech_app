@@ -1,28 +1,23 @@
 /* eslint-disable no-unused-vars */
+import PropTypes from 'prop-types'
 import tolby from '../../assets/icons/tolby.svg'
-import { Link } from 'react-router-dom'
 import { Container } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
-const TolbyLogo = () => {
+const TolbyLogoBase = ({ width, height }) => {
   const LogoContainerBase = styled(Container)(({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '2rem',
+    padding: '1rem',
+    pointerEvents: 'none',
   }))
 
   const LogoBase = styled('img')(({ theme }) => ({
-    width: '400px',
-    height: '400px',
-    position: 'absolute',
-    right: '40px',
-    top: '190px',
+    width: width,
+    height: height,
+    position: 'relative',
     alignContent: 'right',
-    zIndex: 1,
-    animation: 'ease-in-out 1s',
-    animationName: '$fadeIn',
-    pointerEvents: 'none',
   }))
 
   return (
@@ -32,4 +27,14 @@ const TolbyLogo = () => {
   )
 }
 
-export default TolbyLogo
+TolbyLogoBase.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+}
+
+TolbyLogoBase.defaultProps = {
+  width: '100px',
+  height: '100px',
+}
+
+export default TolbyLogoBase
