@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Form, Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLogoutMutation } from '../../slices/user-slice.js'
 import { logout } from '../../slices/auth-slice.js'
@@ -24,6 +24,7 @@ import {
   Grid,
   FormControl,
   InputAdornment,
+  FormControlLabel,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
@@ -280,7 +281,13 @@ const TolbyNavBar = () => {
   }
 
   useEffect(() => {
-    if (isOpen) {
+    if (searchValue.length > 0) {
+      document.addEventListener('mousedown', handleClearSearch)
+    } else {
+      document.removeEventListener('mousedown', handleClearSearch)
+    }
+
+    if (isOpen && searchValue.length === 0) {
       document.addEventListener('mousedown', closeDrawer)
     } else {
       document.removeEventListener('mousedown', closeDrawer)
@@ -288,7 +295,7 @@ const TolbyNavBar = () => {
     return () => {
       document.removeEventListener('mousedown', closeDrawer)
     }
-  }, [isOpen])
+  }, [isOpen, searchValue.length])
 
   return (
     <AppBarBase position="sticky">
@@ -420,6 +427,14 @@ const TolbyNavBar = () => {
                     }}
                   >
                     <FormControl>
+                      {searchValue && (
+                        <Box sx={{ marginLeft: '3rem' }}>
+                          <Typography variant="body2">
+                            Search Tolby.co.nz
+                          </Typography>
+                        </Box>
+                      )}
+
                       <Box sx={{ display: 'inline-flex' }}>
                         <Box sx={{ height: '3rem' }}>
                           <SearchOutlinedIcon />
@@ -431,6 +446,7 @@ const TolbyNavBar = () => {
                             showSearch={true}
                             allowClear={true}
                             allowCancel={true}
+                            value={searchValue}
                             onChange={handleInputChange}
                             endAdornment={
                               searchValue && (
