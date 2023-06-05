@@ -45,7 +45,7 @@
 - [x] **Home Page**
 - [x] **Tech Page**
 - [ ] **Blog Page**
-- [ ] **Login/Signup Page**
+- [x] **Login/Signup Page**
 - [x] **Product Details Page**
 
 <hr>
@@ -80,7 +80,7 @@ client
 server
 - [x] **admin**
 - [x] **product**
-- [ ] **user**
+- [x] **user**
 - [ ] **order**
 - [ ] **payment**
 - [ ] **blog**
