@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
 import { Outlet } from 'react-router-dom'
-
 import { alpha, styled, createTheme, ThemeProvider } from '@mui/material/styles'
-import { Typography, Container, Box } from '@mui/material'
-
-import Footer from './components/Footer'
+import { Typography, Container, Snackbar, Alert } from '@mui/material'
 import TolbyNavBar from './components/NavBar/TolbyNavBar'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
-  const isDrawerOpen = false
   const theme = createTheme({
     palette: {
       primary: {
@@ -34,6 +32,7 @@ const App = () => {
           <Outlet />
         </Container>
       </ThemeProvider>
+      <ToastContainer />
     </>
   )
 }

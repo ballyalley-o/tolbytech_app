@@ -6,14 +6,18 @@ export const usersSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (data) => ({
-        url: USERS_URL / auth,
+        url: USERS_URL + '/auth',
         method: 'POST',
         body: data,
       }),
-      keepUnusedDataFor: 5,
-      providesTags: ['Product'],
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: USERS_URL + '/logout',
+        method: 'POST',
+      }),
     }),
   }),
 })
 
-export const { useLoginMutation } = usersSlice
+export const { useLoginMutation, useLogoutMutation } = usersSlice

@@ -17,8 +17,18 @@ import {
   FormControl,
   CardActionArea,
 } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import Message from '../components/Message'
 import DeleteIcon from '@mui/icons-material/Delete'
+
+const LinkBase = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: '#000',
+  fontWeight: 600,
+  border: '1px solid #000',
+  padding: '.3rem .5rem',
+  borderRadius: '1em',
+}))
 
 const CartScreen = () => {
   const navigate = useNavigate()
@@ -44,20 +54,20 @@ const CartScreen = () => {
         <Grid container spacing={2}>
           <Grid item lg={12}>
             <Typography variant="h3" pr={3} py={3} fontWeight="bold">
-              Cart.
+              Bag.
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 sx={{ color: 'gray', display: 'inline-flex' }}
               >
-                Your cart
+                Your bag
               </Typography>
             </Typography>
           </Grid>
           <Grid item lg={8}>
             {cartItems.length === 0 ? (
               <Message variant="h3" pr={3} py={3} fontWeight="bold">
-                Your cart is empty <Link to="/">Go Back</Link>
+                Your bag is empty <LinkBase to="/">Go Back</LinkBase>
               </Message>
             ) : (
               <>
@@ -180,10 +190,14 @@ const CartScreen = () => {
                 <Button
                   type="button"
                   fullWidth
-                  color="info"
-                  variant="contained"
                   disabled={cartItems.length === 0}
-                  sx={{ borderRadius: '5px', margin: '1rem 0' }}
+                  sx={{
+                    borderRadius: '5px',
+                    margin: '1rem 0',
+                    backgroundColor: 'pink.main',
+                    color: '#fff',
+                    fontWeight: 'bold',
+                  }}
                   onClick={() => {
                     handleCheckout()
                   }}

@@ -22,7 +22,6 @@ const LandingPage = () => {
     <>
       <ContainerLandingBase maxWidth="md">
         <Box>
-          <TolbyLogo />
           <Typography variant="h1" fontWeight="bold">
             CONVENTIONCVS 2023
           </Typography>
@@ -50,6 +49,7 @@ const LandingPage = () => {
               </Typography>
             </ExtraLargeTypesBase>
             <Box sx={{ alignItems: 'center' }}>
+              <TolbyLogo />
               <ExtraLargeTypesBase
                 variant="h1"
                 fontWeight="bold"
@@ -59,7 +59,7 @@ const LandingPage = () => {
                   display: 'inline-flex',
                   position: 'absolute',
                   zIndex: -1,
-                  top: '670px',
+                  top: '450px',
                   left: '250px',
                 }}
               >
