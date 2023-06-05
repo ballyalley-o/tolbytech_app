@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
-import { Typography, Box, Container, Grid } from '@mui/material'
+import { Typography, Box, Container, CardMedia } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import TolbyLogo from './TolbyLogo.jsx'
-import AbstractBg from '../../components/AbstractBg.jsx'
+import bg2 from '../../assets/images/bg2.png'
+import bg from '../../assets/images/bg.png'
 
 const LandingPage = () => {
   const ContainerLandingBase = styled(Container)(({ theme }) => ({
@@ -17,6 +18,7 @@ const LandingPage = () => {
   const ExtraLargeTypesBase = styled(Typography)(({ theme }) => ({
     fontSize: '10rem',
     fontWeight: 'bold',
+    background: `linear-gradient(90deg, #F2e121 0%, #FF0000 33%, #FF0060 66%, #FF0000 100%)`,
   }))
   return (
     <>
@@ -65,9 +67,45 @@ const LandingPage = () => {
               >
                 in
               </ExtraLargeTypesBase>
-              <ExtraLargeTypesBase variant="h1">AOTEAROA</ExtraLargeTypesBase>
+              <ExtraLargeTypesBase variant="h1" color="white">
+                AOTEAROA
+              </ExtraLargeTypesBase>
             </Box>
           </Box>
+          <CardMedia
+            component="img"
+            height="140"
+            image={bg}
+            alt="Tech"
+            sx={{
+              zIndex: -1,
+              position: 'absolute',
+              objectFit: 'fill',
+              float: 'left',
+              right: 0,
+              top: 0,
+              width: 'auto',
+              height: '100%',
+              // center the image
+            }}
+          />
+          <CardMedia
+            component="img"
+            height="140"
+            image={bg2}
+            alt="Tech"
+            sx={{
+              zIndex: -2,
+              position: 'absolute',
+              objectFit: 'fill',
+              float: 'left',
+              left: 0,
+              top: 0,
+              width: 'auto',
+              height: '100vh',
+              // center the image
+            }}
+          />
         </Box>
       </ContainerLandingBase>
 

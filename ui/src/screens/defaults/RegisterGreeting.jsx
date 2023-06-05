@@ -3,19 +3,19 @@ import React from 'react'
 import { Grid, Typography, CardMedia, Container } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import bg from '../../assets/images/bg.png'
-const LoginGreeting = () => {
+import bg2 from '../../assets/images/bg2.png'
+
+const RegisterGreeting = () => {
   const ContainerBase = styled(Container)(({ theme }) => ({
     color: theme.palette.common.black,
   }))
   return (
     <>
-      <ContainerBase maxWidth="md">
-        <Grid container lg={12} direction="row" justifyContent="flex-start">
-          <Grid item lg={6}>
+      <ContainerBase maxWidth="lg" maxHeight="sm">
+        <Grid container direction="row" justifyContent="center">
+          <Grid item lg={12}>
             <Typography variant="h1" fontWeight="bold">
-              <i>Everything</i> <br /> <i>Tech.</i> <br /> <br />
-              <i>One</i> <br /> <i>Place.</i>
-              <br />
+              Join. Tolby Tech
             </Typography>
             <CardMedia
               component="img"
@@ -25,11 +25,30 @@ const LoginGreeting = () => {
               sx={{
                 zIndex: -1,
                 position: 'absolute',
+                objectFit: 'fill',
                 float: 'left',
                 right: 0,
                 top: 0,
-                width: '70%',
+                width: 'auto',
                 height: '100%',
+                // center the image
+              }}
+            />
+            <CardMedia
+              component="img"
+              height="140"
+              image={bg2}
+              alt="Tech"
+              sx={{
+                zIndex: -2,
+                position: 'absolute',
+                objectFit: 'fill',
+                float: 'left',
+                left: 0,
+                top: 0,
+                width: 'auto',
+                height: '100vh',
+                // center the image
               }}
             />
           </Grid>
@@ -39,4 +58,4 @@ const LoginGreeting = () => {
   )
 }
 
-export default LoginGreeting
+export default RegisterGreeting

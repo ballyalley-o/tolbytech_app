@@ -4,7 +4,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLoginMutation } from '../slices/user-slice'
+import { useRegisterMutation } from '../slices/user-slice'
 import { setCredentials } from '../slices/auth-slice'
 import Loader from '../components/Loader'
 import SnackAlert from '../components/SnackAlert'
@@ -25,19 +25,20 @@ import {
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import FormContainer from '../components/FormCotainer'
-import LoginGreeting from './defaults/LoginGreeting'
+import RegisterGreeting from './defaults/RegisterGreeting'
 import TolbyLogoBase from './defaults/TolbyLogoBase'
 import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 const InputBase = styled(TextField)(({ theme }) => ({
   root: {
     '& .MuiInputBase-root': {
-      backgroundColor: '#f5f5f5',
+      //   backgroundColor: '#f5f5f5',
       borderRadius: 4,
       padding: '8px 12px',
     },
     '& .MuiFormLabel-root.Mui-focused': {
-      color: '#555555',
+      //   color: '#555555',
     },
     '& .MuiInput-underline:after': {
       borderBottomColor: '#555555',
@@ -56,22 +57,35 @@ const InputBase = styled(TextField)(({ theme }) => ({
   },
 }))
 
-const LoginScreen = () => {
+const LinkBase = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: '#000',
+  padding: '.3rem .5rem',
+  '&:hover': {
+    textDecoration: 'none',
+    color: 'pink.main',
+  },
+  backgroundColor: 'pink.main',
+  borderRadius: 4,
+}))
+
+const RegisterScreen = () => {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errorSnackOpen, setErrorSnackOpen] = useState(null)
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [snackOpen, setSnackOpen] = useState(null)
   const [transition, setTransition] = useState(undefined)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [login, { isLoading }] = useLoginMutation()
+  const [register, { isLoading }] = useRegisterMutation()
   const { userInfo } = useSelector((state) => state.auth)
   const { search } = useLocation()
   const sp = new URLSearchParams(search)
 
   const redirect = sp.get('redirect') || '/'
-
   useEffect(() => {
     if (userInfo) {
       navigate(redirect)
@@ -80,92 +94,117 @@ const LoginScreen = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('login')
-    try {
-      const res = await login({ email, password }).unwrap()
-      dispatch(setCredentials({ ...res }))
-      setErrorSnackOpen('LOGGED IN')
-      navigate(redirect)
-    } catch (error) {
-      // toast.error(error.data.message || error.message)
-      setErrorSnackOpen(error.data.message || error.message)
+    if (password !== confirmPassword) {
+      setSnackOpen("PASSWORDS DON'T MATCH")
       handleHideDuration(2000)
+    } else {
+      try {
+        const res = await register({ name, email, password }).unwrap()
+        dispatch(setCredentials({ ...res }))
+        setSnackOpen('Account Created', 'success')
+        navigate(redirect)
+      } catch (error) {
+        // toast.error(error.data.message || error.message)
+        setSnackOpen(error.data.message || error.message)
+        handleHideDuration(2000)
+      }
     }
   }
 
   const handleHideDuration = (duration) => {
     setTimeout(() => {
-      setErrorSnackOpen(null)
+      setSnackOpen(null)
     }, duration)
   }
   return (
     <>
-      <Grid container justifyContent="flex-inline" direction="row">
-        <Grid item lg={8} sx={{ display: { xs: 'none', lg: 'flex' } }}>
-          <LoginGreeting />
+      <Grid container justifyContent="center" direction="row">
+        <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'flex' } }}>
+          <Grid container direction="row" justifyContent="space-between">
+            <Grid item>
+              <RegisterGreeting />
+            </Grid>
+            <Grid item p={2} alignContent="center">
+              {isLoading ? (
+                <Box display="block">
+                  <Loader />
+                </Box>
+              ) : (
+                <Box justifyContent="flex-start">
+                  <TolbyLogoBase height="100px" width="100px" />
+                </Box>
+              )}
+            </Grid>
+          </Grid>
         </Grid>
-        {errorSnackOpen && (
+
+        {snackOpen && (
           <SnackAlert
-            open={errorSnackOpen}
+            open={snackOpen}
             severity="error"
-            onClose={() => setErrorSnackOpen(null)}
-            message={errorSnackOpen}
+            onClose={() => setSnackOpen(null)}
+            message={snackOpen}
             transition="left"
             vertical="top"
             duration={2000}
             horizontal="right"
           >
-            {errorSnackOpen}
+            {snackOpen}
           </SnackAlert>
         )}
         <Grid item sm={12} lg={4} gap={2}>
           <Box
             sx={{
               display: 'flex',
-
               justifyContent: 'center',
-              alignItems: 'center',
-              height: '80vh',
-              width: '100%',
+              //   alignItems: 'center',
+              py: '2rem',
+              pb: '4rem',
+              height: 'auto',
+              width: '400px',
               backgroundColor: '#fff',
               borderRadius: '1rem',
             }}
           >
             <FormContainer>
-              <Box marginTop={-8}>
-                {isLoading ? (
-                  <Box display="block">
-                    <Loader />
-                  </Box>
-                ) : (
-                  <TolbyLogoBase />
-                )}
-              </Box>
               <Box
                 sx={{
-                  textAlign: 'center',
                   display: 'block',
-                  flexDirection: 'row',
                   margin: '1rem 0 2rem 0',
+                  textAlign: 'center',
                 }}
               >
                 <Typography variant="h6" fontWeight="bold">
-                  Sign In to Tolby
+                  Create Your Tolby ID
                 </Typography>
-                <Typography variant="body2">Manage your account</Typography>
+                <Typography variant="body2">
+                  One Tolby ID is all you need to access all Tolby services.
+                </Typography>
               </Box>
-              <Container maxWidth="xs">
+              <Container>
                 <FormControl component="form" onSubmit={handleSubmit}>
                   <FormGroup>
                     <Grid container spacing={2} gap={1}>
                       <Grid item xs={12}>
                         <InputBase
-                          label="Tolby ID"
+                          label="Tolby ID / Email"
                           name="email"
+                          type="text"
                           fullWidth
                           size="small"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <InputBase
+                          label="Name"
+                          type="text"
+                          name="name"
+                          fullWidth
+                          size="small"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -179,6 +218,17 @@ const LoginScreen = () => {
                           onChange={(e) => setPassword(e.target.value)}
                         />
                       </Grid>
+                      <Grid item xs={12}>
+                        <InputBase
+                          label="Confirm Password"
+                          name="password"
+                          type="password"
+                          fullWidth
+                          size="small"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                      </Grid>
                       <Grid
                         item
                         xs={12}
@@ -189,26 +239,31 @@ const LoginScreen = () => {
                       >
                         <Button
                           type="submit"
-                          variant="contained"
                           fullWidth
                           sx={{ backgroundColor: 'pink.main', color: '#fff' }}
                           disabled={isLoading}
                         >
-                          Sign In
+                          Register
                         </Button>
-                        <Grid container>
+                        <Grid container justifyContent="center">
                           <Box m={1}>
                             <Typography variant="caption">
-                              By continuing, you agree to Tolby's{' '}
-                              <Link to="#">
-                                <Badge>Conditions of Use</Badge>
-                              </Link>{' '}
-                              and{' '}
-                              <Link to="#">
-                                <Badge>Privacy Notice</Badge>
-                              </Link>
-                              .
+                              By continuing, you agree to Tolby's
                             </Typography>
+                            <Typography></Typography>
+                            <LinkBase to="/terms">
+                              <Typography variant="caption">
+                                Terms of Service
+                              </Typography>
+                            </LinkBase>
+
+                            <Typography variant="caption">and </Typography>
+
+                            <LinkBase to="/privacy">
+                              <Typography variant="caption">
+                                Privacy Policy
+                              </Typography>
+                            </LinkBase>
                           </Box>
                         </Grid>
 
@@ -227,24 +282,28 @@ const LoginScreen = () => {
                 textAlign="center"
                 alignContent="center"
               >
-                <Grid item>
-                  <Link
-                    to={
-                      redirect ? `/register?redirect=${redirect}` : '/register'
-                    }
+                {' '}
+                <Grid item sx={{ display: 'block' }}>
+                  <Typography variant="caption">
+                    You already have a Tolby ID?
+                  </Typography>
+                  &nbsp;
+                  <LinkBase
+                    to={redirect ? `/auth?redirect=${redirect}` : '/auth'}
+                    variant="caption"
                   >
-                    <Typography variant="caption" fontWeight="bold">
-                      Create your Tolby account
+                    <Typography variant="caption">
+                      Sign in with your Tolby ID
                     </Typography>
-                  </Link>
+                  </LinkBase>
                 </Grid>
                 <Grid item>
-                  <Link to="/forgot-password">
+                  {/* <Link to="/forgot-password">
                     <Typography variant="caption">
                       Forgot your Tolby ID and password?
                       <CallMissedOutgoingIcon />
                     </Typography>
-                  </Link>
+                  </Link> */}
                 </Grid>
               </Grid>
             </FormContainer>
@@ -255,4 +314,4 @@ const LoginScreen = () => {
   )
 }
 
-export default LoginScreen
+export default RegisterScreen

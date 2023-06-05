@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
+import PropTypes from 'prop-types'
 import tolby from '../../assets/icons/tolby.svg'
 import { Container } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
-const TolbyLogo = () => {
+const TolbyLogoBase = ({ width, height }) => {
   const LogoContainerBase = styled(Container)(({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
@@ -13,8 +14,8 @@ const TolbyLogo = () => {
   }))
 
   const LogoBase = styled('img')(({ theme }) => ({
-    width: '100px',
-    height: '100px',
+    width: width,
+    height: height,
     position: 'relative',
     alignContent: 'right',
   }))
@@ -26,4 +27,14 @@ const TolbyLogo = () => {
   )
 }
 
-export default TolbyLogo
+TolbyLogoBase.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+}
+
+TolbyLogoBase.defaultProps = {
+  width: '100px',
+  height: '100px',
+}
+
+export default TolbyLogoBase
