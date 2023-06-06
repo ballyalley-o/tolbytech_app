@@ -292,9 +292,7 @@ const RegisterScreen = () => {
                     to={redirect ? `/auth?redirect=${redirect}` : '/auth'}
                     variant="caption"
                   >
-                    <Typography variant="caption">
-                      Sign in with your Tolby ID
-                    </Typography>
+                    <Typography variant="caption">Sign in</Typography>
                   </LinkBase>
                 </Grid>
                 <Grid item>
