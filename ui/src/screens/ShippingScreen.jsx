@@ -99,7 +99,6 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
     boxSizing: 'border-box',
   },
 }))
-
 const ButtonBase = styled(Button)(({ theme }) => ({
   '&:hover': {
     color: '#000',
