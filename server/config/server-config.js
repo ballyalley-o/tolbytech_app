@@ -12,6 +12,16 @@ import VARS from '../helpers/vars/vars.js'
 dotenv.config({
   path: './server/config/config.env',
 })
+/**
+ *
+ * @param app - express app
+ * @param connectDB - connect to database
+ * @param registerRoutes - link routes from routes/index.js
+ * @param start - start/init the server
+ * @param protect - protect routes
+ * @param VARS - environment variables
+ *
+ */
 
 export class App {
   constructor() {

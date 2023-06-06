@@ -228,6 +228,9 @@ const LoginScreen = () => {
                 alignContent="center"
               >
                 <Grid item>
+                  <Typography variant="caption">
+                    New to Tolby? &nbsp;
+                  </Typography>
                   <Link
                     to={
                       redirect ? `/register?redirect=${redirect}` : '/register'

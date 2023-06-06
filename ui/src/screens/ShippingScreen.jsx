@@ -9,7 +9,7 @@ import SnackAlert from '../components/SnackAlert'
 import Message from '../components/Message'
 import {
   FormControl,
-  Container,
+  Divider,
   Box,
   Typography,
   FormGroup,
@@ -32,8 +32,42 @@ const LinkBase = styled(Link)(({ theme }) => ({
   cursor: 'pointer',
 }))
 
+const InputBase = styled(TextField)(({ theme }) => ({
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#000',
+    },
+
+    '&:hover fieldset': {
+      borderColor: '#000',
+    },
+
+    '&.Mui-focused fieldset': {
+      borderColor: '#000',
+    },
+    '& .MuiInputBase-input': {
+      fontSize: '1rem',
+      '&::placeholder': {
+        color: '#000',
+        fontWeight: 400,
+        fontSize: '1em',
+      },
+    },
+  },
+}))
+
+const ButtonBase = styled(Button)(({ theme }) => ({
+  '&:hover': {
+    color: '#000',
+  },
+}))
+
 const ShippingScreen = () => {
   const { userInfo } = useSelector((state) => state.auth)
+  const { shippingAddress } = useSelector((state) => state.cart)
+  const { cartItems } = useSelector((state) => state.cart)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [address, setAddress] = useState('')
   const [city, setCity] = useState('')
   const [postalCode, setPostalCode] = useState('')
@@ -48,8 +82,8 @@ const ShippingScreen = () => {
 
   return (
     <>
-      <Grid container direction="column">
-        <Grid item lg={12} justifyContent="space-between">
+      <Grid container>
+        <Grid item sm={12} lg={12}>
           <Typography variant="h3" pr={3} py={3} fontWeight="bold">
             Shipping.
             <Typography
@@ -60,6 +94,21 @@ const ShippingScreen = () => {
               It's Free!
             </Typography>
           </Typography>
+          <Grid
+            container
+            direction="column"
+            textAlign="right"
+            alignContent="flex-end"
+            sx={{ mt: 2, display: 'flex' }}
+          >
+            <Grid item lg={12}>
+              <Typography variant="body1" pr={3} py={3} fontWeight="bold">
+                Order summary: NZ$
+                {cartItems.reduce((acc, item) => acc + item.price, 0)}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Divider />
           {/* for admin only, */}
           {userInfo.response.isAdmin && (
             <Box alignContent="flex-end">
@@ -75,7 +124,7 @@ const ShippingScreen = () => {
             </Box>
           )}
         </Grid>
-        <Grid item lg={12}>
+        <Grid item sm={12} lg={12} pt={2}>
           {underDevelopment ? (
             <Message
               variant="h3"
@@ -91,95 +140,139 @@ const ShippingScreen = () => {
           ) : (
             <>
               <Grid
-                item
-                lg={12}
+                container
                 sx={{
                   display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
+                  alignContent: 'center',
                   justifyContent: 'center',
                 }}
               >
                 <Box
                   sx={{
                     display: 'flex',
-                    justifyContent: 'center',
-                    //   alignItems: 'center',
                     py: '2rem',
                     pb: '4rem',
                     height: 'auto',
-                    width: '400px',
+                    width: { xs: '100%', sm: '100%', md: '100%', lg: '30%' },
                     backgroundColor: '#fff',
                     borderRadius: '1rem',
                   }}
                 >
-                  <Container>
-                    <FormContainer
-                      title="Shipping"
-                      subtitle="Enter your shipping address"
+                  <FormContainer>
+                    <Grid
+                      container
+                      textAlign="center"
+                      py={2}
+                      alignContent="center"
                     >
-                      <FormControl onSubmit={handleSubmit}>
-                        <FormGroup controlId="address" sx={{ my: 2 }}>
-                          <TextField
-                            required
-                            // size
-                            fullWidth
-                            id="address"
-                            label="Address"
-                            variant="outlined"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                          ></TextField>
-                        </FormGroup>
-                        <FormGroup controlId="city" sx={{ my: 2 }}>
-                          <TextField
-                            required
-                            id="city"
-                            label="City"
-                            variant="outlined"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                          ></TextField>
-                        </FormGroup>
-                        <FormGroup controlId="postalCode" sx={{ my: 2 }}>
-                          <TextField
-                            required
-                            id="postalCode"
-                            label="Postal Code"
-                            variant="outlined"
-                            value={postalCode}
-                            onChange={(e) => setPostalCode(e.target.value)}
-                          ></TextField>
-                        </FormGroup>
-                        <FormGroup controlId="country" sx={{ my: 2 }}>
-                          <TextField
-                            required
-                            id="country"
-                            label="Country"
-                            variant="outlined"
-                            value={country}
-                            onChange={(e) => setCountry(e.target.value)}
-                          ></TextField>
-                        </FormGroup>
-                        <Box sx={{ my: 2 }}>
-                          <Button
-                            color="primary"
-                            type="submit"
-                            fullWidth
-                            sx={{ backgroundColor: 'pink.main', color: '#FFF' }}
-                            //   onClick={() => setOpenSnack(true)}
+                      <Grid item lg={12}>
+                        <Typography variant="h5" fontWeight="bold">
+                          Where should we send your order?
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <FormControl onSubmit={handleSubmit} fullWidth>
+                      <FormGroup controlId="address" sx={{ my: 2 }}>
+                        <TextField
+                          required
+                          fullWidth
+                          id="address"
+                          label="Address"
+                          variant="outlined"
+                          size="small"
+                          value={address}
+                          onChange={(e) => setAddress(e.target.value)}
+                        />
+                      </FormGroup>
+                      <FormGroup controlId="city" sx={{ my: 2 }}>
+                        <TextField
+                          required
+                          fullWidth
+                          id="city"
+                          label="City"
+                          variant="outlined"
+                          size="small"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                        />
+                      </FormGroup>
+                      <FormGroup controlId="postalCode" sx={{ my: 2 }}>
+                        <TextField
+                          required
+                          fullWidth
+                          id="postalCode"
+                          label="Postal Code"
+                          variant="outlined"
+                          size="small"
+                          value={postalCode}
+                          onChange={(e) => setPostalCode(e.target.value)}
+                        />
+                      </FormGroup>
+                      <FormGroup controlId="country" sx={{ my: 2 }}>
+                        <TextField
+                          required
+                          fullWidth
+                          id="country"
+                          label="Country"
+                          variant="outlined"
+                          size="small"
+                          value={country}
+                          onChange={(e) => setCountry(e.target.value)}
+                        />
+                      </FormGroup>
+                      <Box sx={{ my: 2 }}>
+                        <Divider>
+                          <Typography
+                            variant="h6"
+                            fontWeight="bold"
+                            sx={{
+                              color: 'gray',
+                            }}
                           >
-                            Proceed to Checkout
-                          </Button>
-                        </Box>
-                        {/* <SnackAlert
-                  openSnack={openSnack}
-                  setOpenSnack={setOpenSnack}
-                  severity="success"
-                  message="Shipping Address Saved"
-                /> */}
+                            Your contact Information.
+                          </Typography>
+                        </Divider>
+                      </Box>
+                      <FormGroup controlId="name" sx={{ my: 2 }}>
+                        <TextField
+                          id="name"
+                          label="Name"
+                          variant="outlined"
+                          size="small"
+                          value={userInfo.response.name}
+                          onChange={(e) => setPostalCode(e.target.value)}
+                          disabled
+                        />
+                      </FormGroup>
+                      <FormGroup controlId="email" sx={{ my: 2 }}>
+                        <TextField
+                          id="email"
+                          label="E-mail"
+                          variant="outlined"
+                          size="small"
+                          value={userInfo.response.email}
+                          onChange={(e) => setPostalCode(e.target.value)}
+                          disabled
+                        />
+                      </FormGroup>
+                      <Box sx={{ my: 2 }}>
+                        <ButtonBase
+                          color="primary"
+                          type="submit"
+                          fullWidth
+                          sx={{ backgroundColor: 'pink.main', color: '#FFF' }}
+                        >
+                          Proceed to Checkout
+                        </ButtonBase>
+                      </Box>
+                      {/* <SnackAlert
+                            openSnack={openSnack}
+                            setOpenSnack={setOpenSnack}
+                            severity="success"
+                            message="Shipping Address Saved"
+                        /> */}
+                      <Grid container justifyContent="flex-end">
                         <Box>
-                          {/* add a label to switch */}
                           <Typography
                             variant="caption"
                             sx={{ color: 'gray', display: 'inline-flex' }}
@@ -193,9 +286,9 @@ const ShippingScreen = () => {
                             inputProps={{ 'aria-label': 'controlled' }}
                           />
                         </Box>
-                      </FormControl>
-                    </FormContainer>
-                  </Container>
+                      </Grid>
+                    </FormControl>
+                  </FormContainer>
                 </Box>
               </Grid>
             </>
