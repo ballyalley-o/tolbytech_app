@@ -19,6 +19,7 @@ import RegisterScreen from './screens/RegisterScreen.jsx'
 import KickScreen from './screens/KickScreen.jsx'
 import ShippingScreen from './screens/ShippingScreen.jsx'
 import NotFound from './screens/defaults/NotFound.jsx'
+import PrivateRoute from './components/PrivateRoute.jsx'
 import './assets/css/index.css'
 
 const router = createBrowserRouter(
@@ -32,7 +33,10 @@ const router = createBrowserRouter(
       <Route path="/kicks" element={<KickScreen />} />
       <Route path="/auth" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
-      <Route path="/shipping" element={<ShippingScreen />} />
+
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/shipping" element={<ShippingScreen />} />
+      </Route>
       <Route path="*" element={<NotFound />} />
     </Route>
   )

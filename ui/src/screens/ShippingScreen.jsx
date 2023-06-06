@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveShippingAddress } from '../slices/cart-slice'
-import PropTypes from 'prop-types'
 import SnackAlert from '../components/SnackAlert'
 import Message from '../components/Message'
 import {
@@ -21,6 +20,7 @@ import {
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import FormContainer from '../components/FormCotainer'
+import CheckoutSteps from '../components/CheckoutSteps'
 
 const LinkBase = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -56,6 +56,50 @@ const InputBase = styled(TextField)(({ theme }) => ({
   },
 }))
 
+const AntSwitch = styled(Switch)(({ theme }) => ({
+  width: 28,
+  height: 16,
+  padding: 4,
+  display: 'flex-inline',
+  '&:active': {
+    '& .MuiSwitch-thumb': {
+      width: 15,
+    },
+    '& .MuiSwitch-switchBase.Mui-checked': {
+      transform: 'translateX(9px)',
+    },
+  },
+  '& .MuiSwitch-switchBase': {
+    padding: 2,
+    '&.Mui-checked': {
+      transform: 'translateX(12px)',
+      color: '#fff',
+      '& + .MuiSwitch-track': {
+        opacity: 1,
+        backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
+      },
+    },
+  },
+  '& .MuiSwitch-thumb': {
+    boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    transition: theme.transitions.create(['width'], {
+      duration: 200,
+    }),
+  },
+  '& .MuiSwitch-track': {
+    borderRadius: 16 / 2,
+    opacity: 1,
+    backgroundColor:
+      theme.palette.mode === 'dark'
+        ? 'rgba(255,255,255,.35)'
+        : 'rgba(0,0,0,.25)',
+    boxSizing: 'border-box',
+  },
+}))
+
 const ButtonBase = styled(Button)(({ theme }) => ({
   '&:hover': {
     color: '#000',
@@ -64,20 +108,35 @@ const ButtonBase = styled(Button)(({ theme }) => ({
 
 const ShippingScreen = () => {
   const { userInfo } = useSelector((state) => state.auth)
-  const { shippingAddress } = useSelector((state) => state.cart)
-  const { cartItems } = useSelector((state) => state.cart)
+  const cart = useSelector((state) => state.cart)
+  const { shippingAddress } = cart
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [address, setAddress] = useState('')
-  const [city, setCity] = useState('')
-  const [postalCode, setPostalCode] = useState('')
-  const [country, setCountry] = useState('')
+  const [address, setAddress] = useState(shippingAddress?.address || '')
+  const [city, setCity] = useState(shippingAddress?.city || '')
+  const [postalCode, setPostalCode] = useState(
+    shippingAddress?.postalCode || ''
+  )
+  const [country, setCountry] = useState(shippingAddress?.country || '')
   const [openSnack, setOpenSnack] = useState(false)
   const [underDevelopment, setUnderDevelopment] = useState(false)
+  const [memoShippingAddress, setMemoShippingAddress] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('submit')
+    dispatch(saveShippingAddress({ address, city, postalCode, country }))
+    navigate('/payment')
+  }
+
+  const handleShippingAddress = (e) => {
+    e.preventDefault()
+    setMemoShippingAddress(!memoShippingAddress)
+    if (memoShippingAddress) {
+      dispatch(saveShippingAddress({ address, city, postalCode, country }))
+    } else {
+      dispatch(saveShippingAddress({}))
+    }
+    setOpenSnack(true)
   }
 
   return (
@@ -96,15 +155,21 @@ const ShippingScreen = () => {
           </Typography>
           <Grid
             container
-            direction="column"
+            direction="row"
             textAlign="right"
             alignContent="flex-end"
-            sx={{ mt: 2, display: 'flex' }}
+            sx={{ mt: 2, display: 'inline-flex' }}
           >
-            <Grid item lg={12}>
-              <Typography variant="body1" pr={3} py={3} fontWeight="bold">
+            <Grid item sm={6}>
+              <CheckoutSteps step1 step2 />
+            </Grid>
+            <Grid item lg={6}>
+              <Typography variant="body1" pr={3} py={2} fontWeight="bold">
                 Order summary: NZ$
-                {cartItems.reduce((acc, item) => acc + item.price, 0)}
+                {cart.cartItems.reduce(
+                  (acc, item) => acc + item.price * item.qty,
+                  0
+                )}
               </Typography>
             </Grid>
           </Grid>
@@ -171,7 +236,11 @@ const ShippingScreen = () => {
                         </Typography>
                       </Grid>
                     </Grid>
-                    <FormControl onSubmit={handleSubmit} fullWidth>
+                    <FormControl
+                      onSubmit={handleSubmit}
+                      component="form"
+                      fullWidth
+                    >
                       <FormGroup controlId="address" sx={{ my: 2 }}>
                         <TextField
                           required
@@ -279,10 +348,10 @@ const ShippingScreen = () => {
                           >
                             Save this address for next time
                           </Typography>
-
-                          <Switch
-                            checked={saveShippingAddress}
-                            onChange={() => {}}
+                          <AntSwitch
+                            color="pink"
+                            checked={memoShippingAddress}
+                            onChange={handleShippingAddress}
                             inputProps={{ 'aria-label': 'controlled' }}
                           />
                         </Box>
