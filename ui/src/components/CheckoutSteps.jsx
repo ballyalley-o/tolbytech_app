@@ -54,7 +54,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
           {step3 ? (
             <Link to="/payment" style={{ textDecoration: 'none' }}>
               <Typography variant="body2" fontWeight="bolder" color="#EF798A">
-                Payment
+                {step4 ? 'Payment Method Selected' : 'Payment Method'}
               </Typography>
             </Link>
           ) : (

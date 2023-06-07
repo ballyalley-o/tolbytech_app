@@ -100,6 +100,9 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }))
 const ButtonBase = styled(Button)(({ theme }) => ({
+  backgroundColor: 'pink.main',
+  color: '#FFF',
+  fontWeight: 600,
   '&:hover': {
     color: '#000',
   },
