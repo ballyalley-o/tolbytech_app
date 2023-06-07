@@ -20,6 +20,15 @@ dotenv.config({
  * @param start - start/init the server
  * @param protect - protect routes
  * @param VARS - environment variables
+ * @param MessageLOG - custom message logger
+ * @param TolbyTechResponse - custom response for the server
+ * @param notFound - 404 error handler
+ * @param errorHandler - error handler
+ * @param cors - cross origin resource sharing
+ * @param setHeaders - set headers for the server
+ * @parem registerRoutes - introduce the connection links to the other routes
+ * @param linkRoutes - connect routes from routes/index.js
+ * @param connectDB - ignite the connection to the database
  *
  */
 
