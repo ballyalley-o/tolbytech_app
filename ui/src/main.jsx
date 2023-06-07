@@ -19,6 +19,7 @@ import RegisterScreen from './screens/RegisterScreen.jsx'
 import KickScreen from './screens/KickScreen.jsx'
 import ShippingScreen from './screens/ShippingScreen.jsx'
 import PaymentScreen from './screens/PaymentScreen.jsx'
+import BagConfirmScreen from './screens/BagConfirmScreen.jsx'
 import NotFound from './screens/defaults/NotFound.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx'
 import './assets/css/index.css'
@@ -38,6 +39,7 @@ const router = createBrowserRouter(
       <Route path="" element={<PrivateRoute />}>
         <Route path="/shipping" element={<ShippingScreen />} />
         <Route path="/payment" element={<PaymentScreen />} />
+        <Route path="/bag/confirm" element={<BagConfirmScreen />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Route>
