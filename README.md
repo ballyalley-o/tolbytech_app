@@ -63,8 +63,9 @@ client
 - [x] **search bar**
 - [x] **cart**
 - [ ] **wishlist**
-- [ ] **checkout page**
-- [ ] **payment gateway**
+- [x] **checkout page**
+- [x] **payment gateway**
+- [x] **bag-confirm**
 - [ ] **contact page**
 - [ ] **blog**
 - [x] **about**
@@ -82,7 +83,7 @@ server
 - [x] **product**
 - [x] **user**
 - [ ] **order**
-- [ ] **payment**
+- [x] **payment**
 - [ ] **blog**
 - [ ] **contact**
 - [x] **peerdata**

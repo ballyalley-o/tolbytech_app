@@ -1,13 +1,64 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { Grid, Typography, FormControl, Button, Divider } from '@mui/material'
+import { useCreateOrderMutation } from '../slices/order-slice'
+import { clearCartItems } from '../slices/cart-slice'
+
+import {
+  Grid,
+  Typography,
+  FormControl,
+  Button,
+  Divider,
+  List,
+  ListItem,
+  Box,
+  Card,
+  CardMedia,
+  Badge,
+} from '@mui/material'
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { styled } from '@mui/material/styles'
+import { LinkBase } from '../themes/styles.js'
 import CheckoutSteps from '../components/CheckoutSteps'
+import SnackAlert from '../components/SnackAlert'
+import Message from '../components/Message'
+
+const CardBase = styled(Card)(({ theme }) => ({
+  boxShadow: 'none',
+  backgroundColor: 'transparent',
+  border: '1px solid #D4D4D4',
+  margin: '1rem 2rem',
+  root: {
+    borderRadius: '20px',
+    '& .MuiInputBase-root': {
+      backgroundColor: '#f5f5f5',
+      borderRadius: 5,
+      boxShadow: 'none',
+    },
+    '& .MuiFormLabel-root.Mui-focused': {
+      color: '#555555',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#555555',
+    },
+  },
+}))
 
 const BagConfirmScreen = () => {
   const cart = useSelector((state) => state.cart)
   const { shippingAddress, paymentMethod, cartItems } = cart
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!cart.shippingAddress.address) {
+      navigate('/payment')
+    } else if (!cart.paymentMethod) {
+      navigate('/payment')
+    }
+  }, [cart.paymentMethod, cart.shippingAddress.address, navigate])
   return (
     <>
       <Grid container>
@@ -46,6 +97,268 @@ const BagConfirmScreen = () => {
           <Divider />
           <Grid item textAlign="center" m={3}>
             <Typography variant="h4">Confirm your Paypal details </Typography>
+          </Grid>
+          <Grid container direction="row">
+            <Grid item lg={8}>
+              <List>
+                <ListItem>
+                  <Grid container direction="row" spacing={5} m={2}>
+                    <Grid item>
+                      <Typography variant="h2">Shipping</Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      sx={{
+                        display: 'block',
+                        flexDirection: 'column',
+                      }}
+                    >
+                      <Box>
+                        <Typography variant="body1">
+                          <Typography variant="body1" fontWeight="bold">
+                            Address:
+                          </Typography>
+                          {cart.shippingAddress.address},
+                          {cart.shippingAddress.city},
+                          {cart.shippingAddress.postalCode},
+                          {cart.shippingAddress.country}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+              </List>
+              <Divider />
+              <List>
+                <ListItem>
+                  <Grid container direction="row" spacing={5} m={2}>
+                    <Grid item>
+                      <Typography variant="h2">Payment</Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      sx={{
+                        display: 'block',
+                        flexDirection: 'column',
+                      }}
+                    >
+                      <Box>
+                        <Typography variant="body1">
+                          <Typography variant="body1" fontWeight="bold">
+                            Payment Method:
+                          </Typography>
+                          {cart.paymentMethod}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <Divider />
+                <List>
+                  <ListItem>
+                    <Grid container direction="row" spacing={5} m={2}>
+                      <Grid item>
+                        <Typography variant="h2">Order Items</Typography>
+                      </Grid>
+                      <Grid
+                        item
+                        sx={{
+                          display: 'block',
+                          flexDirection: 'column',
+                        }}
+                      >
+                        {cartItems.length === 0 ? (
+                          <Message>
+                            Your Bag is empty &nbsp;
+                            <LinkBase to="/">Go Back</LinkBase>
+                          </Message>
+                        ) : (
+                          <List>
+                            {cartItems.map((item, index) => (
+                              <ListItem key={index}>
+                                <Grid container direction="row">
+                                  <Grid item lg={2}>
+                                    <CardMedia
+                                      component="img"
+                                      image={item.image}
+                                    />
+                                  </Grid>
+                                  <Grid item lg={4}>
+                                    <Grid
+                                      container
+                                      direction="row"
+                                      gap={2}
+                                      spacing={2}
+                                      ml={1}
+                                    >
+                                      <Grid item lg={12}>
+                                        <Link to="/product/${item.product}">
+                                          <Typography variant="body1">
+                                            {item.name}
+                                          </Typography>
+                                        </Link>
+                                      </Grid>
+                                      <Grid item lg={12}>
+                                        <Typography variant="body1">
+                                          <Badge
+                                            badgeContent={item.qty}
+                                            color="primary"
+                                          />
+                                          &nbsp;&nbsp;&nbsp; x NZ${item.price} =
+                                          ${item.qty * item.price}
+                                        </Typography>
+                                      </Grid>
+                                    </Grid>
+                                  </Grid>
+                                </Grid>
+                              </ListItem>
+                            ))}
+                          </List>
+                        )}
+                      </Grid>
+                    </Grid>
+                  </ListItem>
+                </List>
+              </List>
+            </Grid>
+            <Grid item lg={4}>
+              <CardBase
+                sx={{
+                  display: 'block',
+                  width: '100%',
+                }}
+              >
+                <List>
+                  <ListItem>
+                    <Grid
+                      container
+                      direction="row"
+                      spacing={4}
+                      m={2}
+                      mt={0}
+                      textAlign="left"
+                      gap={2}
+                    >
+                      <Grid item textAlign="left">
+                        <Typography variant="h3">Order Summary</Typography>
+                      </Grid>
+                      <Divider
+                        sx={{
+                          display: 'block',
+                          width: '100%',
+                        }}
+                      />
+                      <Grid item lg={12}>
+                        <Grid
+                          container
+                          direction="row"
+                          spacing={5}
+                          gap={2}
+                          justifyContent="space-between"
+                        >
+                          <Grid
+                            container
+                            display="inline-flex"
+                            justifyContent="space-between"
+                          >
+                            <Grid item>
+                              <Typography variant="body1" fontWeight="bold">
+                                Subtotal
+                              </Typography>
+                            </Grid>
+                            <Grid item>
+                              <Typography variant="body1">
+                                NZ$
+                                {cart.cartItems.reduce(
+                                  (acc, item) => acc + item.price * item.qty,
+                                  0
+                                )}
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                          <Grid
+                            container
+                            display="inline-flex"
+                            justifyContent="space-between"
+                          >
+                            <Grid item>
+                              <Typography variant="body1" fontWeight="bold">
+                                Shipping
+                              </Typography>
+                            </Grid>
+                            <Grid item>
+                              <Typography variant="body1">
+                                {cart.cartItems.shippingPrice > 0
+                                  ? `NZ$ ${cart.shippingPrice}`
+                                  : 'FREE'}
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                          <Divider
+                            sx={{
+                              display: 'block',
+                              width: '100%',
+                            }}
+                          />
+                          <Grid
+                            container
+                            display="inline-flex"
+                            justifyContent="space-between"
+                          >
+                            <Grid item>
+                              <Typography variant="h6" fontWeight="bold">
+                                Your bag total
+                              </Typography>
+                            </Grid>
+                            <Grid item>
+                              <Typography variant="h6">
+                                NZ$
+                                {cart.cartItems.reduce(
+                                  (acc, item) => acc + item.price * item.qty,
+                                  0
+                                ) +
+                                  (cart.shippingPrice > 0
+                                    ? cart.shippingPrice
+                                    : 0)}
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                          <Grid item lg={12}>
+                            <PayPalScriptProvider>
+                              <PayPalButtons
+                                style={{
+                                  layout: 'horizontal',
+                                  backgroundColor: 'transparent',
+                                  color: 'white',
+                                }}
+                              />
+                            </PayPalScriptProvider>
+                            {/* <Button
+                              fullWidth
+                              disabled={cartItems.length === 0}
+                              sx={{
+                                display: 'block',
+                                backgroundColor: 'pink.main',
+                                color: 'white',
+                                fontWeight: 'bold',
+                                '&:hover': {
+                                  backgroundColor: 'pink.dark',
+                                  color: '#000',
+                                },
+                              }}
+                            >
+                              <Typography variant="h6">
+                                {paymentMethod}
+                              </Typography>
+                            </Button> */}
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </ListItem>
+                </List>
+              </CardBase>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
