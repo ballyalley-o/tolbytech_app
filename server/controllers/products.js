@@ -1,4 +1,3 @@
-import express from 'express'
 import asyncHandler from '../middleware/async-handler.js'
 import Product from '../models/Product.js'
 
