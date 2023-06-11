@@ -32,7 +32,7 @@ const CardBase = styled(Card)(({ theme }) => ({
   boxShadow: 'none',
   backgroundColor: 'transparent',
   border: '1px solid #D4D4D4',
-  margin: '1rem 2rem',
+  margin: '1rem 1rem',
   root: {
     borderRadius: '20px',
     '& .MuiInputBase-root': {
@@ -281,12 +281,12 @@ const BagConfirmScreen = () => {
                       container
                       direction="row"
                       spacing={4}
-                      m={2}
-                      mt={0}
-                      textAlign="left"
-                      gap={2}
+                      margin={2}
+                      mt={2}
+                      gap={4}
+                      justifyContent="center"
                     >
-                      <Grid item textAlign="left">
+                      <Grid item lg={12}>
                         <Typography variant="h3">Order Summary</Typography>
                       </Grid>
                       <Divider
@@ -296,18 +296,8 @@ const BagConfirmScreen = () => {
                         }}
                       />
                       <Grid item lg={12}>
-                        <Grid
-                          container
-                          direction="row"
-                          spacing={5}
-                          gap={2}
-                          justifyContent="space-between"
-                        >
-                          <Grid
-                            container
-                            display="inline-flex"
-                            justifyContent="space-between"
-                          >
+                        <Grid container direction="row" spacing={5} gap={2}>
+                          <Grid container justifyContent="space-between">
                             <Grid item>
                               <Typography variant="body1" fontWeight="bold">
                                 Subtotal
@@ -378,16 +368,16 @@ const BagConfirmScreen = () => {
                               </Typography>
                             </Grid>
                           </Grid>
-                          <Grid item>
-                            {error && (
-                              <Message variant="danger" color="error">
-                                {error?.data?.message || error.message}
-                              </Message>
-                            )}
-                          </Grid>
 
                           <Divider />
-                          <Grid item lg={12}>
+                          <Grid container gap={2}>
+                            <Grid item lg={12}>
+                              {error && (
+                                <Message variant="danger" color="error">
+                                  {error?.data?.message || error.message}
+                                </Message>
+                              )}
+                            </Grid>
                             {/* {cart.paymentMethod === 'PayPal' && (
                               <PayPalScriptProvider>
                                 <PayPalButtons
@@ -416,9 +406,8 @@ const BagConfirmScreen = () => {
                                 },
                               }}
                             >
-                              Confirm Order
+                              {isLoading ? <Loader /> : 'Confirm Order'}
                             </Button>
-                            {isLoading && <Loader />}
                           </Grid>
                         </Grid>
                       </Grid>
