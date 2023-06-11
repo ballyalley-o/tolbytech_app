@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { savePaymentMethod } from '../slices/cart-slice'
+import { savePaymentMethod } from '../../slices/cart-slice'
 import {
   FormControl,
   FormGroup,
@@ -18,9 +18,10 @@ import {
   Button,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import FormContainer from '../components/FormCotainer'
-import CheckoutSteps from '../components/CheckoutSteps'
-import TolbyLogoBase from './defaults/TolbyLogoBase'
+import FormContainer from '../../components/FormCotainer'
+import CheckoutSteps from '../../components/CheckoutSteps'
+import TolbyLogoBase from '../defaults/TolbyLogoBase'
+import { CLIENT } from '../../constants'
 
 const CardBase = styled(Card)(({ theme }) => ({
   boxShadow: 'none',
@@ -67,14 +68,14 @@ const PaymentScreen = () => {
 
   useEffect(() => {
     if (!shippingAddress) {
-      navigate('/shipping')
+      navigate(CLIENT.SHIPPING_URL)
     }
   }, [shippingAddress, navigate])
 
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(savePaymentMethod(paymentMethod))
-    navigate('/bag/confirm')
+    navigate(CLIENT.BAGCONFIRM_URL)
   }
   return (
     <Grid container>
@@ -106,10 +107,9 @@ const PaymentScreen = () => {
           <Grid item lg={6}>
             <Typography variant="body1" pr={3} py={2} fontWeight="bold">
               Order summary: NZ$
-              {cart.cartItems.reduce(
-                (acc, item) => acc + item.price * item.qty,
-                0
-              )}
+              {cart.cartItems
+                .reduce((acc, item) => acc + item.price * item.qty, 0)
+                .toFixed(2)}
             </Typography>
           </Grid>
         </Grid>

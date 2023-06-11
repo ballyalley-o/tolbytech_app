@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Typography, Grid } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import Message from '../components/Message'
+import Message from '../../components/Message'
 
 const LinkBase = styled(Link)(({ theme }) => ({
   textDecoration: 'none',

@@ -5,10 +5,11 @@ import { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLoginMutation } from '../slices/user-slice'
-import { setCredentials } from '../slices/auth-slice'
-import Loader from '../components/Loader'
-import SnackAlert from '../components/SnackAlert'
+import { useLoginMutation } from '../../slices/user-slice'
+import { setCredentials } from '../../slices/auth-slice'
+import { CLIENT } from '../../constants'
+import Loader from '../../components/Loader'
+import SnackAlert from '../../components/SnackAlert'
 import { toast } from 'react-toastify'
 import {
   FormControl,
@@ -25,9 +26,9 @@ import {
   Slide,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import FormContainer from '../components/FormCotainer'
-import LoginGreeting from './defaults/LoginGreeting'
-import TolbyLogoBase from './defaults/TolbyLogoBase'
+import FormContainer from '../../components/FormCotainer'
+import LoginGreeting from '../defaults/LoginGreeting'
+import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing'
 
 const InputBase = styled(TextField)(({ theme }) => ({
@@ -234,18 +235,15 @@ const LoginScreen = () => {
                   <Typography variant="caption">
                     New to Tolby? &nbsp;
                   </Typography>
-                  <Link
-                    to={
-                      redirect ? `/register?redirect=${redirect}` : '/register'
-                    }
-                  >
+                  <Link to={CLIENT.REGISTER_REDIRECT}>
+                    {/* redirect ? `/register?redirect=${redirect}` : '/register' */}
                     <Typography variant="caption" fontWeight="bold">
                       Create your Tolby account
                     </Typography>
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link to="/forgot-password">
+                  <Link to={CLIENT.FORGOT_PASSWORD}>
                     <Typography variant="caption">
                       Forgot your Tolby ID and password?
                       <CallMissedOutgoingIcon />

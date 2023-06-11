@@ -18,7 +18,7 @@ export default function Loader() {
   }, [])
 
   return (
-    <Stack spacing={2} direction="row">
+    <Stack spacing={2} direction="row" justifyContent="center">
       {/* <CircularProgress variant="determinate" value={25} />
       <CircularProgress variant="determinate" value={50} />
       <CircularProgress variant="determinate" value={75} />
@@ -27,6 +27,12 @@ export default function Loader() {
         variant="determinate"
         color="inherit"
         value={progress}
+        size={30}
+        sx={{
+          color: (theme) => theme.palette.text.main,
+          reduceMotion: true,
+          display: 'flex',
+        }}
       />
     </Stack>
   )

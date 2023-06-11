@@ -61,7 +61,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
             </Link>
           )}
           {step4 ? (
-            <Link to="/bagit" style={{ textDecoration: 'none' }}>
+            <Link to="/orders" style={{ textDecoration: 'none' }}>
               <Typography variant="body2" fontWeight="bolder" color="#35A7FF">
                 Bag It!
               </Typography>

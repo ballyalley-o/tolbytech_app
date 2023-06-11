@@ -13,7 +13,7 @@ const authUser = asyncHandler(async (req, res, next) => {
   if (user && (await user.validatePassword(password))) {
     generateToken(res, user._id)
 
-    res.status(200).json({
+    res.json({
       message: 'Successful',
       response: {
         _id: user._id,

@@ -24,15 +24,14 @@ import {
   Grid,
   FormControl,
   InputAdornment,
-  FormControlLabel,
 } from '@mui/material'
+import { alpha, styled } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined'
 import CustomAvatar from '../CustomAvatar.jsx'
-import { alpha, styled } from '@mui/material/styles'
-import { toast } from 'react-toastify'
+import { CLIENT } from '../../constants.js'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -172,39 +171,39 @@ const pages = [
   {
     id: 1,
     label: 'Home',
-    link: '/',
+    link: CLIENT.HOME_URL,
   },
   {
     id: 2,
     label: 'Tech',
-    link: '/tech',
+    link: CLIENT.TECH_URL,
   },
   {
     id: 3,
-    label: 'Blog',
-    link: '/blog',
+    label: 'Talks',
+    link: CLIENT.TALKS_URL,
   },
   {
     id: 4,
     label: 'Kicks',
-    link: '/kicks',
+    link: CLIENT.KICKS_URL,
   },
 ]
 const settings = [
   {
     id: 1,
     label: 'Account',
-    link: '/account',
+    link: CLIENT.ACCOUNT_URL,
   },
   {
     id: 2,
     label: 'Orders',
-    link: '/my-orders',
+    link: CLIENT.ORDERS_URL,
   },
   {
     id: 3,
     label: 'Orders History',
-    link: '/history',
+    link: CLIENT.HISTORY_URL,
   },
 ]
 
@@ -265,7 +264,7 @@ const TolbyNavBar = () => {
     try {
       await logoutCall().unwrap()
       dispatch(logout())
-      navigate('/auth')
+      navigate(CLIENT.LOGIN_URL)
       // toast.success('Logout successful')
       setSnackOpen('Logout successful')
       handleHideDuration(2000)
@@ -492,7 +491,7 @@ const TolbyNavBar = () => {
               marginLeft: 'auto',
             }}
           >
-            <Link to="/cart">
+            <Link to={CLIENT.BAG_URL}>
               <Tooltip title="Your Bag">
                 <IconButton size="small" aria-label="show cart" color="inherit">
                   <Badge
@@ -582,7 +581,7 @@ const TolbyNavBar = () => {
                     </MenuItem>
                   ))}
                   <MenuItem onClick={handleLogout}>
-                    <Link to="/logout">
+                    <Link to={CLIENT.LOGOUT_URL}>
                       <Typography textAlign="center">Logout</Typography>
                     </Link>
                   </MenuItem>
@@ -591,8 +590,9 @@ const TolbyNavBar = () => {
             </Box>
           ) : (
             <Box>
-              <Link to="/auth" onClick={handleCloseNavMenu}>
+              <Link to={CLIENT.LOGIN_URL} onClick={handleCloseNavMenu}>
                 <Button
+                  disabled={CLIENT.LOGIN_URL === location.pathname}
                   sx={{
                     my: 2,
                     color: 'black',

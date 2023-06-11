@@ -4,12 +4,11 @@ import { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { useCreateOrderMutation } from '../slices/order-slice'
-import { clearCartItems } from '../slices/cart-slice'
+import { useCreateOrderMutation } from '../../slices/order-slice'
+import { clearCartItems } from '../../slices/cart-slice'
 import {
   Grid,
   Typography,
-  FormControl,
   Button,
   Divider,
   List,
@@ -21,11 +20,11 @@ import {
 } from '@mui/material'
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { styled } from '@mui/material/styles'
-import { LinkBase } from '../themes/styles.js'
-import CheckoutSteps from '../components/CheckoutSteps'
-import SnackAlert from '../components/SnackAlert'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
+import { LinkBase } from '../../themes/styles.js'
+import CheckoutSteps from '../../components/CheckoutSteps'
+import SnackAlert from '../../components/SnackAlert'
+import Message from '../../components/Message'
+import Loader from '../../components/Loader'
 import { toast } from 'react-toastify'
 
 const CardBase = styled(Card)(({ theme }) => ({
@@ -49,7 +48,19 @@ const CardBase = styled(Card)(({ theme }) => ({
   },
 }))
 
+const ButtonBase = styled(Button)(({ theme }) => ({
+  display: 'block',
+  backgroundColor: '#2141fF',
+  color: '#FFF',
+  fontWeight: 'bold',
+  '&:hover': {
+    backgroundColor: 'pink.dark',
+    color: '#000',
+  },
+}))
+
 const BagConfirmScreen = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [errorSnackOpen, setErrorSnackOpen] = useState(null)
 
@@ -65,10 +76,9 @@ const BagConfirmScreen = () => {
     }
   }, [cart.paymentMethod, cart.shippingAddress.address, navigate])
 
-  const dispatch = useDispatch()
   const handleBagConfirm = async () => {
     try {
-      const res = await createOrder({
+      const result = await createOrder({
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
@@ -77,11 +87,10 @@ const BagConfirmScreen = () => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       }).unwrap()
-      console.log(res)
       dispatch(clearCartItems())
-      navigate(`/order/${res._id}`)
+      navigate(`/orders/${result._id}`)
     } catch (error) {
-      // toast.error(error.message)
+      toast.error(error.message)
       setErrorSnackOpen(error.message)
       handleHideDuration(2000)
     }
@@ -252,7 +261,7 @@ const BagConfirmScreen = () => {
                                           />
                                           &nbsp;&nbsp;&nbsp; &nbsp; x NZ$
                                           {item.price} = $
-                                          {item.qty * item.price}
+                                          {(item.qty * item.price).toFixed(2)}
                                         </Typography>
                                       </Grid>
                                     </Grid>
@@ -390,24 +399,14 @@ const BagConfirmScreen = () => {
                                 />
                               </PayPalScriptProvider>
                             )} */}
-                            <Button
+                            <ButtonBase
                               type="button"
                               fullWidth
                               disabled={cart.cartItems.length === 0}
                               onClick={handleBagConfirm}
-                              sx={{
-                                display: 'block',
-                                backgroundColor: 'pink.main',
-                                color: 'white',
-                                fontWeight: 'bold',
-                                '&:hover': {
-                                  backgroundColor: 'pink.dark',
-                                  color: '#000',
-                                },
-                              }}
                             >
                               {isLoading ? <Loader /> : 'Confirm Order'}
-                            </Button>
+                            </ButtonBase>
                           </Grid>
                         </Grid>
                       </Grid>

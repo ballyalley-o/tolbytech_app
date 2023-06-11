@@ -6,11 +6,11 @@ const router = express.Router()
 
 router
   .route('/')
-  .get(protect, admin, ordersController.getOrders)
+  .get(protect, admin, ordersController.getAllOrders)
   .post(protect, ordersController.addOrderItems)
 
 router.get('/myorders', protect, ordersController.getMyOrders)
-router.get('/:id', protect, admin, ordersController.getOrder)
+router.get('/:id', protect, ordersController.getOrder)
 router.put(
   '/:id/deliver',
   protect,

@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { saveShippingAddress } from '../slices/cart-slice'
-import SnackAlert from '../components/SnackAlert'
-import Message from '../components/Message'
+import { saveShippingAddress } from '../../slices/cart-slice'
+import SnackAlert from '../../components/SnackAlert'
+import Message from '../../components/Message'
 import {
   FormControl,
   Divider,
@@ -20,8 +20,9 @@ import {
   Switch,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import FormContainer from '../components/FormCotainer'
-import CheckoutSteps from '../components/CheckoutSteps'
+import FormContainer from '../../components/FormCotainer'
+import CheckoutSteps from '../../components/CheckoutSteps'
+import { CLIENT } from '../../constants'
 
 const LinkBase = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -128,7 +129,7 @@ const ShippingScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(saveShippingAddress({ address, city, postalCode, country }))
-    navigate('/payment')
+    navigate(CLIENT.PAYMENT_URL)
   }
 
   const handleShippingAddress = (e) => {
@@ -172,10 +173,9 @@ const ShippingScreen = () => {
             <Grid item lg={6}>
               <Typography variant="body1" pr={3} py={2} fontWeight="bold">
                 Order summary: NZ$
-                {cart.cartItems.reduce(
-                  (acc, item) => acc + item.price * item.qty,
-                  0
-                )}
+                {cart.cartItems
+                  .reduce((acc, item) => acc + item.price * item.qty, 0)
+                  .toFixed(2)}
               </Typography>
             </Grid>
           </Grid>
@@ -206,7 +206,7 @@ const ShippingScreen = () => {
               color="warning"
             >
               Under development, We apologize for the inconvenience.{' '}
-              <LinkBase to="/">Go Back</LinkBase>
+              <LinkBase to={CLIENT.HOME_URL}>Go Back</LinkBase>
             </Message>
           ) : (
             <>
@@ -340,12 +340,12 @@ const ShippingScreen = () => {
                           Proceed to Checkout
                         </ButtonBase>
                       </Box>
-                      {/* <SnackAlert
-                            openSnack={openSnack}
-                            setOpenSnack={setOpenSnack}
-                            severity="success"
-                            message="Shipping Address Saved"
-                        /> */}
+                      <SnackAlert
+                        openSnack={openSnack}
+                        setOpenSnack={setOpenSnack}
+                        severity="success"
+                        message="Shipping Address Saved"
+                      />
                       <Grid container justifyContent="flex-end">
                         <Box>
                           <Typography
