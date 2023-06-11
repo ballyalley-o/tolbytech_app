@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet-async'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { alpha, styled } from '@mui/material/styles'
 import {
@@ -19,15 +20,15 @@ import {
 } from '@mui/material'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
-import Rating from '../components/Rating'
-import Product from '../components/Product'
-import Loader from '../components/Loader'
-import Message from '../components/Message'
-import { CONFIG } from '../config-global'
-import { CART_URL } from '../constants'
+import Rating from '../../components/Rating'
+import Product from '../../components/Product'
+import Loader from '../../components/Loader'
+import Message from '../../components/Message'
+import { CONFIG } from '../../config-global'
+import { CLIENT } from '../../constants'
 import { useDispatch } from 'react-redux'
-import { useGetProductDetailsQuery } from '../slices/products-slice'
-import { addToCart } from '../slices/cart-slice'
+import { useGetProductDetailsQuery } from '../../slices/products-slice'
+import { addToCart } from '../../slices/cart-slice'
 
 const ProductDetailScreen = () => {
   const { id: productId } = useParams()
@@ -37,7 +38,7 @@ const ProductDetailScreen = () => {
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, qty }))
-    navigate(CART_URL)
+    navigate(CLIENT.BAG_URL)
   }
 
   const {
@@ -111,6 +112,9 @@ const ProductDetailScreen = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{product?.name}</title>
+      </Helmet>
       <Link to="/">
         <Button>
           <KeyboardDoubleArrowLeftIcon />

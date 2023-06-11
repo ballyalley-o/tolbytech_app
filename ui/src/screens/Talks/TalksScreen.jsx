@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Typography, Grid } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import Message from '../components/Message'
+import Message from '../../components/Message'
 
 const LinkBase = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -15,7 +16,7 @@ const LinkBase = styled(Link)(({ theme }) => ({
   cursor: 'pointer',
 }))
 
-const BlogScreen = () => {
+const TalksScreen = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
@@ -23,6 +24,9 @@ const BlogScreen = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Talks</title>
+      </Helmet>
       <Container>
         <Grid container spacing={2}>
           <Grid item lg={12}>
@@ -40,11 +44,11 @@ const BlogScreen = () => {
           <Grid item lg={12}>
             {cartItems.length !== 0 ? (
               <Message variant="h3" pr={3} py={3} fontWeight="bold">
-                Blog list is empty &nbsp; <LinkBase to="/">Go Back</LinkBase>
+                News list is empty &nbsp; <LinkBase to="/">Go Back</LinkBase>
               </Message>
             ) : (
               <>
-                <h1>Blog here</h1>
+                <h1>News here</h1>
               </>
             )}
           </Grid>
@@ -54,4 +58,4 @@ const BlogScreen = () => {
   )
 }
 
-export default BlogScreen
+export default TalksScreen

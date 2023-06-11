@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
-import asyncHandler from './async-handler.js'
 import User from '../models/User.js'
+import asyncHandler from './async-handler.js'
 import VARS from '../helpers/vars/vars.js'
 import MessageLOG from '../helpers/message-logger.js'
 

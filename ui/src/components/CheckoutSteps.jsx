@@ -12,10 +12,6 @@ import {
   Grid,
 } from '@mui/material'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
-import HdrWeakOutlinedIcon from '@mui/icons-material/HdrWeakOutlined'
-import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded'
-import TimelineIcon from '@mui/icons-material/Timeline'
-import CommitIcon from '@mui/icons-material/Commit'
 
 const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
   return (
@@ -65,7 +61,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
             </Link>
           )}
           {step4 ? (
-            <Link to="/bagit" style={{ textDecoration: 'none' }}>
+            <Link to="/orders" style={{ textDecoration: 'none' }}>
               <Typography variant="body2" fontWeight="bolder" color="#35A7FF">
                 Bag It!
               </Typography>

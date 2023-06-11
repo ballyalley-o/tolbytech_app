@@ -1,18 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Grid, Typography } from '@mui/material'
-import Product from '../components/Product'
-import { CONFIG } from '../config-global'
-import { useGetProductsQuery } from '../slices/products-slice'
-import Loader from '../components/Loader'
-import Message from '../components/Message'
-import Footer from '../components/Footer'
+import Product from '../../components/Product'
+import { CONFIG } from '../../config-global'
+import { useGetProductsQuery } from '../../slices/products-slice'
+import Loader from '../../components/Loader'
+import Message from '../../components/Message'
+import Footer from '../../components/Footer'
 
 const TechScreen = () => {
   const { data: products, isLoading, error } = useGetProductsQuery()
 
   return (
     <>
+      <Helmet>
+        <title>Techs</title>
+      </Helmet>
       {isLoading ? (
         <Loader />
       ) : error ? (

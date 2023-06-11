@@ -1,10 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import LandingPage from './defaults/LandingPage.jsx'
 
 const HomeScreen = () => {
   return (
     <>
+      <Helmet>
+        <title>Tolby Technologies</title>
+      </Helmet>
       <LandingPage />
     </>
   )

@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, removeFromCart } from '../slices/cart-slice'
+import { addToCart, removeFromCart } from '../../slices/cart-slice'
 import {
   Container,
   Typography,
@@ -18,8 +19,9 @@ import {
   CardActionArea,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import Message from '../components/Message'
+import Message from '../../components/Message'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { CLIENT } from '../../constants'
 
 const LinkBase = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -30,7 +32,7 @@ const LinkBase = styled(Link)(({ theme }) => ({
   borderRadius: '1em',
 }))
 
-const CartScreen = () => {
+const BagScreen = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
@@ -45,11 +47,14 @@ const CartScreen = () => {
   }
 
   const handleCheckout = () => {
-    navigate('/auth?redirect=/shipping')
+    navigate(CLIENT.AUTH_REDIRECT)
   }
 
   return (
     <>
+      <Helmet>
+        <title>Bag</title>
+      </Helmet>
       <Container>
         <Grid container spacing={2}>
           <Grid item lg={12}>
@@ -60,7 +65,7 @@ const CartScreen = () => {
                 fontWeight="bold"
                 sx={{ color: 'gray', display: 'inline-flex' }}
               >
-                Your bag
+                Review your bag
               </Typography>
             </Typography>
           </Grid>
@@ -202,7 +207,7 @@ const CartScreen = () => {
                     handleCheckout()
                   }}
                 >
-                  checkout
+                  Proceed to Shipping
                 </Button>
               </Grid>
             </Grid>
@@ -213,4 +218,4 @@ const CartScreen = () => {
   )
 }
 
-export default CartScreen
+export default BagScreen

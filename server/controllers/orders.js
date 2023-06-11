@@ -1,5 +1,5 @@
 import asyncHandler from '../middleware/async-handler.js'
-import Order from '../models/order.js'
+import Order from '../models/Order.js'
 import { StatusCodes, getReasonPhrase } from 'http-status-codes'
 import { customResponse, defaultResponse } from '../helpers/static.js'
 
@@ -35,19 +35,15 @@ const addOrderItems = asyncHandler(async (req, res, next) => {
       shippingPrice,
       totalPrice,
     })
-
     const createdOrder = await order.save()
-    res
-      .status(StatusCodes.CREATED)
-      .send(
-        defaultResponse(StatusCodes.CREATED, 'CREATED AN ORDER', createdOrder)
-      )
+    res.status(201).json(createdOrder)
+    // .send(defaultResponse(StatusCodes.CREATED, 'ADDED ORDER', createdOrder))
   }
 })
 
-// @desc    Get logged in user's order items
-// @route   GET /api/orders/myorders
-// @access  Private
+// desc    Get logged in user's order items
+// route   GET /api/orders/
+// access  Private
 const getMyOrders = asyncHandler(async (req, res, next) => {
   const orders = await Order.find({ user: req.user._id })
   res
@@ -81,9 +77,9 @@ const updateOrderToPaid = asyncHandler(async (req, res, next) => {
   res.send('update order to paid')
 })
 
-// @desc    Update order to delivered
-// @route   PUT /api/orders/:id/deliver
-// @access  Private
+//  @desc    Update order to delivered
+//  @route   PUT /api/orders/:id/deliver
+//  @access  Private
 const updateOrderToDelivered = asyncHandler(async (req, res, next) => {
   res.send('update order to delivered')
 })
@@ -91,7 +87,7 @@ const updateOrderToDelivered = asyncHandler(async (req, res, next) => {
 // @desc    Get ALL orders
 // @route   GET /api/orders
 // @access  Private/Admin
-const getOrders = asyncHandler(async (req, res, next) => {
+const getAllOrders = asyncHandler(async (req, res, next) => {
   res.send('get all orders')
 })
 
@@ -101,7 +97,7 @@ const ordersController = {
   updateOrderToPaid,
   updateOrderToDelivered,
   getOrder,
-  getOrders,
+  getAllOrders,
 }
 
 export default ordersController

@@ -1,10 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
+import { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Typography, Grid } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import Message from '../components/Message'
+import Message from '../../components/Message'
 
 const LinkBase = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -24,6 +26,9 @@ const KickScreen = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Kicks</title>
+      </Helmet>
       <Container>
         <Grid container spacing={2}>
           <Grid item lg={12}>

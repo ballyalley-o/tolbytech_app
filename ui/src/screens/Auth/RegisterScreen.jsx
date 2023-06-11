@@ -1,13 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useState, useEffect } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useRegisterMutation } from '../slices/user-slice'
-import { setCredentials } from '../slices/auth-slice'
-import Loader from '../components/Loader'
-import SnackAlert from '../components/SnackAlert'
+import { useRegisterMutation } from '../../slices/user-slice'
+import { setCredentials } from '../../slices/auth-slice'
+import Loader from '../../components/Loader'
+import SnackAlert from '../../components/SnackAlert'
 import { toast } from 'react-toastify'
 import {
   FormControl,
@@ -24,11 +25,10 @@ import {
   Slide,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import FormContainer from '../components/FormCotainer'
-import RegisterGreeting from './defaults/RegisterGreeting'
-import TolbyLogoBase from './defaults/TolbyLogoBase'
-import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import FormContainer from '../../components/FormCotainer'
+import RegisterGreeting from '../defaults/RegisterGreeting'
+import TolbyLogoBase from '../defaults/TolbyLogoBase'
+import { CLIENT } from '../../constants'
 
 const InputBase = styled(TextField)(({ theme }) => ({
   root: {
@@ -118,6 +118,9 @@ const RegisterScreen = () => {
   }
   return (
     <>
+      <Helmet>
+        <title>Join Tolby</title>
+      </Helmet>
       <Grid container justifyContent="center" direction="row">
         <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'flex' } }}>
           <Grid container direction="row" justifyContent="space-between">
@@ -289,7 +292,7 @@ const RegisterScreen = () => {
                   </Typography>
                   &nbsp;
                   <LinkBase
-                    to={redirect ? `/auth?redirect=${redirect}` : '/auth'}
+                    to={redirect ? CLIENT.LOGIN_REDIRECT : CLIENT.LOGIN_URL}
                     variant="caption"
                   >
                     <Typography variant="caption">Sign in</Typography>
