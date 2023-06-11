@@ -32,7 +32,7 @@ const SnackAlert = ({
 }
 
 SnackAlert.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.ReactNode,
   severity: PropTypes.string,
   duration: PropTypes.number,
   transition: PropTypes.string,
@@ -49,20 +49,3 @@ SnackAlert.defaultProps = {
 }
 
 export default SnackAlert
-
-{
-  /* <Snackbar
-            open={errorSnackOpen}
-            autoHideDuration={2000}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            TransitionComponent={transition}
-            message={errorSnackOpen}
-          >
-            <Alert
-              severity={snackSeverity}
-              onClose={() => setErrorSnackOpen(null)}
-            >
-              {errorSnackOpen}
-            </Alert>
-          </Snackbar> */
-}

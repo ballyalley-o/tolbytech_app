@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { savePaymentMethod } from '../slices/cart-slice'
@@ -77,6 +78,9 @@ const PaymentScreen = () => {
   }
   return (
     <Grid container>
+      <Helmet>
+        <title>Secured Payment</title>
+      </Helmet>
       <Grid item sm={12} lg={12}>
         <Typography variant="h3" pr={3} py={3} fontWeight="bold">
           Payment.
@@ -113,7 +117,6 @@ const PaymentScreen = () => {
         <Grid item textAlign="center" m={3}>
           <Typography variant="h4">Select the Payment Method </Typography>
         </Grid>
-
         <Grid
           container
           justifyContent="center"
@@ -158,6 +161,18 @@ const PaymentScreen = () => {
                           checked={paymentMethod === 'Google Pay'}
                           onChange={(e) => setPaymentMethod(e.target.value)}
                           value="Google Pay"
+                          name="paymentMethod"
+                          color="primary"
+                        />
+                      }
+                    />
+                    <FormControlLabel
+                      label="Stripe"
+                      control={
+                        <Checkbox
+                          checked={paymentMethod === 'Stripe'}
+                          onChange={(e) => setPaymentMethod(e.target.value)}
+                          value="Stripe"
                           name="paymentMethod"
                           color="primary"
                         />

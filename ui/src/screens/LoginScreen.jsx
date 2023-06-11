@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLoginMutation } from '../slices/user-slice'
@@ -100,6 +101,9 @@ const LoginScreen = () => {
   }
   return (
     <>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <Grid container justifyContent="flex-inline" direction="row">
         <Grid item lg={8} sx={{ display: { xs: 'none', lg: 'flex' } }}>
           <LoginGreeting />
@@ -211,7 +215,6 @@ const LoginScreen = () => {
                             </Typography>
                           </Box>
                         </Grid>
-
                         <Grid item xs={10}></Grid>
                       </Grid>
                     </Grid>

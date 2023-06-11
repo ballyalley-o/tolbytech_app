@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet-async'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { alpha, styled } from '@mui/material/styles'
 import {
@@ -111,6 +112,9 @@ const ProductDetailScreen = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{product?.name}</title>
+      </Helmet>
       <Link to="/">
         <Button>
           <KeyboardDoubleArrowLeftIcon />

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useState, useEffect } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -118,6 +119,9 @@ const RegisterScreen = () => {
   }
   return (
     <>
+      <Helmet>
+        <title>Join Tolby</title>
+      </Helmet>
       <Grid container justifyContent="center" direction="row">
         <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'flex' } }}>
           <Grid container direction="row" justifyContent="space-between">

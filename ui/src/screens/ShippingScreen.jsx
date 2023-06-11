@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import { useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveShippingAddress } from '../slices/cart-slice'
@@ -143,6 +144,9 @@ const ShippingScreen = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Shipping</title>
+      </Helmet>
       <Grid container>
         <Grid item sm={12} lg={12}>
           <Typography variant="h3" pr={3} py={3} fontWeight="bold">
@@ -243,7 +247,7 @@ const ShippingScreen = () => {
                       component="form"
                       fullWidth
                     >
-                      <FormGroup controlId="address" sx={{ my: 2 }}>
+                      <FormGroup sx={{ my: 2 }}>
                         <TextField
                           required
                           fullWidth
@@ -255,7 +259,7 @@ const ShippingScreen = () => {
                           onChange={(e) => setAddress(e.target.value)}
                         />
                       </FormGroup>
-                      <FormGroup controlId="city" sx={{ my: 2 }}>
+                      <FormGroup sx={{ my: 2 }}>
                         <TextField
                           required
                           fullWidth
@@ -267,7 +271,7 @@ const ShippingScreen = () => {
                           onChange={(e) => setCity(e.target.value)}
                         />
                       </FormGroup>
-                      <FormGroup controlId="postalCode" sx={{ my: 2 }}>
+                      <FormGroup sx={{ my: 2 }}>
                         <TextField
                           required
                           fullWidth
@@ -279,7 +283,7 @@ const ShippingScreen = () => {
                           onChange={(e) => setPostalCode(e.target.value)}
                         />
                       </FormGroup>
-                      <FormGroup controlId="country" sx={{ my: 2 }}>
+                      <FormGroup sx={{ my: 2 }}>
                         <TextField
                           required
                           fullWidth
@@ -304,7 +308,7 @@ const ShippingScreen = () => {
                           </Typography>
                         </Divider>
                       </Box>
-                      <FormGroup controlId="name" sx={{ my: 2 }}>
+                      <FormGroup sx={{ my: 2 }}>
                         <TextField
                           id="name"
                           label="Name"
@@ -315,7 +319,7 @@ const ShippingScreen = () => {
                           disabled
                         />
                       </FormGroup>
-                      <FormGroup controlId="email" sx={{ my: 2 }}>
+                      <FormGroup sx={{ my: 2 }}>
                         <TextField
                           id="email"
                           label="E-mail"

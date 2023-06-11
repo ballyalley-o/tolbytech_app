@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, removeFromCart } from '../slices/cart-slice'
 import {
@@ -50,6 +51,9 @@ const CartScreen = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Bag</title>
+      </Helmet>
       <Container>
         <Grid container spacing={2}>
           <Grid item lg={12}>
@@ -60,7 +64,7 @@ const CartScreen = () => {
                 fontWeight="bold"
                 sx={{ color: 'gray', display: 'inline-flex' }}
               >
-                Your bag
+                Review your bag
               </Typography>
             </Typography>
           </Grid>
@@ -202,7 +206,7 @@ const CartScreen = () => {
                     handleCheckout()
                   }}
                 >
-                  checkout
+                  Proceed to Shipping
                 </Button>
               </Grid>
             </Grid>

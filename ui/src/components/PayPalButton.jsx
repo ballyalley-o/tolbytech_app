@@ -54,7 +54,9 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
             })
         }}
         onApprove={function (data, actions) {
-          return actions.order.capture().then(function () {})
+          return actions.order.capture().then(function () {
+            
+          })
         }}
       />
     </>

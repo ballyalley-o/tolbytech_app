@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Typography, Grid } from '@mui/material'
 import { styled } from '@mui/material/styles'
@@ -23,6 +24,9 @@ const BlogScreen = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Talks</title>
+      </Helmet>
       <Container>
         <Grid container spacing={2}>
           <Grid item lg={12}>

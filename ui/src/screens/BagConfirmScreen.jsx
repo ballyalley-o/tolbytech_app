@@ -1,10 +1,11 @@
+'use client'
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useCreateOrderMutation } from '../slices/order-slice'
 import { clearCartItems } from '../slices/cart-slice'
-
 import {
   Grid,
   Typography,
@@ -24,6 +25,8 @@ import { LinkBase } from '../themes/styles.js'
 import CheckoutSteps from '../components/CheckoutSteps'
 import SnackAlert from '../components/SnackAlert'
 import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { toast } from 'react-toastify'
 
 const CardBase = styled(Card)(({ theme }) => ({
   boxShadow: 'none',
@@ -47,20 +50,54 @@ const CardBase = styled(Card)(({ theme }) => ({
 }))
 
 const BagConfirmScreen = () => {
-  const cart = useSelector((state) => state.cart)
-  const { shippingAddress, paymentMethod, cartItems } = cart
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const [errorSnackOpen, setErrorSnackOpen] = useState(null)
+
+  const cart = useSelector((state) => state.cart)
+
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation()
 
   useEffect(() => {
     if (!cart.shippingAddress.address) {
-      navigate('/payment')
+      navigate('/shipping')
     } else if (!cart.paymentMethod) {
       navigate('/payment')
     }
   }, [cart.paymentMethod, cart.shippingAddress.address, navigate])
+
+  const dispatch = useDispatch()
+  const handleBagConfirm = async () => {
+    try {
+      const res = await createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      }).unwrap()
+      console.log(res)
+      dispatch(clearCartItems())
+      navigate(`/order/${res._id}`)
+    } catch (error) {
+      // toast.error(error.message)
+      setErrorSnackOpen(error.message)
+      handleHideDuration(2000)
+    }
+  }
+
+  const handleHideDuration = (duration) => {
+    setTimeout(() => {
+      setErrorSnackOpen(null)
+    }, duration)
+  }
+
   return (
     <>
+      <Helmet>
+        <title>Bag Confirm</title>
+      </Helmet>
       <Grid container>
         <Grid item sm={12} lg={12}>
           <Typography variant="h3" pr={3} py={3} fontWeight="bold">
@@ -73,7 +110,20 @@ const BagConfirmScreen = () => {
               Review your bag.
             </Typography>
           </Typography>
-
+          {errorSnackOpen && (
+            <SnackAlert
+              open={errorSnackOpen}
+              severity="error"
+              onClose={() => setErrorSnackOpen(null)}
+              message={errorSnackOpen}
+              transition="left"
+              vertical="top"
+              duration={2000}
+              horizontal="right"
+            >
+              {errorSnackOpen}
+            </SnackAlert>
+          )}
           <Grid
             container
             direction="row"
@@ -86,11 +136,7 @@ const BagConfirmScreen = () => {
             </Grid>
             <Grid item lg={6}>
               <Typography variant="body1" pr={3} py={2} fontWeight="bold">
-                Order summary: NZ$
-                {cart.cartItems.reduce(
-                  (acc, item) => acc + item.price * item.qty,
-                  0
-                )}
+                &nbsp;
               </Typography>
             </Grid>
           </Grid>
@@ -167,14 +213,14 @@ const BagConfirmScreen = () => {
                           flexDirection: 'column',
                         }}
                       >
-                        {cartItems.length === 0 ? (
+                        {cart.cartItems.length === 0 ? (
                           <Message>
                             Your Bag is empty &nbsp;
                             <LinkBase to="/">Go Back</LinkBase>
                           </Message>
                         ) : (
                           <List>
-                            {cartItems.map((item, index) => (
+                            {cart.cartItems.map((item, index) => (
                               <ListItem key={index}>
                                 <Grid container direction="row">
                                   <Grid item lg={2}>
@@ -192,20 +238,21 @@ const BagConfirmScreen = () => {
                                       ml={1}
                                     >
                                       <Grid item lg={12}>
-                                        <Link to="/product/${item.product}">
-                                          <Typography variant="body1">
+                                        <Link to={`/product/${item.product}`}>
+                                          <Typography variant="caption">
                                             {item.name}
                                           </Typography>
                                         </Link>
                                       </Grid>
                                       <Grid item lg={12}>
-                                        <Typography variant="body1">
+                                        <Typography variant="caption">
                                           <Badge
                                             badgeContent={item.qty}
                                             color="primary"
                                           />
-                                          &nbsp;&nbsp;&nbsp; x NZ${item.price} =
-                                          ${item.qty * item.price}
+                                          &nbsp;&nbsp;&nbsp; &nbsp; x NZ$
+                                          {item.price} = $
+                                          {item.qty * item.price}
                                         </Typography>
                                       </Grid>
                                     </Grid>
@@ -269,10 +316,24 @@ const BagConfirmScreen = () => {
                             <Grid item>
                               <Typography variant="body1">
                                 NZ$
-                                {cart.cartItems.reduce(
-                                  (acc, item) => acc + item.price * item.qty,
-                                  0
-                                )}
+                                {cart.itemsPrice}
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                          <Grid
+                            container
+                            display="inline-flex"
+                            justifyContent="space-between"
+                          >
+                            <Grid item>
+                              <Typography variant="body1" fontWeight="bold">
+                                GST
+                              </Typography>
+                            </Grid>
+                            <Grid item>
+                              <Typography variant="body1">
+                                NZ$
+                                {cart.taxPrice}
                               </Typography>
                             </Grid>
                           </Grid>
@@ -288,7 +349,7 @@ const BagConfirmScreen = () => {
                             </Grid>
                             <Grid item>
                               <Typography variant="body1">
-                                {cart.cartItems.shippingPrice > 0
+                                {cart.shippingPrice > 0
                                   ? `NZ$ ${cart.shippingPrice}`
                                   : 'FREE'}
                               </Typography>
@@ -313,29 +374,37 @@ const BagConfirmScreen = () => {
                             <Grid item>
                               <Typography variant="h6">
                                 NZ$
-                                {cart.cartItems.reduce(
-                                  (acc, item) => acc + item.price * item.qty,
-                                  0
-                                ) +
-                                  (cart.shippingPrice > 0
-                                    ? cart.shippingPrice
-                                    : 0)}
+                                {cart.totalPrice}
                               </Typography>
                             </Grid>
                           </Grid>
+                          <Grid item>
+                            {error && (
+                              <Message variant="danger" color="error">
+                                {error?.data?.message || error.message}
+                              </Message>
+                            )}
+                          </Grid>
+
+                          <Divider />
                           <Grid item lg={12}>
-                            <PayPalScriptProvider>
-                              <PayPalButtons
-                                style={{
-                                  layout: 'horizontal',
-                                  backgroundColor: 'transparent',
-                                  color: 'white',
-                                }}
-                              />
-                            </PayPalScriptProvider>
-                            {/* <Button
+                            {/* {cart.paymentMethod === 'PayPal' && (
+                              <PayPalScriptProvider>
+                                <PayPalButtons
+                                  style={{
+                                    layout: 'horizontal',
+                                    backgroundColor: 'transparent',
+                                    width: '100%',
+                                  }}
+                                  onClick={handleBagConfirm}
+                                />
+                              </PayPalScriptProvider>
+                            )} */}
+                            <Button
+                              type="button"
                               fullWidth
-                              disabled={cartItems.length === 0}
+                              disabled={cart.cartItems.length === 0}
+                              onClick={handleBagConfirm}
                               sx={{
                                 display: 'block',
                                 backgroundColor: 'pink.main',
@@ -347,10 +416,9 @@ const BagConfirmScreen = () => {
                                 },
                               }}
                             >
-                              <Typography variant="h6">
-                                {paymentMethod}
-                              </Typography>
-                            </Button> */}
+                              Confirm Order
+                            </Button>
+                            {isLoading && <Loader />}
                           </Grid>
                         </Grid>
                       </Grid>

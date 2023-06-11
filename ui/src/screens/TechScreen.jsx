@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Grid, Typography } from '@mui/material'
 import Product from '../components/Product'
 import { CONFIG } from '../config-global'
@@ -13,6 +14,9 @@ const TechScreen = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Techs</title>
+      </Helmet>
       {isLoading ? (
         <Loader />
       ) : error ? (

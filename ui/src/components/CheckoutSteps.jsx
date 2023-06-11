@@ -12,10 +12,6 @@ import {
   Grid,
 } from '@mui/material'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
-import HdrWeakOutlinedIcon from '@mui/icons-material/HdrWeakOutlined'
-import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded'
-import TimelineIcon from '@mui/icons-material/Timeline'
-import CommitIcon from '@mui/icons-material/Commit'
 
 const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
   return (
