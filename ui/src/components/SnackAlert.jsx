@@ -32,7 +32,7 @@ const SnackAlert = ({
 }
 
 SnackAlert.propTypes = {
-  children: PropTypes.ReactNode,
+  children: PropTypes.node,
   severity: PropTypes.string,
   duration: PropTypes.number,
   transition: PropTypes.string,

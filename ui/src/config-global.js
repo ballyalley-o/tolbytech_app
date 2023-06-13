@@ -40,6 +40,7 @@ export const CONFIG = {
   PRODUCTS_URL: '/api/v1/products',
   PRODUCT_DETAILS_URL: '/api/v1/products',
   USERS_URL: '/api/v1/users',
+  AUTH_URL: '/api/v1/auth',
   BAG_URL: '/api/v1/bag',
   ORDERS_URL: '/api/v1/orders',
   TALKS_URL: '/api/v1/talks',
@@ -50,7 +51,6 @@ export const CONFIG = {
   CLIENT_PRODUCT_URL: '/:id',
 
   // Auth sublinks
-  CLIENT_AUTH_URL: '/auth',
   CLIENT_REGISTER_URL: '/register',
   CLIENT_LOGIN_URL: '/login',
   CLIENT_LOGOUT_URL: '/logout',

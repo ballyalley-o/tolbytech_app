@@ -88,7 +88,7 @@ const BagConfirmScreen = () => {
         totalPrice: cart.totalPrice,
       }).unwrap()
       dispatch(clearCartItems())
-      navigate(`/orders/${result._id}`)
+      navigate(`/order/${result._id}`)
     } catch (error) {
       toast.error(error.message)
       setErrorSnackOpen(error.message)
