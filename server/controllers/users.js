@@ -1,80 +1,6 @@
 import asyncHandler from '../middleware/async-handler.js'
 import User from '../models/User.js'
-import generateToken from '../helpers/generate-token.js'
 import VARS from '../helpers/vars/vars.js'
-
-// @desc    Auth user & token
-// @route   POST /api/v1/users/login
-// @access  Public
-const authUser = asyncHandler(async (req, res, next) => {
-  const { email, password } = req.body
-  const user = await User.findOne({ email })
-
-  if (user && (await user.validatePassword(password))) {
-    generateToken(res, user._id)
-
-    res.json({
-      message: 'Successful',
-      response: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-      },
-    })
-  } else {
-    res.status(401)
-    throw new Error('INVALID CREDENTIALS')
-  }
-})
-
-// @desc    Logout user/ clear cookie
-// @route   POST /api/v1/users/logout
-// @access  Private
-const logoutUser = asyncHandler(async (req, res, next) => {
-  res.cookie('jwt', '', {
-    httpeOnly: true,
-    expires: new Date(0),
-  })
-  res.status(200).json({
-    message: 'LOGGED OUT SUCCESSFULLY',
-  })
-})
-
-// @desc    Register user
-// @route   POST /api/v1/users
-// @access  Public
-const registerUser = asyncHandler(async (req, res, next) => {
-  const { name, email, password } = req.body
-  const userExists = await User.findOne({ email })
-
-  if (userExists) {
-    res.status(400)
-    throw new Error('USER ALREADY EXISTS')
-  }
-  const user = await User.create({
-    name,
-    email,
-    password,
-  })
-
-  if (user) {
-    generateToken(res, user._id)
-
-    res.status(201).json({
-      message: 'USER REGISTERED',
-      response: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-      },
-    })
-  } else {
-    res.status(400)
-    throw new Error('INVALID USER DATA')
-  }
-})
 
 // @desc    GET User account
 // @route   GET /api/v1/users/account
@@ -151,9 +77,6 @@ const deleteUser = asyncHandler(async (req, res, next) => {
 })
 
 const userController = {
-  authUser,
-  logoutUser,
-  registerUser,
   getUserAccount,
   updateUserAccount,
   getUsers,

@@ -5,7 +5,7 @@ const generateToken = (res, userId) => {
   const token = jwt.sign({ userId }, VARS.JWT_SECRET, {
     expiresIn: VARS.JWT_EXPIRATION,
   })
-  //set JWT as HTTP-only cookie
+
   res.cookie('jwt', token, {
     httpOnly: true,
     secure: VARS.ENV !== 'development',

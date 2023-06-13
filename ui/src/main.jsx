@@ -55,13 +55,13 @@ const router = createBrowserRouter(
       <Route path={CLIENT.FORGOT_PASSWORD} element={<ForgotPasswordScreen />} />
 
       <Route path="" element={<PrivateRoute />}>
+        <Route path={CLIENT.ORDER_URL} element={<OrderScreen />} />
         <Route path={CLIENT.ORDERS_URL} element={<AllOrdersScreen />} />
         <Route path={CLIENT.HISTORY_URL} element={<HistoryScreen />} />
         <Route path={CLIENT.ACCOUNT_URL} element={<AccountScreen />} />
         <Route path={CLIENT.SHIPPING_URL} element={<ShippingScreen />} />
         <Route path={CLIENT.PAYMENT_URL} element={<PaymentScreen />} />
         <Route path={CLIENT.BAGCONFIRM_URL} element={<BagConfirmScreen />} />
-        <Route path={CLIENT.ORDER_URL} element={<OrderScreen />} />
       </Route>
       <Route path={CLIENT.NOT_FOUND_URL} element={<NotFound />} />
     </Route>

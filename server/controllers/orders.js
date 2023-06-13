@@ -36,7 +36,9 @@ const addOrderItems = asyncHandler(async (req, res, next) => {
       totalPrice,
     })
     const createdOrder = await order.save()
+
     res.status(201).json(createdOrder)
+
     // .send(defaultResponse(StatusCodes.CREATED, 'ADDED ORDER', createdOrder))
   }
 })
