@@ -27,19 +27,6 @@ const loginUser = asyncHandler(async (req, res, next) => {
   }
 })
 
-// @desc    Logout user/ clear cookie
-// @route   POST /api/v1/auth/logout
-// @access  Private
-const logoutUser = asyncHandler(async (req, res, next) => {
-  res.cookie('jwt', '', {
-    httpeOnly: true,
-    expires: new Date(0),
-  })
-  res.status(200).json({
-    message: 'LOGGED OUT SUCCESSFULLY',
-  })
-})
-
 // @desc    Register user
 // @route   POST /api/v1/auth/register
 // @access  Public
@@ -73,6 +60,19 @@ const registerUser = asyncHandler(async (req, res, next) => {
     res.status(400)
     throw new Error('INVALID USER DATA')
   }
+})
+
+// @desc    Logout user/ clear cookie
+// @route   POST /api/v1/auth/logout
+// @access  Private
+const logoutUser = asyncHandler(async (req, res, next) => {
+  res.cookie('jwt', '', {
+    httpeOnly: true,
+    expires: new Date(0),
+  })
+  res.status(200).json({
+    message: 'LOGGED OUT SUCCESSFULLY',
+  })
 })
 
 const authController = { loginUser, logoutUser, registerUser }

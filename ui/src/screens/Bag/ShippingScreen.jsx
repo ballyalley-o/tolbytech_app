@@ -113,15 +113,14 @@ const ButtonBase = styled(Button)(({ theme }) => ({
 const ShippingScreen = () => {
   const { userInfo } = useSelector((state) => state.auth)
   const cart = useSelector((state) => state.cart)
+  console.log(cart)
   const { shippingAddress } = cart
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [address, setAddress] = useState(shippingAddress?.address || '')
-  const [city, setCity] = useState(shippingAddress?.city || '')
-  const [postalCode, setPostalCode] = useState(
-    shippingAddress?.postalCode || ''
-  )
-  const [country, setCountry] = useState(shippingAddress?.country || '')
+  const [address, setAddress] = useState(shippingAddress.address || '')
+  const [city, setCity] = useState(shippingAddress.city || '')
+  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '')
+  const [country, setCountry] = useState(shippingAddress.country || '')
   const [openSnack, setOpenSnack] = useState(false)
   const [underDevelopment, setUnderDevelopment] = useState(false)
   const [memoShippingAddress, setMemoShippingAddress] = useState(false)
@@ -148,6 +147,7 @@ const ShippingScreen = () => {
       <Helmet>
         <title>Shipping</title>
       </Helmet>
+
       <Grid container>
         <Grid item sm={12} lg={12}>
           <Typography variant="h3" pr={3} py={3} fontWeight="bold">
