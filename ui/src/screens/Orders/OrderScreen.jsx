@@ -90,11 +90,58 @@ const OrderScreen = () => {
           </Grid>
           <Divider />
         </Grid>
-        <Grid item lg={6}>
-          <Typography variant="h3" py={3} fontWeight="bold">
-            Order {orderId}
-          </Typography>
-        </Grid>
+        {isLoading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant="danger" color="error" />
+        ) : (
+          <>
+            <Grid container direction="row" justifyContent="flex-start">
+              <Grid item lg={8} p={2}>
+                <Typography variant="h4" fontWeight="bold">
+                  Order no: {order.response._id}
+                </Typography>
+              </Grid>
+              <Grid container direction="row">
+                <Grid item lg={8}>
+                  <List>
+                    <Typography variant="h5">Shipping</Typography>
+                    <ListItem>
+                      <Typography variant="body1" fontWeight="bold">
+                        Name:
+                      </Typography>
+                      <Typography variant="body1">
+                        {order.response.user.name}
+                      </Typography>
+                    </ListItem>
+                    <ListItem>
+                      <Typography variant="body1" fontWeight="bold">
+                        Email:
+                      </Typography>
+                      <Typography variant="body1">
+                        {order.response.user.email}
+                      </Typography>
+                    </ListItem>
+                    <ListItem>
+                      <Typography variant="body1" fontWeight="bold">
+                        Address:
+                      </Typography>
+                      <Typography variant="body1">
+                        {order.response.shippingAddress.address},
+                        {order.response.shippingAddress.city},
+                        {order.response.shippingAddress.postalCode},
+                        {order.response.shippingAddress.country}
+                      </Typography>
+                    </ListItem>
+                  </List>
+                </Grid>
+                <Grid item lg={4}>
+                  hey
+                </Grid>
+              </Grid>
+            </Grid>
+          </>
+        )}
       </Grid>
     </>
   )

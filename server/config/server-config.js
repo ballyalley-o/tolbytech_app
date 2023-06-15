@@ -39,9 +39,9 @@ export class App {
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(cookieParser())
     this.app.use(setHeaders)
-    this.app.use(cors({ origin: '*', credentials: true }))
-    this.app.get('/', TolbyTechResponse.response)
+    this.app.use(cors())
     this.registerRoutes()
+    this.app.get('/', TolbyTechResponse.response)
     this.app.use(notFound)
     this.app.use(errorHandler)
   }

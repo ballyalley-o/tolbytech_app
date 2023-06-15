@@ -10,7 +10,7 @@ const LoginGreeting = () => {
   return (
     <>
       <ContainerBase maxWidth="md">
-        <Grid container lg={12} direction="row" justifyContent="flex-start">
+        <Grid container direction="row" justifyContent="flex-start">
           <Grid item lg={6}>
             <Typography variant="h1" fontWeight="bold">
               <i>Everything</i> <br /> <i>Tech.</i> <br /> <br />

@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // disable eslint plugin
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8002',
+    },
+  },
   plugins: [react()],
 })
