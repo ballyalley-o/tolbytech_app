@@ -18,6 +18,7 @@ import {
   CardMedia,
   Badge,
 } from '@mui/material'
+import { CardBase, ButtonBase } from '../../themes/styles/default-styled.js'
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { styled } from '@mui/material/styles'
 import { LinkBase } from '../../themes/styles.js'
@@ -26,38 +27,6 @@ import SnackAlert from '../../components/SnackAlert'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import { toast } from 'react-toastify'
-
-const CardBase = styled(Card)(({ theme }) => ({
-  boxShadow: 'none',
-  backgroundColor: 'transparent',
-  border: '1px solid #D4D4D4',
-  margin: '1rem 1rem',
-  root: {
-    borderRadius: '20px',
-    '& .MuiInputBase-root': {
-      backgroundColor: '#f5f5f5',
-      borderRadius: 5,
-      boxShadow: 'none',
-    },
-    '& .MuiFormLabel-root.Mui-focused': {
-      color: '#555555',
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#555555',
-    },
-  },
-}))
-
-const ButtonBase = styled(Button)(({ theme }) => ({
-  display: 'block',
-  backgroundColor: '#2141fF',
-  color: '#FFF',
-  fontWeight: 'bold',
-  '&:hover': {
-    backgroundColor: 'pink.dark',
-    color: '#000',
-  },
-}))
 
 const BagConfirmScreen = () => {
   const dispatch = useDispatch()
@@ -88,7 +57,7 @@ const BagConfirmScreen = () => {
         totalPrice: cart.totalPrice,
       }).unwrap()
       dispatch(clearCartItems())
-      navigate(`/orders/${result._id}`)
+      navigate(`/orders/${result.response._id}`)
     } catch (error) {
       toast.error(error.message)
       setErrorSnackOpen(error.message)

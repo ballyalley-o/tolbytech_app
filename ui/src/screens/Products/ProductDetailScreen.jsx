@@ -132,10 +132,7 @@ const ProductDetailScreen = () => {
         <>
           <Grid container>
             <Grid item lg={7}>
-              <CardMediaBase
-                component="img"
-                image={product.image}
-              ></CardMediaBase>
+              <CardMediaBase component="img" image={product.image} />
             </Grid>
             <Grid item lg={5}>
               <Grid container>
@@ -176,7 +173,6 @@ const ProductDetailScreen = () => {
                     />
                   </BoxBase>
                 </CardContentBase>
-
                 {product.countInStock > 0 && (
                   <CardContentBase>
                     <BoxBase>

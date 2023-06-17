@@ -42,6 +42,9 @@ export class App {
     this.app.use(cors())
     this.registerRoutes()
     this.app.get('/', TolbyTechResponse.response)
+    this.app.get('/api/v1/config/paypal', (req, res) => {
+      res.send({ clientId: VARS.PAYPAL_CLIENT_ID })
+    })
     this.app.use(notFound)
     this.app.use(errorHandler)
   }

@@ -11,12 +11,12 @@ const OrderSchema = new mongoose.Schema(
       required: true,
     },
     orderItems: [OrderItemSchema],
-    shippingAddress: { ShippingAddressSchema },
+    shippingAddress: ShippingAddressSchema,
     paymentMethod: {
       type: String,
       required: true,
     },
-    paymentResult: { PaymentResultSchema },
+    paymentResult: PaymentResultSchema,
     itemsPrice: {
       type: Number,
       required: true,

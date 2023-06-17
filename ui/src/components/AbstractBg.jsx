@@ -5,7 +5,6 @@ import { styled } from '@mui/material/styles'
 
 const AbstractBg = () => {
   const ContainerLandingBase = styled(Container)(({ theme }) => ({
-    //  make it the background
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
