@@ -37,9 +37,10 @@ const addOrderItems = asyncHandler(async (req, res, next) => {
     })
     const createdOrder = await order.save()
 
-    res.status(201).json(createdOrder)
-
-    // .send(defaultResponse(StatusCodes.CREATED, 'ADDED ORDER', createdOrder))
+    console.log(createdOrder)
+    res
+      .status(201)
+      .send(defaultResponse(StatusCodes.CREATED, 'ADDED ORDER', createdOrder))
   }
 })
 
@@ -76,7 +77,25 @@ const getOrder = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/orders/:id/pay
 // @access  Private/Admin
 const updateOrderToPaid = asyncHandler(async (req, res, next) => {
-  res.send('update order to paid')
+  const order = await Order.findById(req.params.id)
+  if (order) {
+    order.isPaid = true
+    order.paidAt = Date.now()
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.payer.email_address,
+    }
+    const updateOrder = await order.save()
+    res
+      .status(200)
+      .send(defaultResponse(StatusCodes.OK, 'ORDER IS PAID', updateOrder))
+  } else {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .send(getReasonPhrase(StatusCodes.NOT_FOUND))
+  }
 })
 
 //  @desc    Update order to delivered

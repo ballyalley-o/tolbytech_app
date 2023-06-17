@@ -19,6 +19,7 @@ const VARS = {
   HOST: process.env.MONGODB_HOST,
   DBNAME: process.env.MONGODB_DB,
   DB_URI: process.env.MONGODB_URI,
+  PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID,
 }
 
 export default VARS

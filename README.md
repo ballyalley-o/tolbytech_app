@@ -65,6 +65,8 @@ client
 - [ ] **wishlist**
 - [x] **checkout page**
 - [x] **payment gateway**
+- [x] **paypal-integration**
+- [ ] **print-receipt**
 - [x] **bag-confirm**
 - [ ] **contact page**
 - [ ] **blog**
@@ -77,6 +79,7 @@ client
 - [x] **redux-toolkit**
 - [x] **redux-actions**
 - [ ] **redux-thunk**
+- [x] **redux-paypal**
 
 server
 - [x] **admin**
@@ -84,6 +87,7 @@ server
 - [x] **user**
 - [ ] **order**
 - [x] **payment**
+- [ ] **paypal**
 - [ ] **blog**
 - [ ] **contact**
 - [x] **peerdata**
