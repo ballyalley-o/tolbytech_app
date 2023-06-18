@@ -40,6 +40,7 @@ export const CONFIG = {
   PRODUCTS_URL: '/api/v1/products',
   PRODUCT_DETAILS_URL: '/api/v1/products',
   USERS_URL: '/api/v1/users',
+  ACCOUNT_URL: '/api/v1/users/account',
   AUTH_URL: '/api/v1/auth',
   BAG_URL: '/api/v1/bag',
   ORDERS_URL: '/api/v1/orders',

@@ -24,26 +24,26 @@ export const CardBase = styled(Card)(({ theme }) => ({
   },
 }))
 
+export const ButtonBase = styled(Button)(({ theme }) => ({
+  display: 'block',
+  backgroundColor: theme.palette.primary.main,
+  color: '#FFF',
+  fontWeight: 'bold',
+  '&:hover': {
+    backgroundColor: 'pink.main',
+    color: '#000',
+  },
+}))
+
 // export const ButtonBase = styled(Button)(({ theme }) => ({
-//   display: 'block',
-//   backgroundColor: '#2141fF',
+//   backgroundColor: 'pink.main',
 //   color: '#FFF',
-//   fontWeight: 'bold',
+//   fontWeight: 600,
 //   '&:hover': {
 //     backgroundColor: 'pink.dark',
 //     color: '#000',
 //   },
 // }))
-
-export const ButtonBase = styled(Button)(({ theme }) => ({
-  backgroundColor: 'pink.main',
-  color: '#FFF',
-  fontWeight: 600,
-  '&:hover': {
-    backgroundColor: 'pink.dark',
-    color: '#000',
-  },
-}))
 
 export const LinkBase = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -122,3 +122,30 @@ export const AntSwitch = styled(Switch)(({ theme }) => ({
     boxSizing: 'border-box',
   },
 }))
+
+// export const InputBase = styled(TextField)(({ theme }) => ({
+//   root: {
+//     '& .MuiInputBase-root': {
+//       backgroundColor: '#f5f5f5',
+//       borderRadius: 4,
+//       padding: '8px 12px',
+//     },
+//     '& .MuiFormLabel-root.Mui-focused': {
+//       color: '#555555',
+//     },
+//     '& .MuiInput-underline:after': {
+//       borderBottomColor: '#555555',
+//     },
+//     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+//       borderBottomColor: '#555555',
+//     },
+//   },
+//   '& .MuiInputBase-input': {
+//     fontSize: '1rem',
+//     '&::placeholder': {
+//       color: '#000',
+//       fontWeight: 400,
+//       fontSize: '1em',
+//     },
+//   },
+// }))

@@ -2,10 +2,13 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Box, Avatar } from '@mui/material'
+import { useSelector } from 'react-redux'
 
-const CustomAvatar = ({ name }) => {
-  const firstLetter = name.charAt(0)
-  const secondLetter = name.split(' ')[1] && name.split(' ')[1].charAt(0)
+function CustomAvatar({ name }) {
+  const { userInfo } = useSelector((state) => state.auth)
+  const firstLetter = userInfo.response.name?.charAt(0)
+  const secondLetter =
+    userInfo.response.name?.split(' ')[1] && name?.split(' ')[1]?.charAt(0)
 
   return (
     <>
