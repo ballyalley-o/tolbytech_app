@@ -16,12 +16,18 @@ const App = () => {
     palette: {
       primary: {
         main: '#1c252c',
+        light: '#FFF',
+        lighter: '#F4FAFF',
       },
       secondary: {
         main: '#1c252c',
       },
       pink: {
         main: '#FF1288',
+        light: '#D9B6E0',
+      },
+      gray: {
+        main: '#B3B5BB',
       },
     },
     minHeight: '80vh',

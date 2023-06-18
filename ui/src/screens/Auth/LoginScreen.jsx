@@ -25,38 +25,11 @@ import {
   Container,
   Slide,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { InputBase } from '../../themes/styles/default-styled.js'
 import FormContainer from '../../components/FormCotainer'
 import LoginGreeting from '../defaults/LoginGreeting'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing'
-
-const InputBase = styled(TextField)(({ theme }) => ({
-  root: {
-    '& .MuiInputBase-root': {
-      backgroundColor: '#f5f5f5',
-      borderRadius: 4,
-      padding: '8px 12px',
-    },
-    '& .MuiFormLabel-root.Mui-focused': {
-      color: '#555555',
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#555555',
-    },
-    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-      borderBottomColor: '#555555',
-    },
-  },
-  '& .MuiInputBase-input': {
-    fontSize: '1rem',
-    '&::placeholder': {
-      color: '#000',
-      fontWeight: 400,
-      fontSize: '1em',
-    },
-  },
-}))
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')

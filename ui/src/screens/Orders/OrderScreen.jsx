@@ -74,6 +74,7 @@ const OrderScreen = () => {
         await payOrder({ orderId, details })
         refetch()
         setSnackOpen('Payment successful', 'success')
+        handleHideDuration(2000)
       } catch (error) {
         setSnackOpen(
           error?.data?.response?.message || error.message || 'Payment failed',
