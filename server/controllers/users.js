@@ -28,6 +28,8 @@ const getUserAccount = asyncHandler(async (req, res, next) => {
 // @access  Private
 const updateUserAccount = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user._id)
+  // const io = App.io
+
   if (user) {
     user.name = req.body.name || user.name
     user.email = req.body.email || user.email
@@ -36,7 +38,13 @@ const updateUserAccount = asyncHandler(async (req, res, next) => {
       user.password = req.body.password
     }
     const updatedUser = await user.save()
-    const response = { _id: updatedUser._id, updatedField: req.body }
+
+    const response = {
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    }
 
     res.status(200).json({
       message: 'USER UPDATED',
