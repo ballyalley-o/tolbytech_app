@@ -9,7 +9,7 @@ router
   .get(protect, admin, ordersController.getAllOrders)
   .post(protect, ordersController.addOrderItems)
 
-router.get('/myorders', protect, ordersController.getMyOrders)
+router.get('/mine', protect, ordersController.getMyOrders)
 router.get('/:id', protect, ordersController.getOrder)
 router.put(
   '/:id/deliver',

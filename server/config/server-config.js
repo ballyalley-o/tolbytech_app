@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import setHeaders from '../helpers/set-headers.js'
 import connectDB from './db.js'
-import { linkRoutes } from '../routes/index.js'
+import { linkRoutes, payPalRoute, serverRoute } from '../routes/index.js'
 import { notFound, errorHandler } from '../middleware/error-handler.js'
 import { TolbyTechResponse } from '../helpers/response.js'
 import MessageLOG from '../helpers/message-logger.js'
@@ -41,10 +41,6 @@ export class App {
     this.app.use(setHeaders)
     this.app.use(cors())
     this.registerRoutes()
-    this.app.get('/', TolbyTechResponse.response)
-    this.app.get('/api/v1/config/paypal', (req, res) => {
-      res.send({ clientId: VARS.PAYPAL_CLIENT_ID })
-    })
     this.app.use(notFound)
     this.app.use(errorHandler)
   }
@@ -59,7 +55,9 @@ export class App {
   }
 
   registerRoutes() {
-    linkRoutes(this.app, VARS.API_ROOT)
+    serverRoute(this.app),
+      linkRoutes(this.app, VARS.API_ROOT),
+      payPalRoute(this.app, VARS.API_ROOT)
   }
 
   start() {
