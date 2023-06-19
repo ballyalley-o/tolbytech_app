@@ -14,27 +14,30 @@ import { toast } from 'react-toastify'
 import {
   FormControl,
   FormGroup,
-  TextField,
   Button,
   Grid,
   Typography,
   Box,
   Badge,
-  Alert,
-  Snackbar,
   Container,
-  Slide,
+  InputAdornment,
+  IconButton,
+  OutlinedInput,
+  InputLabel,
 } from '@mui/material'
 import { InputBase } from '../../themes/styles/default-styled.js'
 import FormContainer from '../../components/FormCotainer'
 import LoginGreeting from '../defaults/LoginGreeting'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorSnackOpen, setErrorSnackOpen] = useState(null)
+  const [showPassword, setShowPassword] = useState(false)
   const [transition, setTransition] = useState(undefined)
 
   const dispatch = useDispatch()
@@ -72,6 +75,14 @@ const LoginScreen = () => {
     setTimeout(() => {
       setErrorSnackOpen(null)
     }, duration)
+  }
+
+  const handleClickShowPassword = () => {
+    setShowPassword((show) => !show)
+  }
+
+  const handleMouseDownPassword = (e) => {
+    e.preventDefault()
   }
   return (
     <>
@@ -135,28 +146,55 @@ const LoginScreen = () => {
               <Container maxWidth="xs">
                 <FormControl component="form" onSubmit={handleSubmit}>
                   <FormGroup>
-                    <Grid container spacing={2} gap={1}>
-                      <Grid item xs={12}>
+                    <Grid container gap={1}>
+                      <FormControl
+                        sx={{ m: 1, width: '37ch' }}
+                        variant="outlined"
+                      >
+                        <InputLabel htmlFor="outlined-email">
+                          Tolby ID
+                        </InputLabel>
                         <InputBase
                           label="Tolby ID"
                           name="email"
-                          fullWidth
-                          size="small"
                           value={email}
+                          size="medium"
                           onChange={(e) => setEmail(e.target.value)}
                         />
-                      </Grid>
-                      <Grid item xs={12}>
+                      </FormControl>
+                      <FormControl
+                        sx={{ m: 1, width: '37ch' }}
+                        variant="outlined"
+                      >
+                        <InputLabel htmlFor="outlined-adornment-password">
+                          Password
+                        </InputLabel>
                         <InputBase
                           label="Password"
+                          id="outlined-adornment-password"
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                aria-label="toggle password visibility"
+                                edge="end"
+                              >
+                                {showPassword ? (
+                                  <Visibility />
+                                ) : (
+                                  <VisibilityOff />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          }
                           name="password"
-                          type="password"
-                          fullWidth
-                          size="small"
+                          type={showPassword ? 'text' : 'password'}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                         />
-                      </Grid>
+                      </FormControl>
+
                       <Grid
                         item
                         xs={12}

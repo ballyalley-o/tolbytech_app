@@ -1,6 +1,13 @@
 /* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types'
-import { Card, Button, Link, Switch, TextField } from '@mui/material'
+import {
+  Card,
+  Button,
+  Link,
+  Switch,
+  TextField,
+  OutlinedInput,
+} from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 export const CardBase = styled(Card)(({ theme }) => ({
@@ -55,7 +62,7 @@ export const LinkBase = styled(Link)(({ theme }) => ({
   cursor: 'pointer',
 }))
 
-export const InputBase = styled(TextField)(({ theme }) => ({
+export const InputBase = styled(OutlinedInput)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
       borderColor: '#000',
