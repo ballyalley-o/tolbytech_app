@@ -29,21 +29,13 @@ const TechScreen = () => {
             <Grid item lg={12}>
               <Grid item lg={8}>
                 <Typography variant="h3" pr={3} py={3} fontWeight="bold">
-                  Shop.
+                  Tech.
                   <Typography
                     variant="h3"
                     fontWeight="bold"
-                    sx={{ color: 'gray', display: 'inline-flex' }}
+                    sx={{ color: 'gray.main', display: 'inline-flex' }}
                   >
-                    The best tech products in{' '}
-                    <Typography
-                      variant="h2"
-                      color="pink.main"
-                      fontWeight="bold"
-                    >
-                      one
-                    </Typography>
-                    place
+                    Shop
                   </Typography>
                 </Typography>
               </Grid>

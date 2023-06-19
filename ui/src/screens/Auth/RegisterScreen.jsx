@@ -9,7 +9,6 @@ import { useRegisterMutation } from '../../slices/user-slice'
 import { setCredentials } from '../../slices/auth-slice'
 import Loader from '../../components/Loader'
 import SnackAlert from '../../components/SnackAlert'
-import { toast } from 'react-toastify'
 import {
   FormControl,
   FormGroup,
@@ -18,44 +17,19 @@ import {
   Grid,
   Typography,
   Box,
-  Badge,
-  Alert,
-  Snackbar,
   Container,
-  Slide,
+  InputAdornment,
+  IconButton,
+  InputLabel,
 } from '@mui/material'
+import { InputBase, ButtonBase } from '../../themes/styles/default-styled.js'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import Visibility from '@mui/icons-material/Visibility'
 import { styled } from '@mui/material/styles'
 import FormContainer from '../../components/FormCotainer'
 import RegisterGreeting from '../defaults/RegisterGreeting'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import { CLIENT } from '../../constants'
-
-const InputBase = styled(TextField)(({ theme }) => ({
-  root: {
-    '& .MuiInputBase-root': {
-      //   backgroundColor: '#f5f5f5',
-      borderRadius: 4,
-      padding: '8px 12px',
-    },
-    '& .MuiFormLabel-root.Mui-focused': {
-      //   color: '#555555',
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#555555',
-    },
-    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-      borderBottomColor: '#555555',
-    },
-  },
-  '& .MuiInputBase-input': {
-    fontSize: '1rem',
-    '&::placeholder': {
-      color: '#000',
-      fontWeight: 400,
-      fontSize: '1em',
-    },
-  },
-}))
 
 const LinkBase = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -75,6 +49,8 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [snackOpen, setSnackOpen] = useState(null)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [transition, setTransition] = useState(undefined)
 
   const dispatch = useDispatch()
@@ -115,6 +91,17 @@ const RegisterScreen = () => {
     setTimeout(() => {
       setSnackOpen(null)
     }, duration)
+  }
+
+  const handleClickShowPassword = () => {
+    setShowPassword((show) => !show)
+  }
+  const handleClickShowConfirmPassword = () => {
+    setShowConfirmPassword((show) => !show)
+  }
+
+  const handleMouseDownPassword = (e) => {
+    e.preventDefault()
   }
   return (
     <>
@@ -189,48 +176,111 @@ const RegisterScreen = () => {
                   <FormGroup>
                     <Grid container spacing={2} gap={1}>
                       <Grid item xs={12}>
-                        <InputBase
-                          label="Tolby ID / Email"
-                          name="email"
-                          type="text"
-                          fullWidth
-                          size="small"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
+                        <FormControl
+                          sx={{ m: 1, width: '40ch' }}
+                          variant="outlined"
+                        >
+                          <InputLabel htmlFor="outlined-Tolby-ID">
+                            Tolby ID / Email
+                          </InputLabel>
+                          <InputBase
+                            label="Tolby ID / Email"
+                            name="email"
+                            type="text"
+                            fullWidth
+                            size="medium"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </FormControl>
                       </Grid>
                       <Grid item xs={12}>
-                        <InputBase
-                          label="Name"
-                          type="text"
-                          name="name"
-                          fullWidth
-                          size="small"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                        />
+                        <FormControl
+                          sx={{ m: 1, width: '40ch' }}
+                          variant="outlined"
+                        >
+                          <InputLabel htmlFor="outlined-name">Name</InputLabel>
+                          <InputBase
+                            label="Name"
+                            type="text"
+                            name="name"
+                            fullWidth
+                            size="medium"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                          />
+                        </FormControl>
                       </Grid>
                       <Grid item xs={12}>
-                        <InputBase
-                          label="Password"
-                          name="password"
-                          type="password"
-                          fullWidth
-                          size="small"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <FormControl
+                          sx={{ m: 1, width: '40ch' }}
+                          variant="outlined"
+                        >
+                          <InputLabel htmlFor="outlined-adornment-password">
+                            Password
+                          </InputLabel>
+                          <InputBase
+                            label="Password"
+                            id="outlined-adornment-password"
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <IconButton
+                                  onClick={handleClickShowPassword}
+                                  onMouseDown={handleMouseDownPassword}
+                                  aria-label="toggle password visibility"
+                                  edge="end"
+                                >
+                                  {showPassword ? (
+                                    <Visibility />
+                                  ) : (
+                                    <VisibilityOff />
+                                  )}
+                                </IconButton>
+                              </InputAdornment>
+                            }
+                            name="password"
+                            type={showPassword ? 'text' : 'password'}
+                            fullWidth
+                            size="medium"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                        </FormControl>
                       </Grid>
                       <Grid item xs={12}>
-                        <InputBase
-                          label="Confirm Password"
-                          name="password"
-                          type="password"
-                          fullWidth
-                          size="small"
-                          value={confirmPassword}
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
+                        <FormControl
+                          sx={{ m: 1, width: '40ch' }}
+                          variant="outlined"
+                        >
+                          <InputLabel htmlFor="outlined-adornment-password">
+                            Confirm Password
+                          </InputLabel>
+                          <InputBase
+                            label="Confirm Password"
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <IconButton
+                                  onClick={handleClickShowConfirmPassword}
+                                  onMouseDown={handleMouseDownPassword}
+                                  aria-label="toggle password visibility"
+                                  edge="end"
+                                >
+                                  {showConfirmPassword ? (
+                                    <Visibility />
+                                  ) : (
+                                    <VisibilityOff />
+                                  )}
+                                </IconButton>
+                              </InputAdornment>
+                            }
+                            name="password"
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            fullWidth
+                            size="medium"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                          />
+                        </FormControl>
                       </Grid>
                       <Grid
                         item
@@ -240,14 +290,14 @@ const RegisterScreen = () => {
                         justifyContent="center"
                         textAlign="center"
                       >
-                        <Button
+                        <ButtonBase
                           type="submit"
                           fullWidth
                           sx={{ backgroundColor: 'pink.main', color: '#fff' }}
                           disabled={isLoading}
                         >
                           Register
-                        </Button>
+                        </ButtonBase>
                         <Grid container justifyContent="center">
                           <Box m={1}>
                             <Typography variant="caption">
