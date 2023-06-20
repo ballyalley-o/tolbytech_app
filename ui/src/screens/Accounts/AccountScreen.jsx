@@ -10,6 +10,9 @@ import {
   Grid,
   Divider,
   FormGroup,
+  InputLabel,
+  InputAdornment,
+  IconButton,
 } from '@mui/material'
 import CollapsibleTable from '../../components/Accounts/Table.jsx'
 import { InputBase, ButtonBase } from '../../themes/styles/default-styled.js'
@@ -17,6 +20,8 @@ import { useAccountMutation } from '../../slices/user-slice'
 import { setCredentials } from '../../slices/auth-slice'
 import { CLIENT, SERVER_URL } from '../../constants'
 import OrderViewAccounts from '../../components/Accounts/OrderViewAccounts.jsx'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import SnackAlert from '../../components/SnackAlert'
@@ -26,6 +31,8 @@ const AccountScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [snackOpen, setSnackOpen] = useState(null)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -72,6 +79,18 @@ const AccountScreen = () => {
     }, duration)
   }
 
+  const handleClickShowPassword = () => {
+    setShowPassword((show) => !show)
+  }
+
+  const handleClickShowConfirmPassword = () => {
+    setShowConfirmPassword((show) => !show)
+  }
+
+  const handleMouseDownPassword = (e) => {
+    e.preventDefault()
+  }
+
   return (
     <>
       <Helmet>
@@ -114,59 +133,114 @@ const AccountScreen = () => {
               <Grid container gap={1} spacing={2} my={2} mr={2}>
                 <Grid item md={12}>
                   <FormGroup row>
-                    <InputBase
-                      label="Name"
-                      type="text"
-                      name="name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      fullWidth
-                    />
+                    <FormControl sx={{ width: '52ch' }} variant="outlined">
+                      <InputLabel htmlFor="outlined-name">Name</InputLabel>
+                      <InputBase
+                        label="Name"
+                        type="text"
+                        name="name"
+                        id="outlined-name"
+                        size="small"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        fullWidth
+                      />
+                    </FormControl>
                   </FormGroup>
                 </Grid>
                 <Grid item md={12}>
                   <FormGroup row>
-                    <InputBase
-                      label="Email"
-                      type="text"
-                      name="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      fullWidth
-                    />
+                    <FormControl sx={{ width: '52ch' }} variant="outlined">
+                      <InputLabel htmlFor="outlined-name">
+                        Tolby ID/ E-Mail
+                      </InputLabel>
+                      <InputBase
+                        label=" Tolby ID/ E-Mail"
+                        type="text"
+                        name="email"
+                        size="small"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        fullWidth
+                      />
+                    </FormControl>
                   </FormGroup>
                 </Grid>
                 <Grid item md={12}>
                   <FormGroup row>
-                    <InputBase
-                      label="Password"
-                      type="password"
-                      name="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      fullWidth
-                    />
+                    <FormControl sx={{ width: '52ch' }} variant="outlined">
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Password
+                      </InputLabel>
+                      <InputBase
+                        label="Password"
+                        id="outlined-adornment-password"
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                              aria-label="toggle password visibility"
+                              edge="end"
+                            >
+                              {showPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        name="password"
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        size="small"
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </FormControl>
                   </FormGroup>
                 </Grid>
                 <Grid item md={12}>
                   {password !== '' && (
                     <FormGroup aria-autocomplete="none" row>
-                      <InputBase
-                        label="Confirm Password"
-                        type="password"
-                        name="confirmPassword"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        fullWidth
-                      />
+                      <FormControl sx={{ width: '52ch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-password">
+                          Confirm Password
+                        </InputLabel>
+                        <InputBase
+                          label="Confirm Password"
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={handleClickShowConfirmPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                aria-label="toggle password visibility"
+                                edge="end"
+                              >
+                                {showPassword ? (
+                                  <Visibility />
+                                ) : (
+                                  <VisibilityOff />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          }
+                          name="password"
+                          type={showConfirmPassword ? 'text' : 'password'}
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          fullWidth
+                          size="small"
+                        />
+                      </FormControl>
                     </FormGroup>
                   )}
                 </Grid>
-                <Grid item md={12}>
-                  <ButtonBase type="submit" fullWidth>
-                    {loadingUpdateAcccount ? <Loader /> : 'Update Account'}
-                  </ButtonBase>
-                </Grid>
+              </Grid>
+              <Grid item md={12} mr={2}>
+                <ButtonBase type="submit" fullWidth>
+                  {loadingUpdateAcccount ? <Loader /> : 'Update Account'}
+                </ButtonBase>
               </Grid>
             </FormControl>
           </Grid>

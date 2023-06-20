@@ -63,6 +63,7 @@ export const LinkBase = styled(Link)(({ theme }) => ({
 }))
 
 export const InputBase = styled(OutlinedInput)(({ theme }) => ({
+  py: 0,
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
       borderColor: '#000',

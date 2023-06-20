@@ -174,7 +174,7 @@ const RegisterScreen = () => {
               <Container>
                 <FormControl component="form" onSubmit={handleSubmit}>
                   <FormGroup>
-                    <Grid container spacing={2} gap={1}>
+                    <Grid container gap={1}>
                       <Grid item xs={12}>
                         <FormControl
                           sx={{ m: 1, width: '40ch' }}
@@ -188,7 +188,7 @@ const RegisterScreen = () => {
                             name="email"
                             type="text"
                             fullWidth
-                            size="medium"
+                            size="small"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                           />
@@ -205,7 +205,7 @@ const RegisterScreen = () => {
                             type="text"
                             name="name"
                             fullWidth
-                            size="medium"
+                            size="small"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                           />
@@ -241,7 +241,7 @@ const RegisterScreen = () => {
                             name="password"
                             type={showPassword ? 'text' : 'password'}
                             fullWidth
-                            size="medium"
+                            size="small"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                           />
@@ -276,7 +276,7 @@ const RegisterScreen = () => {
                             name="password"
                             type={showConfirmPassword ? 'text' : 'password'}
                             fullWidth
-                            size="medium"
+                            size="small"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                           />
