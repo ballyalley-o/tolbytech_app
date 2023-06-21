@@ -17,10 +17,10 @@ function path(root, sublink) {
 const ROOT_HOME = '/'
 const ROOT_AUTH = '/auth'
 const ROOT_ACCOUNT = '/account'
-const ROOT_USERS = '/users'
 const ROOT_ADMIN = '/admin'
 const ROOT_BAG = '/bag'
 const ROOT_ORDERS = '/orders'
+const ROOT_USERS = '/users'
 const ROOT_PRODUCTS = '/products'
 const ROOT_TECH = '/tech'
 const ROOT_TALKS = '/talks'
@@ -109,6 +109,8 @@ export const PATH_PRODUCTS = {
 export const PATH_ADMIN = {
   ROOT: ROOT_ADMIN,
   ORDERS: path(ROOT_ADMIN, ROOT_ORDERS),
+  USERS: path(ROOT_ADMIN, ROOT_USERS),
+  PRODUCTS: path(ROOT_ADMIN, ROOT_PRODUCTS),
 }
 
 export const PATH_TECH = {
