@@ -24,6 +24,11 @@ export const ThemeProvider = ({ children }) => {
       info: {
         main: '#1c252c',
       },
+      pink: {
+        main: '#FF1288',
+        light: '#D9B6E0',
+        contrastText: '#FFF',
+      },
     },
   })
 

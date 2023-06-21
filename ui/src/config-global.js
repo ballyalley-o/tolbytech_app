@@ -18,6 +18,7 @@ const ROOT_HOME = '/'
 const ROOT_AUTH = '/auth'
 const ROOT_ACCOUNT = '/account'
 const ROOT_USERS = '/users'
+const ROOT_ADMIN = '/admin'
 const ROOT_BAG = '/bag'
 const ROOT_ORDERS = '/orders'
 const ROOT_PRODUCTS = '/products'
@@ -103,6 +104,11 @@ export const PATH_BAG = {
 export const PATH_PRODUCTS = {
   ROOT: ROOT_PRODUCTS,
   PRODUCT: path(ROOT_PRODUCTS, CONFIG.CLIENT_PRODUCT_URL),
+}
+
+export const PATH_ADMIN = {
+  ROOT: ROOT_ADMIN,
+  ORDERS: path(ROOT_ADMIN, ROOT_ORDERS),
 }
 
 export const PATH_TECH = {

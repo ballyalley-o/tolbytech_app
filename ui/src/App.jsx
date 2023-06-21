@@ -25,6 +25,7 @@ const App = () => {
       pink: {
         main: '#FF1288',
         light: '#D9B6E0',
+        contrastText: '#FFF',
       },
       gray: {
         main: '#B3B5BB',

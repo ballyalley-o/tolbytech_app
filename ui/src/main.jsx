@@ -12,6 +12,7 @@ import { Provider } from 'react-redux'
 import { CLIENT } from './constants.js'
 import store from './store.js'
 import PrivateRoute from './components/PrivateRoute.jsx'
+import AdminRoute from './components/AdminRoute.jsx'
 // @home
 import HomeScreen from './screens/HomeScreen.jsx'
 // @tech
@@ -29,7 +30,7 @@ import PaymentScreen from './screens/Bag/PaymentScreen.jsx'
 import BagConfirmScreen from './screens/Bag/BagConfirmScreen.jsx'
 // @orders
 import OrderScreen from './screens/Orders/OrderScreen.jsx'
-import AllOrdersScreen from './screens/Orders/AllOrdersScreen.jsx'
+import AllOrdersScreen from './screens/Orders/admin/AllOrdersScreen.jsx'
 import HistoryScreen from './screens/Orders/HistoryScreen.jsx'
 // @auth
 import LoginScreen from './screens/Auth/LoginScreen.jsx'
@@ -57,12 +58,15 @@ const router = createBrowserRouter(
 
       <Route path="" element={<PrivateRoute />}>
         <Route path={CLIENT.ORDER_URL} element={<OrderScreen />} />
-        <Route path={CLIENT.ORDERS_URL} element={<AllOrdersScreen />} />
+
         <Route path={CLIENT.HISTORY_URL} element={<HistoryScreen />} />
         <Route path={CLIENT.ACCOUNT_URL} element={<AccountScreen />} />
         <Route path={CLIENT.SHIPPING_URL} element={<ShippingScreen />} />
         <Route path={CLIENT.PAYMENT_URL} element={<PaymentScreen />} />
         <Route path={CLIENT.BAGCONFIRM_URL} element={<BagConfirmScreen />} />
+      </Route>
+      <Route path="" element={<AdminRoute />}>
+        <Route path={CLIENT.ADMIN_ORDERS_URL} element={<AllOrdersScreen />} />
       </Route>
       <Route path={CLIENT.NOT_FOUND_URL} element={<NotFound />} />
     </Route>

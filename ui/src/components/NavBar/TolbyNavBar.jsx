@@ -21,6 +21,7 @@ import {
   Grid,
   FormControl,
   InputAdornment,
+  Chip,
 } from '@mui/material'
 import {
   Search,
@@ -34,6 +35,9 @@ import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined'
+import { MdAdminPanelSettings } from 'react-icons/md'
+import { FaUsers } from 'react-icons/fa'
+import { BiStore } from 'react-icons/bi'
 import CustomAvatar from '../CustomAvatar.jsx'
 import { CLIENT } from '../../constants.js'
 
@@ -64,11 +68,6 @@ const settings = [
     id: 1,
     label: 'Account',
     link: CLIENT.ACCOUNT_URL,
-  },
-  {
-    id: 2,
-    label: 'Orders',
-    link: CLIENT.ORDERS_URL,
   },
   {
     id: 3,
@@ -450,6 +449,61 @@ const TolbyNavBar = () => {
                     </Typography>
                   </MenuItem>
                   <Divider />
+                  {userInfo && userInfo.response.isAdmin && (
+                    <>
+                      <MenuItem onClick={handleCloseUserMenu}>
+                        <Chip
+                          label={
+                            <Link to={CLIENT.ADMIN_ORDERS_URL}>
+                              <Typography textAlign="right">
+                                <MdAdminPanelSettings /> &nbsp; Orders
+                              </Typography>
+                            </Link>
+                          }
+                          color="success"
+                          textAlign="right"
+                          variant="outlined"
+                          size="small"
+                        ></Chip>
+                      </MenuItem>
+                      <MenuItem onClick={handleCloseUserMenu}>
+                        <Chip
+                          label={
+                            <Link to={CLIENT.USERS_URL}>
+                              <Typography textAlign="right">
+                                <FaUsers />
+                                &nbsp; Users
+                              </Typography>
+                            </Link>
+                          }
+                          color="info"
+                          size="small"
+                          textAlign="right"
+                          variant="outlined"
+                          setExpanded={true}
+                        ></Chip>
+                      </MenuItem>
+                      <MenuItem onClick={handleCloseUserMenu}>
+                        <Chip
+                          label={
+                            <Link to={CLIENT.PRODUCTS_URL}>
+                              <Typography textAlign="right">
+                                <BiStore />
+                                &nbsp; Products
+                              </Typography>
+                            </Link>
+                          }
+                          color="warning"
+                          size="small"
+                          textAlign="right"
+                          variant="outlined"
+                          setExpanded={true}
+                        ></Chip>
+                      </MenuItem>
+                      <Divider />
+                    </>
+                  )}
+
                   {settings.map((setting) => (
                     <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
                       <Link to={setting.link}>
