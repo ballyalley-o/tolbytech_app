@@ -21,6 +21,7 @@ import {
 } from '@mui/material'
 import { CardBase } from '../../themes/styles/default-styled.js'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
+import { FaCcPaypal } from 'react-icons/fa'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import CheckoutSteps from '../../components/CheckoutSteps'
@@ -41,7 +42,7 @@ const OrderScreen = () => {
   const dispatch = useDispatch()
 
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation()
-  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer()
+  const [{ isPending, isPaid }, paypalDispatch] = usePayPalScriptReducer()
   const {
     data: paypal,
     isLoading: loadingPayPal,
@@ -84,6 +85,7 @@ const OrderScreen = () => {
       }
     })
   }
+
   // FOR TESTING ONLY
   // async function onApproveTest() {
   //   await payOrder({ orderId, details: { payer: {} } })
@@ -249,10 +251,12 @@ const OrderScreen = () => {
                       </Typography>
                       <ListItem>
                         <Typography variant="body1" fontWeight="bold">
-                          Method:
+                          Method:&nbsp;
                         </Typography>
                         <Typography variant="body1">
-                          {order.response.paymentMethod}
+                          {order.response.paymentMethod === 'PayPal' && (
+                            <FaCcPaypal size={25} />
+                          )}
                         </Typography>
                       </ListItem>
                       <ListItem>
@@ -443,8 +447,20 @@ const OrderScreen = () => {
                                       <Loader />
                                     ) : (
                                       <Grid item md={12}>
-                                        {/* ONLY FOR TESTING */}
-                                        {/* <Button
+                                        <Grid md={12}>
+                                          <PayPalButtons
+                                            createOrder={createOrder}
+                                            onApprove={onApprove}
+                                            onError={onError}
+                                            disabled={isPaid}
+                                          ></PayPalButtons>
+                                        </Grid>
+                                      </Grid>
+                                    )}
+                                  </ListItem>
+                                )}
+                                {/* ONLY FOR TESTING */}
+                                {/* <Button
                                           variant="contained"
                                           fullWidth
                                           onClick={onApproveTest}
@@ -454,17 +470,6 @@ const OrderScreen = () => {
                                         >
                                           Test
                                         </Button> */}
-                                        <Grid md={12}>
-                                          <PayPalButtons
-                                            createOrder={createOrder}
-                                            onApprove={onApprove}
-                                            onError={onError}
-                                          ></PayPalButtons>
-                                        </Grid>
-                                      </Grid>
-                                    )}
-                                  </ListItem>
-                                )}
                                 {/* MARK AS DELIVERED PLACEHOLDER */}
                               </Grid>
                             </Grid>

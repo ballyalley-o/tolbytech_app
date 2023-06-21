@@ -67,7 +67,16 @@ const getUsers = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/users/:id
 // @access  Private/Admin
 const getUser = asyncHandler(async (req, res, next) => {
-  res.send('get user by id')
+  const user = await User.findById(req.params.id).select('-password')
+  if (user) {
+    res.status(200).json({
+      message: 'USER FETCHED',
+      response: user,
+    })
+  } else {
+    res.status(404)
+    throw new Error('USER NOT FOUND')
+  }
 })
 
 // @desc    Update User by ID

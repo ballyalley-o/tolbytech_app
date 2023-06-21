@@ -98,7 +98,7 @@ const AccountScreen = () => {
       </Helmet>
       <Grid container>
         <Typography variant="h1">
-          Hi, {userInfo.response.name !== '' && userInfo.response.name}!
+          Hi, {userInfo?.response?.name !== '' && userInfo?.response?.name}!
         </Typography>
       </Grid>
       <Divider />
@@ -217,7 +217,7 @@ const AccountScreen = () => {
                                 aria-label="toggle password visibility"
                                 edge="end"
                               >
-                                {showPassword ? (
+                                {showConfirmPassword ? (
                                   <Visibility />
                                 ) : (
                                   <VisibilityOff />
@@ -257,7 +257,7 @@ const AccountScreen = () => {
                 {error?.data?.message || error.message}
               </Message>
             ) : (
-              <CollapsibleTable orders={orders} />
+              <CollapsibleTable orders={orders} user={userInfo?.response} />
             )}
           </Grid>
         </Grid>

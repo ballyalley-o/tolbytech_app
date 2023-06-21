@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { AUTH_URL, ACCOUNT_URL } from '../constants'
+import { AUTH_URL, ACCOUNT_URL, USERS_URL } from '../constants'
 import { apiSlice } from './api-slice'
 
 export const usersSlice = apiSlice.injectEndpoints({
@@ -31,6 +31,12 @@ export const usersSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    // get user by id
+    user: builder.query({
+      query: (id) => ({
+        url: USERS_URL + '/' + id,
+      }),
+    }),
   }),
 })
 
@@ -39,4 +45,5 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useAccountMutation,
+  useUserQuery,
 } = usersSlice
