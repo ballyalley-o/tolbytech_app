@@ -16,11 +16,10 @@ import {
 
 import { FaCcPaypal } from 'react-icons/fa'
 import { FcDownload } from 'react-icons/fc'
-
 import Message from '../Message'
 
-const OrderViewAccounts = ({ order, error }) => {
-  const { userInfo } = useSelector((state) => state.auth)
+const OrderViewAccounts = ({ order, error, user }) => {
+  // const { data: orders, isLoading, error: errors } = useGetOrderByIdQuery(id)
 
   return (
     <>
@@ -35,14 +34,14 @@ const OrderViewAccounts = ({ order, error }) => {
                 <Typography variant="caption" fontWeight="bold">
                   Name:&nbsp;
                 </Typography>
-                <Typography variant="caption">{order.user.name}</Typography>
+                <Typography variant="caption">{user.name}</Typography>
               </ListItem>
               <ListItem>
                 <Typography variant="caption" fontWeight="bold">
                   Email:&nbsp;
                 </Typography>
                 <Typography variant="caption">
-                  <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
+                  <a href={`mailto:${user.email}`}>{user.email}</a>
                 </Typography>
               </ListItem>
               <ListItem>
@@ -287,6 +286,7 @@ const OrderViewAccounts = ({ order, error }) => {
 OrderViewAccounts.propTypes = {
   order: PropTypes.object,
   error: PropTypes.object,
+  user: PropTypes.object,
 }
 
 export default OrderViewAccounts

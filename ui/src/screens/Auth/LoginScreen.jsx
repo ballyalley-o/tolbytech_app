@@ -158,7 +158,7 @@ const LoginScreen = () => {
                           label="Tolby ID"
                           name="email"
                           value={email}
-                          size="medium"
+                          size="small"
                           onChange={(e) => setEmail(e.target.value)}
                         />
                       </FormControl>
@@ -191,6 +191,7 @@ const LoginScreen = () => {
                           name="password"
                           type={showPassword ? 'text' : 'password'}
                           value={password}
+                          size="small"
                           onChange={(e) => setPassword(e.target.value)}
                         />
                       </FormControl>
