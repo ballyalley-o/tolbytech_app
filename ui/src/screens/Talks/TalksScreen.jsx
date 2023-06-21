@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Typography, Grid } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import Streamgraph from '../../components/graphs/Steamgraph'
 import Message from '../../components/Message'
 
 const LinkBase = styled(Link)(({ theme }) => ({
@@ -48,7 +49,15 @@ const TalksScreen = () => {
               </Message>
             ) : (
               <>
-                <h1>News here</h1>
+                <Streamgraph
+                  width={1000}
+                  height={200}
+                  data={[
+                    { date: '2011-10-01', value: 63.4 },
+                    { date: '2011-10-02', value: 58.0 },
+                    { date: '2011-10-03', value: 53.3 },
+                  ]}
+                />
               </>
             )}
           </Grid>
