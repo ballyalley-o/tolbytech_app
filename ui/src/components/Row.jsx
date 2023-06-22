@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   TableRow,
@@ -18,6 +19,7 @@ import {
 import { FcHighPriority } from 'react-icons/fc'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import { CLIENT } from '../constants.js'
 
 export default function Row(props) {
   const { row, user, onClick, content, customer } = props
@@ -48,7 +50,9 @@ export default function Row(props) {
               </Typography>
             </TableHeadCellBase>
             <TableHeadCellBase>
-              <Typography variant="body1">{row._id}</Typography>
+              <Link to={`/orders/${row._id}`} target="_blank">
+                <Typography variant="body1">{row._id}</Typography>
+              </Link>
             </TableHeadCellBase>
             <TableHeadCellBase align="center">
               NZ$ {row.totalPrice}

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
-import { Form, Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLogoutMutation } from '../../slices/user-slice.js'
 import { logout } from '../../slices/auth-slice.js'

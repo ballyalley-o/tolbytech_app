@@ -8,6 +8,7 @@ import {
   useGetOrderDetailsQuery,
   usePayOrderMutation,
   useGetPayPalClientIdQuery,
+  useDeliverOrderMutation,
 } from '../../slices/order-slice'
 import {
   Grid,
@@ -22,6 +23,7 @@ import {
 import { CardBase } from '../../themes/styles/default-styled.js'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { FaCcPaypal } from 'react-icons/fa'
+import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import CheckoutSteps from '../../components/CheckoutSteps'
@@ -38,10 +40,9 @@ const OrderScreen = () => {
     error,
   } = useGetOrderDetailsQuery(orderId)
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation()
+  const [deliverOrder, { isLoading: loadingDeliver }] =
+    useDeliverOrderMutation()
   const [{ isPending, isPaid }, paypalDispatch] = usePayPalScriptReducer()
   const {
     data: paypal,
@@ -86,12 +87,17 @@ const OrderScreen = () => {
     })
   }
 
-  // FOR TESTING ONLY
-  // async function onApproveTest() {
-  //   await payOrder({ orderId, details: { payer: {} } })
-  //   refetch()
-  //   setSnackOpen('Payment successful', 'success')
-  // }
+  const handleDelivered = async () => {
+    try {
+      await deliverOrder(orderId)
+      refetch()
+      setSnackOpen('ORDER DELIVERED', 'success', 'success')
+      handleHideDuration(2000)
+    } catch (error) {
+      setSnackOpen(error?.data?.message || error?.message)
+      handleHideDuration(2000)
+    }
+  }
 
   function onError(error) {
     setSnackOpen(
@@ -122,6 +128,13 @@ const OrderScreen = () => {
       setSnackOpen(null)
     }, duration)
   }
+
+  // FOR TESTING ONLY
+  // async function onApproveTest() {
+  //   await payOrder({ orderId, details: { payer: {} } })
+  //   refetch()
+  //   setSnackOpen('Payment successful', 'success')
+  // }
 
   return (
     <>
@@ -216,10 +229,10 @@ const OrderScreen = () => {
                           Address:&nbsp;
                         </Typography>
                         <Typography variant="body1">
-                          {order.response.shippingAddress.address},
-                          {order.response.shippingAddress.city},
-                          {order.response.shippingAddress.postalCode},
-                          {order.response.shippingAddress.country}
+                          {order.response.shippingAddress?.address},
+                          {order.response.shippingAddress?.city},
+                          {order.response.shippingAddress?.postalCode},
+                          {order.response.shippingAddress?.country}
                         </Typography>
                       </ListItem>
                       <ListItem>
@@ -470,7 +483,33 @@ const OrderScreen = () => {
                                         >
                                           Test
                                         </Button> */}
-                                {/* MARK AS DELIVERED PLACEHOLDER */}
+                                {loadingDeliver && <Loader />}
+                                {userInfo &&
+                                  userInfo?.response?.isAdmin &&
+                                  order.response.isPaid &&
+                                  !order.isDelivered && (
+                                    <Grid item>
+                                      <ListItem>
+                                        <Button
+                                          variant="outlined"
+                                          color="info"
+                                          fullWidth
+                                          onClick={handleDelivered}
+                                          disabled={order.response.isDelivered}
+                                          sx={{
+                                            mb: '10px',
+                                            fontWeight: 'bold',
+                                          }}
+                                        >
+                                          <LocalShippingIcon />
+                                          &nbsp;
+                                          {order.response.isDelivered
+                                            ? 'DELIVERED'
+                                            : 'UPDATE TO DELIVERED'}
+                                        </Button>
+                                      </ListItem>
+                                    </Grid>
+                                  )}
                               </Grid>
                             </Grid>
                           </Grid>

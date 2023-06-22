@@ -107,12 +107,16 @@ const updateOrderToDelivered = asyncHandler(async (req, res, next) => {
     order.isDelivered = true
     order.deliveredAt = Date.now()
 
-    const UpdateOrder = await order.save()
+    const deliveredOrder = await order.save()
 
     res
       .status(StatusCodes.OK)
       .send(
-        defaultResponse(StatusCodes.OK, 'UPDATE STATUS: DELIVERED', UpdateOrder)
+        defaultResponse(
+          StatusCodes.OK,
+          'UPDATE STATUS: DELIVERED',
+          deliveredOrder
+        )
       )
   } else {
     res

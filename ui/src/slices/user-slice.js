@@ -31,7 +31,6 @@ export const usersSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    // get user by id
     user: builder.query({
       query: (id) => ({
         url: USERS_URL + '/' + id,
