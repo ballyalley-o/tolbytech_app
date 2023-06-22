@@ -469,7 +469,7 @@ const TolbyNavBar = () => {
                       <MenuItem onClick={handleCloseUserMenu}>
                         <Chip
                           label={
-                            <Link to={CLIENT.USERS_URL}>
+                            <Link to={CLIENT.ADMIN_USERS_URL}>
                               <Typography textAlign="right">
                                 <FaUsers />
                                 &nbsp; Users
@@ -486,7 +486,7 @@ const TolbyNavBar = () => {
                       <MenuItem onClick={handleCloseUserMenu}>
                         <Chip
                           label={
-                            <Link to={CLIENT.PRODUCTS_URL}>
+                            <Link to={CLIENT.ADMIN_PRODUCTS_URL}>
                               <Typography textAlign="right">
                                 <BiStore />
                                 &nbsp; Products

@@ -42,11 +42,14 @@
 
 ## Pages
 
-- [x] **Home Page**
-- [x] **Tech Page**
-- [ ] **Blog Page**
-- [x] **Login/Signup Page**
-- [x] **Product Details Page**
+- [x] **Home**
+- [x] **Tech**
+- [ ] **Talk**
+- [ ] **Kicks**
+- [x] **Login/Signup**
+- [x] **Product Details**
+- [x] **Accounts**
+- [x] **Bag**
 
 <hr>
 
@@ -63,7 +66,7 @@ client
 - [x] **search bar**
 - [x] **cart**
 - [ ] **wishlist**
-- [x] **checkout page**
+- [x] **checkout**
 - [x] **payment gateway**
 - [x] **paypal-integration**
 - [ ] **print-receipt**
@@ -72,6 +75,7 @@ client
 - [ ] **blog**
 - [x] **about**
 - [x] **footer**
+- [ ] **visx**
 
 
 - [x] **redux-boilerplate**

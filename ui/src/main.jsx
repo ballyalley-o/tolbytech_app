@@ -67,6 +67,8 @@ const router = createBrowserRouter(
       </Route>
       <Route path="" element={<AdminRoute />}>
         <Route path={CLIENT.ADMIN_ORDERS_URL} element={<AllOrdersScreen />} />
+        <Route path={CLIENT.ADMIN_USERS_URL} element={<AllOrdersScreen />} />
+        <Route path={CLIENT.ADMIN_PRODUCTS_URL} element={<AllOrdersScreen />} />
       </Route>
       <Route path={CLIENT.NOT_FOUND_URL} element={<NotFound />} />
     </Route>

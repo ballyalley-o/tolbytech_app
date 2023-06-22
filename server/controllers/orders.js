@@ -109,7 +109,10 @@ const updateOrderToDelivered = asyncHandler(async (req, res, next) => {
 // @route   GET /api/orders
 // @access  Private/Admin
 const getAllOrders = asyncHandler(async (req, res, next) => {
-  res.send('get all orders')
+  const orders = await Order.find({}).populate('user', 'id name')
+  res
+    .status(StatusCodes.OK)
+    .send(defaultResponse(StatusCodes.OK, 'ALL ORDERS FETCHED', orders))
 })
 
 const ordersController = {

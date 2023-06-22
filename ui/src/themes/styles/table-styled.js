@@ -49,10 +49,10 @@ export const TableCellBaseHistory = styled(TableCell)(({ theme }) => ({
   color: theme.palette.primary.light,
 }))
 
-export const TableRowHeaderBase = styled(TableRow)(({ theme }) => ({
-  backgroundColor: theme.palette.pink.main,
+export const TableRowHeaderBase = styled(TableRow)(({ theme, color }) => ({
+  backgroundColor: color,
   padding: '2rem',
-  color: theme.palette.primary.lighter,
+  color: theme.palette.primary.light,
   fontWeight: 'bold',
 }))
 
@@ -94,6 +94,8 @@ export const TableHeadCellBase = styled(TableCell)(({ theme }) => ({
 }))
 
 export const TableCellBase = styled(TableCell)(({ theme }) => ({
+  color: theme.palette.primary.light,
+  fontWeight: 'bold',
   fontSize: '1rem',
   backgroundColor: 'transparent',
 }))
