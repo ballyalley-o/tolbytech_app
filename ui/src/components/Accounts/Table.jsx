@@ -1,40 +1,18 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
-import {
-  Box,
-  IconButton,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  Typography,
-  Paper,
-  Badge,
-  Grid,
-} from '@mui/material'
+import { Box, TableBody, Typography, Paper, Grid } from '@mui/material'
 import {
   TableContainerBase,
   TableRowHeader,
   TableBase,
   TableHeadBase,
-  TableHeadCellBase,
   TableCellBase,
-  CollapseBase,
 } from '../../themes/styles/table-styled.js'
-import {
-  useGetMyOrdersQuery,
-  useGetOrderDetailsQuery,
-} from '../../slices/order-slice.js'
+import { useGetMyOrdersQuery } from '../../slices/order-slice.js'
 import Row from '../Row.jsx'
-
-import { useUserQuery } from '../../slices/user-slice.js'
 import OrderViewAccounts from './OrderViewAccounts.jsx'
-import { FcHighPriority } from 'react-icons/fc'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
 export default function CollapsibleTable({ orders, user }) {
   orders?.response?.map((order) => ({
