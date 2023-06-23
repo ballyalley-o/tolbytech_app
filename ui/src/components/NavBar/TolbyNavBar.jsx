@@ -35,11 +35,11 @@ import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined'
+import { CLIENT } from '../../constants.js'
 import { MdAdminPanelSettings } from 'react-icons/md'
 import { FaUsers } from 'react-icons/fa'
 import { BiStore } from 'react-icons/bi'
 import CustomAvatar from '../CustomAvatar.jsx'
-import { CLIENT } from '../../constants.js'
 
 const pages = [
   {

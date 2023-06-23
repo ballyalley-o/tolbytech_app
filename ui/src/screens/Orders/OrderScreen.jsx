@@ -472,17 +472,7 @@ const OrderScreen = () => {
                                     )}
                                   </ListItem>
                                 )}
-                                {/* ONLY FOR TESTING */}
-                                {/* <Button
-                                          variant="contained"
-                                          fullWidth
-                                          onClick={onApproveTest}
-                                          sx={{
-                                            mb: '10px',
-                                          }}
-                                        >
-                                          Test
-                                        </Button> */}
+
                                 {loadingDeliver && <Loader />}
                                 {userInfo &&
                                   userInfo?.response?.isAdmin &&
