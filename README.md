@@ -3,7 +3,7 @@
 
 <div align="center" style='display:inline-flex'>
 
-<img src="https://i.ibb.co/pjGRsF0/Screenshot-2023-06-24-at-12-15-10-AM.png" width="800" height="150">
+<img src="https://i.ibb.co/kHt2WWW/tolbytech-logo.png" width="800" height="150">
 <br/>
 
 
