@@ -77,12 +77,12 @@ export default function Row(props) {
           <TableRow>
             <TableCellBase
               style={{ paddingBottom: 0, paddingTop: 0 }}
-              colSpan={6}
+              colSpan={8}
             >
               <CollapseBase in={open} timeout="auto" unmountOnExit>
                 <Box sx={{ margin: 1 }}>
                   <Table size="small" aria-label="purchases">
-                    <TableHeadCellBase component="th" scope="row">
+                    <TableHeadCellBase component="th" scope="column">
                       <TableRow>
                         <TableCell>{content}</TableCell>
                       </TableRow>

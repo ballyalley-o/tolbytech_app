@@ -23,6 +23,7 @@ import TalksScreen from './screens/Talks/TalksScreen.jsx'
 import KickScreen from './screens/Kicks/KickScreen.jsx'
 // @products
 import ProductDetailScreen from './screens/Products/ProductDetailScreen.jsx'
+import AllProductsScreen from './screens/Products/admin/AllProductsScreen.jsx'
 // @bag
 import BagScreen from './screens/Bag/BagScreen.jsx'
 import ShippingScreen from './screens/Bag/ShippingScreen.jsx'
@@ -68,7 +69,10 @@ const router = createBrowserRouter(
       <Route path="" element={<AdminRoute />}>
         <Route path={CLIENT.ADMIN_ORDERS_URL} element={<AllOrdersScreen />} />
         <Route path={CLIENT.ADMIN_USERS_URL} element={<AllOrdersScreen />} />
-        <Route path={CLIENT.ADMIN_PRODUCTS_URL} element={<AllOrdersScreen />} />
+        <Route
+          path={CLIENT.ADMIN_PRODUCTS_URL}
+          element={<AllProductsScreen />}
+        />
       </Route>
       <Route path={CLIENT.NOT_FOUND_URL} element={<NotFound />} />
     </Route>

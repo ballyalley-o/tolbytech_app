@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import {
   useGetMyOrdersQuery,
   useGetOrdersQuery,
@@ -31,6 +32,9 @@ const AllOrdersScreen = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Admin | Orders</title>
+      </Helmet>
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -60,6 +64,7 @@ const AllOrdersScreen = () => {
                       order={order}
                       error={error}
                       user={user.user}
+                      adminOrder
                     />
                   }
                 />
