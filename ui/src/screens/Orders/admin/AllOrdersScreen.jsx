@@ -6,7 +6,7 @@ import {
   useGetMyOrdersQuery,
   useGetOrdersQuery,
 } from '../../../slices/order-slice'
-import { Typography, TableBody } from '@mui/material'
+import { Grid, Typography, TableBody } from '@mui/material'
 import {
   TableBase,
   TableHeadBase,
@@ -40,38 +40,43 @@ const AllOrdersScreen = () => {
       ) : error ? (
         <Message variant="danger"> {error?.message}</Message>
       ) : (
-        <TableContainerBase>
-          <TableBase>
-            <TableHeadBase>
-              <TableRowHeaderBase color={theme.palette.primary.main}>
-                <TableCellBase align="center"></TableCellBase>
-                <TableCellBase align="left">CUSTOMER</TableCellBase>
-                <TableCellBase align="left">DATE</TableCellBase>
-                <TableCellBase align="center">ORDER NO</TableCellBase>
-                <TableCellBase align="center">AMOUNT</TableCellBase>
-                <TableCellBase align="center">PAID</TableCellBase>
-                <TableCellBase align="center">DELIVERED</TableCellBase>
-              </TableRowHeaderBase>
-            </TableHeadBase>
-            <TableBody>
-              {orders.response.map((order) => (
-                <Row
-                  key={order._id}
-                  row={order}
-                  customer
-                  content={
-                    <OrderViewAccounts
-                      order={order}
-                      error={error}
-                      user={user.user}
-                      adminOrder
-                    />
-                  }
-                />
-              ))}
-            </TableBody>
-          </TableBase>
-        </TableContainerBase>
+        <>
+          <Grid item md={6}>
+            <Typography variant="h1">Orders</Typography>
+          </Grid>
+          <TableContainerBase>
+            <TableBase>
+              <TableHeadBase>
+                <TableRowHeaderBase color={theme.palette.primary.main}>
+                  <TableCellBase align="center"></TableCellBase>
+                  <TableCellBase align="left">CUSTOMER</TableCellBase>
+                  <TableCellBase align="left">DATE</TableCellBase>
+                  <TableCellBase align="center">ORDER NO</TableCellBase>
+                  <TableCellBase align="center">AMOUNT</TableCellBase>
+                  <TableCellBase align="center">PAID</TableCellBase>
+                  <TableCellBase align="center">DELIVERED</TableCellBase>
+                </TableRowHeaderBase>
+              </TableHeadBase>
+              <TableBody>
+                {orders.response.map((order) => (
+                  <Row
+                    key={order._id}
+                    row={order}
+                    customer
+                    content={
+                      <OrderViewAccounts
+                        order={order}
+                        error={error}
+                        user={user.user}
+                        adminOrder
+                      />
+                    }
+                  />
+                ))}
+              </TableBody>
+            </TableBase>
+          </TableContainerBase>
+        </>
       )}
     </>
   )

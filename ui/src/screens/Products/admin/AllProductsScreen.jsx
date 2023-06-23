@@ -5,6 +5,11 @@ import { Helmet } from 'react-helmet-async'
 import { useSelector } from 'react-redux'
 import { useGetProductsQuery } from '../../../slices/products-slice.js'
 import { Typography, Grid, Button, Table, TableRow } from '@mui/material'
+import {
+  TableContainerBase,
+  TableRowHeader,
+} from '../../../themes/styles/table-styled'
+import { ButtonBase } from '../../../themes/styles/default-styled'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import Message from '../../../components/Message'
@@ -22,7 +27,12 @@ const AllProductsScreen = () => {
       <Grid container direction="row">
         <Grid item md={12}>
           <Grid container direction="column">
-            <Typography>Hey</Typography>
+            <Grid item md={6}>
+              <Typography variant="h1">Products</Typography>
+            </Grid>
+            <Grid item md={6}>
+              <ButtonBase variant="h1">Products</ButtonBase>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
