@@ -7,6 +7,7 @@ import {
   Switch,
   TextField,
   OutlinedInput,
+  Dialog,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
@@ -41,16 +42,6 @@ export const ButtonBase = styled(Button)(({ theme }) => ({
     color: '#000',
   },
 }))
-
-// export const ButtonBase = styled(Button)(({ theme }) => ({
-//   backgroundColor: 'pink.main',
-//   color: '#FFF',
-//   fontWeight: 600,
-//   '&:hover': {
-//     backgroundColor: 'pink.dark',
-//     color: '#000',
-//   },
-// }))
 
 export const LinkBase = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -131,6 +122,38 @@ export const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }))
 
+export const DialogBase = styled(Dialog)(({ theme }) => ({
+  '& .MuiBackdrop-root': {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backdropFilter: 'blur(2px)',
+  },
+  '& .MuiDrawer-paper': {
+    backgroundColor: '#FFF',
+    backdropFilter: 'blur(5px)',
+  },
+  '& .MuiDrawer-paperAnchorDockedTop': {
+    marginTop: '0px',
+    backgroundColor: '#FFF',
+  },
+  WebkitBackdropFilter: 'blur(5px)',
+  backdropFilter: 'blur(5px)',
+  backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  boxShadow: '0 8px 32px 0 rgba(255, 255, 255, 0.97)',
+  scrollBehavior: 'smooth',
+  animation: 'fadeInUp .5s ease-in-out',
+  transition: 'all .5s ease-in-out',
+  '@keyframes fadeInUp': {
+    '0%': {
+      opacity: 0,
+      transform: 'translateY(20px)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translateY(0)',
+    },
+  },
+}))
+
 // export const InputBase = styled(TextField)(({ theme }) => ({
 //   root: {
 //     '& .MuiInputBase-root': {
@@ -155,5 +178,15 @@ export const AntSwitch = styled(Switch)(({ theme }) => ({
 //       fontWeight: 400,
 //       fontSize: '1em',
 //     },
+//   },
+// }))
+
+// export const ButtonBase = styled(Button)(({ theme }) => ({
+//   backgroundColor: 'pink.main',
+//   color: '#FFF',
+//   fontWeight: 600,
+//   '&:hover': {
+//     backgroundColor: 'pink.dark',
+//     color: '#000',
 //   },
 // }))
