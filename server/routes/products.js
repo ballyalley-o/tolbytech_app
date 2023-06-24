@@ -4,11 +4,16 @@ import { protect, admin } from '../middleware/auth-middleware.js'
 
 const router = express.Router()
 
-router.get('/', productsController.getProducts)
-router.get('/:id', productsController.getProduct)
-router.post('/', protect, admin, productsController.createProduct)
-// router.put('/:id', productsController.updateProduct)
-// router.get('/:id', productsController.deleteProduct)
+router
+  .route('/')
+  .get(productsController.getProducts)
+  .post(protect, admin, productsController.createProduct)
+
+router
+  .route('/:id')
+  .get(productsController.getProduct)
+  .put(protect, admin, productsController.updateProduct)
+//   .delete(protect, admin, productsController.deleteProduct)
 
 const productRouter = router
 export default productRouter

@@ -53,11 +53,52 @@ const createProduct = asyncHandler(async (req, res, next) => {
     )
 })
 
+// @desc    UPDATE all products
+// @route   PUT /api/products/:id
+// @access  Private/Admin
+const updateProduct = asyncHandler(async (req, res, next) => {
+  const {
+    name,
+    price,
+    user,
+    image,
+    brand,
+    category,
+    countInStock,
+    numReviews,
+    description,
+    model,
+  } = req.body
+
+  const product = await Product.findById(req.params.id)
+
+  if (product) {
+    product.name = name
+    product.price = price
+    product.user = user
+    product.image = image
+    product.brand = brand
+    product.category = category
+    product.countInStock = countInStock
+    product.numReviews = numReviews
+    product.description = description
+    product.model = model
+
+    const updatedProduct = await product.save()
+    res
+      .status(StatusCodes.OK)
+      .send(defaultResponse(StatusCodes.OK, 'PRODUCTS UPDATED', updatedProduct))
+  } else {
+    res.status(StatusCodes.NOT_FOUND)
+    throw new Error(getReasonPhrase(StatusCodes.NOT_FOUND))
+  }
+})
+
 const productsController = {
   getProducts,
   getProduct,
   createProduct,
-  //   updateProduct,
+  updateProduct,
   //   deleteProduct,
 }
 
