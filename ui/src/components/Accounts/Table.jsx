@@ -58,7 +58,7 @@ export default function CollapsibleTable({ orders, user }) {
       </TableBase>
     </TableContainerBase>
   ) : (
-    <Grid container textAlign="center" direction="column">
+    <Grid container direction="column">
       <Grid item md={12}></Grid>
       <Grid item md={12}>
         <Box>

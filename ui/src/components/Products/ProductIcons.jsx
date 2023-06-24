@@ -4,13 +4,12 @@ import PropTypes from 'prop-types'
 import ConfirmDialog from '../ConfirmDialog'
 import { IconButton, Button } from '@mui/material'
 import { ButtonBase } from '../../themes/styles/default-styled'
-import { useTheme } from '@mui/material/styles'
+import theme from '../../themes/theme'
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 function ProductIcons({ row, handleEdit, handleDelete: handleRemove }) {
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false)
-  const theme = useTheme()
 
   const handleCloseConfirm = () => {
     setOpenConfirmDialog(false)
@@ -50,10 +49,12 @@ function ProductIcons({ row, handleEdit, handleDelete: handleRemove }) {
         content={`Are you sure you want to delete ${row.name} ?`}
         action={
           <ButtonBase
-            color="error"
             onClick={() => {
               handleRemove(row._id)
               handleCloseConfirm()
+            }}
+            sx={{
+              backgroundColor: theme.palette.error.main,
             }}
           >
             Delete
