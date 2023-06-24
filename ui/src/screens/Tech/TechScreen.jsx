@@ -42,7 +42,7 @@ const TechScreen = () => {
             </Grid>
             <Grid item lg={12}>
               <Grid container justifyContent="space-evenly">
-                {products.map((product) => {
+                {products?.response.map((product) => {
                   return (
                     <Grid
                       item
