@@ -28,10 +28,35 @@ const getProduct = asyncHandler(async (req, res, next) => {
   }
 })
 
+// @desc    create a product
+// @route   POST /api/products
+// @access  Private/Admin
+const createProduct = asyncHandler(async (req, res, next) => {
+  const product = new Product({
+    name: 'Sample Name',
+    price: 0,
+    user: req.user._id,
+    image: '/images/tolby.jpg',
+    brand: 'Tolby brand',
+    category: 'Tolby category',
+    countInStock: 0,
+    numReviews: 0,
+    description: 'description',
+    model: 'model',
+  })
+
+  const createdProduct = await product.save()
+  res
+    .status(StatusCodes.CREATED)
+    .send(
+      defaultResponse(StatusCodes.CREATED, 'PRODUCTS CREATED', createdProduct)
+    )
+})
+
 const productsController = {
   getProducts,
   getProduct,
-  //   createProduct,
+  createProduct,
   //   updateProduct,
   //   deleteProduct,
 }
