@@ -18,7 +18,7 @@ import {
   Button,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import FormContainer from '../../components/FormCotainer'
+import FormContainer from '../../components/FormContainer'
 import CheckoutSteps from '../../components/CheckoutSteps'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import { CLIENT } from '../../constants'

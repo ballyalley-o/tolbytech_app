@@ -25,6 +25,7 @@ const ROOT_PRODUCTS = '/products'
 const ROOT_TECH = '/tech'
 const ROOT_TALKS = '/talks'
 const ROOT_KICKS = '/kicks'
+const ROOT_POLICIES = '/policies'
 
 /**
  * @constant CONFIG - global envs
@@ -36,6 +37,9 @@ export const CONFIG = {
   NODE_ENV: import.meta.env.VITE_NODE_ENV,
   DEV_TOOLS: import.meta.env.VITE_DEV_TOOLS,
   CLIENT_URL_DEV: import.meta.env.VITE_CLIENT_URL_DEV,
+
+  // file name
+  FILE_: import.meta.env.VITE_TOLBYTECH_IMG,
 
   // Server routes
   PRODUCTS_URL: '/api/v1/products',
@@ -51,6 +55,7 @@ export const CONFIG = {
 
   // Product sublinks
   CLIENT_PRODUCT_URL: '/:id',
+  CLIENT_PRODUCTS_URL: '/:id/edit',
 
   // Auth sublinks
   CLIENT_REGISTER_URL: '/register',
@@ -69,6 +74,16 @@ export const CONFIG = {
   // Order sublinks
   CLIENT_ORDER_URL: '/:id',
   CLIENT_HISTORY_URL: '/history',
+
+  // Admin sublinks
+  CLIENT_ADMIN_USERS_URL: '/users',
+  CLIENT_ADMIN_USER_EDIT_URL: '/users/:id/edit',
+  CLIENT_ADMIN_PRODUCTS_URL: '/products',
+  CLIENT_ADMIN_PRODUCT_EDIT_URL: '/products/:id/edit',
+
+  // Rules sublinks
+  CLIENT_REGISTER_TERMS: '/terms',
+  CLIENT_REGISTER_PRIVACY: '/privacy',
 
   CLIENT_NOT_FOUND_URL: '*',
 }
@@ -111,6 +126,7 @@ export const PATH_ADMIN = {
   ORDERS: path(ROOT_ADMIN, ROOT_ORDERS),
   USERS: path(ROOT_ADMIN, ROOT_USERS),
   PRODUCTS: path(ROOT_ADMIN, ROOT_PRODUCTS),
+  EDIT: path(ROOT_ADMIN, CONFIG.CLIENT_ADMIN_PRODUCT_EDIT_URL),
 }
 
 export const PATH_TECH = {
@@ -131,4 +147,10 @@ export const PATH_ACCOUNT = {
 
 export const PATH_KICKS = {
   ROOT: ROOT_KICKS,
+}
+
+export const PATH_POLICIES = {
+  ROOT: ROOT_POLICIES,
+  TERMS: path(ROOT_POLICIES, CONFIG.CLIENT_REGISTER_TERMS),
+  PRIVACY: path(ROOT_POLICIES, CONFIG.CLIENT_REGISTER_PRIVACY),
 }

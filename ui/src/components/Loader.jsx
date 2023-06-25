@@ -19,10 +19,6 @@ export default function Loader() {
 
   return (
     <Stack spacing={2} direction="row" justifyContent="center">
-      {/* <CircularProgress variant="determinate" value={25} />
-      <CircularProgress variant="determinate" value={50} />
-      <CircularProgress variant="determinate" value={75} />
-      <CircularProgress variant="determinate" value={100} /> */}
       <CircularProgress
         variant="determinate"
         color="inherit"

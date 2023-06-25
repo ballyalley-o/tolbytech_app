@@ -30,14 +30,15 @@ export default function ConfirmDialog({
         open={open}
         onClose={onClose}
         {...other}
-        sx={{}}
+        sx={{ p: 0 }}
       >
-        <DialogTitle sx={{ pb: 2 }}>{title}</DialogTitle>
+        <DialogTitle>{title}</DialogTitle>
         <Divider />
         {content && (
-          <DialogContent sx={{ typography: 'body2' }}>{content}</DialogContent>
+          <DialogContent sx={{ typography: 'body1', p: 2 }}>
+            {content}
+          </DialogContent>
         )}
-
         <DialogActions>
           {action}
           <ButtonBase color="info" onClick={onClose}>

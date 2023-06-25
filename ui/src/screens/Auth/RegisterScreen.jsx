@@ -7,13 +7,9 @@ import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRegisterMutation } from '../../slices/user-slice'
 import { setCredentials } from '../../slices/auth-slice'
-import Loader from '../../components/Loader'
-import SnackAlert from '../../components/SnackAlert'
 import {
   FormControl,
   FormGroup,
-  TextField,
-  Button,
   Grid,
   Typography,
   Box,
@@ -23,25 +19,20 @@ import {
   InputLabel,
 } from '@mui/material'
 import { InputBase, ButtonBase } from '../../themes/styles/default-styled.js'
+import {
+  LinkBase,
+  BoxBase,
+  FormBoxTitle,
+} from '../../themes/styles/auth-styled.js'
+import { styled } from '@mui/material/styles'
+import FormContainer from '../../components/FormContainer'
+import Loader from '../../components/Loader'
+import SnackAlert from '../../components/SnackAlert'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Visibility from '@mui/icons-material/Visibility'
-import { styled } from '@mui/material/styles'
-import FormContainer from '../../components/FormCotainer'
 import RegisterGreeting from '../defaults/RegisterGreeting'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import { CLIENT } from '../../constants'
-
-const LinkBase = styled(Link)(({ theme }) => ({
-  textDecoration: 'none',
-  color: '#000',
-  padding: '.3rem .5rem',
-  '&:hover': {
-    textDecoration: 'none',
-    color: 'pink.main',
-  },
-  backgroundColor: 'pink.main',
-  borderRadius: 4,
-}))
 
 const RegisterScreen = () => {
   const [name, setName] = useState('')
@@ -143,34 +134,16 @@ const RegisterScreen = () => {
           </SnackAlert>
         )}
         <Grid item sm={12} lg={4} gap={2}>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              //   alignItems: 'center',
-              py: '2rem',
-              pb: '4rem',
-              height: 'auto',
-              width: '400px',
-              backgroundColor: '#fff',
-              borderRadius: '1rem',
-            }}
-          >
+          <BoxBase>
             <FormContainer>
-              <Box
-                sx={{
-                  display: 'block',
-                  margin: '1rem 0 2rem 0',
-                  textAlign: 'center',
-                }}
-              >
+              <FormBoxTitle>
                 <Typography variant="h6" fontWeight="bold">
                   Create Your Tolby ID
                 </Typography>
                 <Typography variant="body2">
                   One Tolby ID is all you need to access all Tolby services.
                 </Typography>
-              </Box>
+              </FormBoxTitle>
               <Container>
                 <FormControl component="form" onSubmit={handleSubmit}>
                   <FormGroup>
@@ -304,7 +277,7 @@ const RegisterScreen = () => {
                               By continuing, you agree to Tolby's
                             </Typography>
                             <Typography></Typography>
-                            <LinkBase to="/terms">
+                            <LinkBase href={CLIENT.TERMS}>
                               <Typography variant="caption">
                                 Terms of Service
                               </Typography>
@@ -312,7 +285,7 @@ const RegisterScreen = () => {
 
                             <Typography variant="caption">and </Typography>
 
-                            <LinkBase to="/privacy">
+                            <LinkBase href={CLIENT.PRIVACY}>
                               <Typography variant="caption">
                                 Privacy Policy
                               </Typography>
@@ -335,14 +308,13 @@ const RegisterScreen = () => {
                 textAlign="center"
                 alignContent="center"
               >
-                {' '}
                 <Grid item sx={{ display: 'block' }}>
                   <Typography variant="caption">
                     You already have a Tolby ID?
                   </Typography>
                   &nbsp;
                   <LinkBase
-                    to={redirect ? CLIENT.LOGIN_REDIRECT : CLIENT.LOGIN_URL}
+                    href={redirect ? CLIENT.LOGIN_REDIRECT : CLIENT.LOGIN_URL}
                     variant="caption"
                   >
                     <Typography variant="caption">Sign in</Typography>
@@ -358,7 +330,7 @@ const RegisterScreen = () => {
                 </Grid>
               </Grid>
             </FormContainer>
-          </Box>
+          </BoxBase>
         </Grid>
       </Grid>
     </>

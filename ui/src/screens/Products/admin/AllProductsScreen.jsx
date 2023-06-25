@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { useSelector } from 'react-redux'
-import { useGetProductsQuery } from '../../../slices/products-slice.js'
-import { Typography, Grid, TableBody, Table, TableRow } from '@mui/material'
+import {
+  useGetProductsQuery,
+  useCreateProductMutation,
+} from '../../../slices/products-slice.js'
+import { Typography, Grid, TableBody } from '@mui/material'
 import {
   TableContainerBase,
   TableRowHeaderBase,
@@ -16,21 +19,82 @@ import RowProduct from '../../../components/RowProduct'
 import { ButtonBase } from '../../../themes/styles/default-styled'
 import { useTheme } from '@mui/material/styles'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline'
+import ConfirmDialog from '../../../components/ConfirmDialog.jsx'
 import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
-import ConfirmDialog from '../../../components/ConfirmDialog.jsx'
+import SnackAlert from '../../../components/SnackAlert.jsx'
 
 const AllProductsScreen = () => {
-  const { data: products, isLoading, error } = useGetProductsQuery()
+  const [open, setOpen] = useState(false)
+  const [snackOpen, setSnackOpen] = useState(null)
+  const { data: products, isLoading, error, refetch } = useGetProductsQuery()
+  const [createProduct, { isLoading: loadingCreate }] =
+    useCreateProductMutation()
   const { userInfo } = useSelector((state) => state.auth)
   const theme = useTheme()
+
+  const handleCreateProduct = async () => {
+    try {
+      await createProduct()
+      refetch()
+      setSnackOpen('Product Created', 'success')
+      handleHideDuration(3000)
+      console.log('hey: ', createProduct)
+      setOpen(false)
+    } catch (error) {
+      setSnackOpen(error?.response.message, 'error')
+      handleHideDuration(3000)
+    }
+  }
+
+  const handleConfirm = async () => {
+    setOpen(true)
+  }
+  const handleCancel = async () => {
+    setOpen(false)
+    console.log('hey')
+  }
+
+  const handleHideDuration = (duration) => {
+    setTimeout(() => {
+      setSnackOpen(null)
+    }, duration)
+  }
+
   console.log(products)
   return (
     <>
       <Helmet>
         <title>Admin | Products</title>
       </Helmet>
+      <ConfirmDialog
+        open={open}
+        onClose={handleCancel}
+        title="Confirm Navigate to Product Listing"
+        content="List a product?"
+        action={
+          <ButtonBase
+            onClick={handleCreateProduct}
+            disabled={loadingCreate}
+            variant="h1"
+          >
+            Create
+          </ButtonBase>
+        }
+      />
+      {snackOpen && (
+        <SnackAlert
+          open={snackOpen}
+          onClose={() => setSnackOpen(null)}
+          message={snackOpen}
+          transition="left"
+          horizontal="right"
+          vertical="top"
+          duration={2000}
+        >
+          {snackOpen}
+        </SnackAlert>
+      )}
       <Grid container direction="row">
         <Grid item md={12}>
           <Grid container direction="column">
@@ -47,7 +111,12 @@ const AllProductsScreen = () => {
             </Grid>
             <Grid item md={6} my={2}>
               <Grid container justifyContent="flex-end">
-                <ButtonBase variant="h1">
+                <ButtonBase
+                  variant="h1"
+                  onClick={() => {
+                    handleConfirm()
+                  }}
+                >
                   <AddCircleIcon />
                   &nbsp;Products
                 </ButtonBase>
@@ -56,6 +125,7 @@ const AllProductsScreen = () => {
           </Grid>
         </Grid>
       </Grid>
+      {loadingCreate && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (

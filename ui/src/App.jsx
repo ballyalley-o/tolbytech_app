@@ -8,42 +8,22 @@ import { Typography, Container, Snackbar, Alert } from '@mui/material'
 import TolbyNavBar from './components/NavBar/TolbyNavBar'
 import { ToastContainer } from 'react-toastify'
 import { HelmetProvider } from 'react-helmet-async'
+import theme from './themes/theme'
 import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
   const dispatch = useDispatch()
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#1c252c',
-        light: '#FFF',
-        lighter: '#F4FAFF',
-      },
-      secondary: {
-        main: '#1c252c',
-      },
-      pink: {
-        main: '#FF1288',
-        light: '#D9B6E0',
-        contrastText: '#FFF',
-      },
-      gray: {
-        main: '#B3B5BB',
-      },
-    },
-    minHeight: '80vh',
-  })
 
-  useEffect(() => {
-    const expirationTime = localStorage.getItem('expirationTime')
-    if (expirationTime) {
-      const currentTime = new Date().getTime()
+  // useEffect(() => {
+  //   const expirationTime = localStorage.getItem('expirationTime')
+  //   if (expirationTime) {
+  //     const currentTime = new Date().getTime()
 
-      if (currentTime > expirationTime) {
-        dispatch(logout())
-      }
-    }
-  }, [dispatch])
+  //     if (currentTime > expirationTime) {
+  //       dispatch(logout())
+  //     }
+  //   }
+  // }, [dispatch])
 
   return (
     <>

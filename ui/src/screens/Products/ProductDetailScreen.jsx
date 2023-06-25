@@ -1,30 +1,29 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react'
-import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet-async'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { alpha, styled } from '@mui/material/styles'
 import {
   Grid,
   Typography,
-  CardMedia,
-  CardContent,
   Button,
-  Accordion,
-  Chip,
-  Box,
   FormControl,
   Select,
   InputLabel,
   MenuItem,
 } from '@mui/material'
+import {
+  CardMediaBase,
+  CardContentBase,
+  BoxBase,
+  ChipBase,
+  CartButton,
+  CartTypography,
+} from '../../themes/styles/product-styled'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import Rating from '../../components/Rating'
-import Product from '../../components/Product'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
-import { CONFIG } from '../../config-global'
 import { CLIENT } from '../../constants'
 import { useDispatch } from 'react-redux'
 import { useGetProductDetailsQuery } from '../../slices/products-slice'
@@ -46,69 +45,6 @@ const ProductDetailScreen = () => {
     isLoading,
     error,
   } = useGetProductDetailsQuery(productId)
-
-  const CardMediaBase = styled(CardMedia)(({ theme }) => ({
-    display: 'block',
-    border: '1px solid #C0C0C0',
-    objectFit: 'contain',
-    marginRight: '3rem',
-    marginTop: '2rem',
-  }))
-
-  const CardContentBase = styled(CardContent)(({ theme }) => ({
-    display: 'block',
-    width: '100%',
-    paddingLeft: '1rem',
-    paddingTop: '2rem',
-    paddingRight: '1rem',
-  }))
-
-  const BoxBase = styled(Box)(({ theme }) => ({
-    display: 'block',
-    width: '100%',
-    paddingBottom: '1rem',
-  }))
-
-  const ChipBase = styled(Chip)(({ theme }) => ({
-    color: product.countInStock > 0 ? '#4CAF50' : '#F44336',
-    borderColor: product.countInStock > 0 ? '#4CAF50' : '#F44336',
-    padding: 0,
-  }))
-
-  const CartButton = styled(Button)(({ theme }) => ({
-    color: '#C0C0C0',
-    backgroundColor: product.countInStock > 0 ? '#1c252c' : 'transparent',
-    width: '25%',
-    '&:hover': {
-      backgroundColor: '#1c252c',
-      transitionDelay: '0.4s',
-      easeIn: '0.8s',
-      easeOut: '0.8s',
-    },
-    disabled: {
-      backgroundColor: 'red',
-    },
-  }))
-
-  const CartTypography = styled(Typography)(({ theme }) => ({
-    color: '#C0C0C0',
-    '&:hover': {
-      display: 'none',
-      easeIn: '0.8s',
-      easeOut: '0.8s',
-      AnimationEffect: 'ease-in',
-      scrollBehavior: 'smooth',
-      WebkitTransform: 'translateX(-100%)',
-      MozTransform: 'translateX(-100%)',
-      WebkitBackfaceVisibility: 'hidden',
-      backfaceVisibility: 'hidden',
-      MozBackfaceVisibility: 'hidden',
-      msTransform: 'translateZ(0)',
-      OTransform: 'translateZ(0)',
-      transform: 'translateZ(0)',
-      transitionDelay: '0.2s',
-    },
-  }))
 
   return (
     <>
@@ -166,6 +102,7 @@ const ProductDetailScreen = () => {
                 <CardContentBase>
                   <BoxBase fontSize={1}>
                     <ChipBase
+                      productCountInStock={product.countInStock}
                       label={
                         product.countInStock > 0 ? 'In Stock' : 'Out of Stock'
                       }
@@ -199,6 +136,7 @@ const ProductDetailScreen = () => {
                 <CardContentBase>
                   <BoxBase>
                     <CartButton
+                      productCountInStock={product.countInStock}
                       onClick={handleAddToCart}
                       disabled={product.countInStock === 0}
                     >
