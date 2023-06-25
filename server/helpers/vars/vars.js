@@ -19,7 +19,13 @@ const VARS = {
   HOST: process.env.MONGODB_HOST,
   DBNAME: process.env.MONGODB_DB,
   DB_URI: process.env.MONGODB_URI,
+  // PayPal
   PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID,
+  // File
+  FILE_: 'tolbytechImg',
+  FILETYPES: /jpg|jpeg|png/,
+  FILEOUTPUT: 'uploads/',
+  FILESTATIC: '/uploads',
 }
 
 export default VARS

@@ -1,3 +1,4 @@
+import path from 'path'
 import express from 'express'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
@@ -5,8 +6,8 @@ import cors from 'cors'
 import setHeaders from '../helpers/set-headers.js'
 import connectDB from './db.js'
 import { linkRoutes, payPalRoute, serverRoute } from '../routes/index.js'
+import { fileStatic } from '../middleware/upload-config.js'
 import { notFound, errorHandler } from '../middleware/error-handler.js'
-import { TolbyTechResponse } from '../helpers/response.js'
 import MessageLOG from '../helpers/message-logger.js'
 import VARS from '../helpers/vars/vars.js'
 dotenv.config({
@@ -21,7 +22,6 @@ dotenv.config({
  * @param protect - protect routes
  * @param VARS - environment variables
  * @param MessageLOG - custom message logger
- * @param TolbyTechResponse - custom response for the server
  * @param notFound - 404 error handler
  * @param errorHandler - error handler
  * @param cors - cross origin resource sharing
@@ -29,6 +29,7 @@ dotenv.config({
  * @parem registerRoutes - introduce the connection links to the other routes
  * @param linkRoutes - connect routes from routes/index.js
  * @param connectDB - ignite the connection to the database
+ * @param fileStatic - static file path
  *
  */
 
@@ -41,6 +42,7 @@ export class App {
     this.app.use(setHeaders)
     this.app.use(cors())
     this.registerRoutes()
+    this.app.use(VARS.FILESTATIC, fileStatic)
     this.app.use(notFound)
     this.app.use(errorHandler)
   }

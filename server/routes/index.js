@@ -2,6 +2,7 @@ import productRouter from './products.js'
 import userRouter from './users.js'
 import orderRouter from './orders.js'
 import authRouter from './auth.js'
+import uploadRouter from './upload.js'
 import { TolbyTechResponse } from '../helpers/response.js'
 import VARS from '../helpers/vars/vars.js'
 
@@ -17,6 +18,7 @@ export const linkRoutes = (app, API_ROOT) => {
   app.use(`${rootPath}/users`, userRoutes)
   app.use(`${rootPath}/orders`, orderRoutes)
   app.use(`${rootPath}/auth`, authRoutes)
+  app.use(`${rootPath}/upload`, uploadRouter)
 }
 
 export const payPalRoute = (app, API_ROOT) => {

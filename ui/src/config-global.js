@@ -38,6 +38,9 @@ export const CONFIG = {
   DEV_TOOLS: import.meta.env.VITE_DEV_TOOLS,
   CLIENT_URL_DEV: import.meta.env.VITE_CLIENT_URL_DEV,
 
+  // file name
+  FILE_: import.meta.env.VITE_TOLBYTECH_IMG,
+
   // Server routes
   PRODUCTS_URL: '/api/v1/products',
   PRODUCT_DETAILS_URL: '/api/v1/products',

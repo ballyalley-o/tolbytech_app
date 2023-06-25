@@ -23,6 +23,9 @@ export const BASE_URL =
 export const DEV_TOOLS =
   CONFIG.NODE_ENV === 'development' ? CONFIG.DEV_TOOLS : false
 
+// file name multer
+export const FILE_ = CONFIG.FILE_
+
 // Server ROUTES
 export const SERVER_URL = CONFIG.SERVER_URL
 export const PRODUCTS_URL = CONFIG.PRODUCTS_URL
