@@ -26,7 +26,7 @@ import {
   InputLabel,
 } from '@mui/material'
 import { InputBase } from '../../themes/styles/default-styled.js'
-import FormContainer from '../../components/FormCotainer'
+import FormContainer from '../../components/FormContainer'
 import LoginGreeting from '../defaults/LoginGreeting'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing'

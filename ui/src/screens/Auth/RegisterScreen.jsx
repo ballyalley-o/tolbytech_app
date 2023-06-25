@@ -12,8 +12,6 @@ import SnackAlert from '../../components/SnackAlert'
 import {
   FormControl,
   FormGroup,
-  TextField,
-  Button,
   Grid,
   Typography,
   Box,
@@ -23,25 +21,14 @@ import {
   InputLabel,
 } from '@mui/material'
 import { InputBase, ButtonBase } from '../../themes/styles/default-styled.js'
+import { LinkBase } from '../../themes/styles/auth-styled.js'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Visibility from '@mui/icons-material/Visibility'
 import { styled } from '@mui/material/styles'
-import FormContainer from '../../components/FormCotainer'
+import FormContainer from '../../components/FormContainer'
 import RegisterGreeting from '../defaults/RegisterGreeting'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import { CLIENT } from '../../constants'
-
-const LinkBase = styled(Link)(({ theme }) => ({
-  textDecoration: 'none',
-  color: '#000',
-  padding: '.3rem .5rem',
-  '&:hover': {
-    textDecoration: 'none',
-    color: 'pink.main',
-  },
-  backgroundColor: 'pink.main',
-  borderRadius: 4,
-}))
 
 const RegisterScreen = () => {
   const [name, setName] = useState('')
@@ -304,7 +291,7 @@ const RegisterScreen = () => {
                               By continuing, you agree to Tolby's
                             </Typography>
                             <Typography></Typography>
-                            <LinkBase to="/terms">
+                            <LinkBase href={CLIENT.TERMS}>
                               <Typography variant="caption">
                                 Terms of Service
                               </Typography>
@@ -312,7 +299,7 @@ const RegisterScreen = () => {
 
                             <Typography variant="caption">and </Typography>
 
-                            <LinkBase to="/privacy">
+                            <LinkBase href={CLIENT.PRIVACY}>
                               <Typography variant="caption">
                                 Privacy Policy
                               </Typography>
@@ -342,7 +329,7 @@ const RegisterScreen = () => {
                   </Typography>
                   &nbsp;
                   <LinkBase
-                    to={redirect ? CLIENT.LOGIN_REDIRECT : CLIENT.LOGIN_URL}
+                    href={redirect ? CLIENT.LOGIN_REDIRECT : CLIENT.LOGIN_URL}
                     variant="caption"
                   >
                     <Typography variant="caption">Sign in</Typography>
