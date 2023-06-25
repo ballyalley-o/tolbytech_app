@@ -25,8 +25,8 @@ import SnackAlert from '../../../components/SnackAlert'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 
 const EditProductsScreen = () => {
-  const [snackOpen, setSnackOpen] = useState(null)
   const { id: productId } = useParams()
+  const [snackOpen, setSnackOpen] = useState(null)
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
   const [image, setImage] = useState('')
@@ -77,10 +77,11 @@ const EditProductsScreen = () => {
 
     const result = await updateProduct(updatedProduct)
     if (result.error) {
-      setSnackOpen(result.error.message)
+      setSnackOpen(result?.error?.data.message, 'error')
       handleHideDuration(3000)
     } else {
       setSnackOpen('Product Updated', 'success')
+      refetch()
       handleHideDuration(3000)
       navigate(CLIENT.ADMIN_PRODUCTS_URL)
     }
@@ -132,7 +133,7 @@ const EditProductsScreen = () => {
           <Message variant="danger">{error?.message}</Message>
         ) : (
           <Grid item md={12}>
-            <FormControl component="form" onSubmit={() => console.log('hello')}>
+            <FormControl component="form" onSubmit={handleSubmit}>
               <FormGroup>
                 <Grid container direction="row" justifyContent="center" gap={4}>
                   <Grid item lg={5}>

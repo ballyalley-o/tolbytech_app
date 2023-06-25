@@ -63,11 +63,11 @@ const updateProduct = asyncHandler(async (req, res, next) => {
     user,
     image,
     brand,
+    model,
     category,
     countInStock,
     numReviews,
     description,
-    model,
   } = req.body
 
   const product = await Product.findById(req.params.id)
@@ -79,12 +79,13 @@ const updateProduct = asyncHandler(async (req, res, next) => {
     product.image = image
     product.brand = brand
     product.category = category
+    product.model = model
     product.countInStock = countInStock
     product.numReviews = numReviews
     product.description = description
-    product.model = model
 
     const updatedProduct = await product.save()
+    console.log('updatedProduct', updatedProduct)
     res
       .status(StatusCodes.OK)
       .send(defaultResponse(StatusCodes.OK, 'PRODUCTS UPDATED', updatedProduct))
