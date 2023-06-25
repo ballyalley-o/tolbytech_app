@@ -9,6 +9,7 @@ import {
   Button,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import theme from '../theme'
 
 export const CardMediaBase = styled(CardMedia)(({ theme }) => ({
   display: 'block',
@@ -18,12 +19,25 @@ export const CardMediaBase = styled(CardMedia)(({ theme }) => ({
   marginTop: '2rem',
 }))
 
+export const CardMediaTechBase = styled(CardMedia)(({ theme }) => ({
+  display: 'block',
+  height: '150px',
+  objectFit: 'cover',
+  borderRadius: '.5em',
+}))
+
 export const CardContentBase = styled(CardContent)(({ theme }) => ({
   display: 'block',
   width: '100%',
   paddingLeft: '1rem',
   paddingTop: '2rem',
   paddingRight: '1rem',
+}))
+
+export const CardContentTechBase = styled(CardContent)(({ theme }) => ({
+  display: 'block',
+  width: '95%',
+  height: '50px',
 }))
 
 export const BoxBase = styled(Box)(({ theme }) => ({
@@ -70,5 +84,24 @@ export const CartTypography = styled(Typography)(({ theme }) => ({
     OTransform: 'translateZ(0)',
     transform: 'translateZ(0)',
     transitionDelay: '0.2s',
+  },
+}))
+
+export const CardBase = styled(Card)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  display: 'flex',
+  backgroundColor: 'white',
+  flexDirection: 'column',
+  border: '0px solid #C0C0C0',
+  alignItems: 'center',
+  height: '300px',
+  width: '200px',
+  borderRadius: '1em',
+  padding: '.5rem',
+  m: '1rem',
+  boxShadow: 'none',
+  transition: '0.3s',
+  '&:hover': {
+    boxShadow: '0 0 20px 0 rgba(234,43,233,0.2)',
   },
 }))

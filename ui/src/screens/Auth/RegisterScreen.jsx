@@ -7,8 +7,6 @@ import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRegisterMutation } from '../../slices/user-slice'
 import { setCredentials } from '../../slices/auth-slice'
-import Loader from '../../components/Loader'
-import SnackAlert from '../../components/SnackAlert'
 import {
   FormControl,
   FormGroup,
@@ -21,11 +19,17 @@ import {
   InputLabel,
 } from '@mui/material'
 import { InputBase, ButtonBase } from '../../themes/styles/default-styled.js'
-import { LinkBase } from '../../themes/styles/auth-styled.js'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import Visibility from '@mui/icons-material/Visibility'
+import {
+  LinkBase,
+  BoxBase,
+  FormBoxTitle,
+} from '../../themes/styles/auth-styled.js'
 import { styled } from '@mui/material/styles'
 import FormContainer from '../../components/FormContainer'
+import Loader from '../../components/Loader'
+import SnackAlert from '../../components/SnackAlert'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import Visibility from '@mui/icons-material/Visibility'
 import RegisterGreeting from '../defaults/RegisterGreeting'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import { CLIENT } from '../../constants'
@@ -130,34 +134,16 @@ const RegisterScreen = () => {
           </SnackAlert>
         )}
         <Grid item sm={12} lg={4} gap={2}>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              //   alignItems: 'center',
-              py: '2rem',
-              pb: '4rem',
-              height: 'auto',
-              width: '400px',
-              backgroundColor: '#fff',
-              borderRadius: '1rem',
-            }}
-          >
+          <BoxBase>
             <FormContainer>
-              <Box
-                sx={{
-                  display: 'block',
-                  margin: '1rem 0 2rem 0',
-                  textAlign: 'center',
-                }}
-              >
+              <FormBoxTitle>
                 <Typography variant="h6" fontWeight="bold">
                   Create Your Tolby ID
                 </Typography>
                 <Typography variant="body2">
                   One Tolby ID is all you need to access all Tolby services.
                 </Typography>
-              </Box>
+              </FormBoxTitle>
               <Container>
                 <FormControl component="form" onSubmit={handleSubmit}>
                   <FormGroup>
@@ -322,7 +308,6 @@ const RegisterScreen = () => {
                 textAlign="center"
                 alignContent="center"
               >
-                {' '}
                 <Grid item sx={{ display: 'block' }}>
                   <Typography variant="caption">
                     You already have a Tolby ID?
@@ -345,7 +330,7 @@ const RegisterScreen = () => {
                 </Grid>
               </Grid>
             </FormContainer>
-          </Box>
+          </BoxBase>
         </Grid>
       </Grid>
     </>
