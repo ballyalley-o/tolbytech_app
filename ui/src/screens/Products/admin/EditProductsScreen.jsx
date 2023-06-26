@@ -14,7 +14,9 @@ import {
   FormGroup,
   Grid,
   Divider,
+  InputBase,
 } from '@mui/material'
+
 import { ButtonBase } from '../../../themes/styles/default-styled'
 import { FormBoxTitle } from '../../../themes/styles/auth-styled'
 import { CLIENT } from '../../../constants'
@@ -53,7 +55,18 @@ const EditProductsScreen = () => {
     useUploadProductImageMutation()
 
   const handleUploadFile = async (e) => {
-    console.log(e.target.files[0])
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    const result = await uploadProductImage(formData)
+    if (result.error) {
+      setSnackOpen(result?.error?.data.message, 'error')
+      handleHideDuration(3000)
+    } else {
+      setImage(result.data)
+      setSnackOpen('Image Uploaded', 'success')
+      handleHideDuration(3000)
+    }
   }
 
   useEffect(() => {
@@ -208,21 +221,36 @@ const EditProductsScreen = () => {
                   </Grid>
                   <Divider orientation="vertical" flexItem />
                   <Grid item lg={6}>
-                    <InputUploadField
+                    {/* <InputUploadField
+                      id="image"
+                      label="Image URL"
+                      title="Image"
+                      value={image}
+                      onChange={(e) => setImage(e.target.value)}
+                    /> */}
+                    <InputBase
                       id="image"
                       label="Image URL"
                       title="Image"
                       value={image}
                       onChange={(e) => setImage(e.target.value)}
                     />
-                    <InputUploadField
+                    <InputBase
+                      id="image"
+                      type="file"
+                      label="Choose Image"
+                      title="Image"
+                      //   value={}
+                      onChange={handleUploadFile}
+                    />
+                    {/* <InputUploadField
                       id="image"
                       type="file"
                       label="Choose Image"
                       title="Image"
                       value={image}
                       onChange={handleUploadFile}
-                    />
+                    /> */}
                     <Grid container direction="row">
                       <Grid item md={12}>
                         <Typography variant="h2">Hey</Typography>
