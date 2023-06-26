@@ -6,4 +6,5 @@ import VARS from '../helpers/vars/vars.js'
 export const singleUpload = upload.single(VARS.FILE_)
 
 const __dirname = path.resolve()
+
 export const fileStatic = express.static(path.join(__dirname, VARS.FILESTATIC))
