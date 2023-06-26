@@ -52,6 +52,7 @@ export const CONFIG = {
   TALKS_URL: '/api/v1/talks',
   TECH_URL: '/api/v1/tech',
   PAYPAL_URL: '/api/v1/config/paypal',
+  UPLOAD_URL: '/api/v1/upload',
 
   // Product sublinks
   CLIENT_PRODUCT_URL: '/:id',

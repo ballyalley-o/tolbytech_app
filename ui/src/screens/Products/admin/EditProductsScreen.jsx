@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   useUpdateProductMutation,
   useGetProductDetailsQuery,
+  useUploadProductImageMutation,
 } from '../../../slices/products-slice'
 import { Helmet } from 'react-helmet-async'
 import {
@@ -21,6 +22,7 @@ import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
 import InputViewField from '../../../components/Forms/InputViewField'
 import MultiInputViewField from '../../../components/Forms/MultiInputViewField'
+import InputUploadField from '../../../components/Forms/InputUploadField'
 import SnackAlert from '../../../components/SnackAlert'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 
@@ -46,6 +48,13 @@ const EditProductsScreen = () => {
 
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation()
+
+  const [uploadProductImage, { isLoading: loadingUpload }] =
+    useUploadProductImageMutation()
+
+  const handleUploadFile = async (e) => {
+    console.log(e.target.files[0])
+  }
 
   useEffect(() => {
     if (product) {
@@ -199,7 +208,21 @@ const EditProductsScreen = () => {
                   </Grid>
                   <Divider orientation="vertical" flexItem />
                   <Grid item lg={6}>
-                    {/* IMAGE UPLOAD PLACEHOLDER */}
+                    <InputUploadField
+                      id="image"
+                      label="Image URL"
+                      title="Image"
+                      value={image}
+                      onChange={(e) => setImage(e.target.value)}
+                    />
+                    <InputUploadField
+                      id="image"
+                      type="file"
+                      label="Choose Image"
+                      title="Image"
+                      value={image}
+                      onChange={handleUploadFile}
+                    />
                     <Grid container direction="row">
                       <Grid item md={12}>
                         <Typography variant="h2">Hey</Typography>

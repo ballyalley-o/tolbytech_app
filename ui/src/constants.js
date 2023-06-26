@@ -38,6 +38,7 @@ export const TECH_URL = CONFIG.TECH_URL
 export const TALKS_URL = CONFIG.TALKS_URL
 export const CHECKOUT_AUTH_CHECK = CONFIG.CHECKOUT_AUTH_CHECK
 export const PAYPAL_URL = CONFIG.PAYPAL_URL
+export const UPLOAD_URL = CONFIG.UPLOAD_URL
 
 // Client ROUTES
 export const CLIENT = {
