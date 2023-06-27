@@ -39,8 +39,6 @@ const InputUploadField = ({
               startAdornment={currency && adornment}
               onChange={onChange}
               fullWidth
-              accept="image/*"
-              multiple
               {...props}
             />
           </FormControl>
