@@ -54,7 +54,19 @@ const EditProductsScreen = () => {
   const [uploadProductImage, { isLoading: loadingUpload }] =
     useUploadProductImageMutation()
 
-  const handleUploadFile = async (e) => {}
+  const handleUploadFile = async (e) => {
+    const formData = new FormData()
+    formData.append('tolbytechImg', e.target.files[0])
+    try {
+      const res = await uploadProductImage(formData).unwrap()
+      setSnackOpen(res.message, 'success', 'success')
+      handleHideDuration(3000)
+      setImage(res.image)
+    } catch (error) {
+      setSnackOpen(error?.data?.message, 'error')
+      handleHideDuration(3000)
+    }
+  }
 
   useEffect(() => {
     if (product) {
@@ -208,24 +220,27 @@ const EditProductsScreen = () => {
                   </Grid>
                   <Divider orientation="vertical" flexItem />
                   <Grid item lg={6}>
-                    <InputViewField
-                      id="image"
-                      label="Image URL"
-                      title="Image URL"
-                      value={image}
-                      onChange={(e) => setImage(e.target.value)}
-                    />
-                    <InputUploadField
-                      id="image"
-                      type="file"
-                      label="Choose Image"
-                      //   title="Image"
-                      // value={null}
-                      onChange={handleUploadFile}
-                    />
+                    <Grid container justifyContent="center">
+                      <Grid item md={12} my={2}>
+                        <Typography variant="h6">Product Image</Typography>
+                      </Grid>
+                      <InputViewField
+                        id="image"
+                        label="Image URL"
+                        title="Image URL"
+                        value={image}
+                        onChange={(e) => setImage}
+                      />
+                      <InputUploadField
+                        size="large"
+                        type="file"
+                        label="Choose Image"
+                        onChange={handleUploadFile}
+                      />
+                    </Grid>
                     <Grid container direction="row">
                       <Grid item md={12}>
-                        <Typography variant="h2">Hey</Typography>
+                        <Typography variant="h2"></Typography>
                       </Grid>
                       <Grid item md={12}>
                         <Grid container justifyContent="flex-end">

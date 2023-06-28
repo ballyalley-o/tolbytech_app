@@ -29,9 +29,13 @@ const checkFileType = (file, cb) => {
 
 export const upload = multer({
   storage,
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb)
+  },
 })
 
 const fileController = (req, res) => {
+  console.log('req.file.path: ', req.file.path)
   res.send({
     message: MessageResp.FILESUCCESS,
     image: `/${req.file.path}`,

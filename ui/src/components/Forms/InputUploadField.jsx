@@ -27,11 +27,10 @@ const InputUploadField = ({
       <Grid container>
         <Grid item lg={12}>
           <FormControl sx={{ m: 1, width: '40ch' }} variant="outlined">
-            <InputLabel htmlFor={id}>{title}</InputLabel>
+            {/* <InputLabel htmlFor={id}>{title}</InputLabel> */}
             {/* image upload */}
             <InputBase
               id={id}
-              label={label}
               name={name}
               type={type}
               size={size}
@@ -67,9 +66,7 @@ InputUploadField.propTypes = {
 }
 
 InputUploadField.defaultProps = {
-  // type upload
   type: 'file',
-  size: 'small',
   adornment: <InputAdornment position="start">NZD</InputAdornment>,
 }
 
