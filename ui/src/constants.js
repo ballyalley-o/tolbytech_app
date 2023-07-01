@@ -78,6 +78,7 @@ export const CLIENT = {
   ADMIN_USERS_URL: PATH_ADMIN.USERS,
   ADMIN_PRODUCTS_URL: PATH_ADMIN.PRODUCTS,
   ADMIN_EDIT_URL: PATH_ADMIN.EDIT,
+  ADMIN_EDITUSER_URL: PATH_ADMIN.EDITUSER,
 
   // @root: ACCOUNT
   ACCOUNT_URL: PATH_ACCOUNT.ROOT,
@@ -119,4 +120,9 @@ export const StatusMsg = {
   // @root: OrderScreen: Payment
   NOTPAID: 'NOT PAID',
   PAID: 'PAID',
+}
+
+export const Snacks = {
+  // @root EditUsersScreen: Update
+  UPDATED: 'USER UPDATED',
 }

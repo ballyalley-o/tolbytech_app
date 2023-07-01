@@ -23,7 +23,6 @@ import {
   StyledBox,
   StyledGrid,
 } from '../../themes/styles/default-styled.js'
-import { styled } from '@mui/material/styles'
 import FormContainer from '../../components/FormContainer'
 import CheckoutSteps from '../../components/CheckoutSteps'
 import { CLIENT } from '../../constants'

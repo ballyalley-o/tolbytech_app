@@ -60,7 +60,7 @@ const AllUsersScreen = () => {
                   <RowUsers
                     key={user._id}
                     row={user}
-                    customer
+
                     // content={
                     //   <OrderViewAccounts
                     //     order={user}
