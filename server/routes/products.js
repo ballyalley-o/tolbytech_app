@@ -13,7 +13,7 @@ router
   .route('/:id')
   .get(productsController.getProduct)
   .put(protect, admin, productsController.updateProduct)
-//   .delete(protect, admin, productsController.deleteProduct)
+  .delete(protect, admin, productsController.deleteProduct)
 
 const productRouter = router
 export default productRouter

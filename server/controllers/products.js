@@ -91,7 +91,6 @@ const updateProduct = asyncHandler(async (req, res, next) => {
     // }
 
     const updatedProduct = await product.save()
-    console.log('updatedProduct', updatedProduct)
 
     res
       .status(StatusCodes.OK)
@@ -102,12 +101,29 @@ const updateProduct = asyncHandler(async (req, res, next) => {
   }
 })
 
+// @desc    DELETE all products
+// @route   DELETE /api/products/:id
+// @access  Private/Admin
+const deleteProduct = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id)
+
+  if (product) {
+    await Product.deleteOne({ _id: req.params.id })
+
+    res
+      .status(StatusCodes.OK)
+      .send(defaultResponse(StatusCodes.OK, 'PRODUCT DELETED', {}))
+  } else {
+    res.status(StatusCodes.NOT_FOUND)
+    throw new Error(getReasonPhrase(StatusCodes.NOT_FOUND))
+  }
+})
 const productsController = {
   getProducts,
   getProduct,
   createProduct,
   updateProduct,
-  //   deleteProduct,
+  deleteProduct,
 }
 
 export default productsController

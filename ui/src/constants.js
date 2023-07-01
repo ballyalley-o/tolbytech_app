@@ -98,3 +98,25 @@ export const CLIENT = {
   // @root: boundary
   NOT_FOUND_URL: CONFIG.CLIENT_NOT_FOUND_URL,
 }
+
+export const BtnTitles = {
+  // @root: BAG
+  ADD_TO_CART: 'Add to Cart',
+  ADD_TO_BAG: 'Add to Bag',
+
+  // @root: ORDERS
+  PLACE_ORDER: 'Place Order',
+
+  // @root: ORDERSCREEN
+  DELIVER: 'UPDATE TO DELIVERED',
+  DELIVERED: 'DELIVERED',
+}
+
+export const StatusMsg = {
+  // @root: OrderScreen: Deliver
+  NOTEDELIVERED: 'NOT DELIVERED',
+  DELIVERED: 'DELIVERED',
+  // @root: OrderScreen: Payment
+  NOTPAID: 'NOT PAID',
+  PAID: 'PAID',
+}

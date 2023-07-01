@@ -14,17 +14,17 @@ import {
   TableCellBase,
   TableContainerBase,
 } from '../../../themes/styles/table-styled'
+import { useTheme } from '@mui/material/styles'
+import { LinkBase } from '../../../themes/styles/default-styled'
 import Row from '../../../components/Row'
 import OrderViewAccounts from '../../../components/Accounts/OrderViewAccounts'
 import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
-import { useTheme } from '@mui/material/styles'
+import { AdminHeading } from '../../../components/Heading'
 
 const AllOrdersScreen = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery()
   const theme = useTheme()
-  console.log(orders)
-
   const { id } = useParams()
   const user = orders?.response.find((payer) => payer.id === id)
   const { data: userOrders } = useGetMyOrdersQuery(user?.user)
@@ -35,15 +35,16 @@ const AllOrdersScreen = () => {
       <Helmet>
         <title>Admin | Orders</title>
       </Helmet>
+      <AdminHeading title="Orders" />
+
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger"> {error?.message}</Message>
+        <Message variant="h3" pr={3} py={3} fontWeight="bold">
+          No recent orders &nbsp; <LinkBase href="/">Go Back</LinkBase>
+        </Message>
       ) : (
         <>
-          <Grid item md={6}>
-            <Typography variant="h1">Orders</Typography>
-          </Grid>
           <TableContainerBase>
             <TableBase>
               <TableHeadBase>
