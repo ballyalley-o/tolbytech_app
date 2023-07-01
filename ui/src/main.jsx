@@ -40,6 +40,7 @@ import RegisterScreen from './screens/Auth/RegisterScreen.jsx'
 import ForgotPasswordScreen from './screens/Auth/ForgotPasswordScreen.jsx'
 // @account
 import AccountScreen from './screens/Accounts/AccountScreen.jsx'
+import AllUsersScreen from './screens/Accounts/admin/AllUsersScreen.jsx'
 // @defaults
 import NotFound from './screens/defaults/NotFound.jsx'
 import './assets/css/index.css'
@@ -68,7 +69,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="" element={<AdminRoute />}>
         <Route path={CLIENT.ADMIN_ORDERS_URL} element={<AllOrdersScreen />} />
-        <Route path={CLIENT.ADMIN_USERS_URL} element={<AllOrdersScreen />} />
+        <Route path={CLIENT.ADMIN_USERS_URL} element={<AllUsersScreen />} />
         <Route path={CLIENT.ADMIN_EDIT_URL} element={<EditProductsScreen />} />
         <Route
           path={CLIENT.ADMIN_PRODUCTS_URL}

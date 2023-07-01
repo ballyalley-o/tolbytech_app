@@ -36,7 +36,6 @@ const AllOrdersScreen = () => {
         <title>Admin | Orders</title>
       </Helmet>
       <AdminHeading title="Orders" />
-
       {isLoading ? (
         <Loader />
       ) : error ? (
