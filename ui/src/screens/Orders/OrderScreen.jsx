@@ -178,7 +178,7 @@ const OrderScreen = () => {
         <Divider />
 
         {isLoading ? (
-          <Loader />
+          <Loader size={80} thickness={4} variant="indeterminate" />
         ) : error ? (
           <Message variant="h3" color="error">
             {error?.message}

@@ -2,6 +2,7 @@ import asyncHandler from '../middleware/async-handler.js'
 import Order from '../models/Order.js'
 import { StatusCodes, getReasonPhrase } from 'http-status-codes'
 import { customResponse, defaultResponse } from '../helpers/static.js'
+import { get } from 'mongoose'
 
 // @desc    Add all order items
 // @route   POST /api/orders
@@ -19,7 +20,7 @@ const addOrderItems = asyncHandler(async (req, res, next) => {
 
   if (orderItems && orderItems.length === 0) {
     res.status(400)
-    throw new Error('NO ORDERS ADDED')
+    throw new Error(getReasonPhrase(StatusCodes.BAD_REQUEST))
   } else {
     const order = new Order({
       orderItems: orderItems.map((x) => ({

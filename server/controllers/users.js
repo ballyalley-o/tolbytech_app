@@ -1,6 +1,6 @@
 import asyncHandler from '../middleware/async-handler.js'
 import User from '../models/User.js'
-import VARS from '../helpers/vars/vars.js'
+import { getReasonPhrase } from 'http-status-codes'
 
 // @desc    GET User account
 // @route   GET /api/v1/users/account
@@ -60,7 +60,12 @@ const updateUserAccount = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/users
 // @access  Private/Admin
 const getUsers = asyncHandler(async (req, res, next) => {
-  res.send('get users')
+  const users = await User.find({})
+
+  res.status(200).json({
+    message: 'USERS FETCHED',
+    response: users,
+  })
 })
 
 // @desc    GET User by ID
@@ -83,14 +88,41 @@ const getUser = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/v1/users/:id
 // @access  Private/Admin
 const updateUser = asyncHandler(async (req, res, next) => {
-  res.send('update user')
+  const user = await User.findById(req.params.id)
+
+  if (user) {
+    user.name = req.body.name || user.name
+    user.email = req.body.email || user.email
+    user.isAdmin = Boolean(req.body.isAdmin)
+
+    const updatedUser = await user.save()
+
+    res.status(200).send({
+      message: 'USER UPDATED',
+      response: updatedUser,
+    })
+  }
 })
 
 // @desc    Delete User
 // @route   DELETE /api/v1/users/:id
 // @access  Private/Admin
 const deleteUser = asyncHandler(async (req, res, next) => {
-  res.send('delete user')
+  const user = await User.findById(req.params.id)
+
+  if (user) {
+    if (user.isAdmin) {
+      res.status(400)
+      throw new Error('CANNOT DELETE ADMIN USER')
+    }
+    await user.deleteOne({ _id: user._id })
+    res.status(200).send({
+      message: 'USER DELETED',
+      response: {},
+    })
+  } else {
+    throw new Error('USER NOT FOUND')
+  }
 })
 
 const userController = {

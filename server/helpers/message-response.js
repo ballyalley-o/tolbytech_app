@@ -1,3 +1,5 @@
+// message reponse for snacks
+
 const MessageResp = {
   FILEWARN: 'FILE TYPE NOT ACCEPTED',
   FILESUCCESS: 'IMAGE UPLOADED',
