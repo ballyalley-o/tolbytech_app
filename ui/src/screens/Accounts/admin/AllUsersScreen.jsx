@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { useGetUsersQuery } from '../../../slices/user-slice'
@@ -21,6 +21,7 @@ import { AdminHeading } from '../../../components/Heading'
 
 const AllUsersScreen = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery()
+  const [loadingDelete, setLoadingDelete] = useState(false)
   const theme = useTheme()
   //   const { id } = useParams()
   //   const user = orders?.response.find((payer) => payer.id === id)
@@ -33,6 +34,7 @@ const AllUsersScreen = () => {
         <title>Admin | Users</title>
       </Helmet>
       <AdminHeading title="Users" />
+      {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (

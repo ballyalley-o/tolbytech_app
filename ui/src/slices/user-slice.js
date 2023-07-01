@@ -44,11 +44,11 @@ export const usersSlice = apiSlice.injectEndpoints({
       }),
     }),
     deleteUser: builder.mutation({
-      query: (id) => ({
-        url: USERS_URL + '/' + id,
+      query: (userId) => ({
+        url: USERS_URL + '/' + userId,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Users'],
+      // invalidatesTags: ['Users'],
     }),
   }),
 })

@@ -1,7 +1,7 @@
 const products = [
   {
     name: 'Apple Vision Pro',
-    image: '/images/visionpro.jpeg',
+    image: '/images/visionpro.jpg',
     description:
       'Welcome to Spatial computing, the next generation of technology. The Apple Vision Pro is the most advanced  ever created. With a 6.7 inch screen, 5G, and a 12 megapixel camera, this phone is the best on the market. Hybrid reality is here.',
     brand: 'Apple',
