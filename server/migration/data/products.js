@@ -1,7 +1,7 @@
 const products = [
   {
     name: 'Apple Vision Pro',
-    image: '/images/visionpro.jpeg',
+    image: '/images/visionpro.jpg',
     description:
       'Welcome to Spatial computing, the next generation of technology. The Apple Vision Pro is the most advanced  ever created. With a 6.7 inch screen, 5G, and a 12 megapixel camera, this phone is the best on the market. Hybrid reality is here.',
     brand: 'Apple',
@@ -180,6 +180,84 @@ const products = [
     countInStock: 7,
     rating: 3.5,
     numReviews: 10,
+    model: '2022',
+  },
+  {
+    name: 'Samsung Galaxy S21 Ultra',
+    image: '/images/galaxy.jpeg',
+    description:
+      'Experience the ultimate in smartphone technology with the Samsung Galaxy S21 Ultra. It boasts a large Dynamic AMOLED 2X display and a powerful Exynos 2100 processor.',
+    brand: 'Samsung',
+    category: 'Electronics',
+    price: 1199.99,
+    countInStock: 3,
+    rating: 4.8,
+    numReviews: 15,
+    model: '2023',
+  },
+  {
+    name: 'Dell XPS 15',
+    image: '/images/xps15.jpg',
+    description:
+      'The Dell XPS 15 is a powerful laptop with a stunning InfinityEdge display. It features a fast processor, ample storage, and a sleek design.',
+    brand: 'Dell',
+    category: 'Electronics',
+    price: 1899.99,
+    countInStock: 8,
+    rating: 4.7,
+    numReviews: 28,
+    model: '2021',
+  },
+  {
+    name: 'HP Spectre x360',
+    image: '/images/spectre.jpeg',
+    description:
+      'The HP Spectre x360 is a versatile 2-in-1 laptop with a premium design. It boasts a vibrant touchscreen display, excellent performance, and a long battery life.',
+    brand: 'HP',
+    category: 'Electronics',
+    price: 1699.99,
+    countInStock: 12,
+    rating: 4.6,
+    numReviews: 42,
+    model: '2022',
+  },
+  {
+    name: 'Lenovo ThinkPad X1 Carbon',
+    image: '/images/thinkpad.jpg',
+    description:
+      'The Lenovo ThinkPad X1 Carbon is a lightweight and durable business laptop. It offers impressive performance, a comfortable keyboard, and extensive connectivity options.',
+    brand: 'Lenovo',
+    category: 'Electronics',
+    price: 1799.99,
+    countInStock: 5,
+    rating: 4.9,
+    numReviews: 37,
+    model: '2023',
+  },
+  {
+    name: 'PlayStation 5 DualSense Controller',
+    image: '/images/ps5-controller.jpg',
+    description:
+      'The PlayStation 5 DualSense Controller offers immersive haptic feedback, adaptive triggers, and precise controls for an enhanced gaming experience. It features a built-in microphone and a rechargeable battery.',
+    brand: 'Sony',
+    category: 'Electronics',
+    price: 69.99,
+    countInStock: 25,
+    rating: 4.9,
+    numReviews: 52,
+    model: '2021',
+  },
+  {
+    name: 'Steam Deck',
+    image: '/images/steamdeck.jpeg',
+    description:
+      'The Steam Deck is a handheld gaming device that allows you to play your entire Steam library on the go. It features a powerful processor, a high-resolution display, and customizable controls for a seamless gaming experience.',
+    brand: 'Valve',
+    category: 'Electronics',
+    price: 399.99,
+    countInStock: 15,
+    rating: 4.7,
+    numReviews: 23,
     model: '2022',
   },
 ]
