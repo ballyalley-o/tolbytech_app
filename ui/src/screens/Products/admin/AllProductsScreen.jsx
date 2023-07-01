@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import {
   useGetProductsQuery,
   useCreateProductMutation,
+  useDeleteProductMutation,
 } from '../../../slices/products-slice.js'
 import { Typography, Grid, TableBody } from '@mui/material'
 import {
@@ -23,13 +24,18 @@ import ConfirmDialog from '../../../components/ConfirmDialog.jsx'
 import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
 import SnackAlert from '../../../components/SnackAlert.jsx'
+import { set } from 'mongoose'
 
 const AllProductsScreen = () => {
   const [open, setOpen] = useState(false)
   const [snackOpen, setSnackOpen] = useState(null)
+  const [dialogTitle, setDialogTitle] = useState('')
+  const [dialogContent, setDialogContent] = useState('')
   const { data: products, isLoading, error, refetch } = useGetProductsQuery()
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation()
+  const [deleteProduct, { isLoading: loadingDelete }] =
+    useDeleteProductMutation()
   const { userInfo } = useSelector((state) => state.auth)
   const theme = useTheme()
 
@@ -47,12 +53,26 @@ const AllProductsScreen = () => {
     }
   }
 
+  const handleDeleteProduct = async (id) => {
+    try {
+      await deleteProduct(id)
+      refetch()
+      setSnackOpen('Product Deleted', 'success')
+      handleHideDuration(2000)
+    } catch (error) {
+      setSnackOpen(error?.response.message, 'error')
+      handleHideDuration(2000)
+    }
+  }
+
   const handleConfirm = async () => {
+    setDialogTitle('Confirm Navigate to Product Listing')
+    setDialogContent('List a product?')
     setOpen(true)
   }
+
   const handleCancel = async () => {
     setOpen(false)
-    console.log('hey')
   }
 
   const handleHideDuration = (duration) => {
@@ -70,15 +90,28 @@ const AllProductsScreen = () => {
       <ConfirmDialog
         open={open}
         onClose={handleCancel}
-        title="Confirm Navigate to Product Listing"
-        content="List a product?"
+        title={dialogTitle}
+        content={dialogContent}
         action={
           <ButtonBase
             onClick={handleCreateProduct}
             disabled={loadingCreate}
-            variant="h1"
+            color="error"
+            sx={{
+              fontWeight: 'bold',
+              bgcolor: theme.palette.pink.main,
+            }}
           >
-            Create
+            {loadingCreate ? (
+              <Loader
+                color={theme.palette.primary.main}
+                type="Oval"
+                width={23}
+                height={23}
+              />
+            ) : (
+              'Create'
+            )}
           </ButtonBase>
         }
       />
@@ -147,7 +180,7 @@ const AllProductsScreen = () => {
               </TableHeadBase>
               <TableBody>
                 {products?.response.map((product) => (
-                  <RowProduct key={product._id} row={product}></RowProduct>
+                  <RowProduct key={product._id} row={product} />
                 ))}
               </TableBody>
             </TableBase>

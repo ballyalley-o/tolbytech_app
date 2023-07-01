@@ -12,19 +12,6 @@ import theme from './themes/theme'
 import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
-  const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   const expirationTime = localStorage.getItem('expirationTime')
-  //   if (expirationTime) {
-  //     const currentTime = new Date().getTime()
-
-  //     if (currentTime > expirationTime) {
-  //       dispatch(logout())
-  //     }
-  //   }
-  // }, [dispatch])
-
   return (
     <>
       <HelmetProvider>

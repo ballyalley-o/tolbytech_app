@@ -1,7 +1,8 @@
-import { StatusCodes } from 'http-status-codes'
-import { getReasonPhrase } from 'http-status-codes'
 import asyncHandler from '../middleware/async-handler.js'
 import Product from '../models/Product.js'
+import { unlinkDelete } from '../helpers/unlink-delete.js'
+import { StatusCodes } from 'http-status-codes'
+import { getReasonPhrase } from 'http-status-codes'
 import { defaultResponse } from '../helpers/static.js'
 
 // @desc    fetch all products
@@ -84,8 +85,13 @@ const updateProduct = asyncHandler(async (req, res, next) => {
     product.numReviews = numReviews
     product.description = description
 
+    // if (req.body.image) {
+    //   unlinkDelete(product.image)
+    //   product.image = image
+    // }
+
     const updatedProduct = await product.save()
-    console.log('updatedProduct', updatedProduct)
+
     res
       .status(StatusCodes.OK)
       .send(defaultResponse(StatusCodes.OK, 'PRODUCTS UPDATED', updatedProduct))
@@ -95,12 +101,29 @@ const updateProduct = asyncHandler(async (req, res, next) => {
   }
 })
 
+// @desc    DELETE all products
+// @route   DELETE /api/products/:id
+// @access  Private/Admin
+const deleteProduct = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id)
+
+  if (product) {
+    await Product.deleteOne({ _id: req.params.id })
+
+    res
+      .status(StatusCodes.OK)
+      .send(defaultResponse(StatusCodes.OK, 'PRODUCT DELETED', {}))
+  } else {
+    res.status(StatusCodes.NOT_FOUND)
+    throw new Error(getReasonPhrase(StatusCodes.NOT_FOUND))
+  }
+})
 const productsController = {
   getProducts,
   getProduct,
   createProduct,
   updateProduct,
-  //   deleteProduct,
+  deleteProduct,
 }
 
 export default productsController

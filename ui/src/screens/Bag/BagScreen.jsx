@@ -18,19 +18,11 @@ import {
   FormControl,
   CardActionArea,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
 import Message from '../../components/Message'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { CLIENT } from '../../constants'
-
-const LinkBase = styled(Link)(({ theme }) => ({
-  textDecoration: 'none',
-  color: '#000',
-  fontWeight: 600,
-  border: '1px solid #000',
-  padding: '.3rem .5rem',
-  borderRadius: '1em',
-}))
+import { LinkBase } from '../../themes/styles/default-styled'
+import Heading from '../../components/Heading'
 
 const BagScreen = () => {
   const navigate = useNavigate()
@@ -57,22 +49,11 @@ const BagScreen = () => {
       </Helmet>
       <Container>
         <Grid container spacing={2}>
-          <Grid item lg={12}>
-            <Typography variant="h3" pr={3} py={3} fontWeight="bold">
-              Bag.
-              <Typography
-                variant="h3"
-                fontWeight="bold"
-                sx={{ color: 'gray', display: 'inline-flex' }}
-              >
-                Review your bag
-              </Typography>
-            </Typography>
-          </Grid>
+          <Heading title="Bag." subTitle="Review your bag" />
           <Grid item lg={8}>
             {cartItems.length === 0 ? (
               <Message variant="h3" pr={3} py={3} fontWeight="bold">
-                Your bag is empty <LinkBase to="/">Go Back</LinkBase>
+                Your bag is empty &nbsp; <LinkBase href="/">Go Back</LinkBase>
               </Message>
             ) : (
               <>

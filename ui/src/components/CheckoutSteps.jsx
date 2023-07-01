@@ -35,7 +35,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
             </Link>
           )}
           {step2 ? (
-            <Link to="/shipping" style={{ textDecoration: 'none' }}>
+            <Link to="/bag/shipping" style={{ textDecoration: 'none' }}>
               <Typography variant="body2" fontWeight="bolder" color="#D14081">
                 {step3 ? 'Shipping Address saved' : 'Shipping'}
               </Typography>
@@ -48,7 +48,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
             </Link>
           )}
           {step3 ? (
-            <Link to="/payment" style={{ textDecoration: 'none' }}>
+            <Link to="/bag/payment" style={{ textDecoration: 'none' }}>
               <Typography variant="body2" fontWeight="bolder" color="#EF798A">
                 {step4 ? 'Payment Method Selected' : 'Payment Method'}
               </Typography>
@@ -61,7 +61,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
             </Link>
           )}
           {step4 ? (
-            <Link to="/orders" style={{ textDecoration: 'none' }}>
+            <Link to="/bag/confirm" style={{ textDecoration: 'none' }}>
               <Typography variant="body2" fontWeight="bolder" color="#35A7FF">
                 Bag It!
               </Typography>

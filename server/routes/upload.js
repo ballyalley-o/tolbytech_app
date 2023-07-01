@@ -1,6 +1,5 @@
 import express from 'express'
-import fileController from '../controllers/upload.js'
-import { singleUpload } from '../middleware/upload-config.js'
+import fileController, { singleUpload } from '../controllers/upload.js'
 
 const router = express.Router()
 

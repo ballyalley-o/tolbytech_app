@@ -2,10 +2,11 @@
 import PropTypes from 'prop-types'
 import {
   Card,
+  Grid,
   Button,
   Link,
   Switch,
-  TextField,
+  Box,
   OutlinedInput,
   Dialog,
 } from '@mui/material'
@@ -152,6 +153,22 @@ export const DialogBase = styled(Dialog)(({ theme }) => ({
       transform: 'translateY(0)',
     },
   },
+}))
+
+export const StyledBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  padding: '2rem 0',
+  paddingBottom: '4rem',
+  height: 'auto',
+  width: { xs: '100%', sm: '100%', md: '100%', lg: '30%' },
+  backgroundColor: '#fff',
+  borderRadius: '1rem',
+}))
+
+export const StyledGrid = styled(Grid)(({ theme }) => ({
+  display: 'flex',
+  alignContent: 'center',
+  justifyContent: 'center',
 }))
 
 // export const InputBase = styled(TextField)(({ theme }) => ({

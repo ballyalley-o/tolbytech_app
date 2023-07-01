@@ -18,16 +18,18 @@ import {
   Divider,
   CardMedia,
   Chip,
-  Button,
 } from '@mui/material'
 import { CardBase } from '../../themes/styles/default-styled.js'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { FaCcPaypal } from 'react-icons/fa'
-import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import CheckoutSteps from '../../components/CheckoutSteps'
 import SnackAlert from '../../components/SnackAlert'
+import Heading from '../../components/Heading'
+import OrderButton from './OrderButton'
+import StatusUpdateMessage from './StatusUpdateMessage'
+import { StatusMsg } from '../../constants'
 
 const OrderScreen = () => {
   const [snackOpen, setSnackOpen] = useState(null)
@@ -74,6 +76,7 @@ const OrderScreen = () => {
     return actions.order.capture().then(async function (details) {
       try {
         await payOrder({ orderId, details })
+        // dispatch order paid action
         refetch()
         setSnackOpen('Payment successful', 'success')
         handleHideDuration(2000)
@@ -142,52 +145,44 @@ const OrderScreen = () => {
         <title>Your Tolby Order</title>
       </Helmet>
       <Grid container justifyContent="center">
-        <Grid item lg={12} sm={12}>
-          <Typography variant="h3" pr={3} py={3} fontWeight="bold">
-            Order.
-            <Typography
-              variant="h3"
-              fontWeight="bold"
-              sx={{ color: 'gray', display: 'inline-flex' }}
-            >
-              Your Tolby Order.
-            </Typography>
-          </Typography>
-          {snackOpen && (
-            <SnackAlert
-              open={snackOpen}
-              onClose={() => setSnackOpen(null)}
-              message={snackOpen}
-              transition="left"
-              vertical="top"
-              duration={2000}
-              horizontal="right"
-            >
-              {snackOpen}
-            </SnackAlert>
-          )}
-          <Grid
-            container
-            direction="row"
-            textAlign="right"
-            alignContent="flex-end"
-            sx={{ mt: 2, display: 'inline-flex' }}
+        <Heading title="Order" subtitle="Your Tolby Order" />
+        {snackOpen && (
+          <SnackAlert
+            open={snackOpen}
+            onClose={() => setSnackOpen(null)}
+            message={snackOpen}
+            transition="left"
+            vertical="top"
+            duration={2000}
+            horizontal="right"
           >
-            <Grid item sm={6}>
-              <CheckoutSteps step1 step2 step3 step4 />
-            </Grid>
-            <Grid item lg={6}>
-              <Typography variant="body1" pr={3} py={2} fontWeight="bold">
-                &nbsp;
-              </Typography>
-            </Grid>
+            {snackOpen}
+          </SnackAlert>
+        )}
+        <Grid
+          container
+          direction="row"
+          textAlign="right"
+          alignContent="flex-end"
+          sx={{ mt: 2, display: 'inline-flex' }}
+        >
+          <Grid item sm={6}>
+            <CheckoutSteps step1 step2 step3 step4 />
           </Grid>
-          <Divider />
+          <Grid item lg={6}>
+            <Typography variant="body1" pr={3} py={2} fontWeight="bold">
+              &nbsp;
+            </Typography>
+          </Grid>
         </Grid>
+        <Divider />
+
         {isLoading ? (
           <Loader />
         ) : error ? (
-          <Message variant="danger" color="error" />
+          <Message variant="h3" color="error">
+            {error?.message}
+          </Message>
         ) : (
           <>
             <Grid
@@ -235,25 +230,13 @@ const OrderScreen = () => {
                           {order.response.shippingAddress?.country}
                         </Typography>
                       </ListItem>
-                      <ListItem>
-                        {order.response.isDelivered ? (
-                          <Message
-                            variant="success"
-                            color="success"
-                            severity="success"
-                          >
-                            STATUS: DELIVERED | {order.response.deliveredAt}
-                          </Message>
-                        ) : (
-                          <Message
-                            variant="danger"
-                            color="error"
-                            severity="error"
-                          >
-                            STATUS: <b>NOT DELIVERED</b>
-                          </Message>
-                        )}
-                      </ListItem>
+                      <StatusUpdateMessage
+                        order={order}
+                        date={order.response.deliveredAt}
+                        StatusToUpdate={order.response.isDelivered}
+                        status1={StatusMsg.DELIVERED}
+                        status2={StatusMsg.NOTEDELIVERED}
+                      />
                     </List>
                   </Grid>
                   <Divider />
@@ -272,25 +255,13 @@ const OrderScreen = () => {
                           )}
                         </Typography>
                       </ListItem>
-                      <ListItem>
-                        {order.response.isPaid ? (
-                          <Message
-                            variant="success"
-                            color="success"
-                            severity="success"
-                          >
-                            STATUS: <b>PAID</b> | {order.response.paidAt}
-                          </Message>
-                        ) : (
-                          <Message
-                            variant="danger"
-                            color="error"
-                            severity="error"
-                          >
-                            STATUS: <b>NOT PAID</b>
-                          </Message>
-                        )}
-                      </ListItem>
+                      <StatusUpdateMessage
+                        order={order}
+                        StatusToUpdate={order.response.isPaid}
+                        date={order.response.paidAt}
+                        status1={StatusMsg.PAID}
+                        status2={StatusMsg.NOTPAID}
+                      />
                     </List>
                   </Grid>
                   <Divider />
@@ -453,6 +424,10 @@ const OrderScreen = () => {
                                     {error?.data?.message || error.message}
                                   </Message>
                                 )}
+                                {/* disable immediately after
+                                payment is made to prevent multiple payments
+                                 */}
+
                                 {!order.isPaid && (
                                   <ListItem>
                                     {loadingPay && <Loader />}
@@ -478,27 +453,10 @@ const OrderScreen = () => {
                                   userInfo?.response?.isAdmin &&
                                   order.response.isPaid &&
                                   !order.isDelivered && (
-                                    <Grid item>
-                                      <ListItem>
-                                        <Button
-                                          variant="outlined"
-                                          color="info"
-                                          fullWidth
-                                          onClick={handleDelivered}
-                                          disabled={order.response.isDelivered}
-                                          sx={{
-                                            mb: '10px',
-                                            fontWeight: 'bold',
-                                          }}
-                                        >
-                                          <LocalShippingIcon />
-                                          &nbsp;
-                                          {order.response.isDelivered
-                                            ? 'DELIVERED'
-                                            : 'UPDATE TO DELIVERED'}
-                                        </Button>
-                                      </ListItem>
-                                    </Grid>
+                                    <OrderButton
+                                      onClick={handleDelivered}
+                                      order={order}
+                                    />
                                   )}
                               </Grid>
                             </Grid>

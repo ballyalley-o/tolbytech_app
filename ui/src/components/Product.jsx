@@ -2,14 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import {
-  Grid,
-  Typography,
-  Card,
-  CardMedia,
-  CardContent,
-  Box,
-} from '@mui/material'
+import { Grid, Typography, Box } from '@mui/material'
 import {
   CardBase,
   CardMediaTechBase,
