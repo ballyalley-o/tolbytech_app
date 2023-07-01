@@ -16,7 +16,6 @@ import {
   Divider,
   InputBase,
 } from '@mui/material'
-
 import { ButtonBase } from '../../../themes/styles/default-styled'
 import { FormBoxTitle } from '../../../themes/styles/auth-styled'
 import { CLIENT } from '../../../constants'
@@ -26,6 +25,7 @@ import InputViewField from '../../../components/Forms/InputViewField'
 import MultiInputViewField from '../../../components/Forms/MultiInputViewField'
 import InputUploadField from '../../../components/Forms/InputUploadField'
 import SnackAlert from '../../../components/SnackAlert'
+import { toast } from 'react-toastify'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 
 const EditProductsScreen = () => {
@@ -56,7 +56,8 @@ const EditProductsScreen = () => {
 
   const handleUploadFile = async (e) => {
     const formData = new FormData()
-    formData.append('tolbytechImg', e.target.files[0])
+    formData.append('image', e.target.files[0])
+
     try {
       const res = await uploadProductImage(formData).unwrap()
       setSnackOpen(res.message, 'success', 'success')
@@ -84,28 +85,38 @@ const EditProductsScreen = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const updatedProduct = {
-      productId,
-      name,
-      price,
-      image,
-      brand,
-      model,
-      category,
-      countInStock,
-      description,
+    try {
+      const updatedProduct = {
+        productId,
+        name,
+        price,
+        image,
+        brand,
+        model,
+        category,
+        countInStock,
+        description,
+      }
+      const result = await updateProduct(updatedProduct)
+      toast.success('Product Updated', { position: 'top-center' })
+      console.log('image : ', image)
+      // handleHideDuration(3000)
+      refetch()
+      navigate(CLIENT.ADMIN_PRODUCTS_URL)
+    } catch (error) {
+      setSnackOpen(error?.data?.message, 'error', 'error')
+      handleHideDuration(3000)
     }
 
-    const result = await updateProduct(updatedProduct)
-    if (result.error) {
-      setSnackOpen(result?.error?.data.message, 'error')
-      handleHideDuration(3000)
-    } else {
-      setSnackOpen('Product Updated', 'success')
-      refetch()
-      handleHideDuration(3000)
-      navigate(CLIENT.ADMIN_PRODUCTS_URL)
-    }
+    // if (result.error) {
+    //   setSnackOpen(result?.error?.data.message, 'error')
+    //   handleHideDuration(3000)
+    // } else {
+    //   setSnackOpen('Product Updated', 'success', 'success')
+    //   refetch()
+    //   handleHideDuration(3000)
+    //   navigate(CLIENT.ADMIN_PRODUCTS_URL)
+    // }
   }
 
   const handleHideDuration = (duration) => {
@@ -128,7 +139,7 @@ const EditProductsScreen = () => {
       {snackOpen && (
         <SnackAlert
           open={snackOpen}
-          severity="error"
+          severity={snackOpen?.severity}
           onClose={() => setSnackOpen(null)}
           message={snackOpen}
           transition="left"

@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
@@ -13,50 +12,12 @@ import {
   Grid,
   Typography,
   Divider,
-  TextField,
-  Card,
-  Button,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
 import FormContainer from '../../components/FormContainer'
 import CheckoutSteps from '../../components/CheckoutSteps'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import { CLIENT } from '../../constants'
-
-const CardBase = styled(Card)(({ theme }) => ({
-  boxShadow: 'none',
-  width: '50%',
-  justifyContent: 'center',
-  padding: '8px 12px',
-  root: {
-    // backgroundColor: '#f5f5f5',
-    borderRadius: ' 20px',
-    '& .MuiInputBase-root': {
-      backgroundColor: '#f5f5f5',
-      borderRadius: 4,
-
-      boxShadow: 'none',
-    },
-    '& .MuiFormLabel-root.Mui-focused': {
-      color: '#555555',
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#555555',
-    },
-    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-      borderBottomColor: '#555555',
-    },
-  },
-}))
-
-const ButtonBase = styled(Button)(({ theme }) => ({
-  backgroundColor: 'pink.main',
-  color: '#FFF',
-  fontWeight: 600,
-  '&:hover': {
-    color: '#000',
-  },
-}))
+import { CardBase, ButtonBase } from '../../themes/styles/bag-styled'
 
 const PaymentScreen = () => {
   const [paymentMethod, setPaymentMethod] = useState('PayPal')
@@ -85,13 +46,13 @@ const PaymentScreen = () => {
       <Grid item sm={12} lg={12}>
         <Typography variant="h3" pr={3} py={3} fontWeight="bold">
           Payment.
-          <Typography
-            variant="h3"
-            fontWeight="bold"
-            sx={{ color: 'gray', display: 'inline-flex' }}
-          >
-            Secured.
-          </Typography>
+        </Typography>
+        <Typography
+          variant="h3"
+          fontWeight="bold"
+          sx={{ color: 'gray', display: 'inline-flex' }}
+        >
+          Secured.
         </Typography>
 
         <Grid

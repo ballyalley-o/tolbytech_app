@@ -17,7 +17,12 @@ import {
   Grid,
   Switch,
 } from '@mui/material'
-import { LinkBase, ButtonBase } from '../../themes/styles/default-styled.js'
+import {
+  LinkBase,
+  ButtonBase,
+  StyledBox,
+  StyledGrid,
+} from '../../themes/styles/default-styled.js'
 import { styled } from '@mui/material/styles'
 import FormContainer from '../../components/FormContainer'
 import CheckoutSteps from '../../components/CheckoutSteps'
@@ -26,7 +31,6 @@ import { CLIENT } from '../../constants'
 const ShippingScreen = () => {
   const { userInfo } = useSelector((state) => state.auth)
   const cart = useSelector((state) => state.cart)
-  console.log(cart)
   const { shippingAddress } = cart
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -41,7 +45,7 @@ const ShippingScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(saveShippingAddress({ address, city, postalCode, country }))
-    console.log(saveShippingAddress({ address, city, postalCode, country }))
+
     navigate(CLIENT.PAYMENT_URL)
   }
 
@@ -120,30 +124,13 @@ const ShippingScreen = () => {
               severity="warning"
               color="warning"
             >
-              Under development, We apologize for the inconvenience.{' '}
+              Under development, We apologize for the inconvenience.
               <LinkBase to={CLIENT.HOME_URL}>Go Back</LinkBase>
             </Message>
           ) : (
             <>
-              <Grid
-                container
-                sx={{
-                  display: 'flex',
-                  alignContent: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Box
-                  sx={{
-                    display: 'flex',
-                    py: '2rem',
-                    pb: '4rem',
-                    height: 'auto',
-                    width: { xs: '100%', sm: '100%', md: '100%', lg: '30%' },
-                    backgroundColor: '#fff',
-                    borderRadius: '1rem',
-                  }}
-                >
+              <StyledGrid container>
+                <StyledBox>
                   <FormContainer>
                     <Grid
                       container
@@ -255,13 +242,13 @@ const ShippingScreen = () => {
                           Proceed to Checkout
                         </ButtonBase>
                       </Box>
-                      <SnackAlert
+                      <Grid container justifyContent="flex-end">
+                        {/* <SnackAlert
                         openSnack={openSnack}
                         setOpenSnack={setOpenSnack}
                         severity="success"
                         message="Shipping Address Saved"
-                      />
-                      <Grid container justifyContent="flex-end">
+                      /> */}
                         {/* <Box>
                           <Typography
                             variant="caption"
@@ -279,8 +266,8 @@ const ShippingScreen = () => {
                       </Grid>
                     </FormControl>
                   </FormContainer>
-                </Box>
-              </Grid>
+                </StyledBox>
+              </StyledGrid>
             </>
           )}
         </Grid>

@@ -13,45 +13,44 @@ import VARS from '../helpers/vars/vars.js'
 dotenv.config({
   path: './server/config/config.env',
 })
+
 /**
- *
  * @param app - express app
  * @param connectDB - connect to database
  * @param registerRoutes - link routes from routes/index.js
  * @param start - start/init the server
  * @param protect - protect routes
- * @param VARS - environment variables
+ * @param VARS - environment variables constants/global config
  * @param MessageLOG - custom message logger
  * @param notFound - 404 error handler
  * @param errorHandler - error handler
  * @param cors - cross origin resource sharing
  * @param setHeaders - set headers for the server
- * @parem registerRoutes - introduce the connection links to the other routes
+ * @param registerRoutes - introduce the connection links to the other routes
  * @param linkRoutes - connect routes from routes/index.js
  * @param connectDB - ignite the connection to the database
  * @param fileStatic - static file path
- *
  */
 
 export class App {
   constructor() {
     this.app = express()
+    this.app.use(VARS.FILESTATIC, fileStatic)
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(cookieParser())
     this.app.use(setHeaders)
     this.app.use(cors())
     this.registerRoutes()
-    this.app.use(VARS.FILESTATIC, fileStatic)
     this.app.use(notFound)
     this.app.use(errorHandler)
   }
   async connectDB() {
     try {
       await connectDB()
-      MessageLOG.custom('.. CONNECTED', 'green')
+      MessageLOG.log(VARS.SERVERCONNECT)
     } catch (err) {
-      MessageLOG.error('FAILED TO CONNECT')
+      MessageLOG.error(VARS.FAILEDCONNECTION)
       MessageLOG.error(err)
     }
   }

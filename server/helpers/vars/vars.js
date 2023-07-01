@@ -22,10 +22,15 @@ const VARS = {
   // PayPal
   PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID,
   // File
-  FILE_: 'tolbytechImg',
+  FILE_: 'image',
   FILETYPES: /jpg|jpeg|png/,
   FILEOUTPUT: 'uploads/',
   FILESTATIC: '/uploads',
+  HARDCODEPATH: 'ui/public/uploads/',
+
+  // server connect to database
+  SERVERCONNECT: '.. CONNECTED',
+  FAILEDCONNECTION: 'FAILED TO CONNECT TO DATABASE',
 }
 
 export default VARS

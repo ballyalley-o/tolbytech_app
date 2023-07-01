@@ -42,7 +42,6 @@ import ForgotPasswordScreen from './screens/Auth/ForgotPasswordScreen.jsx'
 import AccountScreen from './screens/Accounts/AccountScreen.jsx'
 // @defaults
 import NotFound from './screens/defaults/NotFound.jsx'
-
 import './assets/css/index.css'
 
 const router = createBrowserRouter(

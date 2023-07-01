@@ -1,7 +1,8 @@
-import { StatusCodes } from 'http-status-codes'
-import { getReasonPhrase } from 'http-status-codes'
 import asyncHandler from '../middleware/async-handler.js'
 import Product from '../models/Product.js'
+import { unlinkDelete } from '../helpers/unlink-delete.js'
+import { StatusCodes } from 'http-status-codes'
+import { getReasonPhrase } from 'http-status-codes'
 import { defaultResponse } from '../helpers/static.js'
 
 // @desc    fetch all products
@@ -84,8 +85,14 @@ const updateProduct = asyncHandler(async (req, res, next) => {
     product.numReviews = numReviews
     product.description = description
 
+    // if (req.body.image) {
+    //   unlinkDelete(product.image)
+    //   product.image = image
+    // }
+
     const updatedProduct = await product.save()
     console.log('updatedProduct', updatedProduct)
+
     res
       .status(StatusCodes.OK)
       .send(defaultResponse(StatusCodes.OK, 'PRODUCTS UPDATED', updatedProduct))

@@ -10,6 +10,7 @@ const productRoutes = productRouter
 const userRoutes = userRouter
 const orderRoutes = orderRouter
 const authRoutes = authRouter
+const uploadRoutes = uploadRouter
 
 export const linkRoutes = (app, API_ROOT) => {
   const rootPath = `${API_ROOT}`
@@ -18,7 +19,7 @@ export const linkRoutes = (app, API_ROOT) => {
   app.use(`${rootPath}/users`, userRoutes)
   app.use(`${rootPath}/orders`, orderRoutes)
   app.use(`${rootPath}/auth`, authRoutes)
-  app.use(`${rootPath}/upload`, uploadRouter)
+  app.use(`${rootPath}/upload`, uploadRoutes)
 }
 
 export const payPalRoute = (app, API_ROOT) => {
