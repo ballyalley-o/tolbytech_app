@@ -28,6 +28,7 @@ import MultiInputViewField from '../../components/Forms/MultiInputViewField'
 import InputDescField from '../../components/Forms/InputDescField'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import SnackAlert from '../../components/SnackAlert'
+import useSnack from '../../hooks/useSnack/useSnack'
 import Rating from '../../components/Rating'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
@@ -39,6 +40,7 @@ import {
   useCreateReviewMutation,
 } from '../../slices/products-slice'
 import { addToCart } from '../../slices/cart-slice'
+import { set } from 'mongoose'
 
 const ProductDetailScreen = () => {
   const { id: productId } = useParams()
@@ -49,6 +51,7 @@ const ProductDetailScreen = () => {
   const [qty, setQty] = useState(1)
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
+  const { severity, setSeverity, handleSnackClose } = useSnack()
 
   const {
     data: product,
@@ -74,12 +77,14 @@ const ProductDetailScreen = () => {
         comment,
       }).unwrap()
       refetch()
-      setSnackOpen(Snacks.REVIEWED, { severity: 'success' })
-      handleHideDuration(3000)
+      setSnackOpen(Snacks.REVIEWED)
+      setSeverity('success')
       setRating(0)
       setComment('')
+      handleHideDuration(3000)
     } catch (error) {
-      setSnackOpen(error?.data?.message || error.error, { severity: 'error' })
+      setSnackOpen(error?.data?.message || error.error)
+      setSeverity('error')
       handleHideDuration(3000)
     }
   }
@@ -99,12 +104,12 @@ const ProductDetailScreen = () => {
       {snackOpen && (
         <SnackAlert
           open={snackOpen}
-          onClose={() => setSnackOpen(null)}
-          message={snackOpen}
+          onClose={handleSnackClose}
+          severity={severity}
           transition="left"
           horizontal="right"
           vertical="top"
-          duration={2000}
+          duration={3000}
         >
           {snackOpen}
         </SnackAlert>
@@ -240,6 +245,7 @@ const ProductDetailScreen = () => {
                               {review.name}
                             </Typography>
                           </Grid>
+                          <Divider sx={{ py: 1 }} />
                           <Grid item md={12}>
                             <Rating value={review.rating} />
 
