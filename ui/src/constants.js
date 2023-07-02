@@ -59,6 +59,7 @@ export const CLIENT = {
 
   // @root: TECH
   TECH_URL: PATH_TECH.ROOT,
+  TECH_PAGE: PATH_TECH.PAGE,
 
   // @root: TALKS
   TALKS_URL: PATH_TALKS.ROOT,

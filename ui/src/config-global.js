@@ -54,6 +54,9 @@ export const CONFIG = {
   PAYPAL_URL: '/api/v1/config/paypal',
   UPLOAD_URL: '/api/v1/upload',
 
+  // Tech sublinks
+  CLIENT_TECH_URL: '/page/:pageNumber',
+
   // Product sublinks
   CLIENT_PRODUCT_URL: '/:id',
   CLIENT_PRODUCTS_URL: '/:id/edit',
@@ -135,6 +138,7 @@ export const PATH_ADMIN = {
 
 export const PATH_TECH = {
   ROOT: ROOT_TECH,
+  PAGE: path(ROOT_TECH, CONFIG.CLIENT_TECH_URL),
 }
 
 export const PATH_TALKS = {

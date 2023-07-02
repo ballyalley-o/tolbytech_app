@@ -1,16 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 import Product from '../../components/Product'
 import { CONFIG } from '../../config-global'
 import { useGetProductsQuery } from '../../slices/products-slice'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import Footer from '../../components/Footer'
+import Heading from '../../components/Heading'
 
 const TechScreen = () => {
-  const { data: products, isLoading, error } = useGetProductsQuery()
+  const { pageNumber } = useParams()
+  const { data, isLoading, error } = useGetProductsQuery({ pageNumber })
 
   return (
     <>
@@ -26,23 +29,10 @@ const TechScreen = () => {
       ) : (
         <>
           <Grid container spacing={2}>
-            <Grid item lg={12}>
-              <Grid item lg={8}>
-                <Typography variant="h3" pr={3} py={3} fontWeight="bold">
-                  Tech.
-                  <Typography
-                    variant="h3"
-                    fontWeight="bold"
-                    sx={{ color: 'gray.main', display: 'inline-flex' }}
-                  >
-                    Shop
-                  </Typography>
-                </Typography>
-              </Grid>
-            </Grid>
+            <Heading title="Tech." subTitle="Shop" />
             <Grid item lg={12}>
               <Grid container justifyContent="space-evenly">
-                {products?.response.map((product) => {
+                {data.response.products?.map((product) => {
                   return (
                     <Grid
                       item
