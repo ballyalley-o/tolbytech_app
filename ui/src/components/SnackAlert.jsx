@@ -10,6 +10,7 @@ const SnackAlert = ({
   transition,
   vertical,
   horizontal,
+  ...props
 }) => {
   function Transition(props) {
     return <Slide {...props} direction={transition} />
@@ -41,7 +42,6 @@ SnackAlert.propTypes = {
 }
 
 SnackAlert.defaultProps = {
-  severity: 'success',
   vertical: 'top',
   horizontal: 'right',
   transition: 'left',

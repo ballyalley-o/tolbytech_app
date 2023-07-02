@@ -58,9 +58,7 @@ export const CartButton = styled(Button)(({ theme, productCountInStock }) => ({
   width: '25%',
   '&:hover': {
     backgroundColor: '#1c252c',
-    transitionDelay: '0.4s',
-    easeIn: '0.8s',
-    easeOut: '0.8s',
+    color: theme.palette.text.primary,
   },
   disabled: {
     backgroundColor: 'red',
