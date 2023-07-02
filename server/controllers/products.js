@@ -9,22 +9,21 @@ import { defaultResponse } from '../helpers/static.js'
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res, next) => {
-  const pageSize = 4
+  // if user is admin
+  const pageSize = 8
   const page = Number(req.query.pageNumber) || 1
   const count = await Product.countDocuments()
 
   const products = await Product.find({})
     .limit(pageSize)
     .skip(pageSize * (page - 1))
-  res
-    .status(StatusCodes.OK)
-    .send(
-      defaultResponse(StatusCodes.OK, 'PRODUCTS FETCHED', {
-        products,
-        page,
-        pages: Math.ceil(count / pageSize),
-      })
-    )
+  res.status(StatusCodes.OK).send(
+    defaultResponse(StatusCodes.OK, 'PRODUCTS FETCHED', {
+      products,
+      page,
+      pages: Math.ceil(count / pageSize),
+    })
+  )
 })
 
 // @desc    fetch a product

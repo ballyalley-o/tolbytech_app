@@ -6,6 +6,7 @@ import { Grid } from '@mui/material'
 import Product from '../../components/Product'
 import { CONFIG } from '../../config-global'
 import { useGetProductsQuery } from '../../slices/products-slice'
+import Paginate from '../../components/Paginate'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import Footer from '../../components/Footer'
@@ -47,6 +48,12 @@ const TechScreen = () => {
                     </Grid>
                   )
                 })}
+              </Grid>
+              <Grid container justifyContent="center">
+                <Paginate
+                  pages={data.response.pages}
+                  page={data.response.page}
+                />
               </Grid>
             </Grid>
           </Grid>

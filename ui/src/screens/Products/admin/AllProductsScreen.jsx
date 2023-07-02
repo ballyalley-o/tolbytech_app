@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { useSelector } from 'react-redux'
 import {
@@ -19,19 +19,22 @@ import {
 import RowProduct from '../../../components/RowProduct'
 import { ButtonBase } from '../../../themes/styles/default-styled'
 import { useTheme } from '@mui/material/styles'
+import Paginate from '../../../components/Paginate.jsx'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import ConfirmDialog from '../../../components/ConfirmDialog.jsx'
 import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
 import SnackAlert from '../../../components/SnackAlert.jsx'
-import { set } from 'mongoose'
 
 const AllProductsScreen = () => {
+  const { pageNumber } = useParams()
   const [open, setOpen] = useState(false)
   const [snackOpen, setSnackOpen] = useState(null)
   const [dialogTitle, setDialogTitle] = useState('')
   const [dialogContent, setDialogContent] = useState('')
-  const { data: products, isLoading, error, refetch } = useGetProductsQuery()
+  const { data, isLoading, error, refetch } = useGetProductsQuery({
+    pageNumber,
+  })
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation()
   const [deleteProduct, { isLoading: loadingDelete }] =
@@ -81,7 +84,6 @@ const AllProductsScreen = () => {
     }, duration)
   }
 
-  console.log(products)
   return (
     <>
       <Helmet>
@@ -179,12 +181,20 @@ const AllProductsScreen = () => {
                 </TableRowHeaderBase>
               </TableHeadBase>
               <TableBody>
-                {products?.response.map((product) => (
+                {data?.response.products.map((product) => (
                   <RowProduct key={product._id} row={product} />
                 ))}
               </TableBody>
             </TableBase>
           </TableContainerBase>
+          <Grid container justifyContent="center" py={2}>
+            <Paginate
+              pages={data?.response.pages}
+              page={data?.response.page}
+              isAdmin={true}
+              adminRoot="products"
+            />
+          </Grid>
         </>
       )}
     </>

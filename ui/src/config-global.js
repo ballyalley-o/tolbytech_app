@@ -55,7 +55,7 @@ export const CONFIG = {
   UPLOAD_URL: '/api/v1/upload',
 
   // Tech sublinks
-  CLIENT_TECH_URL: '/page/:pageNumber',
+  CLIENT_TECH_URL: '/:pageNumber',
 
   // Product sublinks
   CLIENT_PRODUCT_URL: '/:id',
@@ -84,6 +84,7 @@ export const CONFIG = {
   CLIENT_ADMIN_USERS_URL: '/users',
   CLIENT_ADMIN_USER_EDIT_URL: '/users/:id/edit',
   CLIENT_ADMIN_PRODUCTS_URL: '/products',
+  CLIENT_ADMIN_PRODUCTS_PAGES_URL: '/products/:pageNumber',
   CLIENT_ADMIN_PRODUCT_EDIT_URL: '/products/:id/edit',
 
   // Rules sublinks
@@ -132,6 +133,7 @@ export const PATH_ADMIN = {
   ORDERS: path(ROOT_ADMIN, ROOT_ORDERS),
   USERS: path(ROOT_ADMIN, ROOT_USERS),
   PRODUCTS: path(ROOT_ADMIN, ROOT_PRODUCTS),
+  PRODUCTS_PAGE: path(ROOT_ADMIN, CONFIG.CLIENT_ADMIN_PRODUCTS_PAGES_URL),
   EDIT: path(ROOT_ADMIN, CONFIG.CLIENT_ADMIN_PRODUCT_EDIT_URL),
   EDITUSER: path(ROOT_ADMIN, CONFIG.CLIENT_ADMIN_USER_EDIT_URL),
 }
