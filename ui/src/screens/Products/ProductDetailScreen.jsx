@@ -24,6 +24,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import Rating from '../../components/Rating'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
+import BackButton from '../../components/BackButton'
 import { CLIENT } from '../../constants'
 import { useDispatch } from 'react-redux'
 import { useGetProductDetailsQuery } from '../../slices/products-slice'
@@ -51,13 +52,7 @@ const ProductDetailScreen = () => {
       <Helmet>
         <title>{product?.name}</title>
       </Helmet>
-      <Link to="/">
-        <Button>
-          <KeyboardDoubleArrowLeftIcon />
-          <Typography>Go Back</Typography>
-        </Button>
-      </Link>
-
+      <BackButton to="/" />
       {isLoading ? (
         <Loader />
       ) : error ? (

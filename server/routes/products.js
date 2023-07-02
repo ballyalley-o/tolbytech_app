@@ -12,8 +12,13 @@ router
 router
   .route('/:id')
   .get(productsController.getProduct)
+
   .put(protect, admin, productsController.updateProduct)
   .delete(protect, admin, productsController.deleteProduct)
+
+router
+  .route('/:id/reviews')
+  .post(protect, productsController.createProductReview)
 
 const productRouter = router
 export default productRouter

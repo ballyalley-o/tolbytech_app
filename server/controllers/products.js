@@ -118,12 +118,53 @@ const deleteProduct = asyncHandler(async (req, res, next) => {
     throw new Error(getReasonPhrase(StatusCodes.NOT_FOUND))
   }
 })
+
+// @desc    Create new review
+// @route   POST /api/products/:id/reviews
+// @access  Private
+const createProductReview = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id)
+  const { rating, comment } = req.body
+
+  if (product) {
+    const reviewed = product.reviews.find(
+      (review) => review.user.toString() === req.user._id.toString()
+    )
+    if (reviewed) {
+      res.status(StatusCodes.NOT_FOUND)
+      throw new Error('PRODUCT ALREADY REVIEWED')
+    }
+
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+    }
+
+    product.reviews.push(review)
+    product.numReviews = product.reviews.length
+    product.rating =
+      product.reviews.reduce((acc, review) => acc + review.rating, 0) /
+      product.reviews.length
+
+    await product.save()
+    res
+      .status(StatusCodes.CREATED)
+      .send(defaultResponse(StatusCodes.CREATED, 'PRODUCT REVIEWED', review))
+  } else {
+    res.status(StatusCodes.NOT_FOUND)
+    throw new Error(getReasonPhrase(StatusCodes.NOT_FOUND))
+  }
+})
+
 const productsController = {
   getProducts,
   getProduct,
   createProduct,
   updateProduct,
   deleteProduct,
+  createProductReview,
 }
 
 export default productsController
