@@ -11,7 +11,6 @@ import { ButtonBase } from '../../themes/styles/default-styled'
 import theme from '../../themes/theme'
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline'
 import SnackAlert from '../SnackAlert'
-import { toast } from 'react-toastify'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Loader from '../Loader'
 

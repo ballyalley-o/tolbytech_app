@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import {
   useUpdateProductMutation,
@@ -9,7 +9,6 @@ import {
 } from '../../../slices/products-slice'
 import {
   FormControl,
-  Button,
   Typography,
   FormGroup,
   Grid,
@@ -17,11 +16,11 @@ import {
   InputBase,
 } from '@mui/material'
 import { ButtonBase } from '../../../themes/styles/default-styled'
-import { FormBoxTitle } from '../../../themes/styles/auth-styled'
 import { CLIENT } from '../../../constants'
 import { AdminHeading } from '../../../components/Heading'
 import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
+import BackButton from '../../../components/BackButton'
 import { toast } from 'react-toastify'
 import InputViewField from '../../../components/Forms/InputViewField'
 import MultiInputViewField from '../../../components/Forms/MultiInputViewField'
@@ -128,14 +127,9 @@ const EditProductsScreen = () => {
   return (
     <>
       <Helmet>
-        <title>{`Edit ${product?.name}`}</title>
+        <title>{`Admin | Edit ${product?.name}`}</title>
       </Helmet>
-      <Link to={CLIENT.ADMIN_PRODUCTS_URL}>
-        <Button>
-          <KeyboardDoubleArrowLeftIcon />
-          <Typography>Go Back</Typography>
-        </Button>
-      </Link>
+      <BackButton to={CLIENT.ADMIN_PRODUCTS_URL} />
       {snackOpen && (
         <SnackAlert
           open={snackOpen}
@@ -153,13 +147,6 @@ const EditProductsScreen = () => {
       <Grid container direction="column">
         <AdminHeading title="Update Product" />
         <Divider />
-        {/* <Grid item md={12} my={2}>
-          <FormBoxTitle>
-            <Typography variant="h2">Update Product</Typography>
-          </FormBoxTitle>
-          <Divider />
-        </Grid> */}
-
         {loadingUpdate && <Loader />}
         {isLoading ? (
           <Loader />

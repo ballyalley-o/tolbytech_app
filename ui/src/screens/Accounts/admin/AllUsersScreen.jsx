@@ -56,20 +56,8 @@ const AllUsersScreen = () => {
                 </TableRowHeaderBase>
               </TableHeadBase>
               <TableBody>
-                {users.response.map((user) => (
-                  <RowUsers
-                    key={user._id}
-                    row={user}
-
-                    // content={
-                    //   <OrderViewAccounts
-                    //     order={user}
-                    //     error={error}
-                    //     // user={user.user}
-                    //     adminOrder
-                    //   />
-                    // }
-                  />
+                {users?.response.map((user) => (
+                  <RowUsers key={user._id} row={user} />
                 ))}
               </TableBody>
             </TableBase>
