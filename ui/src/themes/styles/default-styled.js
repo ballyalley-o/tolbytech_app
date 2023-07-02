@@ -55,7 +55,6 @@ export const LinkBase = styled(Link)(({ theme }) => ({
 }))
 
 export const InputBase = styled(OutlinedInput)(({ theme }) => ({
-  py: 0,
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
       borderColor: '#000',
@@ -169,6 +168,17 @@ export const StyledGrid = styled(Grid)(({ theme }) => ({
   display: 'flex',
   alignContent: 'center',
   justifyContent: 'center',
+}))
+
+//  login box
+export const StyledLoginBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '80vh',
+  width: '100%',
+  backgroundColor: '#fff',
+  borderRadius: '1rem',
 }))
 
 // export const InputBase = styled(TextField)(({ theme }) => ({

@@ -57,6 +57,7 @@ export const CONFIG = {
   // Product sublinks
   CLIENT_PRODUCT_URL: '/:id',
   CLIENT_PRODUCTS_URL: '/:id/edit',
+  CLIENT_REVIEWS_URL: '/:id/reviews',
 
   // Auth sublinks
   CLIENT_REGISTER_URL: '/register',
@@ -120,6 +121,7 @@ export const PATH_BAG = {
 export const PATH_PRODUCTS = {
   ROOT: ROOT_PRODUCTS,
   PRODUCT: path(ROOT_PRODUCTS, CONFIG.CLIENT_PRODUCT_URL),
+  REVIEWS: path(ROOT_PRODUCTS, CONFIG.CLIENT_REVIEWS_URL),
 }
 
 export const PATH_ADMIN = {
@@ -128,6 +130,7 @@ export const PATH_ADMIN = {
   USERS: path(ROOT_ADMIN, ROOT_USERS),
   PRODUCTS: path(ROOT_ADMIN, ROOT_PRODUCTS),
   EDIT: path(ROOT_ADMIN, CONFIG.CLIENT_ADMIN_PRODUCT_EDIT_URL),
+  EDITUSER: path(ROOT_ADMIN, CONFIG.CLIENT_ADMIN_USER_EDIT_URL),
 }
 
 export const PATH_TECH = {

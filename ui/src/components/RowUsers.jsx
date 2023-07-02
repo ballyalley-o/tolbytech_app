@@ -69,6 +69,7 @@ export default function RowUsers(props) {
           <UserIcons row={row} />
         </TableHeadCellBase>
       </TableRow>
+
       <TableRow>
         <TableCellBase style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
           <CollapseBase in={open} timeout="auto" unmountOnExit>
@@ -95,11 +96,6 @@ RowUsers.propTypes = {
     email: PropTypes.string,
     isAdmin: PropTypes.bool,
   }).isRequired,
-  //   user: PropTypes.shape({
-  //     _id: PropTypes.string,
-  //     name: PropTypes.string,
-  //     email: PropTypes.string,
-  //   }),
   onClick: PropTypes.func,
   content: PropTypes.node,
   customer: PropTypes.bool,

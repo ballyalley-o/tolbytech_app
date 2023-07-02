@@ -28,16 +28,23 @@ export const FILE_ = CONFIG.FILE_
 
 // Server ROUTES
 export const SERVER_URL = CONFIG.SERVER_URL
+
 export const PRODUCTS_URL = CONFIG.PRODUCTS_URL
 export const PRODUCT_DETAILS_URL = CONFIG.PRODUCT_DETAILS_URL
+
 export const USERS_URL = CONFIG.USERS_URL
 export const ACCOUNT_URL = CONFIG.ACCOUNT_URL
 export const AUTH_URL = CONFIG.AUTH_URL
+
 export const ORDERS_URL = CONFIG.ORDERS_URL
+
 export const TECH_URL = CONFIG.TECH_URL
+
 export const TALKS_URL = CONFIG.TALKS_URL
+
 export const CHECKOUT_AUTH_CHECK = CONFIG.CHECKOUT_AUTH_CHECK
 export const PAYPAL_URL = CONFIG.PAYPAL_URL
+
 export const UPLOAD_URL = CONFIG.UPLOAD_URL
 
 // Client ROUTES
@@ -48,6 +55,7 @@ export const CLIENT = {
   // @root: PRODUCTS
   PRODUCTS_URL: PATH_PRODUCTS.ROOT,
   PRODUCT_URL: PATH_PRODUCTS.PRODUCT,
+  REVIEWS_URL: PATH_PRODUCTS.REVIEWS,
 
   // @root: TECH
   TECH_URL: PATH_TECH.ROOT,
@@ -78,6 +86,7 @@ export const CLIENT = {
   ADMIN_USERS_URL: PATH_ADMIN.USERS,
   ADMIN_PRODUCTS_URL: PATH_ADMIN.PRODUCTS,
   ADMIN_EDIT_URL: PATH_ADMIN.EDIT,
+  ADMIN_EDITUSER_URL: PATH_ADMIN.EDITUSER,
 
   // @root: ACCOUNT
   ACCOUNT_URL: PATH_ACCOUNT.ROOT,
@@ -119,4 +128,12 @@ export const StatusMsg = {
   // @root: OrderScreen: Payment
   NOTPAID: 'NOT PAID',
   PAID: 'PAID',
+}
+
+export const Snacks = {
+  // @root EditUsersScreen: Update
+  UPDATED: 'USER UPDATED',
+
+  // @root ProductDetailsScreen: Review
+  REVIEWED: 'REVIEW SUBMITTED',
 }

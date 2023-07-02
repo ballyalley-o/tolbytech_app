@@ -22,10 +22,12 @@ import {
   Container,
   InputAdornment,
   IconButton,
-  OutlinedInput,
   InputLabel,
 } from '@mui/material'
-import { InputBase } from '../../themes/styles/default-styled.js'
+import {
+  InputBase,
+  StyledLoginBox,
+} from '../../themes/styles/default-styled.js'
 import FormContainer from '../../components/FormContainer'
 import LoginGreeting from '../defaults/LoginGreeting'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
@@ -108,18 +110,7 @@ const LoginScreen = () => {
           </SnackAlert>
         )}
         <Grid item sm={12} lg={4} gap={2}>
-          <Box
-            sx={{
-              display: 'flex',
-
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '80vh',
-              width: '100%',
-              backgroundColor: '#fff',
-              borderRadius: '1rem',
-            }}
-          >
+          <StyledLoginBox>
             <FormContainer>
               <Box marginTop={-8}>
                 {isLoading ? (
@@ -264,7 +255,7 @@ const LoginScreen = () => {
                 </Grid>
               </Grid>
             </FormContainer>
-          </Box>
+          </StyledLoginBox>
         </Grid>
       </Grid>
     </>

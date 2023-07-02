@@ -1,15 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import {
   useUpdateProductMutation,
   useGetProductDetailsQuery,
   useUploadProductImageMutation,
 } from '../../../slices/products-slice'
-import { Helmet } from 'react-helmet-async'
 import {
   FormControl,
-  Button,
   Typography,
   FormGroup,
   Grid,
@@ -17,15 +16,16 @@ import {
   InputBase,
 } from '@mui/material'
 import { ButtonBase } from '../../../themes/styles/default-styled'
-import { FormBoxTitle } from '../../../themes/styles/auth-styled'
 import { CLIENT } from '../../../constants'
+import { AdminHeading } from '../../../components/Heading'
 import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
+import BackButton from '../../../components/BackButton'
+import { toast } from 'react-toastify'
 import InputViewField from '../../../components/Forms/InputViewField'
 import MultiInputViewField from '../../../components/Forms/MultiInputViewField'
 import InputUploadField from '../../../components/Forms/InputUploadField'
 import SnackAlert from '../../../components/SnackAlert'
-import { toast } from 'react-toastify'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 
 const EditProductsScreen = () => {
@@ -99,7 +99,6 @@ const EditProductsScreen = () => {
       }
       const result = await updateProduct(updatedProduct)
       toast.success('Product Updated', { position: 'top-center' })
-      console.log('image : ', image)
       // handleHideDuration(3000)
       refetch()
       navigate(CLIENT.ADMIN_PRODUCTS_URL)
@@ -128,14 +127,9 @@ const EditProductsScreen = () => {
   return (
     <>
       <Helmet>
-        <title>{`Edit ${product?.name}`}</title>
+        <title>{`Admin | Edit ${product?.name}`}</title>
       </Helmet>
-      <Link to={CLIENT.ADMIN_PRODUCTS_URL}>
-        <Button>
-          <KeyboardDoubleArrowLeftIcon />
-          <Typography>Go Back</Typography>
-        </Button>
-      </Link>
+      <BackButton to={CLIENT.ADMIN_PRODUCTS_URL} />
       {snackOpen && (
         <SnackAlert
           open={snackOpen}
@@ -151,20 +145,15 @@ const EditProductsScreen = () => {
         </SnackAlert>
       )}
       <Grid container direction="column">
-        <Grid item md={12} my={2}>
-          <FormBoxTitle>
-            <Typography variant="h2">Update Product</Typography>
-          </FormBoxTitle>
-          <Divider />
-        </Grid>
-
+        <AdminHeading title="Update Product" />
+        <Divider />
         {loadingUpdate && <Loader />}
         {isLoading ? (
           <Loader />
         ) : error ? (
           <Message variant="danger">{error?.message}</Message>
         ) : (
-          <Grid item md={12}>
+          <Grid item md={12} py={2}>
             <FormControl component="form" onSubmit={handleSubmit}>
               <FormGroup>
                 <Grid container direction="row" justifyContent="center" gap={4}>
