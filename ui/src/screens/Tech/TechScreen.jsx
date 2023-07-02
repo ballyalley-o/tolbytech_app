@@ -53,6 +53,7 @@ const TechScreen = () => {
                 <Paginate
                   pages={data.response.pages}
                   page={data.response.page}
+                  root="tech"
                 />
               </Grid>
             </Grid>

@@ -4,7 +4,13 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Pagination, PaginationItem, Stack } from '@mui/material'
 
-export default function Paginate({ pages, page, adminRoot, isAdmin = false }) {
+export default function Paginate({
+  pages,
+  page,
+  root,
+  adminRoot,
+  isAdmin = false,
+}) {
   return (
     pages > 1 && (
       <Stack spacing={2}>
@@ -17,7 +23,7 @@ export default function Paginate({ pages, page, adminRoot, isAdmin = false }) {
               component={Link}
               to={
                 !isAdmin
-                  ? `/tech/${x.page === 1 ? '' : `${x.page}`}`
+                  ? `/${root}/${x.page === 1 ? '' : `${x.page}`}`
                   : `/admin/${adminRoot}/${x.page}`
               }
               {...x}
@@ -34,5 +40,6 @@ Paginate.propTypes = {
   pages: PropTypes.string,
   page: PropTypes.string,
   isAdmin: PropTypes.bool,
+  root: PropTypes.string,
   adminRoot: PropTypes.string,
 }
