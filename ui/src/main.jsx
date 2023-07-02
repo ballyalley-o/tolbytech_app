@@ -52,6 +52,8 @@ const router = createBrowserRouter(
       <Route index={true} path={CLIENT.HOME_URL} element={<HomeScreen />} />
       <Route path={CLIENT.TECH_URL} element={<TechScreen />} />
       <Route path={CLIENT.TECH_PAGE} element={<TechScreen />} />
+      <Route path={CLIENT.SEARCH} element={<TechScreen />} />
+      <Route path={CLIENT.SEARCH_PAGE} element={<TechScreen />} />
       <Route path={CLIENT.PRODUCT_URL} element={<ProductDetailScreen />} />
       <Route path={CLIENT.TALKS_URL} element={<TalksScreen />} />
       <Route path={CLIENT.BAG_URL} element={<BagScreen />} />

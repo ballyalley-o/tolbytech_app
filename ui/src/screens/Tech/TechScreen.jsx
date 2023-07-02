@@ -13,8 +13,11 @@ import Footer from '../../components/Footer'
 import Heading from '../../components/Heading'
 
 const TechScreen = () => {
-  const { pageNumber } = useParams()
-  const { data, isLoading, error } = useGetProductsQuery({ pageNumber })
+  const { keyword, pageNumber } = useParams()
+  const { data, isLoading, error } = useGetProductsQuery({
+    keyword,
+    pageNumber,
+  })
 
   return (
     <>
@@ -54,6 +57,7 @@ const TechScreen = () => {
                   pages={data.response.pages}
                   page={data.response.page}
                   root="tech"
+                  keyword={keyword ? keyword : ''}
                 />
               </Grid>
             </Grid>

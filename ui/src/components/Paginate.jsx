@@ -9,6 +9,7 @@ export default function Paginate({
   page,
   root,
   adminRoot,
+  keyword = '',
   isAdmin = false,
 }) {
   return (
@@ -23,7 +24,9 @@ export default function Paginate({
               component={Link}
               to={
                 !isAdmin
-                  ? `/${root}/${x.page === 1 ? '' : `${x.page}`}`
+                  ? keyword
+                    ? `/${root}/search/${keyword}/${x.page === 1 ? '' : x.page}`
+                    : `/${root}/${x.page === 1 ? '' : `${x.page}`}`
                   : `/admin/${adminRoot}/${x.page}`
               }
               {...x}
@@ -42,4 +45,5 @@ Paginate.propTypes = {
   isAdmin: PropTypes.bool,
   root: PropTypes.string,
   adminRoot: PropTypes.string,
+  keyword: PropTypes.string,
 }

@@ -61,6 +61,9 @@ export const CONFIG = {
   CLIENT_PRODUCT_URL: '/:id',
   CLIENT_PRODUCTS_URL: '/:id/edit',
   CLIENT_REVIEWS_URL: '/:id/reviews',
+  // will be implementing in tech just for now, will be setting up a Products page later
+  CLIENT_SEARCH_URL: '/search/:keyword',
+  CLIENT_SEARCH_PAGE_URL: '/search/:keyword/:pageNumber',
 
   // Auth sublinks
   CLIENT_REGISTER_URL: '/register',
@@ -141,6 +144,9 @@ export const PATH_ADMIN = {
 export const PATH_TECH = {
   ROOT: ROOT_TECH,
   PAGE: path(ROOT_TECH, CONFIG.CLIENT_TECH_URL),
+  // will be implementing in tech just for now, will be setting up a Products page later ________
+  SEARCH: path(ROOT_TECH, CONFIG.CLIENT_SEARCH_URL),
+  SEARCH_PAGE: path(ROOT_TECH, CONFIG.CLIENT_SEARCH_PAGE_URL),
 }
 
 export const PATH_TALKS = {
