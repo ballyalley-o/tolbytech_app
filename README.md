@@ -80,19 +80,30 @@ client
 - [x] **redux-slices**
 - [x] **redux-toolkit**
 - [x] **redux-actions**
-- [ ] **redux-thunk**
+- [x] **redux-thunk**
 - [x] **redux-paypal**
 
 server
 - [x] **admin**
 - [x] **product**
 - [x] **user**
-- [ ] **order**
+- [x] **order**
 - [x] **payment**
-- [ ] **paypal**
+- [x] **paypal**
 - [ ] **blog**
 - [ ] **contact**
 - [x] **peerdata**
 - [ ] **wishlist**
 
 <hr>
+
+<sub>
+v0.0.2
+</sub>
+
+<br/>
+
+client
+
+- [ ] **stripe**
+- [ ] **user avatar**
