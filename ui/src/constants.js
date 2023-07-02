@@ -59,6 +59,9 @@ export const CLIENT = {
 
   // @root: TECH
   TECH_URL: PATH_TECH.ROOT,
+  TECH_PAGE: PATH_TECH.PAGE,
+  SEARCH: PATH_TECH.SEARCH,
+  SEARCH_PAGE: PATH_TECH.SEARCH_PAGE,
 
   // @root: TALKS
   TALKS_URL: PATH_TALKS.ROOT,
@@ -85,6 +88,7 @@ export const CLIENT = {
   ADMIN_ORDERS_URL: PATH_ADMIN.ORDERS,
   ADMIN_USERS_URL: PATH_ADMIN.USERS,
   ADMIN_PRODUCTS_URL: PATH_ADMIN.PRODUCTS,
+  ADMIN_PRODUCTS_PAGE_URL: PATH_ADMIN.PRODUCTS_PAGE,
   ADMIN_EDIT_URL: PATH_ADMIN.EDIT,
   ADMIN_EDITUSER_URL: PATH_ADMIN.EDITUSER,
 
@@ -137,3 +141,10 @@ export const Snacks = {
   // @root ProductDetailsScreen: Review
   REVIEWED: 'REVIEW SUBMITTED',
 }
+
+export const Types = {
+  // @root: Nav
+  SEARCH: 'Search Tolby.co.nz',
+}
+
+export const Errors = {}

@@ -1,22 +1,32 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 import Product from '../../components/Product'
 import { CONFIG } from '../../config-global'
 import { useGetProductsQuery } from '../../slices/products-slice'
+import Paginate from '../../components/Paginate'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import Footer from '../../components/Footer'
+import Heading from '../../components/Heading'
+import BackButton from '../../components/BackButton'
+import { CLIENT } from '../../constants'
 
 const TechScreen = () => {
-  const { data: products, isLoading, error } = useGetProductsQuery()
+  const { keyword, pageNumber } = useParams()
+  const { data, isLoading, error } = useGetProductsQuery({
+    keyword,
+    pageNumber,
+  })
 
   return (
     <>
       <Helmet>
         <title>Techs</title>
       </Helmet>
+
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -26,23 +36,19 @@ const TechScreen = () => {
       ) : (
         <>
           <Grid container spacing={2}>
-            <Grid item lg={12}>
-              <Grid item lg={8}>
-                <Typography variant="h3" pr={3} py={3} fontWeight="bold">
-                  Tech.
-                  <Typography
-                    variant="h3"
-                    fontWeight="bold"
-                    sx={{ color: 'gray.main', display: 'inline-flex' }}
-                  >
-                    Shop
-                  </Typography>
-                </Typography>
+            {keyword ? (
+              <Grid container justifyContent="flex-start">
+                <Grid item p={2}>
+                  <BackButton variant="outlined" to={CLIENT.TECH_URL} />
+                </Grid>
+                <Heading title="Search Results for: " subTitle={keyword} />
               </Grid>
-            </Grid>
+            ) : (
+              <Heading title="Tech." subTitle="Shop" />
+            )}
             <Grid item lg={12}>
               <Grid container justifyContent="space-evenly">
-                {products?.response.map((product) => {
+                {data.response.products?.map((product) => {
                   return (
                     <Grid
                       item
@@ -57,6 +63,14 @@ const TechScreen = () => {
                     </Grid>
                   )
                 })}
+              </Grid>
+              <Grid container justifyContent="center">
+                <Paginate
+                  pages={data.response.pages}
+                  page={data.response.page}
+                  root="tech"
+                  keyword={keyword ? keyword : ''}
+                />
               </Grid>
             </Grid>
           </Grid>

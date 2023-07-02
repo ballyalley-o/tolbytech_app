@@ -51,6 +51,9 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} path={CLIENT.HOME_URL} element={<HomeScreen />} />
       <Route path={CLIENT.TECH_URL} element={<TechScreen />} />
+      <Route path={CLIENT.TECH_PAGE} element={<TechScreen />} />
+      <Route path={CLIENT.SEARCH} element={<TechScreen />} />
+      <Route path={CLIENT.SEARCH_PAGE} element={<TechScreen />} />
       <Route path={CLIENT.PRODUCT_URL} element={<ProductDetailScreen />} />
       <Route path={CLIENT.TALKS_URL} element={<TalksScreen />} />
       <Route path={CLIENT.BAG_URL} element={<BagScreen />} />
@@ -75,6 +78,10 @@ const router = createBrowserRouter(
         <Route path={CLIENT.ADMIN_EDIT_URL} element={<EditProductsScreen />} />
         <Route
           path={CLIENT.ADMIN_PRODUCTS_URL}
+          element={<AllProductsScreen />}
+        />
+        <Route
+          path={CLIENT.ADMIN_PRODUCTS_PAGE_URL}
           element={<AllProductsScreen />}
         />
       </Route>

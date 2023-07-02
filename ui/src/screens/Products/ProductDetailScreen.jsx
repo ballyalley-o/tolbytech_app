@@ -231,37 +231,37 @@ const ProductDetailScreen = () => {
               <List>
                 {product.reviews.map((review) => (
                   <>
-                    <Card sx={{ my: 2 }}>
-                      <ListItem
-                        key={review._id}
-                        // sx={{
-                        //   border: '1px solid #ccc',
-                        //   borderRadius: '5px',
-                        // }}
-                      >
-                        <Grid container direction="row" spacing={3}>
-                          <Grid item md={12}>
-                            <Typography variant="h5" fontWeight="bold">
-                              {review.name}
-                            </Typography>
-                          </Grid>
-                          <Divider sx={{ py: 1 }} />
-                          <Grid item md={12}>
-                            <Rating value={review.rating} />
-
-                            <Typography variant="body2">
-                              {review.createdAt.substring(0, 10)}
-                            </Typography>
-                          </Grid>
-                          <Grid item md={12}>
-                            <Typography variant="body1">
-                              {review.comment}
-                            </Typography>
-                          </Grid>
+                    {/* <Card sx={{ my: 2 }}> */}
+                    <ListItem
+                      key={review._id}
+                      sx={{
+                        border: '1px solid #ccc',
+                        borderRadius: '5px',
+                      }}
+                    >
+                      <Grid container direction="row" spacing={3}>
+                        <Grid item md={12}>
+                          <Typography variant="h5" fontWeight="bold">
+                            {review.name}
+                          </Typography>
                         </Grid>
-                      </ListItem>
-                      <Divider sx={{ py: 1 }} />
-                    </Card>
+                        <Divider sx={{ py: 1 }} />
+                        <Grid item md={12}>
+                          <Rating value={review.rating} />
+
+                          <Typography variant="body2">
+                            {review.createdAt.substring(0, 10)}
+                          </Typography>
+                        </Grid>
+                        <Grid item md={12}>
+                          <Typography variant="body1">
+                            {review.comment}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                    <Divider sx={{ py: 1 }} />
+                    {/* </Card> */}
                   </>
                 ))}
               </List>

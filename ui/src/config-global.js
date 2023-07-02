@@ -54,10 +54,16 @@ export const CONFIG = {
   PAYPAL_URL: '/api/v1/config/paypal',
   UPLOAD_URL: '/api/v1/upload',
 
+  // Tech sublinks
+  CLIENT_TECH_URL: '/:pageNumber',
+
   // Product sublinks
   CLIENT_PRODUCT_URL: '/:id',
   CLIENT_PRODUCTS_URL: '/:id/edit',
   CLIENT_REVIEWS_URL: '/:id/reviews',
+  // will be implementing in tech just for now, will be setting up a Products page later
+  CLIENT_SEARCH_URL: '/search/:keyword',
+  CLIENT_SEARCH_PAGE_URL: '/search/:keyword/:pageNumber',
 
   // Auth sublinks
   CLIENT_REGISTER_URL: '/register',
@@ -81,6 +87,7 @@ export const CONFIG = {
   CLIENT_ADMIN_USERS_URL: '/users',
   CLIENT_ADMIN_USER_EDIT_URL: '/users/:id/edit',
   CLIENT_ADMIN_PRODUCTS_URL: '/products',
+  CLIENT_ADMIN_PRODUCTS_PAGES_URL: '/products/:pageNumber',
   CLIENT_ADMIN_PRODUCT_EDIT_URL: '/products/:id/edit',
 
   // Rules sublinks
@@ -129,12 +136,17 @@ export const PATH_ADMIN = {
   ORDERS: path(ROOT_ADMIN, ROOT_ORDERS),
   USERS: path(ROOT_ADMIN, ROOT_USERS),
   PRODUCTS: path(ROOT_ADMIN, ROOT_PRODUCTS),
+  PRODUCTS_PAGE: path(ROOT_ADMIN, CONFIG.CLIENT_ADMIN_PRODUCTS_PAGES_URL),
   EDIT: path(ROOT_ADMIN, CONFIG.CLIENT_ADMIN_PRODUCT_EDIT_URL),
   EDITUSER: path(ROOT_ADMIN, CONFIG.CLIENT_ADMIN_USER_EDIT_URL),
 }
 
 export const PATH_TECH = {
   ROOT: ROOT_TECH,
+  PAGE: path(ROOT_TECH, CONFIG.CLIENT_TECH_URL),
+  // will be implementing in tech just for now, will be setting up a Products page later ________
+  SEARCH: path(ROOT_TECH, CONFIG.CLIENT_SEARCH_URL),
+  SEARCH_PAGE: path(ROOT_TECH, CONFIG.CLIENT_SEARCH_PAGE_URL),
 }
 
 export const PATH_TALKS = {
