@@ -30,6 +30,7 @@ import {
   DrawerBase,
   AvatarWrapper,
   AppBarBase,
+  StyledBagBox,
 } from '../../themes/styles/nav-styled.js'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
@@ -40,6 +41,7 @@ import { MdAdminPanelSettings } from 'react-icons/md'
 import { FaUsers } from 'react-icons/fa'
 import { BiStore } from 'react-icons/bi'
 import CustomAvatar from '../CustomAvatar.jsx'
+import SearchNav from './SearchNav.jsx'
 
 const pages = [
   {
@@ -256,14 +258,9 @@ const TolbyNavBar = () => {
           </Box>
 
           {/* search bar */}
-          <Search
-            sx={{
-              backgroundColor: 'transparent',
-              marginTop: '0px',
-              paddingTop: '0px',
-              marginLeft: { xs: '2rem', md: '0rem' },
-            }}
-          >
+          <SearchNav />
+
+          {/* <Search>
             <SearchIconWrapper
               edge="start"
               color="inherit"
@@ -338,12 +335,7 @@ const TolbyNavBar = () => {
                               )
                             }
                             // onChange={handleSearchChange}
-                            sx={{
-                              fontSize: '2rem',
-                              height: '3rem',
-                              width: '100%',
-                              paddingLeft: '1rem',
-                            }}
+                            sx={{}}
                           />
                         </Box>
                       </Box>
@@ -352,7 +344,7 @@ const TolbyNavBar = () => {
                 </Container>
               </Grid>
             </DrawerBase>
-          </Search>
+          </Search> */}
 
           <Typography
             variant="overline"
@@ -362,13 +354,7 @@ const TolbyNavBar = () => {
           </Typography>
 
           {/* bag  */}
-          <Box
-            sx={{
-              display: { xs: 'block', md: 'flex' },
-              marginRight: { xs: '2rem', md: '0px' },
-              marginLeft: 'auto',
-            }}
-          >
+          <StyledBagBox>
             <Link to={CLIENT.BAG_URL}>
               <Tooltip title="Your Bag">
                 <IconButton size="small" aria-label="show cart" color="inherit">
@@ -393,7 +379,7 @@ const TolbyNavBar = () => {
                 </IconButton>
               </Tooltip>
             </Link>
-          </Box>
+          </StyledBagBox>
           <Box
             sx={{
               display: { xs: 'flex', md: 'none' },
@@ -423,7 +409,7 @@ const TolbyNavBar = () => {
             >
               <AvatarWrapper>
                 <Tooltip title="Account & Settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0.3 }}>
                     <CustomAvatar name={userInfo.response.name} />
                   </IconButton>
                 </Tooltip>

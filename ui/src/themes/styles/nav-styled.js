@@ -22,6 +22,8 @@ export const Search = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(1),
     width: 'auto',
   },
+  marginTop: '0px',
+  paddingTop: '0px',
 }))
 
 export const SearchIconWrapper = styled(IconButton)(({ theme }) => ({
@@ -51,6 +53,9 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
         width: '20ch',
       },
     },
+    fontSize: '2rem',
+    height: '3rem',
+    paddingLeft: '1rem',
   },
 }))
 
@@ -142,4 +147,10 @@ export const AppBarBase = styled(AppBar)(({ theme }) => ({
     height: '30px',
     width: '30px',
   },
+}))
+
+export const StyledBagBox = styled(Box)(({ theme }) => ({
+  display: { xs: 'block', md: 'flex' },
+  marginRight: { xs: '2rem', md: '0px' },
+  marginLeft: 'auto',
 }))

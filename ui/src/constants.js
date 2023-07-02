@@ -141,3 +141,10 @@ export const Snacks = {
   // @root ProductDetailsScreen: Review
   REVIEWED: 'REVIEW SUBMITTED',
 }
+
+export const Types = {
+  // @root: Nav
+  SEARCH: 'Search Tolby.co.nz',
+}
+
+export const Errors = {}

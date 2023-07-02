@@ -11,6 +11,8 @@ import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import Footer from '../../components/Footer'
 import Heading from '../../components/Heading'
+import BackButton from '../../components/BackButton'
+import { CLIENT } from '../../constants'
 
 const TechScreen = () => {
   const { keyword, pageNumber } = useParams()
@@ -24,6 +26,7 @@ const TechScreen = () => {
       <Helmet>
         <title>Techs</title>
       </Helmet>
+
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -33,7 +36,16 @@ const TechScreen = () => {
       ) : (
         <>
           <Grid container spacing={2}>
-            <Heading title="Tech." subTitle="Shop" />
+            {keyword ? (
+              <Grid container justifyContent="flex-start">
+                <Grid item p={2}>
+                  <BackButton variant="outlined" to={CLIENT.TECH_URL} />
+                </Grid>
+                <Heading title="Search Results for: " subTitle={keyword} />
+              </Grid>
+            ) : (
+              <Heading title="Tech." subTitle="Shop" />
+            )}
             <Grid item lg={12}>
               <Grid container justifyContent="space-evenly">
                 {data.response.products?.map((product) => {
