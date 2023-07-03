@@ -13,6 +13,7 @@ import {
   IconButton,
   Button,
   Stack,
+  Chip,
 } from '@mui/material'
 import {
   Search,
@@ -23,6 +24,7 @@ import {
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined'
 import { Types, BtnTitles } from '../../constants'
+import theme from '../../themes/theme'
 
 const SearchNav = () => {
   const { keyword: urlKeyword, pageNumber } = useParams()
@@ -141,6 +143,7 @@ const SearchNav = () => {
                       placeholder={Types.SEARCH}
                       type="text"
                       name="q"
+                      color={theme.palette.grey.main}
                       autoFocus={true}
                       showSearch={true}
                       allowClear={true}
@@ -168,11 +171,29 @@ const SearchNav = () => {
                 </Box>
               </FormControl>
 
-              <Grid continent alignText="flex-end">
-                {searchResults &&
+              <Grid
+                continent
+                justifyContent="flex-end"
+                sx={{ display: 'inline-flex' }}
+              >
+                {keyword.length > 5 &&
                   matchedProducts?.map((item) => (
-                    <Grid item md={4} key={item._id}>
-                      <Typography variant="caption">{item.name}</Typography>
+                    <Grid item md={4} key={item._id} p={1}>
+                      <Chip
+                        label={item.name}
+                        variant="outlined"
+                        color={theme.palette.grey.main}
+                        clickable
+                        onClick={() => {
+                          navigate(`/products/${item._id}`)
+                          setKeyword('')
+                          handleClearSearch()
+                          closeDrawer()
+                        }}
+                        sx={{
+                          color: theme.palette.grey.main,
+                        }}
+                      />
                     </Grid>
                   ))}
               </Grid>
