@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
-import LandingPage from './defaults/LandingPage.jsx'
+import SqueezePage from '../components/Squeeze/SqueezePage'
 
 const HomeScreen = () => {
   return (
@@ -9,7 +9,7 @@ const HomeScreen = () => {
       <Helmet>
         <title>Tolby Technologies</title>
       </Helmet>
-      <h1>HOME</h1>
+      <SqueezePage />
     </>
   )
 }

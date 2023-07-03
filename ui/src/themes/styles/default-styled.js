@@ -9,6 +9,9 @@ import {
   Box,
   OutlinedInput,
   Dialog,
+  Container,
+  Typography,
+  CardMedia,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
@@ -181,39 +184,52 @@ export const StyledLoginBox = styled(Box)(({ theme }) => ({
   borderRadius: '1rem',
 }))
 
-// export const InputBase = styled(TextField)(({ theme }) => ({
-//   root: {
-//     '& .MuiInputBase-root': {
-//       backgroundColor: '#f5f5f5',
-//       borderRadius: 4,
-//       padding: '8px 12px',
-//     },
-//     '& .MuiFormLabel-root.Mui-focused': {
-//       color: '#555555',
-//     },
-//     '& .MuiInput-underline:after': {
-//       borderBottomColor: '#555555',
-//     },
-//     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-//       borderBottomColor: '#555555',
-//     },
-//   },
-//   '& .MuiInputBase-input': {
-//     fontSize: '1rem',
-//     '&::placeholder': {
-//       color: '#000',
-//       fontWeight: 400,
-//       fontSize: '1em',
-//     },
-//   },
-// }))
+// ----------------- Landing Page -----------------
+export const ContainerLandingBase = styled(Container)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: '#000',
+  alignText: 'center',
+}))
 
-// export const ButtonBase = styled(Button)(({ theme }) => ({
-//   backgroundColor: 'pink.main',
-//   color: '#FFF',
-//   fontWeight: 600,
-//   '&:hover': {
-//     backgroundColor: 'pink.dark',
-//     color: '#000',
-//   },
-// }))
+export const ExtraLargeTypesBase = styled(Typography)(({ theme }) => ({
+  fontSize: '10rem',
+  fontWeight: 'bold',
+  background: `linear-gradient(90deg, #F2e121 0%, #FF0000 33%, #FF0060 66%, #FF0000 100%)`,
+}))
+
+export const SubExtraLargeTypesBase = styled(Typography)(({ theme }) => ({
+  fontSize: '10rem',
+  fontWeight: 'bold',
+  background: `linear-gradient(90deg, #F2e121 0%, #FF0000 33%, #FF0060 66%, #FF0000 100%)`,
+  fontFamily: 'Dynalight',
+  display: 'inline-flex',
+  position: 'absolute',
+  zIndex: -1,
+  top: '450px',
+  left: '250px',
+}))
+
+export const StyledCardMedia = styled(CardMedia)(({ theme }) => ({
+  zIndex: -1,
+  position: 'absolute',
+  objectFit: 'fill',
+  float: 'left',
+  right: 0,
+  top: 0,
+  width: 'auto',
+  height: '100%',
+}))
+
+export const StyledSubCardMedia = styled(CardMedia)(({ theme }) => ({
+  zIndex: -2,
+  position: 'absolute',
+  objectFit: 'fill',
+  float: 'left',
+  left: 0,
+  top: 0,
+  width: 'auto',
+  height: '100vh',
+}))

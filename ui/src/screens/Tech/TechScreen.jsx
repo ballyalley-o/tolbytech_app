@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Divider, Grid } from '@mui/material'
 import Product from '../../components/Product'
+import TolbyCarousel from '../../components/TolbyCarousel'
 import { CONFIG } from '../../config-global'
 import { useGetProductsQuery } from '../../slices/products-slice'
 import Paginate from '../../components/Paginate'
@@ -24,7 +25,7 @@ const TechScreen = () => {
   return (
     <>
       <Helmet>
-        <title>Techs</title>
+        <title>Tech</title>
       </Helmet>
 
       {isLoading ? (
@@ -35,6 +36,7 @@ const TechScreen = () => {
         </Message>
       ) : (
         <>
+          <TolbyCarousel />
           <Grid container spacing={2} pb={2}>
             {keyword ? (
               <Grid container justifyContent="flex-start" direction="column">
@@ -44,7 +46,7 @@ const TechScreen = () => {
                 {data.response.products?.length === 0 ? (
                   <Grid item p={2}>
                     <Heading
-                      title="No Results Found for: "
+                      title={Types.SEARCH_RESULTS_EMPTY}
                       subTitle={keyword}
                     />
                   </Grid>
