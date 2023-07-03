@@ -160,3 +160,44 @@ export const Types = {
 }
 
 export const Errors = {}
+
+export const MetaTitles = {
+  // @root: HomeScreen
+  SQUEEZE: 'Tolby Technologies',
+  HOME: 'Tolby | Home',
+
+  // @root: ProductScreen
+  PRODUCTS: 'Tolby | Products',
+
+  // @root: TechScreen
+  TECH: 'Tolby | Tech',
+
+  // @root: TalksScreen
+  TALKS: 'Tolby | Talks',
+
+  // @root: KickScreen
+  KICK: 'Tolby | Kick',
+
+  // @root: BagScreen
+  BAG: 'Tolby | Bag',
+
+  // @root: OrderScreen
+  ORDERS: 'Tolby | Order',
+  CHECKOUT: 'Tolby | Checkout ',
+  SHIPPING: 'Tolby | Shipping ',
+  PAYMENT: 'Tolby | Payment ',
+  BAGCONFIRM: 'Tolby | Confirm Order ',
+
+  // @root: AccountScreen
+  ACCOUNT: 'Tolby | Account',
+  SIGNIN: 'Tolby | Sign In',
+  REGISTER: 'Tolby | Register',
+  FORGOT_PASSWORD: 'Tolby | Forgot Password',
+
+  // @root: AdminScreen
+  ADMIN_ORDERS: 'Admin | Orders',
+  ADMIN_USERS: 'Admin | Users',
+  ADMIN_PRODUCTS: 'Admin | Products',
+  ADMIN_EDIT: 'Admin | Edit Product',
+  ADMIN_EDITUSER: 'Admin | Edit User',
+}

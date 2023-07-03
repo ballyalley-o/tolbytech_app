@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../components/Meta/Meta'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import {
   Grid,
@@ -97,9 +97,7 @@ const ProductDetailScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{product?.name}</title>
-      </Helmet>
+      <Meta title={product?.name} />
       <BackButton to="/" />
       {snackOpen && (
         <SnackAlert

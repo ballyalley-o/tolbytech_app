@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
 import { Divider, Grid } from '@mui/material'
+import Meta from '../../components/Meta/Meta'
 import Product from '../../components/Product'
 import TolbyCarousel from '../../components/TolbyCarousel'
 import { CONFIG } from '../../config-global'
@@ -24,10 +24,7 @@ const TechScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Tech</title>
-      </Helmet>
-
+      <Meta title="Tech" />
       {isLoading ? (
         <Loader />
       ) : error ? (

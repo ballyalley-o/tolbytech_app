@@ -233,3 +233,23 @@ export const StyledSubCardMedia = styled(CardMedia)(({ theme }) => ({
   width: 'auto',
   height: '100vh',
 }))
+
+export const LogoContainerBase = styled(Container)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: '2rem',
+}))
+
+export const LogoBase = styled('img')(({ theme }) => ({
+  width: '400px',
+  height: '400px',
+  position: 'absolute',
+  right: '40px',
+  top: '190px',
+  alignContent: 'right',
+  zIndex: 1,
+  animation: 'ease-in-out 1s',
+  animationName: '$fadeIn',
+  pointerEvents: 'none',
+}))

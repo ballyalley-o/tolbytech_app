@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../../components/Meta/Meta'
 import { useSelector } from 'react-redux'
 import {
   useGetProductsQuery,
@@ -25,6 +25,7 @@ import ConfirmDialog from '../../../components/ConfirmDialog.jsx'
 import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
 import SnackAlert from '../../../components/SnackAlert.jsx'
+import { MetaTitles } from '../../../constants'
 
 const AllProductsScreen = () => {
   const { pageNumber } = useParams()
@@ -86,9 +87,7 @@ const AllProductsScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Admin | Products</title>
-      </Helmet>
+      <Meta title={MetaTitles.ADMIN_PRODUCTS} />
       <ConfirmDialog
         open={open}
         onClose={handleCancel}

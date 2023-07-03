@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../../components/Meta/Meta'
 import {
   useUpdateProductMutation,
   useGetProductDetailsQuery,
@@ -106,16 +106,6 @@ const EditProductsScreen = () => {
       setSnackOpen(error?.data?.message, 'error', 'error')
       handleHideDuration(3000)
     }
-
-    // if (result.error) {
-    //   setSnackOpen(result?.error?.data.message, 'error')
-    //   handleHideDuration(3000)
-    // } else {
-    //   setSnackOpen('Product Updated', 'success', 'success')
-    //   refetch()
-    //   handleHideDuration(3000)
-    //   navigate(CLIENT.ADMIN_PRODUCTS_URL)
-    // }
   }
 
   const handleHideDuration = (duration) => {
@@ -126,9 +116,7 @@ const EditProductsScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{`Admin | Edit ${product?.name}`}</title>
-      </Helmet>
+      <Meta title={`Admin | Edit ${product?.name}`} />
       <BackButton to={CLIENT.ADMIN_PRODUCTS_URL} />
       {snackOpen && (
         <SnackAlert
@@ -238,6 +226,7 @@ const EditProductsScreen = () => {
                         onChange={handleUploadFile}
                       />
                     </Grid>
+                    {loadingUpload && <Loader />}
                     <Grid container direction="row">
                       <Grid item md={12}>
                         <Typography variant="h2"></Typography>

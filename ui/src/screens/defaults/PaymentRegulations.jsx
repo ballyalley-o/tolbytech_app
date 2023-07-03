@@ -5,7 +5,6 @@ import { Typography, Box } from '@mui/material'
 const PaymentRegulations = () => {
   return (
     <Box>
-      {' '}
       {/* <Typography variant="h6">Payment Regulations</Typography> */}
       <Typography variant="body2">
         Payment Methods: We accept various payment methods for gadget purchases,

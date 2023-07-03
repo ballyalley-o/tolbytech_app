@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../../components/Meta/Meta'
 import {
   useGetMyOrdersQuery,
   useGetOrdersQuery,
@@ -21,6 +21,7 @@ import OrderViewAccounts from '../../../components/Accounts/OrderViewAccounts'
 import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
 import { AdminHeading } from '../../../components/Heading'
+import { MetaTitles } from '../../../constants'
 
 const AllOrdersScreen = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery()
@@ -32,6 +33,7 @@ const AllOrdersScreen = () => {
 
   return (
     <>
+      <Meta title={MetaTitles.ADMIN_ORDERS} />
       <Helmet>
         <title>Admin | Orders</title>
       </Helmet>
