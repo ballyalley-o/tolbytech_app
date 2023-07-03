@@ -15,6 +15,7 @@ import PrivateRoute from './components/PrivateRoute.jsx'
 import AdminRoute from './components/AdminRoute.jsx'
 // @home
 import HomeScreen from './screens/HomeScreen.jsx'
+import SqueezeScreen from './screens/SqueezeScreen.jsx'
 // @tech
 import TechScreen from './screens/Tech/TechScreen.jsx'
 // @talks
@@ -49,7 +50,12 @@ import './assets/css/index.css'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index={true} path={CLIENT.HOME_URL} element={<HomeScreen />} />
+      <Route
+        index={true}
+        path={CLIENT.SQUEEZE_URL}
+        element={<SqueezeScreen />}
+      />
+      <Route path={CLIENT.HOME_URL} element={<HomeScreen />} />
       <Route path={CLIENT.TECH_URL} element={<TechScreen />} />
       <Route path={CLIENT.TECH_PAGE} element={<TechScreen />} />
       <Route path={CLIENT.SEARCH} element={<TechScreen />} />

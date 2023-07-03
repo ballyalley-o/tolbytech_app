@@ -40,8 +40,8 @@ export default function Paginate({
 }
 
 Paginate.propTypes = {
-  pages: PropTypes.string,
-  page: PropTypes.string,
+  pages: PropTypes.number,
+  page: PropTypes.number,
   isAdmin: PropTypes.bool,
   root: PropTypes.string,
   adminRoot: PropTypes.string,

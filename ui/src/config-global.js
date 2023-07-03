@@ -14,7 +14,8 @@ function path(root, sublink) {
 /**
  * @constant ROOT_* - root paths
  */
-const ROOT_HOME = '/'
+const ROOT_SQUEEZE = '/'
+const ROOT_HOME = '/home'
 const ROOT_AUTH = '/auth'
 const ROOT_ACCOUNT = '/account'
 const ROOT_ADMIN = '/admin'
@@ -99,6 +100,7 @@ export const CONFIG = {
 
 export const PATH_HOME = {
   ROOT: ROOT_HOME,
+  SQUEEZE: ROOT_SQUEEZE,
 }
 
 export const PATH_AUTH = {

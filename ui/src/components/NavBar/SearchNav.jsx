@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useParams, useNavigate } from 'react-router-dom'
+import { useGetProductsQuery } from '../../slices/products-slice'
 import {
   Grid,
   Container,
@@ -20,13 +22,17 @@ import {
 } from '../../themes/styles/nav-styled'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined'
-import { Types } from '../../constants'
+import { Types, BtnTitles } from '../../constants'
 
 const SearchNav = () => {
-  const { keyword: urlKeyword } = useParams()
+  const { keyword: urlKeyword, pageNumber } = useParams()
   const [keyword, setKeyword] = useState(urlKeyword || '')
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
+  const { data, isLoading, error } = useGetProductsQuery({
+    keyword,
+    pageNumber,
+  })
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen)
@@ -55,6 +61,11 @@ const SearchNav = () => {
     }
   }
 
+  const matchedProducts = data?.response?.products?.filter((product) => {
+    return product.name.toLowerCase().includes(keyword.toLowerCase())
+  })
+
+  const searchResults = matchedProducts === keyword
   // useEffect(() => {
   //   if (keyword.length > 0) {
   //     document.addEventListener('mousedown', handleClearSearch)
@@ -152,16 +163,29 @@ const SearchNav = () => {
                     disabled={!keyword}
                     sx={{ display: !keyword && 'none' }}
                   >
-                    Search
+                    {BtnTitles.SEARCH}
                   </Button>
                 </Box>
               </FormControl>
+
+              <Grid continent alignText="flex-end">
+                {searchResults &&
+                  matchedProducts?.map((item) => (
+                    <Grid item md={4} key={item._id}>
+                      <Typography variant="caption">{item.name}</Typography>
+                    </Grid>
+                  ))}
+              </Grid>
             </Grid>
           </Container>
         </Grid>
       </DrawerBase>
     </Search>
   )
+}
+
+SearchNav.propTypes = {
+  data: PropTypes.object,
 }
 
 export default SearchNav

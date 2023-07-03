@@ -3,15 +3,15 @@ import React from 'react'
 import { Helmet } from 'react-helmet-async'
 import LandingPage from './defaults/LandingPage.jsx'
 
-const HomeScreen = () => {
+const SqueezeScreen = () => {
   return (
     <>
       <Helmet>
         <title>Tolby Technologies</title>
       </Helmet>
-      <h1>HOME</h1>
+      <LandingPage />
     </>
   )
 }
 
-export default HomeScreen
+export default SqueezeScreen

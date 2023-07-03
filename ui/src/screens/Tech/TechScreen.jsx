@@ -2,7 +2,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { Grid } from '@mui/material'
+import { Divider, Grid } from '@mui/material'
 import Product from '../../components/Product'
 import { CONFIG } from '../../config-global'
 import { useGetProductsQuery } from '../../slices/products-slice'
@@ -12,7 +12,7 @@ import Message from '../../components/Message'
 import Footer from '../../components/Footer'
 import Heading from '../../components/Heading'
 import BackButton from '../../components/BackButton'
-import { CLIENT } from '../../constants'
+import { CLIENT, Types } from '../../constants'
 
 const TechScreen = () => {
   const { keyword, pageNumber } = useParams()
@@ -35,13 +35,24 @@ const TechScreen = () => {
         </Message>
       ) : (
         <>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} pb={2}>
             {keyword ? (
-              <Grid container justifyContent="flex-start">
+              <Grid container justifyContent="flex-start" direction="column">
                 <Grid item p={2}>
                   <BackButton variant="outlined" to={CLIENT.TECH_URL} />
                 </Grid>
-                <Heading title="Search Results for: " subTitle={keyword} />
+                {data.response.products?.length === 0 ? (
+                  <Grid item p={2}>
+                    <Heading
+                      title="No Results Found for: "
+                      subTitle={keyword}
+                    />
+                  </Grid>
+                ) : (
+                  <Grid item p={2}>
+                    <Heading title={Types.SEARCH_RESULTS} subTitle={keyword} />
+                  </Grid>
+                )}
               </Grid>
             ) : (
               <Heading title="Tech." subTitle="Shop" />
@@ -74,7 +85,10 @@ const TechScreen = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Footer />
+          <Divider />
+          <Grid container py={2} justifyContent="center">
+            <Footer />
+          </Grid>
         </>
       )}
     </>

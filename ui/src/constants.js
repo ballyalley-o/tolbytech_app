@@ -51,6 +51,7 @@ export const UPLOAD_URL = CONFIG.UPLOAD_URL
 export const CLIENT = {
   // @root: HOME
   HOME_URL: PATH_HOME.ROOT,
+  SQUEEZE_URL: PATH_HOME.SQUEEZE,
 
   // @root: PRODUCTS
   PRODUCTS_URL: PATH_PRODUCTS.ROOT,
@@ -123,6 +124,9 @@ export const BtnTitles = {
   // @root: ORDERSCREEN
   DELIVER: 'UPDATE TO DELIVERED',
   DELIVERED: 'DELIVERED',
+
+  // @root: TechScreen - Search
+  SEARCH: 'Search',
 }
 
 export const StatusMsg = {
@@ -145,6 +149,10 @@ export const Snacks = {
 export const Types = {
   // @root: Nav
   SEARCH: 'Search Tolby.co.nz',
+
+  // @root: TechScreen - Search
+  SEARCH_RESULTS: 'Search Results for: ',
+  SEARCH_RESULTS_EMPTY: 'No Search Results for: ',
 }
 
 export const Errors = {}
