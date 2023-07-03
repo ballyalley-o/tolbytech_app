@@ -171,8 +171,23 @@ const createProductReview = asyncHandler(async (req, res, next) => {
   }
 })
 
+// @desc    Get the Top rated products
+// @route   GET /api/products/top
+// @access    Public
+const getTopProducts = asyncHandler(async (req, res, next) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(4)
+
+  if (products) {
+    res.send(defaultResponse(StatusCodes.OK, 'FETCHED TOP PRODUCTS', products))
+  } else {
+    res.status(StatusCodes.NOT_FOUND)
+    throw new Error(getReasonPhrase(StatusCodes.NOT_FOUND))
+  }
+})
+
 const productsController = {
   getProducts,
+  getTopProducts,
   getProduct,
   createProduct,
   updateProduct,

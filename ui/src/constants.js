@@ -127,12 +127,16 @@ export const BtnTitles = {
 
   // @root: TechScreen - Search
   SEARCH: 'Search',
+
+  // @root TolbyNavBar - SignIn
+  SIGN_IN: 'Sign In',
 }
 
 export const StatusMsg = {
   // @root: OrderScreen: Deliver
   NOTEDELIVERED: 'NOT DELIVERED',
   DELIVERED: 'DELIVERED',
+
   // @root: OrderScreen: Payment
   NOTPAID: 'NOT PAID',
   PAID: 'PAID',
