@@ -16,6 +16,7 @@
   "author": "Bally Lomibao",
   "license": "MIT",
   "dependencies": {
+    "antd": "^5.6.4",
     "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
