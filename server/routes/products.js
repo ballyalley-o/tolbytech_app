@@ -9,6 +9,8 @@ router
   .get(productsController.getProducts)
   .post(protect, admin, productsController.createProduct)
 
+router.get('/top', productsController.getTopProducts)
+
 router
   .route('/:id')
   .get(productsController.getProduct)

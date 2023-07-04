@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from 'react'
-import { Helmet } from 'react-helmet-async'
+import React from 'react'
+import Meta from '../../components/Meta/Meta'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Typography, Grid } from '@mui/material'
@@ -9,6 +9,7 @@ import { LinkBase } from '../../themes/styles/default-styled'
 import Heading from '../../components/Heading'
 import Message from '../../components/Message'
 import Mercator from '../../components/graphs/Mercator/Mercator'
+import { MetaTitles } from '../../constants'
 
 const KickScreen = () => {
   const navigate = useNavigate()
@@ -18,9 +19,7 @@ const KickScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Kicks</title>
-      </Helmet>
+      <Meta title={MetaTitles.KICK} />
       <Container>
         <Grid container spacing={2}>
           <Heading title="Kicks." subTitle="What's a Tech without a Kick?" />

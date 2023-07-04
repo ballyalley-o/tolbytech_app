@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../components/Meta/Meta'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { savePaymentMethod } from '../../slices/cart-slice'
@@ -16,7 +16,7 @@ import {
 import FormContainer from '../../components/FormContainer'
 import CheckoutSteps from '../../components/CheckoutSteps'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
-import { CLIENT } from '../../constants'
+import { CLIENT, MetaTitles } from '../../constants'
 import { CardBase, ButtonBase } from '../../themes/styles/bag-styled'
 import Heading from '../../components/Heading'
 
@@ -41,9 +41,7 @@ const PaymentScreen = () => {
   }
   return (
     <Grid container>
-      <Helmet>
-        <title>Secured Payment</title>
-      </Helmet>
+      <Meta title={MetaTitles.PAYMENT} />
       <Heading title="Payment." subTitle="Secured." />
       <Grid
         container

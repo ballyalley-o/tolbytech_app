@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import { useState } from 'react'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../components/Meta/Meta'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveShippingAddress } from '../../slices/cart-slice'
@@ -25,7 +25,7 @@ import {
 } from '../../themes/styles/default-styled.js'
 import FormContainer from '../../components/FormContainer'
 import CheckoutSteps from '../../components/CheckoutSteps'
-import { CLIENT } from '../../constants'
+import { CLIENT, MetaTitles } from '../../constants'
 
 const ShippingScreen = () => {
   const { userInfo } = useSelector((state) => state.auth)
@@ -61,9 +61,7 @@ const ShippingScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Shipping</title>
-      </Helmet>
+      <Meta title={MetaTitles.SHIPPING} />
 
       <Grid container>
         <Grid item sm={12} lg={12}>

@@ -18,25 +18,16 @@ import {
   Divider,
   Button,
   Badge,
-  Grid,
-  FormControl,
-  InputAdornment,
   Chip,
 } from '@mui/material'
 import {
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
-  DrawerBase,
   AvatarWrapper,
   AppBarBase,
   StyledBagBox,
 } from '../../themes/styles/nav-styled.js'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined'
-import { CLIENT } from '../../constants.js'
+import { BtnTitles, CLIENT } from '../../constants.js'
 import { MdAdminPanelSettings } from 'react-icons/md'
 import { FaUsers } from 'react-icons/fa'
 import { BiStore } from 'react-icons/bi'
@@ -90,10 +81,6 @@ const TolbyNavBar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [snackOpen, setSnackOpen] = useState(false)
   const [searchValue, setSearchValue] = useState('')
-  const [searchResults, setSearchResults] = useState([])
-  const [searchLoading, setSearchLoading] = useState(false)
-  const [searchError, setSearchError] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
   const [isSignedIn, setIsSignedIn] = useState(false)
 
   const toggleDrawer = () => {
@@ -260,92 +247,6 @@ const TolbyNavBar = () => {
           {/* search bar */}
           <SearchNav />
 
-          {/* <Search>
-            <SearchIconWrapper
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={toggleDrawer}
-              sx={{ display: isOpen ? 'none' : 'block', padding: '0px' }}
-            >
-              <SearchOutlinedIcon />
-            </SearchIconWrapper>
-            <DrawerBase
-              anchor="top"
-              open={isOpen}
-              onClose={closeDrawer || toggleDrawer}
-              ModalProps={{
-                disableEnforceFocus: true,
-                disableRestoreFocus: true,
-                disableAutoFocus: true,
-                disablePortal: false,
-                BackdropProps: {
-                  sx: {
-                    backgroundColor: 'transparent',
-                  },
-                },
-              }}
-            >
-              <Grid container>
-                <Container
-                  maxWidth="md"
-                  sx={{
-                    marginTop: '1rem',
-                    padding: '5rem',
-                  }}
-                >
-                  <Grid
-                    item
-                    lg={12}
-                    sx={{
-                      display: 'flex-end',
-                    }}
-                  >
-                    <FormControl>
-                      {searchValue && (
-                        <Box sx={{ marginLeft: '3rem' }}>
-                          <Typography variant="body2">
-                            Search Tolby.co.nz
-                          </Typography>
-                        </Box>
-                      )}
-
-                      <Box sx={{ display: 'inline-flex' }}>
-                        <Box sx={{ height: '3rem' }}>
-                          <SearchOutlinedIcon />
-                        </Box>
-                        <Box>
-                          <StyledInputBase
-                            placeholder="Search Tolby.co.nz"
-                            autoFocus={true}
-                            showSearch={true}
-                            allowClear={true}
-                            value={searchValue}
-                            onChange={handleInputChange}
-                            endAdornment={
-                              searchValue && (
-                                <InputAdornment position="end">
-                                  <IconButton
-                                    edge="end"
-                                    onClick={handleClearSearch}
-                                  >
-                                    <BackspaceOutlinedIcon size="sm" />
-                                  </IconButton>
-                                </InputAdornment>
-                              )
-                            }
-                            // onChange={handleSearchChange}
-                            sx={{}}
-                          />
-                        </Box>
-                      </Box>
-                    </FormControl>
-                  </Grid>
-                </Container>
-              </Grid>
-            </DrawerBase>
-          </Search> */}
-
           <Typography
             variant="overline"
             sx={{ marginRight: '1rem', marginLeft: '.5rem' }}
@@ -467,7 +368,7 @@ const TolbyNavBar = () => {
                           textAlign="right"
                           variant="outlined"
                           setExpanded={true}
-                        ></Chip>
+                        />
                       </MenuItem>
                       <MenuItem onClick={handleCloseUserMenu}>
                         <Chip
@@ -484,7 +385,7 @@ const TolbyNavBar = () => {
                           textAlign="right"
                           variant="outlined"
                           setExpanded={true}
-                        ></Chip>
+                        />
                       </MenuItem>
                       <Divider />
                     </>
@@ -518,7 +419,7 @@ const TolbyNavBar = () => {
                     display: { xs: 'none', md: 'block' },
                   }}
                 >
-                  Sign In
+                  {BtnTitles.SIGN_IN}
                 </Button>
               </Link>
             </Box>

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../components/Meta/Meta'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, removeFromCart } from '../../slices/cart-slice'
 import {
@@ -20,7 +20,7 @@ import {
 } from '@mui/material'
 import Message from '../../components/Message'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { CLIENT } from '../../constants'
+import { CLIENT, MetaTitles } from '../../constants'
 import { LinkBase } from '../../themes/styles/default-styled'
 import Heading from '../../components/Heading'
 
@@ -44,9 +44,7 @@ const BagScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Bag</title>
-      </Helmet>
+      <Meta title={MetaTitles.BAG} />
       <Container>
         <Grid container spacing={2}>
           <Heading title="Bag." subTitle="Review your bag" />

@@ -1,16 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
-import LandingPage from './defaults/LandingPage.jsx'
-import Streamgraph from '../components/graphs/Steamgraph'
+import SqueezePage from '../components/Squeeze/SqueezePage'
+import Meta from '../components/Meta/Meta'
 
 const HomeScreen = () => {
   return (
     <>
-      <Helmet>
-        <title>Tolby Technologies</title>
-      </Helmet>
-      <LandingPage />
+      <Meta />
+      <SqueezePage />
     </>
   )
 }

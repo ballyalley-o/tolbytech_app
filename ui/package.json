@@ -21,6 +21,7 @@
     "@paypal/react-paypal-js": "^7.8.3",
     "@reduxjs/toolkit": "^1.9.5",
     "@visx/visx": "^3.1.2",
+    "antd": "^5.6.4",
     "axios": "^1.4.0",
     "colors": "^1.4.0",
     "dotenv": "^16.0.3",

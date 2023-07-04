@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../components/Meta/Meta'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Typography, Grid } from '@mui/material'
 import { styled } from '@mui/material/styles'
@@ -25,9 +25,7 @@ const TalksScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Talks</title>
-      </Helmet>
+      <Meta title="Talks" />
       <Container>
         <Grid container spacing={2}>
           <Grid item lg={12}>

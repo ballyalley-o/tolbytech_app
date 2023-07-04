@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useGetOrderDetailsQuery } from '../../slices/order-slice.js'
 import {
   Grid,
   Typography,
@@ -10,19 +11,20 @@ import {
   ListItem,
   Divider,
   Chip,
-  CardMedia,
+  Box,
   Button,
+  Badge,
 } from '@mui/material'
-
+// import { Badge } from 'antd'
 import { FaCcPaypal } from 'react-icons/fa'
 import { FcDownload } from 'react-icons/fc'
 import Message from '../Message'
 import { CLIENT } from '../../constants'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
+import TaskAltIcon from '@mui/icons-material/TaskAlt'
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 
 const OrderViewAccounts = ({ order, error, user, adminOrder }) => {
-  // const { data: orders, isLoading, error: errors } = useGetOrderByIdQuery(id)
-
   return (
     <>
       <Grid
@@ -34,9 +36,39 @@ const OrderViewAccounts = ({ order, error, user, adminOrder }) => {
           <Grid container direction={adminOrder ? 'row' : 'column'}>
             <Grid item md={6} lg={4}>
               <List>
-                <Typography variant="body1" my={1}>
-                  Shipping
-                </Typography>
+                <ListItem>
+                  <Box display="inline-flex" alignItems="center">
+                    <Typography variant="body1" my={1}>
+                      Shipping &nbsp;
+                    </Typography>
+
+                    <Chip
+                      variant="outlined"
+                      size="small"
+                      component={Link}
+                      to={CLIENT.ACCOUNTS_ORDERS_URL}
+                      label={
+                        order.isPaid ? (
+                          <Box display="-webkit-flex" alignItems="center">
+                            <TaskAltIcon />
+                            <Typography variant="overline">
+                              DELIVERED
+                            </Typography>
+                          </Box>
+                        ) : (
+                          <Box display="-webkit-flex" alignItems="center">
+                            <ErrorOutlineIcon />
+                            <Typography variant="overline">
+                              NOT DELIVERED
+                            </Typography>
+                          </Box>
+                        )
+                      }
+                      color={order.isPaid ? 'success' : 'error'}
+                    />
+                  </Box>
+                </ListItem>
+
                 <ListItem>
                   <Typography variant="caption" fontWeight="bold">
                     Name:&nbsp;
@@ -48,7 +80,7 @@ const OrderViewAccounts = ({ order, error, user, adminOrder }) => {
                     Email:&nbsp;
                   </Typography>
                   <Typography variant="caption">
-                    <a href={`mailto:${user.email}`}>{user.email}</a>
+                    <Link href={`mailto:${user.email}`}>{user.email}</Link>
                   </Typography>
                 </ListItem>
                 <ListItem>
@@ -70,7 +102,7 @@ const OrderViewAccounts = ({ order, error, user, adminOrder }) => {
                     </Typography>
                   </Grid>
                 </ListItem>
-                <ListItem>
+                {/* <ListItem>
                   {order.isDelivered ? (
                     <Message
                       variant="success"
@@ -84,14 +116,37 @@ const OrderViewAccounts = ({ order, error, user, adminOrder }) => {
                       STATUS: <b>NOT DELIVERED</b>
                     </Message>
                   )}
-                </ListItem>
+                </ListItem> */}
               </List>
             </Grid>
             <Grid item lg={4}>
               <List>
-                <Typography variant="body1" my={1}>
-                  Payment Method
-                </Typography>
+                <ListItem>
+                  <Typography variant="body1" my={1}>
+                    Payment Method &nbsp;
+                  </Typography>
+                  <Chip
+                    variant="outlined"
+                    size="small"
+                    component={Link}
+                    to={CLIENT.ACCOUNTS_ORDERS_URL}
+                    label={
+                      order.isPaid ? (
+                        <Box display="-webkit-flex" alignItems="center">
+                          <TaskAltIcon />
+                          <Typography variant="overline">PAID</Typography>
+                        </Box>
+                      ) : (
+                        <Box display="-webkit-flex" alignItems="center">
+                          <ErrorOutlineIcon />
+                          <Typography variant="overline">NOT PAID</Typography>
+                        </Box>
+                      )
+                    }
+                    color={order.isPaid ? 'success' : 'error'}
+                  />
+                </ListItem>
+
                 <ListItem>
                   <Typography variant="caption" fontWeight="bold">
                     Method:&nbsp;
@@ -111,7 +166,7 @@ const OrderViewAccounts = ({ order, error, user, adminOrder }) => {
                   <Typography variant="caption">&nbsp;</Typography>
                 </ListItem>
                 <ListItem></ListItem>
-                <ListItem>
+                {/* <ListItem>
                   {order.isPaid ? (
                     <Message
                       variant="success"
@@ -125,7 +180,7 @@ const OrderViewAccounts = ({ order, error, user, adminOrder }) => {
                       STATUS: <b>NOT PAID</b>
                     </Message>
                   )}
-                </ListItem>
+                </ListItem> */}
               </List>
             </Grid>
 

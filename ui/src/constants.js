@@ -51,6 +51,7 @@ export const UPLOAD_URL = CONFIG.UPLOAD_URL
 export const CLIENT = {
   // @root: HOME
   HOME_URL: PATH_HOME.ROOT,
+  SQUEEZE_URL: PATH_HOME.SQUEEZE,
 
   // @root: PRODUCTS
   PRODUCTS_URL: PATH_PRODUCTS.ROOT,
@@ -123,12 +124,19 @@ export const BtnTitles = {
   // @root: ORDERSCREEN
   DELIVER: 'UPDATE TO DELIVERED',
   DELIVERED: 'DELIVERED',
+
+  // @root: TechScreen - Search
+  SEARCH: 'Search',
+
+  // @root TolbyNavBar - SignIn
+  SIGN_IN: 'Sign In',
 }
 
 export const StatusMsg = {
   // @root: OrderScreen: Deliver
   NOTEDELIVERED: 'NOT DELIVERED',
   DELIVERED: 'DELIVERED',
+
   // @root: OrderScreen: Payment
   NOTPAID: 'NOT PAID',
   PAID: 'PAID',
@@ -145,6 +153,51 @@ export const Snacks = {
 export const Types = {
   // @root: Nav
   SEARCH: 'Search Tolby.co.nz',
+
+  // @root: TechScreen - Search
+  SEARCH_RESULTS: 'Search Results for: ',
+  SEARCH_RESULTS_EMPTY: 'No Search Results for: ',
 }
 
 export const Errors = {}
+
+export const MetaTitles = {
+  // @root: HomeScreen
+  SQUEEZE: 'Tolby Technologies',
+  HOME: 'Tolby | Home',
+
+  // @root: ProductScreen
+  PRODUCTS: 'Tolby | Products',
+
+  // @root: TechScreen
+  TECH: 'Tolby | Tech',
+
+  // @root: TalksScreen
+  TALKS: 'Tolby | Talks',
+
+  // @root: KickScreen
+  KICK: 'Tolby | Kick',
+
+  // @root: BagScreen
+  BAG: 'Tolby | Bag',
+
+  // @root: OrderScreen
+  ORDERS: 'Tolby | Order',
+  CHECKOUT: 'Tolby | Checkout ',
+  SHIPPING: 'Tolby | Shipping ',
+  PAYMENT: 'Tolby | Payment ',
+  BAGCONFIRM: 'Tolby | Confirm Order ',
+
+  // @root: AccountScreen
+  ACCOUNT: 'Tolby | Account',
+  SIGNIN: 'Tolby | Sign In',
+  REGISTER: 'Tolby | Register',
+  FORGOT_PASSWORD: 'Tolby | Forgot Password',
+
+  // @root: AdminScreen
+  ADMIN_ORDERS: 'Admin | Orders',
+  ADMIN_USERS: 'Admin | Users',
+  ADMIN_PRODUCTS: 'Admin | Products',
+  ADMIN_EDIT: 'Admin | Edit Product',
+  ADMIN_EDITUSER: 'Admin | Edit User',
+}

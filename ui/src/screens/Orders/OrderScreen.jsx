@@ -2,8 +2,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
-import { useSelector, useDispatch } from 'react-redux'
+import Meta from '../../components/Meta/Meta'
+import { useSelector } from 'react-redux'
 import {
   useGetOrderDetailsQuery,
   usePayOrderMutation,
@@ -29,7 +29,7 @@ import SnackAlert from '../../components/SnackAlert'
 import Heading from '../../components/Heading'
 import OrderButton from './OrderButton'
 import StatusUpdateMessage from './StatusUpdateMessage'
-import { StatusMsg } from '../../constants'
+import { MetaTitles, StatusMsg } from '../../constants'
 
 const OrderScreen = () => {
   const [snackOpen, setSnackOpen] = useState(null)
@@ -141,9 +141,7 @@ const OrderScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Your Tolby Order</title>
-      </Helmet>
+      <Meta title={MetaTitles.ORDERS} />
       <Grid container justifyContent="center">
         <Heading title="Order" subtitle="Your Tolby Order" />
         {snackOpen && (
