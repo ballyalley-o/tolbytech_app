@@ -141,7 +141,7 @@ const OrderScreen = () => {
 
   return (
     <>
-      <Meta title={MetaTitles} />
+      <Meta title={MetaTitles.ORDERS} />
       <Grid container justifyContent="center">
         <Heading title="Order" subtitle="Your Tolby Order" />
         {snackOpen && (

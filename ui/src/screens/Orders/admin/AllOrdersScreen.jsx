@@ -6,6 +6,7 @@ import {
   useGetMyOrdersQuery,
   useGetOrdersQuery,
 } from '../../../slices/order-slice'
+import { useUserQuery } from '../../../slices/user-slice'
 import { Grid, Typography, TableBody } from '@mui/material'
 import {
   TableBase,
@@ -26,17 +27,13 @@ import { MetaTitles } from '../../../constants'
 const AllOrdersScreen = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery()
   const theme = useTheme()
-  const { id } = useParams()
-  const user = orders?.response.find((payer) => payer.id === id)
-  const { data: userOrders } = useGetMyOrdersQuery(user?.user)
-  const userId = userOrders?.response?.map((order) => order.user)
+  const dataId = orders?.response?.map((order) => order.user._id)
+  const orderUser = dataId?.find((user) => user === user)
+  const { data: buyer } = useUserQuery(orderUser)
 
   return (
     <>
       <Meta title={MetaTitles.ADMIN_ORDERS} />
-      <Helmet>
-        <title>Admin | Orders</title>
-      </Helmet>
       <AdminHeading title="Orders" />
       {isLoading ? (
         <Loader />
@@ -69,7 +66,7 @@ const AllOrdersScreen = () => {
                       <OrderViewAccounts
                         order={order}
                         error={error}
-                        user={user.user}
+                        user={buyer?.response}
                         adminOrder
                       />
                     }

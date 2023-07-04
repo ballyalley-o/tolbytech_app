@@ -1,7 +1,7 @@
 'use client'
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../components/Meta/Meta'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useCreateOrderMutation } from '../../slices/order-slice'
@@ -21,11 +21,12 @@ import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { styled } from '@mui/material/styles'
 import { LinkBase } from '../../themes/styles.js'
 import CheckoutSteps from '../../components/CheckoutSteps'
+import Heading from '../../components/Heading'
 import SnackAlert from '../../components/SnackAlert'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import { toast } from 'react-toastify'
-import Heading from '../../components/Heading'
+import { MetaTitles } from '../../constants'
 
 const BagConfirmScreen = () => {
   const dispatch = useDispatch()
@@ -72,12 +73,9 @@ const BagConfirmScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Bag Confirm</title>
-      </Helmet>
+      <Meta title={MetaTitles.BAGCONFIRM} />
       <Grid container>
         <Heading title="Bag." subTitle="Review your bag" />
-
         {errorSnackOpen && (
           <SnackAlert
             open={errorSnackOpen}

@@ -5,7 +5,7 @@ import {
   StyledSubCardMedia,
   ExtraLargeTypesBase,
 } from '../../themes/styles/default-styled'
-import abstract1 from '../../assets/images/abstract1.jpg'
+import abstract5 from '../../assets/images/abstract5.jpg'
 
 const SqueezePage = () => {
   return (
@@ -24,7 +24,7 @@ const SqueezePage = () => {
         component="img"
         height="100%"
         width="100%"
-        image={abstract1}
+        image={abstract5}
         alt="Tech"
         sx={{
           width: '100%',
