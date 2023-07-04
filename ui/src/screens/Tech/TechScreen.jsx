@@ -13,7 +13,7 @@ import Message from '../../components/Message'
 import Footer from '../../components/Footer'
 import Heading from '../../components/Heading'
 import BackButton from '../../components/BackButton'
-import { CLIENT, Types } from '../../constants'
+import { CLIENT, MetaTitles, Types } from '../../constants'
 
 const TechScreen = () => {
   const { keyword, pageNumber } = useParams()
@@ -24,7 +24,7 @@ const TechScreen = () => {
 
   return (
     <>
-      <Meta title="Tech" />
+      <Meta title={MetaTitles.TECH} />
       {isLoading ? (
         <Loader />
       ) : error ? (

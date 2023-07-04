@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
-import Meta from '../../../components/Meta/Meta'
+import PropTypes from 'prop-types'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   useGetUserDetailsQuery,
@@ -14,12 +14,12 @@ import {
   Divider,
   Box,
 } from '@mui/material'
-import UsersEditSqueeze from '../../../components/Squeeze/UsersEditSqueeze'
 import { ButtonBase } from '../../../themes/styles/default-styled'
 import { useTheme } from '@mui/material/styles'
 import { CLIENT, Snacks } from '../../../constants'
 import { AdminHeading } from '../../../components/Heading'
 import { toast } from 'react-toastify'
+import Streamgraph from '../../../components/graphs/Steamgraph'
 import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
 import InputViewField from '../../../components/Forms/InputViewField'
@@ -30,28 +30,23 @@ import { AntSwitch } from '../../../themes/styles/default-styled'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 import BackButton from '../../../components/BackButton'
 
-const EditUserScreen = () => {
-  const { id: userId } = useParams()
+const EditUserScreenTable = ({ user }) => {
+  // const { id: userId } = useParams()
   const [snackOpen, setSnackOpen] = useState(null)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [isAdmin, setIsAdmin] = useState(false)
   const theme = useTheme()
   const navigate = useNavigate()
-
-  const {
-    data: user,
-    isLoading,
-    refetch,
-    error,
-  } = useGetUserDetailsQuery(userId)
+  const userId = user._id
+  const { data, isLoading, refetch, error } = useGetUserDetailsQuery(user._id)
   const [updateUser, { isLoading: loadingUpdate }] = useUpdateUserMutation()
 
   useEffect(() => {
     if (user) {
-      setName(user.response.name)
-      setEmail(user.response.email)
-      setIsAdmin(user.response.isAdmin)
+      setName(user.name)
+      setEmail(user.email)
+      setIsAdmin(user.isAdmin)
     }
   }, [user])
 
@@ -67,7 +62,6 @@ const EditUserScreen = () => {
       }
       await updateUser(updatedUser)
       toast.success(Snacks.UPDATED, { position: 'top-center' })
-      // handleHideDuration(3000)
       refetch()
       navigate(CLIENT.ADMIN_USERS_URL)
     } catch (error) {
@@ -83,10 +77,9 @@ const EditUserScreen = () => {
       setSnackOpen(null)
     }, duration)
   }
+
   return (
     <>
-      <Meta title={`Admin | Edit ${user?.response.name}`} />
-      <BackButton to={CLIENT.ADMIN_USERS_URL} />
       {snackOpen && (
         <SnackAlert
           open={snackOpen}
@@ -102,13 +95,12 @@ const EditUserScreen = () => {
         </SnackAlert>
       )}
       <Grid container direction="row" justifyContent="center">
-        <AdminHeading title="Update User" />
         <Divider />
         {loadingUpdate && <Loader />}
         {isLoading ? (
           <Loader />
         ) : error ? (
-          <Message variant="danger">{error?.message}</Message>
+          <Message variant="danger">{error?.data.message}</Message>
         ) : (
           <FormControl component="form" onSubmit={handleSubmit}>
             <FormGroup>
@@ -116,9 +108,9 @@ const EditUserScreen = () => {
                 container
                 direction="column"
                 gap={4}
-                justifyContent="center"
+                justifyContent="space-between"
               >
-                <Grid item md={12}>
+                <Grid item md={6}>
                   <InputViewField
                     id="name"
                     label="Name"
@@ -148,27 +140,40 @@ const EditUserScreen = () => {
                       inputProps={{ 'aria-label': 'controlled' }}
                     />
                   </Box>
-                </Grid>
-
-                {/* <Divider orientation="vertical" flexItem /> */}
-
-                <Grid item md={12}>
-                  <Grid container>
-                    <ButtonBase type="submit" fullWidth>
-                      UPDATE
-                    </ButtonBase>
+                  <Grid item mt={2}>
+                    <Grid container>
+                      <ButtonBase type="submit" fullWidth disable={refetch}>
+                        UPDATE
+                      </ButtonBase>
+                    </Grid>
                   </Grid>
+                </Grid>
+                <Grid item md={6}>
+                  <Streamgraph
+                    width={800}
+                    height={200}
+                    backgroundColor={theme.palette.primary.main}
+                    data={[
+                      { date: '2011-10-01', value: 63.4 },
+                      { date: '2011-10-02', value: 58.0 },
+                      { date: '2011-10-03', value: 53.3 },
+                      { date: '2011-10-04', value: 55.7 },
+                      { date: '2011-10-05', value: 64.2 },
+                      { date: '2011-10-06', value: 58.8 },
+                    ]}
+                  />
                 </Grid>
               </Grid>
             </FormGroup>
           </FormControl>
         )}
-        <Grid item md={12}>
-          {/* <UsersEditSqueeze /> */}
-        </Grid>
       </Grid>
     </>
   )
 }
 
-export default EditUserScreen
+EditUserScreenTable.propTypes = {
+  user: PropTypes.object,
+}
+
+export default EditUserScreenTable

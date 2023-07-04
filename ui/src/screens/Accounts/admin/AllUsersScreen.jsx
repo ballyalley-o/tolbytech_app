@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../../components/Meta/Meta'
 import { useGetUsersQuery } from '../../../slices/user-slice'
 import { Grid, Typography, TableBody } from '@mui/material'
 import {
@@ -14,10 +14,11 @@ import {
 import { useTheme } from '@mui/material/styles'
 import { LinkBase } from '../../../themes/styles/default-styled'
 import RowUsers from '../../../components/RowUsers'
-import OrderViewAccounts from '../../../components/Accounts/OrderViewAccounts'
+import EditUserScreenTable from './EditUserScreenTable'
 import Message from '../../../components/Message'
 import Loader from '../../../components/Loader'
 import { AdminHeading } from '../../../components/Heading'
+import { MetaTitles } from '../../../constants'
 
 const AllUsersScreen = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery()
@@ -30,9 +31,7 @@ const AllUsersScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Admin | Users</title>
-      </Helmet>
+      <Meta title={MetaTitles.ADMIN_USERS} />
       <AdminHeading title="Users" />
       {loadingDelete && <Loader />}
       {isLoading ? (
@@ -57,7 +56,11 @@ const AllUsersScreen = () => {
               </TableHeadBase>
               <TableBody>
                 {users?.response.map((user) => (
-                  <RowUsers key={user._id} row={user} />
+                  <RowUsers
+                    key={user._id}
+                    row={user}
+                    content={<EditUserScreenTable user={user} />}
+                  />
                 ))}
               </TableBody>
             </TableBase>

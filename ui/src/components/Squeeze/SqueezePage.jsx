@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { useTheme } from '@emotion/react'
 import { Typography } from '@mui/material'
 import {
   StyledSubCardMedia,
@@ -8,6 +9,7 @@ import {
 import abstract5 from '../../assets/images/abstract5.jpg'
 
 const SqueezePage = () => {
+  const theme = useTheme()
   return (
     <>
       <Typography
@@ -15,11 +17,22 @@ const SqueezePage = () => {
         sx={{
           fontSize: '15rem',
           fontWeight: 'bold',
-          color: '#FFF',
+          color: theme.palette.pink.main,
         }}
       >
-        TECh
+        TECHNO
       </Typography>
+      <ExtraLargeTypesBase
+        variant="h1"
+        sx={{
+          fontSize: '15rem',
+
+          color: '#FFF',
+          gradient: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        }}
+      >
+        FUNK!
+      </ExtraLargeTypesBase>
       <StyledSubCardMedia
         component="img"
         height="100%"

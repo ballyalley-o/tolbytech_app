@@ -23,18 +23,14 @@ import { FaPaperPlane, FaTimes, FaCheck } from 'react-icons/fa'
 import { CLIENT } from '../constants.js'
 
 export default function RowUsers(props) {
-  const { row, onClick, content, customer } = props
+  const { row, onClick = () => setOpen(!open), content, customer } = props
   const [open, setOpen] = useState(false)
 
   return (
     <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCellBase>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
+          <IconButton aria-label="expand row" size="small" onClick={onClick}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCellBase>
