@@ -102,21 +102,18 @@ const OrderViewAccounts = ({ order, error, user, adminOrder }) => {
                     </Typography>
                   </Grid>
                 </ListItem>
-                {/* <ListItem>
-                  {order.isDelivered ? (
-                    <Message
-                      variant="success"
-                      color="success"
-                      severity="success"
-                    >
-                      STATUS: DELIVERED | {order.deliveredAt}
-                    </Message>
-                  ) : (
-                    <Message variant="danger" color="error" severity="error">
-                      STATUS: <b>NOT DELIVERED</b>
-                    </Message>
+                <ListItem>
+                  {order.isDelivered && (
+                    <Box>
+                      <Typography variant="caption" fontWeight="bold">
+                        Delivery date:&nbsp;
+                      </Typography>
+                      <Typography variant="caption">
+                        {order.deliveredAt.substring(0, 10)}
+                      </Typography>
+                    </Box>
                   )}
-                </ListItem> */}
+                </ListItem>
               </List>
             </Grid>
             <Grid item lg={4}>
@@ -160,27 +157,17 @@ const OrderViewAccounts = ({ order, error, user, adminOrder }) => {
                   </Typography>
                 </ListItem>
                 <ListItem>
-                  <Typography variant="caption" fontWeight="bold">
-                    &nbsp;
-                  </Typography>
-                  <Typography variant="caption">&nbsp;</Typography>
-                </ListItem>
-                <ListItem></ListItem>
-                {/* <ListItem>
-                  {order.isPaid ? (
-                    <Message
-                      variant="success"
-                      color="success"
-                      severity="success"
-                    >
-                      STATUS: <b>PAID</b> | {order.paidAt}
-                    </Message>
-                  ) : (
-                    <Message variant="danger" color="error" severity="error">
-                      STATUS: <b>NOT PAID</b>
-                    </Message>
+                  {order.isPaid && (
+                    <Box>
+                      <Typography variant="caption" fontWeight="bold">
+                        Payment date:&nbsp;
+                      </Typography>
+                      <Typography variant="caption">
+                        {order.paidAt.substring(0, 10)}
+                      </Typography>
+                    </Box>
                   )}
-                </ListItem> */}
+                </ListItem>
               </List>
             </Grid>
 

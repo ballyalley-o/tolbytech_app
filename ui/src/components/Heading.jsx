@@ -31,11 +31,11 @@ Heading.propTypes = {
 
 export default Heading
 
-export const AdminHeading = ({ title }) => {
+export const AdminHeading = ({ title, variant, ...other }) => {
   return (
     <>
       <Grid item md={6}>
-        <Typography variant="h1">{title}</Typography>
+        <Typography variant={variant}>{title}</Typography>
       </Grid>
     </>
   )
@@ -43,4 +43,9 @@ export const AdminHeading = ({ title }) => {
 
 AdminHeading.propTypes = {
   title: PropTypes.string,
+  variant: PropTypes.string,
+}
+
+AdminHeading.defaultProps = {
+  variant: 'h1',
 }
