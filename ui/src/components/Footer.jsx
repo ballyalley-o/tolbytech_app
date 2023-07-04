@@ -1,38 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Typography, Container, Box, IconButton } from '@mui/material'
-import Header from './Header'
-import { styled } from '@mui/material/styles'
+import { Typography, Container, Box, IconButton, Divider } from '@mui/material'
+import { FooterBase, FooterTextWrapper } from '../themes/styles/default-styled'
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
-
 import PaymentRegulations from '../screens/defaults/PaymentRegulations'
 import TolbyIcon from './NavBar/TolbyIcon'
 
 const Footer = () => {
-  const FooterBase = styled('footer')(({ theme }) => ({
-    position: 'relative',
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-    bgColor: '#1c252c',
-  }))
-
-  const FooterTextWrapper = styled(Box)(({ theme }) => ({
-    display: 'flex',
-    paddingTop: '2rem',
-    paddingBottom: '4rem',
-    paddingRight: '2rem',
-  }))
-
   return (
     <>
-      <Box sx={{ minHeight: '80vh' }}>
+      <Box sx={{ minHeight: '80vh' }} mt={2}>
+        <Divider />
         <Container maxWidth="md">
-          <Box display="inline-flex" sx={{ color: 'gray' }}>
+          <Box display="inline-flex" sx={{ color: 'gray' }} my={2}>
             <Box>
               <IconButton
                 disabled

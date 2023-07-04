@@ -84,10 +84,6 @@ const TechScreen = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Divider />
-          <Grid container py={2} justifyContent="center">
-            <Footer />
-          </Grid>
         </>
       )}
     </>
