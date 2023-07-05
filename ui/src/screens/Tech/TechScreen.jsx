@@ -10,7 +10,6 @@ import { useGetProductsQuery } from '../../slices/products-slice'
 import Paginate from '../../components/Paginate'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
-import Footer from '../../components/Footer'
 import Heading from '../../components/Heading'
 import BackButton from '../../components/BackButton'
 import { CLIENT, MetaTitles, Types } from '../../constants'
@@ -33,6 +32,7 @@ const TechScreen = () => {
         </Message>
       ) : (
         <>
+          <Heading title="Tech." subTitle="Shop" />
           <TolbyCarousel />
           <Grid container spacing={2} pb={2}>
             {keyword ? (
@@ -54,7 +54,7 @@ const TechScreen = () => {
                 )}
               </Grid>
             ) : (
-              <Heading title="Tech." subTitle="Shop" />
+              <Heading />
             )}
             <Grid item lg={12}>
               <Grid container justifyContent="space-evenly">

@@ -62,7 +62,6 @@ const ShippingScreen = () => {
   return (
     <>
       <Meta title={MetaTitles.SHIPPING} />
-
       <Grid container>
         <Grid item sm={12} lg={12}>
           <Typography variant="h3" pr={3} py={3} fontWeight="bold">

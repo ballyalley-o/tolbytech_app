@@ -422,6 +422,7 @@ const OrderScreen = () => {
                                     {error?.data?.message || error.message}
                                   </Message>
                                 )}
+
                                 {/* disable immediately after
                                 payment is made to prevent multiple payments
                                  */}

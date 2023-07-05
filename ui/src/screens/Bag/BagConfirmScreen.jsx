@@ -343,18 +343,7 @@ const BagConfirmScreen = () => {
                               </Message>
                             )}
                           </Grid>
-                          {/* {cart.paymentMethod === 'PayPal' && (
-                              <PayPalScriptProvider>
-                                <PayPalButtons
-                                  style={{
-                                    layout: 'horizontal',
-                                    backgroundColor: 'transparent',
-                                    width: '100%',
-                                  }}
-                                  onClick={handleBagConfirm}
-                                />
-                              </PayPalScriptProvider>
-                            )} */}
+
                           <ButtonBase
                             type="button"
                             fullWidth

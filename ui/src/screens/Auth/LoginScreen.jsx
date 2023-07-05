@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../components/Meta/Meta'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLoginMutation } from '../../slices/user-slice'
@@ -34,6 +34,7 @@ import TolbyLogoBase from '../defaults/TolbyLogoBase'
 import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import { MetaTitles } from '../../constants'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -48,6 +49,7 @@ const LoginScreen = () => {
   const [login, { isLoading }] = useLoginMutation()
   const { userInfo } = useSelector((state) => state.auth)
   const { search } = useLocation()
+
   const sp = new URLSearchParams(search)
 
   const redirect = sp.get('redirect') || '/'
@@ -88,9 +90,7 @@ const LoginScreen = () => {
   }
   return (
     <>
-      <Helmet>
-        <title>Login</title>
-      </Helmet>
+      <Meta title={MetaTitles.SIGNIN} />
       <Grid container justifyContent="flex-inline" direction="row">
         <Grid item lg={8} sx={{ display: { xs: 'none', lg: 'flex' } }}>
           <LoginGreeting />

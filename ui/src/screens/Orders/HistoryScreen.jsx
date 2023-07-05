@@ -4,7 +4,7 @@ import React from 'react'
 const HistoryScreen = () => {
   return (
     <div>
-      <h1>History</h1>
+      <h1>About Tolby</h1>
     </div>
   )
 }

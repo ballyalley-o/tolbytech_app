@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Helmet } from 'react-helmet-async'
+import Meta from '../../components/Meta/Meta'
 import { useState, useEffect } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -32,7 +32,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Visibility from '@mui/icons-material/Visibility'
 import RegisterGreeting from '../defaults/RegisterGreeting'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
-import { CLIENT } from '../../constants'
+import { CLIENT, MetaTitles } from '../../constants'
 
 const RegisterScreen = () => {
   const [name, setName] = useState('')
@@ -96,9 +96,7 @@ const RegisterScreen = () => {
   }
   return (
     <>
-      <Helmet>
-        <title>Join Tolby</title>
-      </Helmet>
+      <Meta title={MetaTitles.SIGNIN} />
       <Grid container justifyContent="center" direction="row">
         <Grid item lg={12} sx={{ display: { xs: 'none', lg: 'flex' } }}>
           <Grid container direction="row" justifyContent="space-between">

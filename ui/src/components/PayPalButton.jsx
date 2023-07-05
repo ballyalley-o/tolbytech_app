@@ -49,14 +49,11 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
               ],
             })
             .then((orderId) => {
-              // Your code here after create the order
               return orderId
             })
         }}
         onApprove={function (data, actions) {
-          return actions.order.capture().then(function () {
-            
-          })
+          return actions.order.capture().then(function () {})
         }}
       />
     </>
