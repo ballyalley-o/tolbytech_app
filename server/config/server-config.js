@@ -39,21 +39,23 @@ dotenv.config({
 export class App {
   constructor() {
     this.app = express()
-    this.app.use(VARS.FILESTATIC, fileStatic)
-    // if (VARS.ENV === 'production') {
-    //   this.app.use(fileStaticBuild)
-    //   this.app.get('*', apiRedirect)
-    // } else {
-    //   serverRoute(this.app)
-    // }
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+    this.production()
+    this.__dirname = path.resolve()
     this.app.use(cookieParser())
     this.app.use(setHeaders)
     this.app.use(cors())
     this.registerRoutes()
     this.app.use(notFound)
     this.app.use(errorHandler)
+  }
+  production() {
+    if (VARS.ENV === 'production') {
+      this.app.use(fileStaticBuild)
+    } else {
+      serverRoute(this.app)
+    }
   }
   async connectDB() {
     try {
@@ -66,12 +68,6 @@ export class App {
   }
 
   registerRoutes() {
-    if (VARS.ENV === 'production') {
-      this.app.use(fileStaticBuild)
-      this.app.get('*', apiRedirect)
-    } else {
-      serverRoute(this.app)
-    }
     linkRoutes(this.app, VARS.API_ROOT), payPalRoute(this.app, VARS.API_ROOT)
   }
 
