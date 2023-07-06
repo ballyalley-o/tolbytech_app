@@ -34,6 +34,8 @@ dotenv.config({
  * @param linkRoutes - connect routes from routes/index.js
  * @param connectDB - ignite the connection to the database
  * @param fileStatic - static file path
+ * @param fileStaticBuild - static file path for production
+ * @param apiRedirect - redirect to the by api to the server
  */
 
 export class App {

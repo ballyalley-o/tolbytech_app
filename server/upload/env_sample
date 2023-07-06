@@ -9,5 +9,13 @@ MONGODB_DB=
 MONGODB_USER=
 MONGODB_PASS=
 
-// path
-'/config'
+# JWT
+JWT_SECRET=
+JWT_EXPIRATION=2h
+
+
+# PayPal
+PAYPAL_CLIENT_ID=
+
+env path: /server/config/config.env
+```
