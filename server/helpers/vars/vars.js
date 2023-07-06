@@ -10,7 +10,7 @@ const VARS = {
   // PORT
   PORT: process.env.PORT || 8003,
   // ENV
-  ENV: process.env.NODE_ENV,
+  ENV: 'production',
   // API_ROOT
   API_ROOT: process.env.API_ROOT,
   // MONGO DB
@@ -25,7 +25,11 @@ const VARS = {
   FILE_: 'image',
   FILETYPES: /jpg|jpeg|png/,
   FILEOUTPUT: 'uploads/',
+  FILEDEV: 'uploads', // image path for development
   FILESTATIC: '/uploads',
+  FILEBUILD: '/ui/dist', // image path for production
+  STATIC_HTML: 'index.html',
+
   HARDCODEPATH: 'ui/public/uploads/',
 
   // server connect to database

@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
+import Meta from '../../components/Meta/Meta'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetMyOrdersQuery } from '../../slices/order-slice.js'
-import { Helmet } from 'react-helmet-async'
 import {
   Typography,
   FormControl,
@@ -24,6 +24,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import SnackAlert from '../../components/SnackAlert'
+import { MetaTitles } from '../../constants'
 
 const AccountScreen = () => {
   const [name, setName] = useState('')
@@ -92,9 +93,7 @@ const AccountScreen = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Tolby | Account</title>
-      </Helmet>
+      <Meta title={MetaTitles.ACCOUNT} />
       <Grid container>
         <Typography variant="h1">
           Hi, {userInfo?.response?.name !== '' && userInfo?.response?.name}!

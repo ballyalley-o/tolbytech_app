@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { logout } from './slices/auth-slice'
-import { alpha, styled, createTheme, ThemeProvider } from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
 import { Typography, Container, Snackbar, Alert } from '@mui/material'
 import TolbyNavBar from './components/NavBar/TolbyNavBar'
+import Footer from './components/Footer'
 import { ToastContainer } from 'react-toastify'
 import { HelmetProvider } from 'react-helmet-async'
 import theme from './themes/theme'
@@ -20,6 +19,7 @@ const App = () => {
           <Container>
             <Typography variant="h1">&nbsp;</Typography>
             <Outlet />
+            <Footer />
           </Container>
         </ThemeProvider>
       </HelmetProvider>

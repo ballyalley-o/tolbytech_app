@@ -15,7 +15,7 @@ const LandingPage = () => {
   return (
     <>
       <ContainerLandingBase maxWidth="md">
-        <Box>
+        <Box height="800px">
           <Typography variant="h1" fontWeight="bold">
             CONVENTIONCVS 2023
           </Typography>
@@ -24,8 +24,8 @@ const LandingPage = () => {
             {new Date().toLocaleString('en-US', {
               month: 'long',
               year: 'numeric',
-            })}{' '}
-            at{' '}
+            })}
+            at
             {new Date().toLocaleString('en-US', {
               hour: 'numeric',
               minute: 'numeric',
@@ -61,8 +61,6 @@ const LandingPage = () => {
           />
         </Box>
       </ContainerLandingBase>
-
-      {/* <AbstractBg /> */}
     </>
   )
 }

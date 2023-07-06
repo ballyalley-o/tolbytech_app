@@ -6,7 +6,11 @@ import cors from 'cors'
 import setHeaders from '../helpers/set-headers.js'
 import connectDB from './db.js'
 import { linkRoutes, payPalRoute, serverRoute } from '../routes/index.js'
-import { fileStatic } from '../middleware/upload-config.js'
+import {
+  fileStatic,
+  fileStaticBuild,
+  apiRedirect,
+} from '../middleware/upload-config.js'
 import { notFound, errorHandler } from '../middleware/error-handler.js'
 import MessageLOG from '../helpers/message-logger.js'
 import VARS from '../helpers/vars/vars.js'
@@ -35,15 +39,23 @@ dotenv.config({
 export class App {
   constructor() {
     this.app = express()
-    this.app.use(VARS.FILESTATIC, fileStatic)
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+    this.production()
+    this.__dirname = path.resolve()
     this.app.use(cookieParser())
     this.app.use(setHeaders)
     this.app.use(cors())
     this.registerRoutes()
     this.app.use(notFound)
     this.app.use(errorHandler)
+  }
+  production() {
+    if (VARS.ENV === 'production') {
+      this.app.use(fileStaticBuild)
+    } else {
+      serverRoute(this.app)
+    }
   }
   async connectDB() {
     try {
@@ -56,9 +68,7 @@ export class App {
   }
 
   registerRoutes() {
-    serverRoute(this.app),
-      linkRoutes(this.app, VARS.API_ROOT),
-      payPalRoute(this.app, VARS.API_ROOT)
+    linkRoutes(this.app, VARS.API_ROOT), payPalRoute(this.app, VARS.API_ROOT)
   }
 
   start() {

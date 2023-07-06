@@ -253,3 +253,23 @@ export const LogoBase = styled('img')(({ theme }) => ({
   animationName: '$fadeIn',
   pointerEvents: 'none',
 }))
+
+// @root - Footer
+
+export const FooterBase = styled('footer')(({ theme }) => ({
+  position: 'relative',
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+  bgColor: '#1c252c',
+}))
+
+export const FooterTextWrapper = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  paddingTop: '2rem',
+  paddingBottom: '4rem',
+  paddingRight: '2rem',
+}))
