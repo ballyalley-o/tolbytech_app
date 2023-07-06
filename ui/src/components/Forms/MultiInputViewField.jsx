@@ -1,0 +1,64 @@
+/* eslint-disable no-unused-vars */
+import React from 'react'
+import PropTypes from 'prop-types'
+import { FormControl, InputLabel, Grid, InputAdornment } from '@mui/material'
+import { InputBase } from '../../themes/styles/default-styled.js'
+
+const MultiInputViewField = ({
+  id,
+  name,
+  type,
+  size,
+  value,
+  label,
+  title,
+  adornment,
+  currency,
+  onChange,
+  ...props
+}) => {
+  return (
+    <>
+      <Grid container>
+        <Grid item>
+          <FormControl sx={{ m: 1, width: '40ch' }} variant="outlined">
+            <InputLabel htmlFor={id}>{title}</InputLabel>
+            <InputBase
+              id={id}
+              label={label}
+              name={name}
+              type={type}
+              size={size}
+              value={value}
+              multiline
+              startAdornment={currency && adornment}
+              onChange={onChange}
+              fullWidth
+            />
+          </FormControl>
+        </Grid>
+      </Grid>
+    </>
+  )
+}
+
+MultiInputViewField.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  label: PropTypes.string,
+  title: PropTypes.string,
+  type: PropTypes.string,
+  size: PropTypes.string,
+  value: PropTypes.node,
+  adornment: PropTypes.node,
+  currency: PropTypes.bool,
+  onChange: PropTypes.func,
+}
+
+MultiInputViewField.defaultProps = {
+  size: 'small',
+  type: 'text',
+  adornment: <InputAdornment position="start">NZD</InputAdornment>,
+}
+
+export default MultiInputViewField

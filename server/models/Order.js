@@ -1,49 +1,22 @@
 import mongoose from 'mongoose'
-import { OrderItemSchema } from './OrderItem.js'
+import { OrderItemSchema } from './base/OrderItem.js'
+import { ShippingAddressSchema } from './base/ShippingAddress.js'
+import { PaymentResultSchema } from './base/PaymentResult.js'
 
 const OrderSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     orderItems: [OrderItemSchema],
-    shippingAddress: {
-      address: {
-        type: String,
-        required: true,
-      },
-      city: {
-        type: String,
-        required: true,
-      },
-      postalCode: {
-        type: String,
-        required: true,
-      },
-      country: {
-        type: String,
-        required: true,
-      },
-    },
+    shippingAddress: ShippingAddressSchema,
     paymentMethod: {
       type: String,
       required: true,
     },
-    paymentResult: {
-      id: {
-        type: String,
-      },
-      status: {
-        type: String,
-      },
-      update_time: {
-        type: String,
-      },
-      email_address: {
-        type: String,
-      },
-    },
+    paymentResult: PaymentResultSchema,
     itemsPrice: {
       type: Number,
       required: true,

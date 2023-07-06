@@ -1,12 +1,13 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import 'colors'
-import products from './data/products.js'
-import users from './data/user.js'
+import products from './migration/data/products.js'
+import users from './migration/data/user.js'
 import User from './models/User.js'
 import Product from './models/Product.js'
 import Order from './models/Order.js'
 import connectDB from './config/db.js'
+import MessageLOG from './helpers/message-logger.js'
 
 dotenv.config()
 
@@ -24,7 +25,7 @@ const peerData = async () => {
       return { ...product, user: adminUser }
     })
     await Product.insertMany(sampleProducts)
-    console.log('DATA PEERED'.bgGreen)
+    MessageLOG.custom('DATA PEERED', 'bgGreen')
     process.exit()
   } catch (err) {
     const error = new Error(err)
@@ -39,7 +40,7 @@ const destroyData = async () => {
     await User.deleteMany()
     await Order.deleteMany()
 
-    console.log('DATA DESTROYED'.bgRed)
+    MessageLOG.custom('DATA DESTROYED', 'bgRed')
     process.exit(1)
   } catch (err) {}
   const error = new Error(err)

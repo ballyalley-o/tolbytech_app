@@ -1,17 +1,21 @@
 import dotenv from 'dotenv'
+import VARS from './vars/vars.js'
 dotenv.config({
   path: './server/config/config.env',
 })
-
-const PORT = process.env.PORT
-const ENV = process.env.NODE_ENV
 
 const tolby = {
   name: 'Tolby Technologies Application SERVER',
   status: 'Running',
   API: 'tolbytech-server',
-  port: PORT,
-  environment: ENV,
+  port: VARS.PORT,
+  environment: VARS.ENV,
 }
 
-export default tolby
+const TolbyTechResponse = {
+  response: (req, res) => {
+    res.send(tolby)
+  },
+}
+
+export { TolbyTechResponse }

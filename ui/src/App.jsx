@@ -1,36 +1,29 @@
 /* eslint-disable no-unused-vars */
-import * as React from 'react'
-import ReactDOM from 'react-dom/client'
+import React, { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
-
-import { alpha, styled, createTheme, ThemeProvider } from '@mui/material/styles'
-import { Typography, Container, Box } from '@mui/material'
-
-import Footer from './components/Footer'
+import { ThemeProvider } from '@mui/material/styles'
+import { Typography, Container, Snackbar, Alert } from '@mui/material'
 import TolbyNavBar from './components/NavBar/TolbyNavBar'
+import Footer from './components/Footer'
+import { ToastContainer } from 'react-toastify'
+import { HelmetProvider } from 'react-helmet-async'
+import theme from './themes/theme'
+import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#1c252c',
-      },
-      secondary: {
-        main: '#1c252c',
-      },
-    },
-    minHeight: '80vh',
-  })
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <TolbyNavBar />
-        <Container>
-          <Typography variant='h1'>&nbsp;</Typography>
-          <Outlet />
-        </Container>
-        <Footer />
-      </ThemeProvider>
+      <HelmetProvider>
+        <ThemeProvider theme={theme}>
+          <TolbyNavBar />
+          <Container>
+            <Typography variant="h1">&nbsp;</Typography>
+            <Outlet />
+            <Footer />
+          </Container>
+        </ThemeProvider>
+      </HelmetProvider>
+      <ToastContainer />
     </>
   )
 }
