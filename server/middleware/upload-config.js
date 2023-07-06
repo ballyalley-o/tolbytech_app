@@ -6,11 +6,21 @@ import VARS from '../helpers/vars/vars.js'
 export const singleUpload = upload.single('image')
 
 const __dirname = path.resolve()
-console.log('__dirname: ', __dirname)
 
-// const uploadPath = path.join(__dirname, 'uploads')
-const uploadPath = path.join(__dirname, 'uploads')
-const filesPath = path.join(__dirname, 'files')
-// static file path to my uploads folder
+// development static
+const uploadPath = path.join(__dirname, VARS.FILEDEV)
 export const fileStatic = express.static(uploadPath)
-export const serverStatic = express.static(filesPath)
+
+// production static
+const uploadPathBuild = path.join(__dirname, VARS.FILEBUILD)
+export const fileStaticBuild = express.static(uploadPathBuild)
+
+const pathBuild = (dir, path1, path2, file) => {
+  return path.resolve(dir, path1, path2, file)
+}
+
+// build not api redirect to index.html
+export const buildRedirect = path.resolve(__dirname, 'ui', 'dist', 'index.html')
+export const apiRedirect = (req, res) => {
+  res.sendFile(buildRedirect)
+}

@@ -6,7 +6,11 @@ import cors from 'cors'
 import setHeaders from '../helpers/set-headers.js'
 import connectDB from './db.js'
 import { linkRoutes, payPalRoute, serverRoute } from '../routes/index.js'
-import { fileStatic } from '../middleware/upload-config.js'
+import {
+  fileStatic,
+  fileStaticBuild,
+  apiRedirect,
+} from '../middleware/upload-config.js'
 import { notFound, errorHandler } from '../middleware/error-handler.js'
 import MessageLOG from '../helpers/message-logger.js'
 import VARS from '../helpers/vars/vars.js'
@@ -36,6 +40,12 @@ export class App {
   constructor() {
     this.app = express()
     this.app.use(VARS.FILESTATIC, fileStatic)
+    // if (VARS.ENV === 'production') {
+    //   this.app.use(fileStaticBuild)
+    //   this.app.get('*', apiRedirect)
+    // } else {
+    //   serverRoute(this.app)
+    // }
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(cookieParser())
@@ -56,9 +66,13 @@ export class App {
   }
 
   registerRoutes() {
-    serverRoute(this.app),
-      linkRoutes(this.app, VARS.API_ROOT),
-      payPalRoute(this.app, VARS.API_ROOT)
+    if (VARS.ENV === 'production') {
+      this.app.use(fileStaticBuild)
+      this.app.get('*', apiRedirect)
+    } else {
+      serverRoute(this.app)
+    }
+    linkRoutes(this.app, VARS.API_ROOT), payPalRoute(this.app, VARS.API_ROOT)
   }
 
   start() {

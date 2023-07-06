@@ -25,7 +25,11 @@ const VARS = {
   FILE_: 'image',
   FILETYPES: /jpg|jpeg|png/,
   FILEOUTPUT: 'uploads/',
+  FILEDEV: 'uploads', // image path for development
   FILESTATIC: '/uploads',
+  FILEBUILD: 'uidist', // image path for production
+  STATIC_HTML: 'index.html',
+
   HARDCODEPATH: 'ui/public/uploads/',
 
   // server connect to database

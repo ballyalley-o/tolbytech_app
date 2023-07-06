@@ -11,7 +11,8 @@
     "client": "npm run dev --prefix ui",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "peer": "node server/peer.js -i",
-    "destroy": "node server/peer.js -d"
+    "destroy": "node server/peer.js -d",
+    "build": "npm install && npm install --prefix ui && npm run build --prefix ui"
   },
   "author": "Bally Lomibao",
   "license": "MIT",
