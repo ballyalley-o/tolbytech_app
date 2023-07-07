@@ -53,7 +53,7 @@ export class App {
     this.app.use(errorHandler)
   }
   production() {
-    if (VARS.ENV === '') {
+    if (!VARS.ENV) {
       this.app.use(fileStaticBuild)
     } else {
       serverRoute(this.app)
