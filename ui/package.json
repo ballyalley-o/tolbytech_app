@@ -6,7 +6,7 @@
   "proxy": "http://localhost:8002",
   "scripts": {
     "dev": "vite --host localhost",
-    "build": "vite build",
+    "build": "npm install && vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview port --8002"
   },
