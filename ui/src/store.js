@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit'
 import { apiSlice } from './slices/api-slice'
 import cartSliceReducer from './slices/cart-slice'
 import authReducer from './slices/auth-slice'
-import { CONFIG } from './config-global'
 
 const store = configureStore({
   reducer: {
@@ -12,7 +11,8 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
-  devTools: CONFIG.DEV_TOOLS,
+  devTools: true,
+  // CONFIG.DEV_TOOLS
 })
 
 export default store
