@@ -1,4 +1,3 @@
-import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import 'colors'
 import products from './migration/data/products.js'

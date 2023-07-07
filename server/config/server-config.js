@@ -59,6 +59,7 @@ export class App {
       serverRoute(this.app)
     }
   }
+
   async connectDB() {
     try {
       await connectDB()
