@@ -43,7 +43,6 @@ export class App {
     this.app = express()
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
-    this.__dirname = path.resolve()
     this.app.use(fileStatic)
     this.app.use(cookieParser())
     this.app.use(setHeaders)
