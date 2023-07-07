@@ -255,7 +255,6 @@ export const LogoBase = styled('img')(({ theme }) => ({
 }))
 
 // @root - Footer
-
 export const FooterBase = styled('footer')(({ theme }) => ({
   position: 'relative',
   marginLeft: 0,

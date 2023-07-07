@@ -1,11 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { useParams } from 'react-router-dom'
 import Meta from '../../../components/Meta/Meta'
-import {
-  useGetMyOrdersQuery,
-  useGetOrdersQuery,
-} from '../../../slices/order-slice'
+import { useGetOrdersQuery } from '../../../slices/order-slice'
 import { useUserQuery } from '../../../slices/user-slice'
 import { Grid, Typography, TableBody } from '@mui/material'
 import {
