@@ -6,14 +6,11 @@ import cors from 'cors'
 import setHeaders from '../helpers/set-headers.js'
 import connectDB from './db.js'
 import { linkRoutes, payPalRoute, serverRoute } from '../routes/index.js'
-import {
-  fileStatic,
-  fileStaticBuild,
-  apiRedirect,
-} from '../middleware/upload-config.js'
+import { fileStatic, fileStaticBuild } from '../middleware/upload-config.js'
 import { notFound, errorHandler } from '../middleware/error-handler.js'
 import MessageLOG from '../helpers/message-logger.js'
 import VARS from '../helpers/vars/vars.js'
+
 dotenv.config({
   path: './server/config/config.env',
 })
@@ -52,14 +49,6 @@ export class App {
     this.app.use(notFound)
     this.app.use(errorHandler)
   }
-  // production() {
-  //   this.app.use(fileStaticBuild)
-  //   // if (!VARS.ENV) {
-  //   //   this.app.use(fileStaticBuild)
-  //   // } else {
-  //   //   serverRoute(this.app)
-  //   // }
-  // }
 
   async connectDB() {
     try {
