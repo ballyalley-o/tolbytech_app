@@ -43,22 +43,24 @@ export class App {
     this.app = express()
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
-    this.production()
     this.__dirname = path.resolve()
+    this.app.use(fileStatic)
     this.app.use(cookieParser())
     this.app.use(setHeaders)
     this.app.use(cors())
     this.registerRoutes()
+    this.app.use(fileStaticBuild)
     this.app.use(notFound)
     this.app.use(errorHandler)
   }
-  production() {
-    if (!VARS.ENV) {
-      this.app.use(fileStaticBuild)
-    } else {
-      serverRoute(this.app)
-    }
-  }
+  // production() {
+  //   this.app.use(fileStaticBuild)
+  //   // if (!VARS.ENV) {
+  //   //   this.app.use(fileStaticBuild)
+  //   // } else {
+  //   //   serverRoute(this.app)
+  //   // }
+  // }
 
   async connectDB() {
     try {
