@@ -47,20 +47,11 @@ export class App {
     this.app.use(setHeaders)
     this.app.use(cors())
     this.registerRoutes()
-    this.app.use(morgan('combined', { stream }))
+    this.app.use(morgan('short', { stream }))
     this.app.use(fileStaticBuild)
     this.app.use(notFound)
     this.app.use(errorHandler)
   }
-  production() {
-    try {
-      this.app.use(serverRoute)
-      MessageLOG.env(VARS.ENV)
-    } catch (err) {
-      MessageLOG.error(err)
-    }
-  }
-
   async connectDB() {
     try {
       await connectDB()
@@ -70,7 +61,6 @@ export class App {
       MessageLOG.error(err)
     }
   }
-
   registerRoutes() {
     linkRoutes(this.app, VARS.API_ROOT), payPalRoute(this.app, VARS.API_ROOT)
   }

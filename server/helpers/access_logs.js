@@ -17,4 +17,20 @@ export const stream = {
     const log = new LogEntry({ message })
     log.save().catch((err) => errorHandler(err, 'Error saving log to database'))
   },
+
+  read: () => {
+    LogEntry.find()
+      .then((logs) => {
+        MessageLOG.log(logs)
+      })
+      .catch((err) => errorHandler(err, 'Error reading logs from database'))
+  },
+
+  delete: () => {
+    LogEntry.deleteMany()
+      .then((logs) => {
+        MessageLOG.log(logs)
+      })
+      .catch((err) => errorHandler(err, 'Error deleting logs from database'))
+  },
 }
