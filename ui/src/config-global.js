@@ -34,7 +34,7 @@ const ROOT_POLICIES = '/policies'
 
 export const CONFIG = {
   // Global envs
-  SERVER_URL: '',
+  // SERVER_URL: ,
   NODE_ENV: import.meta.env.VITE_NODE_ENV,
   DEV_TOOLS: import.meta.env.VITE_DEV_TOOLS,
   CLIENT_URL_DEV: import.meta.env.VITE_CLIENT_URL_DEV,
