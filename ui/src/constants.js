@@ -15,7 +15,7 @@ import {
   CONFIG,
 } from './config-global'
 
-export const BASE_URL = ''
+export const BASE_URL = 'http://localhost:8002'
 // CONFIG.NODE_ENV === 'development' ? '' : 'CONFIG.SERVER_URL'
 //  (axios.defaults.baseURL = `http://localhost:8002`)
 
