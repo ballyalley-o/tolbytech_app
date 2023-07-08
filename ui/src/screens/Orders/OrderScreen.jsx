@@ -340,6 +340,7 @@ const OrderScreen = () => {
                             width: '100%',
                           }}
                         />
+
                         <Grid item lg={12}>
                           <Grid container direction="row" spacing={5} gap={2}>
                             <Grid container justifyContent="space-between">
