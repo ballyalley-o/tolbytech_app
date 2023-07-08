@@ -2,7 +2,6 @@ import asyncHandler from '../middleware/async-handler.js'
 import Order from '../models/Order.js'
 import { StatusCodes, getReasonPhrase } from 'http-status-codes'
 import { customResponse, defaultResponse } from '../helpers/static.js'
-import { get } from 'mongoose'
 
 // @desc    Add all order items
 // @route   POST /api/v1/orders
@@ -92,6 +91,26 @@ const updateOrderToPaid = asyncHandler(async (req, res, next) => {
     res
       .status(200)
       .send(defaultResponse(StatusCodes.OK, 'ORDER IS PAID', updateOrder))
+  } else {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .send(getReasonPhrase(StatusCodes.NOT_FOUND))
+  }
+})
+
+// @desc    Get receipt
+// @route   GET /api/v1/orders/:id/receipt
+// @access  Private
+const getReceipt = asyncHandler(async (req, res, next) => {
+  const order = await Order.findById(req.params.id)
+
+  // get receipt from paypal
+  const receipt = await paypalClient.getReceipt(order.paymentResult.id)
+
+  if (order) {
+    res
+      .status(StatusCodes.OK)
+      .send(defaultResponse(StatusCodes.OK, 'RECEIPT', order))
   } else {
     res
       .status(StatusCodes.NOT_FOUND)

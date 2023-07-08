@@ -440,6 +440,12 @@ const OrderScreen = () => {
                                             onApprove={onApprove}
                                             onError={onError}
                                             disabled={isPaid}
+                                            layout="horizontal"
+                                            style={
+                                              isPaid
+                                                ? { display: 'none' }
+                                                : { display: 'block' }
+                                            }
                                           ></PayPalButtons>
                                         </Grid>
                                       </Grid>
