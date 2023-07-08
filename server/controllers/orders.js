@@ -5,7 +5,7 @@ import { customResponse, defaultResponse } from '../helpers/static.js'
 import { get } from 'mongoose'
 
 // @desc    Add all order items
-// @route   POST /api/orders
+// @route   POST /api/v1/orders
 // @access  Private
 const addOrderItems = asyncHandler(async (req, res, next) => {
   const {
@@ -56,7 +56,7 @@ const getMyOrders = asyncHandler(async (req, res, next) => {
 })
 
 // @desc    Get order item by its id
-// @route   GET /api/orders/:id
+// @route   GET /api/v1/orders/:id
 // @access  Private
 const getOrder = asyncHandler(async (req, res, next) => {
   const order = await Order.findById(req.params.id).populate(
@@ -75,7 +75,7 @@ const getOrder = asyncHandler(async (req, res, next) => {
 })
 
 // @desc    Update order to paid
-// @route   PUT /api/orders/:id/pay
+// @route   PUT /api/v1/orders/:id/pay
 // @access  Private/Admin
 const updateOrderToPaid = asyncHandler(async (req, res, next) => {
   const order = await Order.findById(req.params.id)
@@ -100,7 +100,7 @@ const updateOrderToPaid = asyncHandler(async (req, res, next) => {
 })
 
 //  @desc    Update order to delivered
-//  @route   PUT /api/orders/:id/deliver
+//  @route   PUT /api/v1/orders/:id/deliver
 //  @access  Private
 const updateOrderToDelivered = asyncHandler(async (req, res, next) => {
   const order = await Order.findById(req.params.id)
@@ -127,7 +127,7 @@ const updateOrderToDelivered = asyncHandler(async (req, res, next) => {
 })
 
 // @desc    Get ALL orders
-// @route   GET /api/orders
+// @route   GET /api/v1/orders
 // @access  Private/Admin
 const getAllOrders = asyncHandler(async (req, res, next) => {
   const orders = await Order.find({}).populate('user', 'id name')
