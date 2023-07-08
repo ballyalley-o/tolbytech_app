@@ -6,7 +6,8 @@ import morgan from 'morgan'
 // @access  Private
 const getLogs = asyncHandler(async (req, res, next) => {
   const logs = await Log.find({})
-  //  create a controller for the logs in the logs.js file
+  //  create a controller for the logs in the logs from morgan
+  //  create a route for the logs
 
   res.status(200).send('GET ALL LOGS')
 })
