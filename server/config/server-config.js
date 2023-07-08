@@ -8,7 +8,7 @@ import setHeaders from '../helpers/set-headers.js'
 import connectDB from './db.js'
 import { linkRoutes, payPalRoute, serverRoute } from '../routes/index.js'
 import { fileStatic, fileStaticBuild } from '../middleware/upload-config.js'
-import accessLogStream, { stream } from '../helpers/access_logs.js'
+import { stream } from '../helpers/access_logs.js'
 import { notFound, errorHandler } from '../middleware/error-handler.js'
 import MessageLOG from '../helpers/message-logger.js'
 import VARS from '../helpers/vars/vars.js'
@@ -51,6 +51,14 @@ export class App {
     this.app.use(fileStaticBuild)
     this.app.use(notFound)
     this.app.use(errorHandler)
+  }
+  production() {
+    try {
+      this.app.use(serverRoute)
+      MessageLOG.env(VARS.ENV)
+    } catch (err) {
+      MessageLOG.error(err)
+    }
   }
 
   async connectDB() {
