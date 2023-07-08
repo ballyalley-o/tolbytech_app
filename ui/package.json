@@ -3,7 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "proxy": "https://tolby-tech.vercel.app",
   "scripts": {
     "dev": "vite --host localhost",
     "build": "vite build",
