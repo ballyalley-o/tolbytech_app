@@ -1,12 +1,14 @@
-import path from 'path'
+import fs from 'fs'
 import express from 'express'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import morgan from 'morgan'
 import setHeaders from '../helpers/set-headers.js'
 import connectDB from './db.js'
 import { linkRoutes, payPalRoute, serverRoute } from '../routes/index.js'
 import { fileStatic, fileStaticBuild } from '../middleware/upload-config.js'
+import accessLogStream from '../helpers/access_logs.js'
 import { notFound, errorHandler } from '../middleware/error-handler.js'
 import MessageLOG from '../helpers/message-logger.js'
 import VARS from '../helpers/vars/vars.js'
@@ -45,6 +47,7 @@ export class App {
     this.app.use(setHeaders)
     this.app.use(cors())
     this.registerRoutes()
+    this.app.use(morgan('combined', { stream: accessLogStream }))
     this.app.use(fileStaticBuild)
     this.app.use(notFound)
     this.app.use(errorHandler)
