@@ -272,3 +272,28 @@ export const FooterTextWrapper = styled(Box)(({ theme }) => ({
   paddingBottom: '4rem',
   paddingRight: '2rem',
 }))
+
+export const StyledCarouselCardMedia = styled(CardMedia)(({ theme }) => ({
+  height: '400px',
+  color: '#fff',
+  lineHeight: '160px',
+  textAlign: 'center',
+  background: '#364d79',
+  borderRadius: '8px',
+}))
+
+/**
+ * @root - TolbyCarousel Component - options
+ */
+
+export const CarouselConfig = {
+  autoplay: true,
+  autoplaySpeed: 5000,
+  pauseOnHover: true,
+  pauseOnFocus: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  height: '500px',
+}

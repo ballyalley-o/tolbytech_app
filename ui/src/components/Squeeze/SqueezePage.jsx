@@ -33,7 +33,7 @@ const SqueezePage = () => {
         >
           FUNK!
         </ExtraLargeTypesBase>
-        <StyledSubCardMedia
+        {/* <StyledSubCardMedia
           component="img"
           height="100%"
           width="100%"
@@ -42,7 +42,7 @@ const SqueezePage = () => {
           sx={{
             width: '100%',
           }}
-        />
+        /> */}
       </Box>
     </>
   )

@@ -39,8 +39,9 @@ import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
 } from '../../slices/products-slice'
+import { delay } from '../../utils/delay'
 import { addToCart } from '../../slices/cart-slice'
-import { set } from 'mongoose'
+import { message } from 'antd'
 
 const ProductDetailScreen = () => {
   const { id: productId } = useParams()
@@ -52,6 +53,7 @@ const ProductDetailScreen = () => {
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
   const { severity, setSeverity, handleSnackClose } = useSnack()
+  const [messageApi, contextHolder] = message.useMessage()
 
   const {
     data: product,
@@ -62,9 +64,18 @@ const ProductDetailScreen = () => {
 
   const [createReview, { isLoading: loadingReview }] = useCreateReviewMutation()
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
+    await messageApi.open({
+      type: 'success',
+      content: 'Added to cart',
+      icon: <AddShoppingCartIcon />,
+      duration: 2,
+      style: {
+        marginTop: '5rem',
+      },
+    })
     dispatch(addToCart({ ...product, qty }))
-    navigate(CLIENT.BAG_URL)
+    navigate(CLIENT.TECH_URL)
   }
 
   const handleReviewSubmit = async (e) => {
@@ -77,7 +88,7 @@ const ProductDetailScreen = () => {
         comment,
       }).unwrap()
       refetch()
-      setSnackOpen(Snacks.REVIEWED)
+      setSnackOpen(Snacks.REVIEWED, 'success')
       setSeverity('success')
       setRating(0)
       setComment('')
@@ -99,6 +110,8 @@ const ProductDetailScreen = () => {
     <>
       <Meta title={product?.name} />
       <BackButton to="/" />
+      {contextHolder}
+
       {snackOpen && (
         <SnackAlert
           open={snackOpen}

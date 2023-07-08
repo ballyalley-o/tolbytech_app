@@ -10,7 +10,7 @@ import { setCredentials } from '../../slices/auth-slice'
 import { CLIENT } from '../../constants'
 import Loader from '../../components/Loader'
 import SnackAlert from '../../components/SnackAlert'
-import { toast } from 'react-toastify'
+import SpaceTaker from '../../components/SpaceTaker'
 import {
   FormControl,
   FormGroup,
@@ -186,7 +186,6 @@ const LoginScreen = () => {
                           onChange={(e) => setPassword(e.target.value)}
                         />
                       </FormControl>
-
                       <Grid
                         item
                         xs={12}
@@ -256,6 +255,7 @@ const LoginScreen = () => {
               </Grid>
             </FormContainer>
           </StyledLoginBox>
+          <SpaceTaker />
         </Grid>
       </Grid>
     </>

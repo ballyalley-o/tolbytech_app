@@ -53,13 +53,9 @@ export const ChipBase = styled(Chip)(({ theme, productCountInStock }) => ({
 }))
 
 export const CartButton = styled(Button)(({ theme, productCountInStock }) => ({
-  color: '#C0C0C0',
+  color: theme.palette.text.primary,
   backgroundColor: productCountInStock > 0 ? '#1c252c' : 'transparent',
   width: '25%',
-  '&:hover': {
-    backgroundColor: '#1c252c',
-    color: theme.palette.text.primary,
-  },
   disabled: {
     backgroundColor: 'red',
   },
@@ -67,22 +63,6 @@ export const CartButton = styled(Button)(({ theme, productCountInStock }) => ({
 
 export const CartTypography = styled(Typography)(({ theme }) => ({
   color: '#C0C0C0',
-  '&:hover': {
-    display: 'none',
-    easeIn: '0.8s',
-    easeOut: '0.8s',
-    AnimationEffect: 'ease-in',
-    scrollBehavior: 'smooth',
-    WebkitTransform: 'translateX(-100%)',
-    MozTransform: 'translateX(-100%)',
-    WebkitBackfaceVisibility: 'hidden',
-    backfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    msTransform: 'translateZ(0)',
-    OTransform: 'translateZ(0)',
-    transform: 'translateZ(0)',
-    transitionDelay: '0.2s',
-  },
 }))
 
 export const CardBase = styled(Card)(({ theme }) => ({

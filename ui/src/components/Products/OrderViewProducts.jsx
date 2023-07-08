@@ -242,8 +242,6 @@ const OrderViewProducts = ({ order, error, user, adminOrder }) => {
                                   {error?.data?.message || error.message}
                                 </Message>
                               )}
-
-                              {/* MARK AS DELIVERED PLACEHOLDER */}
                             </Grid>
                           </Grid>
                         </Grid>

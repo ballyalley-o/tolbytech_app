@@ -147,6 +147,9 @@ export const Snacks = {
 
   // @root ProductDetailsScreen: Review
   REVIEWED: 'REVIEW SUBMITTED',
+
+  // @root ProductDetailsScreen: Add to Cart
+  ADDEDCART: `ITEM ADDED TO CART`,
 }
 
 export const Types = {
