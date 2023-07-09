@@ -18,8 +18,11 @@ import { styled } from '@mui/material/styles'
 export const CardBase = styled(Card)(({ theme }) => ({
   boxShadow: 'none',
   backgroundColor: 'transparent',
-  border: '1px solid #D4D4D4',
+  // border: '1px solid #D4D4D4',
   margin: '1rem 1rem',
+  display: 'block',
+  width: '100%',
+
   root: {
     borderRadius: '20px',
     '& .MuiInputBase-root': {
@@ -67,9 +70,6 @@ export const InputBase = styled(OutlinedInput)(({ theme }) => ({
       borderColor: '#000',
     },
 
-    '&.Mui-focused fieldset': {
-      borderColor: '#000',
-    },
     '& .MuiInputBase-input': {
       fontSize: '1rem',
       '&::placeholder': {
@@ -77,6 +77,10 @@ export const InputBase = styled(OutlinedInput)(({ theme }) => ({
         fontWeight: 400,
         fontSize: '1em',
       },
+    },
+    '&.Mui-focused': {
+      backgroundColor: 'red',
+      color: '#000',
     },
   },
 }))

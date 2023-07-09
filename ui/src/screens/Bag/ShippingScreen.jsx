@@ -5,7 +5,8 @@ import Meta from '../../components/Meta/Meta'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveShippingAddress } from '../../slices/cart-slice'
-import SnackAlert from '../../components/SnackAlert'
+import { InputBase } from '../../themes/styles/default-styled.js'
+import InputViewField from '../../components/Forms/InputViewField'
 import Message from '../../components/Message'
 import {
   FormControl,
@@ -145,54 +146,42 @@ const ShippingScreen = () => {
                       component="form"
                       fullWidth
                     >
-                      <FormGroup sx={{ my: 2 }}>
-                        <TextField
-                          required
-                          fullWidth
-                          id="address"
-                          label="Address"
-                          variant="outlined"
-                          size="small"
-                          value={address}
-                          onChange={(e) => setAddress(e.target.value)}
-                        />
-                      </FormGroup>
-                      <FormGroup sx={{ my: 2 }}>
-                        <TextField
-                          required
-                          fullWidth
-                          id="city"
-                          label="City"
-                          variant="outlined"
-                          size="small"
-                          value={city}
-                          onChange={(e) => setCity(e.target.value)}
-                        />
-                      </FormGroup>
-                      <FormGroup sx={{ my: 2 }}>
-                        <TextField
-                          required
-                          fullWidth
-                          id="postalCode"
-                          label="Postal Code"
-                          variant="outlined"
-                          size="small"
-                          value={postalCode}
-                          onChange={(e) => setPostalCode(e.target.value)}
-                        />
-                      </FormGroup>
-                      <FormGroup sx={{ my: 2 }}>
-                        <TextField
-                          required
-                          fullWidth
-                          id="country"
-                          label="Country"
-                          variant="outlined"
-                          size="small"
-                          value={country}
-                          onChange={(e) => setCountry(e.target.value)}
-                        />
-                      </FormGroup>
+                      <InputViewField
+                        required
+                        fullWidth
+                        id="address"
+                        label="Address"
+                        title="Address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                      />
+                      <InputViewField
+                        required
+                        fullWidth
+                        id="city"
+                        label="City"
+                        title="City"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                      />
+                      <InputViewField
+                        required
+                        fullWidth
+                        id="postalCode"
+                        label="Postal Code"
+                        title="Postal Code"
+                        value={postalCode}
+                        onChange={(e) => setPostalCode(e.target.value)}
+                      />
+                      <InputViewField
+                        required
+                        fullWidth
+                        id="country"
+                        label="Country"
+                        title="Country"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                      />
                       <Box sx={{ my: 2 }}>
                         <Divider>
                           <Typography

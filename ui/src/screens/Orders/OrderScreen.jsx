@@ -308,6 +308,7 @@ const OrderScreen = () => {
                   sx={{
                     display: 'block',
                     width: '100%',
+                    backgroundColor: '#FFF',
                   }}
                 >
                   <List>
