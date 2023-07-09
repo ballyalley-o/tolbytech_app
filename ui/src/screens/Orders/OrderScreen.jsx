@@ -20,6 +20,7 @@ import {
   Chip,
 } from '@mui/material'
 import { CardBase } from '../../themes/styles/default-styled.js'
+import { StyledGrid } from '../../themes/styles/card-styled.js'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { FaCcPaypal } from 'react-icons/fa'
 import Message from '../../components/Message'
@@ -270,24 +271,13 @@ const OrderScreen = () => {
                       </Typography>
                       {order.response.orderItems.map((item, index) => (
                         <ListItem key={index}>
-                          <Grid
-                            item
-                            md={2}
-                            mr={2}
-                            sx={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              width: '100px',
-                              height: '100px',
-                              objectFit: 'cover',
-                            }}
-                          >
+                          <StyledGrid item md={2} mr={2}>
                             <CardMedia
                               component="img"
                               image={item.image}
                               sx={{ borderRadius: '5px' }}
                             />
-                          </Grid>
+                          </StyledGrid>
                           <Grid
                             container
                             direction="row"
