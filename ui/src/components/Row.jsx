@@ -19,7 +19,6 @@ import {
 import { FcHighPriority } from 'react-icons/fc'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import { CLIENT } from '../constants.js'
 
 export default function Row(props) {
   const { row, user, onClick, content, customer } = props

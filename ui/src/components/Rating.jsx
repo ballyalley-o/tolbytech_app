@@ -15,7 +15,6 @@ const Rating = ({ value, rating, color }) => {
       fontSize: '1rem',
     },
   }))
-
   return (
     <Box lg={4}>
       <Tooltip title={`${value} stars out of 5 , with ${rating} reviews`}>
