@@ -48,7 +48,7 @@ export default function Row(props) {
                 {row.createdAt?.substring(0, 10)}
               </Typography>
             </TableHeadCellBase>
-            <TableHeadCellBase>
+            <TableHeadCellBase align="center">
               <Link to={`/orders/${row._id}`} target="_blank">
                 <Typography variant="body1">{row._id}</Typography>
               </Link>
@@ -68,7 +68,7 @@ export default function Row(props) {
             <TableHeadCellBase align="center">
               {row.isDelivered ? (
                 <Typography variant="caption">
-                  row.deliveredAt.substring(0, 10)
+                  {row.deliveredAt.substring(0, 10)}
                 </Typography>
               ) : (
                 <Badge badgeContent={<FcHighPriority size={15} />}></Badge>
