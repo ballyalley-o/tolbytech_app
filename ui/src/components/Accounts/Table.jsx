@@ -39,7 +39,7 @@ export default function CollapsibleTable({ orders, user }) {
           <TableRowHeader>
             <TableCellBase></TableCellBase>
             <TableCellBase>Date</TableCellBase>
-            <TableCellBase>Order no:</TableCellBase>
+            <TableCellBase align="center">Order no:</TableCellBase>
             <TableCellBase align="center">Amount (NZ$)</TableCellBase>
             <TableCellBase align="center">Paid</TableCellBase>
             <TableCellBase align="center">Delivered</TableCellBase>

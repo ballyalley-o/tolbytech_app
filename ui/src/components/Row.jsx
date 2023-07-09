@@ -68,7 +68,9 @@ export default function Row(props) {
             </TableHeadCellBase>
             <TableHeadCellBase align="center">
               {row.isDelivered ? (
-                row.deliveredAt.substring(0, 10)
+                <Typography variant="caption">
+                  row.deliveredAt.substring(0, 10)
+                </Typography>
               ) : (
                 <Badge badgeContent={<FcHighPriority size={15} />}></Badge>
               )}
