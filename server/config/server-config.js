@@ -32,6 +32,7 @@ dotenv.config({
  * @param registerRoutes - introduce the connection links to the other routes
  * @param linkRoutes - connect routes from routes/index.js
  * @param connectDB - ignite the connection to the database
+ * @param morgan - access logs
  * @param fileStatic - static file path
  * @param fileStaticBuild - static file path for production
  * @param apiRedirect - redirect to the by api to the server
@@ -62,9 +63,7 @@ export class App {
     }
   }
   registerRoutes() {
-    serverRoute(this.app, VARS.API_ROOT),
-      linkRoutes(this.app, VARS.API_ROOT),
-      payPalRoute(this.app, VARS.API_ROOT)
+    linkRoutes(this.app, VARS.API_ROOT), payPalRoute(this.app, VARS.API_ROOT)
   }
 
   start() {
