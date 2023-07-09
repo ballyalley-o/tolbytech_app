@@ -62,7 +62,9 @@ export class App {
     }
   }
   registerRoutes() {
-    linkRoutes(this.app, VARS.API_ROOT), payPalRoute(this.app, VARS.API_ROOT)
+    serverRoute(this.app, VARS.API_ROOT),
+      linkRoutes(this.app, VARS.API_ROOT),
+      payPalRoute(this.app, VARS.API_ROOT)
   }
 
   start() {
