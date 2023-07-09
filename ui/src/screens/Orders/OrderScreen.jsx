@@ -20,7 +20,7 @@ import {
   Chip,
 } from '@mui/material'
 import { CardBase } from '../../themes/styles/default-styled.js'
-import { StyledGrid } from '../../themes/styles/card-styled.js'
+import { StyledGrid } from '../../themes/styles/order-styled.js'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { FaCcPaypal } from 'react-icons/fa'
 import Message from '../../components/Message'
