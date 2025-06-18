@@ -9,7 +9,7 @@ const SqueezeScreen = () => {
     <>
       <Meta />
       <LandingPage />
-      <SpaceTaker />
+      {/* <SpaceTaker /> */}
     </>
   )
 }
