@@ -306,9 +306,7 @@ const OrderScreen = () => {
               <Grid item lg={4}>
                 <CardBase
                   sx={{
-                    display: 'block',
-                    width: '100%',
-                    backgroundColor: '#FFF',
+                  
                   }}
                 >
                   <List>
