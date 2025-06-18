@@ -16,8 +16,7 @@ const App = () => {
       <HelmetProvider>
         <ThemeProvider theme={theme}>
           <TolbyNavBar />
-          <Container>
-            <Typography variant="h1">&nbsp;</Typography>
+            <Container sx={{ height: '100%', alignContent: 'center', margin: 'auto', padding: '50px' }}>
             <Outlet />
             <Footer />
           </Container>
