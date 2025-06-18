@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Grid, Typography, CardMedia, Container } from '@mui/material'
+import { Grid, Typography, Container } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import bg from '../../assets/images/bg.png'
+
 const LoginGreeting = () => {
   const ContainerBase = styled(Container)(({ theme }) => ({
     color: theme.palette.common.black,
+    margin: 'auto'
+    // height: '100%'
   }))
   return (
     <>
@@ -17,21 +19,6 @@ const LoginGreeting = () => {
               <i>One</i> <br /> <i>Place.</i>
               <br />
             </Typography>
-            <CardMedia
-              component="img"
-              height="140"
-              image={bg}
-              alt="Tech"
-              sx={{
-                zIndex: -1,
-                position: 'absolute',
-                float: 'left',
-                right: 0,
-                top: 0,
-                width: '70%',
-                height: '100%',
-              }}
-            />
           </Grid>
         </Grid>
       </ContainerBase>
