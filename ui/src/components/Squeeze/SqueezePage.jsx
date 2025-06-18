@@ -3,16 +3,14 @@ import React from 'react'
 import { useTheme } from '@emotion/react'
 import { Typography, Box } from '@mui/material'
 import {
-  StyledSubCardMedia,
   ExtraLargeTypesBase,
 } from '../../themes/styles/default-styled'
-import abstract5 from '../../assets/images/abstract5.jpg'
 
 const SqueezePage = () => {
   const theme = useTheme()
   return (
     <>
-      <Box height="800px">
+      <Box>
         <Typography
           variant="h1"
           sx={{
