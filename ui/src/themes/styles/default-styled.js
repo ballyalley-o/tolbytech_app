@@ -179,13 +179,14 @@ export const StyledGrid = styled(Grid)(({ theme }) => ({
 
 //  login box
 export const StyledLoginBox = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '80vh',
-  width: '100%',
-  backgroundColor: '#fff',
-  borderRadius: '1rem',
+  display        : 'flex',
+  justifyContent : 'center',
+  alignItems     : 'center',
+  height         : 'auto',
+  margin         : 'auto',
+  width          : '100%',
+  // backgroundColor: '#fff',
+  borderRadius   : '1rem',
 }))
 
 // ----------------- Landing Page -----------------
@@ -196,6 +197,7 @@ export const ContainerLandingBase = styled(Container)(({ theme }) => ({
   alignItems: 'center',
   color: '#000',
   alignText: 'center',
+  height: '100vh'
 }))
 
 export const ExtraLargeTypesBase = styled(Typography)(({ theme }) => ({
