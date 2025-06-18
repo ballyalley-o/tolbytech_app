@@ -91,173 +91,175 @@ const LoginScreen = () => {
   return (
     <>
       <Meta title={MetaTitles.SIGNIN} />
-      <Grid container justifyContent="flex-inline" direction="row">
-        <Grid item lg={8} sx={{ display: { xs: 'none', lg: 'flex' } }}>
-          <LoginGreeting />
-        </Grid>
-        {errorSnackOpen && (
-          <SnackAlert
-            open={errorSnackOpen}
-            severity="error"
-            onClose={() => setErrorSnackOpen(null)}
-            message={errorSnackOpen}
-            transition="left"
-            vertical="top"
-            duration={2000}
-            horizontal="right"
-          >
-            {errorSnackOpen}
-          </SnackAlert>
-        )}
-        <Grid item sm={12} lg={4} gap={2}>
-          <StyledLoginBox>
-            <FormContainer>
-              <Box marginTop={-8}>
-                {isLoading ? (
-                  <Box display="block">
-                    <Loader />
-                  </Box>
-                ) : (
-                  <TolbyLogoBase />
-                )}
-              </Box>
-              <Box
-                sx={{
-                  textAlign: 'center',
-                  display: 'block',
-                  flexDirection: 'row',
-                  margin: '1rem 0 2rem 0',
-                }}
-              >
-                <Typography variant="h6" fontWeight="bold">
-                  Sign In to Tolby
-                </Typography>
-                <Typography variant="body2">Manage your account</Typography>
-              </Box>
-              <Container maxWidth="xs">
-                <FormControl component="form" onSubmit={handleSubmit}>
-                  <FormGroup>
-                    <Grid container gap={1}>
-                      <FormControl
-                        sx={{ m: 1, width: '37ch' }}
-                        variant="outlined"
-                      >
-                        <InputLabel htmlFor="outlined-email">
-                          Tolby ID
-                        </InputLabel>
-                        <InputBase
-                          label="Tolby ID"
-                          name="email"
-                          value={email}
-                          size="small"
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                      </FormControl>
-                      <FormControl
-                        sx={{ m: 1, width: '37ch' }}
-                        variant="outlined"
-                      >
-                        <InputLabel htmlFor="outlined-adornment-password">
-                          Password
-                        </InputLabel>
-                        <InputBase
-                          label="Password"
-                          id="outlined-adornment-password"
-                          endAdornment={
-                            <InputAdornment position="end">
-                              <IconButton
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                aria-label="toggle password visibility"
-                                edge="end"
-                              >
-                                {showPassword ? (
-                                  <Visibility />
-                                ) : (
-                                  <VisibilityOff />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          }
-                          name="password"
-                          type={showPassword ? 'text' : 'password'}
-                          value={password}
-                          size="small"
-                          onChange={(e) => setPassword(e.target.value)}
-                        />
-                      </FormControl>
-                      <Grid
-                        item
-                        xs={12}
-                        md={12}
-                        margin={3}
-                        justifyContent="center"
-                        textAlign="center"
-                      >
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          fullWidth
-                          sx={{ backgroundColor: 'pink.main', color: '#fff' }}
-                          disabled={isLoading}
-                        >
-                          Sign In
-                        </Button>
-                        <Grid container>
-                          <Box m={1}>
-                            <Typography variant="caption">
-                              By continuing, you agree to Tolby's{' '}
-                              <Link to="#">
-                                <Badge>Conditions of Use</Badge>
-                              </Link>{' '}
-                              and{' '}
-                              <Link to="#">
-                                <Badge>Privacy Notice</Badge>
-                              </Link>
-                              .
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={10}></Grid>
-                      </Grid>
-                    </Grid>
-                  </FormGroup>
-                </FormControl>
-              </Container>
-              <hr />
-              <Grid
-                container
-                display="block"
-                spacing={3}
-                justifyContent="center"
-                textAlign="center"
-                alignContent="center"
-              >
-                <Grid item>
-                  <Typography variant="caption">
-                    New to Tolby? &nbsp;
+      <Container>
+        <Grid container justifyContent="flex-inline" direction="row">
+          <Grid item lg={8} sx={{ display: { xs: 'none', lg: 'flex' }, height: '100vh', margin: 'auto' }}>
+            <LoginGreeting />
+          </Grid>
+          {errorSnackOpen && (
+            <SnackAlert
+              open={errorSnackOpen}
+              severity="error"
+              onClose={() => setErrorSnackOpen(null)}
+              message={errorSnackOpen}
+              transition="left"
+              vertical="top"
+              duration={2000}
+              horizontal="right"
+            >
+              {errorSnackOpen}
+            </SnackAlert>
+          )}
+          <Grid item sm={12} lg={4} gap={2} sx={{ height: '100vh', margin: 'auto', alignContent: 'center' }}>
+            <StyledLoginBox>
+              <FormContainer>
+                <Box>
+                  {isLoading ? (
+                    <Box display="block">
+                      <Loader />
+                    </Box>
+                  ) : (
+                    <TolbyLogoBase />
+                  )}
+                </Box>
+                <Box
+                  sx={{
+                    textAlign: 'center',
+                    display: 'block',
+                    flexDirection: 'row',
+                    margin: '1rem 0 2rem 0',
+                  }}
+                >
+                  <Typography variant="h6" fontWeight="bold">
+                    Sign In to Tolby
                   </Typography>
-                  <Link to={CLIENT.REGISTER_REDIRECT}>
-                    {/* redirect ? `/register?redirect=${redirect}` : '/register' */}
-                    <Typography variant="caption" fontWeight="bold">
-                      Create your Tolby account
-                    </Typography>
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link to={CLIENT.FORGOT_PASSWORD}>
+                  <Typography variant="body2">Manage your account</Typography>
+                </Box>
+                <Container maxWidth="xs">
+                  <FormControl component="form" onSubmit={handleSubmit}>
+                    <FormGroup>
+                      <Grid container gap={1}>
+                        <FormControl
+                          sx={{ m: 1, width: '37ch' }}
+                          variant="outlined"
+                        >
+                          <InputLabel htmlFor="outlined-email">
+                            Tolby ID
+                          </InputLabel>
+                          <InputBase
+                            label="Tolby ID"
+                            name="email"
+                            value={email}
+                            size="small"
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </FormControl>
+                        <FormControl
+                          sx={{ m: 1, width: '37ch' }}
+                          variant="outlined"
+                        >
+                          <InputLabel htmlFor="outlined-adornment-password">
+                            Password
+                          </InputLabel>
+                          <InputBase
+                            label="Password"
+                            id="outlined-adornment-password"
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <IconButton
+                                  onClick={handleClickShowPassword}
+                                  onMouseDown={handleMouseDownPassword}
+                                  aria-label="toggle password visibility"
+                                  edge="end"
+                                >
+                                  {showPassword ? (
+                                    <Visibility />
+                                  ) : (
+                                    <VisibilityOff />
+                                  )}
+                                </IconButton>
+                              </InputAdornment>
+                            }
+                            name="password"
+                            type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            size="small"
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                        </FormControl>
+                        <Grid
+                          item
+                          xs={12}
+                          md={12}
+                          margin={3}
+                          justifyContent="center"
+                          textAlign="center"
+                        >
+                          <Button
+                            type="submit"
+                            variant="contained"
+                            fullWidth
+                            sx={{ backgroundColor: 'pink.main', color: '#fff' }}
+                            disabled={isLoading}
+                          >
+                            Sign In
+                          </Button>
+                          <Grid container>
+                            <Box m={1}>
+                              <Typography variant="caption">
+                                By continuing, you agree to Tolby's{' '}
+                                <Link to="#">
+                                  <Badge>Conditions of Use</Badge>
+                                </Link>{' '}
+                                and{' '}
+                                <Link to="#">
+                                  <Badge>Privacy Notice</Badge>
+                                </Link>
+                                .
+                              </Typography>
+                            </Box>
+                          </Grid>
+                          <Grid item xs={10}></Grid>
+                        </Grid>
+                      </Grid>
+                    </FormGroup>
+                  </FormControl>
+                </Container>
+                <hr />
+                <Grid
+                  container
+                  display="block"
+                  spacing={3}
+                  justifyContent="center"
+                  textAlign="center"
+                  alignContent="center"
+                >
+                  <Grid item>
                     <Typography variant="caption">
-                      Forgot your Tolby ID and password?
-                      <CallMissedOutgoingIcon />
+                      New to Tolby? &nbsp;
                     </Typography>
-                  </Link>
+                    <Link to={CLIENT.REGISTER_REDIRECT}>
+                      {/* redirect ? `/register?redirect=${redirect}` : '/register' */}
+                      <Typography variant="caption" fontWeight="bold">
+                        Create your Tolby account
+                      </Typography>
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link to={CLIENT.FORGOT_PASSWORD}>
+                      <Typography variant="caption">
+                        Forgot your Tolby ID and password?
+                        <CallMissedOutgoingIcon />
+                      </Typography>
+                    </Link>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </FormContainer>
-          </StyledLoginBox>
-          <SpaceTaker />
+              </FormContainer>
+            </StyledLoginBox>
+            <SpaceTaker />
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
     </>
   )
 }
