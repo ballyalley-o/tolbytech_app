@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux'
 
 function CustomAvatar({ name }) {
   const { userInfo } = useSelector((state) => state.auth)
-  const firstLetter = userInfo.response.name?.charAt(0)
+  const firstLetter = userInfo?.response?.name?.charAt(0)
   const secondLetter =
-    userInfo.response.name?.split(' ')[1] && name?.split(' ')[1]?.charAt(0)
+    userInfo.response?.name?.split(' ')[1] && name?.split(' ')[1]?.charAt(0)
 
   return (
     <>
