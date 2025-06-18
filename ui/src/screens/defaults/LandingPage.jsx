@@ -1,15 +1,10 @@
-/* eslint-disable no-unused-vars */
-import { Typography, Box, Container, CardMedia } from '@mui/material'
+import { Typography, Box } from '@mui/material'
 import {
   ContainerLandingBase,
   ExtraLargeTypesBase,
   SubExtraLargeTypesBase,
-  StyledCardMedia,
-  StyledSubCardMedia,
 } from '../../themes/styles/default-styled.js'
 import TolbyLogo from './TolbyLogo.jsx'
-import bg2 from '../../assets/images/bg2.png'
-import bg from '../../assets/images/bg.png'
 
 const LandingPage = () => {
   return (
@@ -17,7 +12,7 @@ const LandingPage = () => {
       <ContainerLandingBase maxWidth="md">
         <Box height="800px">
           <Typography variant="h1" fontWeight="bold">
-            CONVENTIONCVS 2023
+            CONVENTIONCVS 2025
           </Typography>
           <Typography variant="h4">
             Watch online on 6
@@ -52,13 +47,6 @@ const LandingPage = () => {
               </ExtraLargeTypesBase>
             </Box>
           </Box>
-          <StyledCardMedia component="img" height="140" image={bg} alt="Tech" />
-          <StyledSubCardMedia
-            component="img"
-            height="140"
-            image={bg2}
-            alt="Tech"
-          />
         </Box>
       </ContainerLandingBase>
     </>
