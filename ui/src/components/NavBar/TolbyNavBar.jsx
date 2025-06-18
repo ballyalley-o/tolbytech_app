@@ -37,24 +37,19 @@ import SearchNav from './SearchNav.jsx'
 const pages = [
   {
     id: 1,
-    label: 'Home',
-    link: CLIENT.HOME_URL,
-  },
-  {
-    id: 2,
     label: 'Tech',
     link: CLIENT.TECH_URL,
   },
-  {
-    id: 3,
-    label: 'Talks',
-    link: CLIENT.TALKS_URL,
-  },
-  {
-    id: 4,
-    label: 'Kicks',
-    link: CLIENT.KICKS_URL,
-  },
+  // {
+  //   id: 3,
+  //   label: 'Talks',
+  //   link: CLIENT.TALKS_URL,
+  // },
+  // {
+  //   id: 4,
+  //   label: 'Kicks',
+  //   link: CLIENT.KICKS_URL,
+  // },
 ]
 const settings = [
   {
@@ -70,18 +65,18 @@ const settings = [
 ]
 
 const TolbyNavBar = () => {
-  const { cartItems } = useSelector((state) => state.cart)
-  const { userInfo } = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [logoutCall] = useLogoutMutation()
-  const [anchorElNav, setAnchorElNav] = useState(null)
+  const { cartItems }                   = useSelector((state) => state.cart)
+  const { userInfo }                    = useSelector((state) => state.auth)
+  const dispatch                        = useDispatch()
+  const navigate                        = useNavigate()
+  const [logoutCall]                    = useLogoutMutation()
+  const [anchorElNav, setAnchorElNav]   = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
-  const [expanded, setExpanded] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const [snackOpen, setSnackOpen] = useState(false)
-  const [searchValue, setSearchValue] = useState('')
-  const [isSignedIn, setIsSignedIn] = useState(false)
+  const [expanded, setExpanded]         = useState(false)
+  const [isOpen, setIsOpen]             = useState(false)
+  const [snackOpen, setSnackOpen]       = useState(false)
+  const [searchValue, setSearchValue]   = useState('')
+  const [isSignedIn, setIsSignedIn]     = useState(false)
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen)
@@ -311,7 +306,7 @@ const TolbyNavBar = () => {
               <AvatarWrapper>
                 <Tooltip title="Account & Settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0.3 }}>
-                    <CustomAvatar name={userInfo.response.name} />
+                    <CustomAvatar name={userInfo?.response?.name} />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -330,62 +325,36 @@ const TolbyNavBar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <MenuItem title={userInfo.response.name} id="username">
+                  <MenuItem title={userInfo?.response?.name} id="username">
                     <Typography textAlign="center">
-                      Hi &nbsp;{userInfo.response.name},
+                     {userInfo?.response?.name}
                     </Typography>
                   </MenuItem>
                   <Divider />
-                  {userInfo && userInfo.response.isAdmin && (
+                  {userInfo && userInfo?.response?.isAdmin && (
                     <>
                       <MenuItem onClick={handleCloseUserMenu}>
-                        <Chip
-                          label={
-                            <Link to={CLIENT.ADMIN_ORDERS_URL}>
-                              <Typography textAlign="right">
-                                <MdAdminPanelSettings /> &nbsp; Orders
-                              </Typography>
-                            </Link>
-                          }
-                          color="success"
-                          textAlign="right"
-                          variant="outlined"
-                          size="small"
-                        ></Chip>
+                        <Link to={CLIENT.ADMIN_ORDERS_URL}>
+                          <Typography textAlign="right">
+                            <MdAdminPanelSettings /> &nbsp; Orders
+                          </Typography>
+                        </Link>
                       </MenuItem>
                       <MenuItem onClick={handleCloseUserMenu}>
-                        <Chip
-                          label={
-                            <Link to={CLIENT.ADMIN_USERS_URL}>
-                              <Typography textAlign="right">
-                                <FaUsers />
-                                &nbsp; Users
-                              </Typography>
-                            </Link>
-                          }
-                          color="info"
-                          size="small"
-                          textAlign="right"
-                          variant="outlined"
-                          setExpanded={true}
-                        />
+                        <Link to={CLIENT.ADMIN_USERS_URL}>
+                          <Typography textAlign="right">
+                            <FaUsers />
+                            &nbsp; Users
+                          </Typography>
+                        </Link>
                       </MenuItem>
                       <MenuItem onClick={handleCloseUserMenu}>
-                        <Chip
-                          label={
-                            <Link to={CLIENT.ADMIN_PRODUCTS_URL}>
-                              <Typography textAlign="right">
-                                <BiStore />
-                                &nbsp; Products
-                              </Typography>
-                            </Link>
-                          }
-                          color="warning"
-                          size="small"
-                          textAlign="right"
-                          variant="outlined"
-                          setExpanded={true}
-                        />
+                        <Link to={CLIENT.ADMIN_PRODUCTS_URL}>
+                          <Typography textAlign="right">
+                            <BiStore />
+                            &nbsp; Products
+                          </Typography>
+                        </Link>
                       </MenuItem>
                       <Divider />
                     </>
