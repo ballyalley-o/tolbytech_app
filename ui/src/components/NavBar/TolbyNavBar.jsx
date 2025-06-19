@@ -18,7 +18,6 @@ import {
   Divider,
   Button,
   Badge,
-  Chip,
 } from '@mui/material'
 import {
   AvatarWrapper,
@@ -72,15 +71,10 @@ const TolbyNavBar = () => {
   const [logoutCall]                    = useLogoutMutation()
   const [anchorElNav, setAnchorElNav]   = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
-  const [expanded, setExpanded]         = useState(false)
   const [isOpen, setIsOpen]             = useState(false)
   const [snackOpen, setSnackOpen]       = useState(false)
   const [searchValue, setSearchValue]   = useState('')
   const [isSignedIn, setIsSignedIn]     = useState(false)
-
-  const toggleDrawer = () => {
-    setIsOpen(!isOpen)
-  }
 
   const closeDrawer = () => {
     setIsOpen(false)
@@ -99,14 +93,6 @@ const TolbyNavBar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
-  }
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded)
-  }
-
-  const handleInputChange = (event) => {
-    setSearchValue(event.target.value)
   }
 
   const handleClearSearch = () => {
