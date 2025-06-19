@@ -31,8 +31,6 @@ const ROOT_POLICIES = '/policies'
     /**
  * @constant CONFIG - global envs
  */
-
-    // https://tolby-tech.vercel.app/
 export const CONFIG = {
       // Global envs
   SERVER_URL     : import.meta.env.VITE_SERVER_URL,
