@@ -2,15 +2,19 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { Typography, Container, Box, IconButton, Divider } from '@mui/material'
+import { useLocation } from 'react-router-dom'
 import { FooterBase, FooterTextWrapper } from '../themes/styles/default-styled'
+
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
 import PaymentRegulations from '../screens/defaults/PaymentRegulations'
 import TolbyIcon from './NavBar/TolbyIcon'
 
 const Footer = () => {
-  return (
+  const location = useLocation()
+  const isAuthRoute = location.pathname.startsWith('/auth/')
+  const renderFooter = (
     <>
-      <Box sx={{ minHeight: '80vh' }} mt={2}>
+      <Box sx={{ minHeight: '60vh' }} mt={2}>
         <Divider />
         <Container maxWidth="md">
           <Box display="inline-flex" sx={{ color: 'gray' }} my={2}>
@@ -52,6 +56,7 @@ const Footer = () => {
       </Box>
     </>
   )
+  return isAuthRoute ? null : renderFooter
 }
 
 export default Footer
