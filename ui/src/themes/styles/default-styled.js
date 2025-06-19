@@ -200,6 +200,20 @@ export const ContainerLandingBase = styled(Container)(({ theme }) => ({
   height: '100vh'
 }))
 
+export const StyledAuthContainer = styled(Container)(({ theme }) => ({
+  height       : 'calc(100vh - 30px)',
+  overflow     : 'hidden',
+  display      : 'flex',
+  flexDirection: 'column',
+}))
+
+export const StyledAppContainer = styled(Container)({
+  // height      : '100%',
+  // alignContent: 'center',
+  // margin      : 'auto',
+  // padding     : '50px',
+})
+
 export const ExtraLargeTypesBase = styled(Typography)(({ theme }) => ({
   fontSize: '10rem',
   fontWeight: 'bold',
