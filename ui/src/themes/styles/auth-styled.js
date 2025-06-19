@@ -18,11 +18,11 @@ export const LinkBase = styled(Link)(({ theme }) => ({
 export const BoxBase = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
-  py: '2rem',
-  pb: '4rem',
+  py: '5rem',
+  pb    : '4rem',
   height: 'auto',
   width: '400px',
-  backgroundColor: '#fff',
+  // backgroundColor: '#fff',
   borderRadius: '1rem',
 }))
 
