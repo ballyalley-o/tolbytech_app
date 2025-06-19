@@ -5,6 +5,9 @@ import { useState, useEffect } from 'react'
 import Meta from '../../components/Meta/Meta'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { useLoginMutation } from '../../slices/user-slice'
 import { setCredentials } from '../../slices/auth-slice'
 import { CLIENT } from '../../constants'
@@ -29,11 +32,9 @@ import {
   StyledLoginBox,
 } from '../../themes/styles/default-styled.js'
 import FormContainer from '../../components/FormContainer'
+import { StyledAuthContainer } from '../../themes/styles/default-styled.js'
 import LoginGreeting from '../defaults/LoginGreeting'
 import TolbyLogoBase from '../defaults/TolbyLogoBase'
-import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { MetaTitles } from '../../constants'
 
 const LoginScreen = () => {
@@ -91,7 +92,7 @@ const LoginScreen = () => {
   return (
     <>
       <Meta title={MetaTitles.SIGNIN} />
-      <Container>
+      <StyledAuthContainer>
         <Grid container justifyContent="flex-inline" direction="row">
           <Grid item lg={8} sx={{ display: { xs: 'none', lg: 'flex' }, height: '100vh', margin: 'auto' }}>
             <LoginGreeting />
@@ -245,21 +246,13 @@ const LoginScreen = () => {
                       </Typography>
                     </Link>
                   </Grid>
-                  <Grid item>
-                    <Link to={CLIENT.FORGOT_PASSWORD}>
-                      <Typography variant="caption">
-                        Forgot your Tolby ID and password?
-                        <CallMissedOutgoingIcon />
-                      </Typography>
-                    </Link>
-                  </Grid>
                 </Grid>
               </FormContainer>
             </StyledLoginBox>
             <SpaceTaker />
           </Grid>
         </Grid>
-      </Container>
+      </StyledAuthContainer>
     </>
   )
 }
