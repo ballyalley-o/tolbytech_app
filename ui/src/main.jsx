@@ -46,32 +46,37 @@ import AllUsersScreen from './screens/Accounts/admin/AllUsersScreen.jsx'
 import EditUserScreen from './screens/Accounts/admin/EditUserScreen.jsx'
 // @defaults
 import NotFound from './screens/defaults/NotFound.jsx'
+import AuthRoute from './components/AuthRoute.jsx'
+import AppRoute from './components/AppRoute.jsx'
 import './assets/css/index.css'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route
-        index={true}
-        path={CLIENT.SQUEEZE_URL}
-        element={<SqueezeScreen />}
-      />
-      <Route path={CLIENT.HOME_URL} element={<HomeScreen />} />
-      <Route path={CLIENT.TECH_URL} element={<TechScreen />} />
-      <Route path={CLIENT.TECH_PAGE} element={<TechScreen />} />
-      <Route path={CLIENT.SEARCH} element={<TechScreen />} />
-      <Route path={CLIENT.SEARCH_PAGE} element={<TechScreen />} />
-      <Route path={CLIENT.PRODUCT_URL} element={<ProductDetailScreen />} />
-      <Route path={CLIENT.TALKS_URL} element={<TalksScreen />} />
-      <Route path={CLIENT.BAG_URL} element={<BagScreen />} />
-      <Route path={CLIENT.KICKS_URL} element={<KickScreen />} />
-      <Route path={CLIENT.LOGIN_URL} element={<LoginScreen />} />
-      <Route path={CLIENT.REGISTER_URL} element={<RegisterScreen />} />
-      <Route path={CLIENT.FORGOT_PASSWORD} element={<ForgotPasswordScreen />} />
+      <Route path="" element={<AppRoute />}>
+        <Route
+          index={true}
+          path={CLIENT.SQUEEZE_URL}
+          element={<SqueezeScreen />}
+        />
+        <Route path={CLIENT.HOME_URL} element={<HomeScreen />} />
+        <Route path={CLIENT.TECH_URL} element={<TechScreen />} />
+        <Route path={CLIENT.TECH_PAGE} element={<TechScreen />} />
+        <Route path={CLIENT.SEARCH} element={<TechScreen />} />
+        <Route path={CLIENT.SEARCH_PAGE} element={<TechScreen />} />
+        <Route path={CLIENT.PRODUCT_URL} element={<ProductDetailScreen />} />
+        <Route path={CLIENT.TALKS_URL} element={<TalksScreen />} />
+        <Route path={CLIENT.BAG_URL} element={<BagScreen />} />
+        <Route path={CLIENT.KICKS_URL} element={<KickScreen />} />
+        </Route>
+      <Route path="" element={<AuthRoute/>}>
+        <Route path={CLIENT.LOGIN_URL} element={<LoginScreen />} />
+        <Route path={CLIENT.REGISTER_URL} element={<RegisterScreen />} />
+        <Route path={CLIENT.FORGOT_PASSWORD} element={<ForgotPasswordScreen />} />
+      </Route>
 
       <Route path="" element={<PrivateRoute />}>
         <Route path={CLIENT.ORDER_URL} element={<OrderScreen />} />
-
         <Route path={CLIENT.HISTORY_URL} element={<HistoryScreen />} />
         <Route path={CLIENT.ACCOUNT_URL} element={<AccountScreen />} />
         <Route path={CLIENT.SHIPPING_URL} element={<ShippingScreen />} />
