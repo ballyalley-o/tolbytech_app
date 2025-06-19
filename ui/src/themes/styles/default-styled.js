@@ -208,10 +208,10 @@ export const StyledAuthContainer = styled(Container)(({ theme }) => ({
 }))
 
 export const StyledAppContainer = styled(Container)({
-  // height      : '100%',
-  // alignContent: 'center',
-  // margin      : 'auto',
-  // padding     : '50px',
+  height      : '100%',
+  alignContent: 'center',
+  margin      : 'auto',
+  padding     : '50px',
 })
 
 export const ExtraLargeTypesBase = styled(Typography)(({ theme }) => ({
